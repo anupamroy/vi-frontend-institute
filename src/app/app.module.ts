@@ -22,7 +22,8 @@ import { ListInstituteTypeComponent } from './Organization A/Institute Type/list
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
