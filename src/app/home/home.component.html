@@ -1,89 +1,70 @@
 <div class="bg-fes-login">
+
+    <section class="bg-light-yellow">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- <div class="col-lg-4 col-sm-12">
+                <h5 class="pt-lg-4 text-blue enquEmail">
+                    <span><i class="fas fa-phone-square-alt"></i> <a class="enqu" href="tel:9123456987"> 9123456987</a></span> <span class="dx-block-a">||</span>
+                    <span><i class="fas fa-phone-square-alt"></i> <a class="enqu" href="mailto:abcd@gmail.com"> abcd@gmail.com</a></span>
+                </h5>
+            </div> -->
+            </div>
+        </div>
+    </section>
     <section class="">
 
         <div class="container">
             <div class="row">
 
                 <div class="col-lg-6 col-sm-12">
-                    <img src="/assets/images/signup.png" class="img-fluid" alt="online pay">
+                    <img src="../../assets/images/signup.png" class="img-signup img-fluid" alt="online pay">
                 </div>
                 <div class="col-lg-6 col-sm-12 mt-60">
                     <!-- Nav pills -->
                     <ul class="nav nav-pills nav-justified tab-login" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="pill" href="#studentLogin"><i
-                                    class="fas fa-user-graduate"></i> Student Login</a>
+                                    class="fas fa-user-graduate"></i> NTA Login</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="pill" href="#instituteLogin"><i
-                                    class="fas fa-user-alt"></i> Institute Login</a>
-                        </li>
+                        <!-- <li class="nav-item">
+                      <a class="nav-link" data-toggle="pill" href="#instituteLogin"><i class="fas fa-user-alt"></i> Institute Login</a>
+                    </li> -->
                     </ul>
 
                     <!-- Tab panes -->
                     <div class="tab-content border-double ">
                         <div id="studentLogin" class="container tab-pane active"><br>
-                            <form class="fees-mat-form">
-                                <h3 class="text-center pt-3 pb-3">Sign In Now</h3>
-                                <div class="form-group">
-                                    <input autofocus type="text" name="regNo" id="regNo" required="required"
-                                        minlength="1" maxlength="20" />
-                                    <label for="regNo" class="control-label">Registration Number</label><i
-                                        class="bar"></i>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="regSession" id="regSession" required="required"
-                                        minlength="1" maxlength="10" />
-                                    <label for="regSession" class="control-label">Registration Session</label><i
-                                        class="bar"></i>
-                                </div>
-
-                                <div class="button-container">
-                                    <button type="submit" id="logAlert" class="btn-mat"><span>Sign In</span></button>
-                                </div>
-                            </form>
-
-                            <!-- OTP form -->
-                            <!-- <form class="fees-mat-form">
-                     <h3 class="text-center pt-3 pb-3">Enter OTP to Login</h3>
-                     <div class="form-group">
-                       <input type="text" name="otp" id="otp" required="required"/>
-                       <label for="otp" class="control-label">Enter OTP</label><i class="bar"></i>
-                     </div>
-                     
-                     <div class="button-container">
-                         <button type="button" class="btn-mat"><span>Submit</span></button>
-                     </div>
-                 </form> -->
-                        </div>
-
-                        <div id="instituteLogin" class="container tab-pane fade"><br>
-                            <form class="fees-mat-form">
+                            <form class="fees-mat-form" >
                                 <h3 class="text-center pt-3 pb-3">Sign In Now</h3>
                                 <div class="form-group">
                                     <input autofocus type="text" name="mobNo" id="mobNo" required="required"
+                                       [(ngModel)]="phone_number"
                                         minlength="0" maxlength="10"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                     <label for="mobNo" class="control-label ">Mobile Number</label><i class="bar"></i>
                                 </div>
 
                                 <div class="button-container">
-                                    <button type="submit" class="btn-mat"><span>Sign In</span></button>
+                                    <button class="btn-mat" id="logAlert" (click)="signIn($event)"  ><span>Sign In</span></button>
                                 </div>
                             </form>
+
                             <!-- OTP form -->
                             <!-- <form class="fees-mat-form">
-                     <h3 class="text-center pt-3 pb-3">Enter OTP to Login</h3>
-                     <div class="form-group">
-                       <input type="text" name="otp" id="otp" required="required"/>
-                       <label for="otp" class="control-label">Enter OTP</label><i class="bar"></i>
-                     </div>
-                     
-                     <div class="button-container">
-                         <button type="button" class="btn-mat"><span>Submit</span></button>
-                     </div>
-                 </form> -->
+                    <h3 class="text-center pt-3 pb-3">Enter OTP to Login</h3>
+                    <div class="form-group">
+                      <input type="text" name="otp" id="otp" required="required"/>
+                      <label for="otp" class="control-label">Enter OTP</label><i class="bar"></i>
+                    </div>
+                    
+                    <div class="button-container text-left">
+                        <button type="button" class="btn-mat"><span>Submit</span></button>
+                        <a href="#" class="class="float-right text-white"">Resend OTP</a>
+                    </div>
+                </form>  -->
                         </div>
+
                     </div>
 
 
@@ -92,4 +73,5 @@
             </div>
         </div>
     </section>
+
 </div>

@@ -127,6 +127,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "vi-frontend"
+    }
+  },
+  "defaultProject": "vi-frontend",
+  "cli": {
+    "analytics": false
+  }
 }
