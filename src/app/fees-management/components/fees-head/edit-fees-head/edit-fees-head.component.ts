@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeesService } from '../../../services/fees.service';
 
@@ -10,7 +15,7 @@ import { FeesService } from '../../../services/fees.service';
 })
 export class EditFeesHeadComponent implements OnInit {
   editFeesHeadForm: FormGroup;
-  instituteType = [];
+  instituteTypeList = [];
   finalItems = [];
 
   constructor(
@@ -21,7 +26,6 @@ export class EditFeesHeadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // console.log(this.activatedRoute.snapshot.params);
     this.editFeesHeadForm = this.formBuilder.group({
       instituteType: [
         this.activatedRoute.snapshot.params.instituteType,
@@ -33,7 +37,7 @@ export class EditFeesHeadComponent implements OnInit {
           Validators.nullValidator,
           Validators.required,
           Validators.maxLength(25),
-          Validators.pattern(RegExp('^[A-Za-z_ ]*$')),
+          Validators.pattern(`^[a-zA-Z_ ]*$`),
         ],
       ],
       parentFees: [
@@ -45,16 +49,14 @@ export class EditFeesHeadComponent implements OnInit {
     fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/all')
       .then((res) => res.json())
       .then((res) => {
-        this.instituteType = JSON.parse(res).Items;
+        this.instituteTypeList = JSON.parse(res).Items;
         const temp = [];
-        this.instituteType.forEach((record) => {
+        this.instituteTypeList.forEach((record) => {
           if (record.instituteType) {
             temp.push(record);
           }
         });
         this.finalItems = temp;
-        console.log(this.finalItems);
-        // console.log(this.instituteType);
       })
       .catch((err) => console.log(err));
   }
@@ -73,26 +75,47 @@ export class EditFeesHeadComponent implements OnInit {
     // this.feesService.updateFeesHeadById(this.activatedRoute.snapshot.params.id, feesHeadData).subscribe((data) => {
     //   console.log(data);
     // });
-    fetch(
-      `https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/fees/${this.activatedRoute.snapshot.params.id}`,
-      {
-        method: 'PUT',
-        body: JSON.stringify({
-          attribute: ['instituteType', 'feesHeadName', 'parentFees'],
-          value: [
-            this.editFeesHeadForm.controls.instituteType.value,
-            this.editFeesHeadForm.controls.feesHeadName.value,
-            this.editFeesHeadForm.controls.parentFees.value,
-          ],
-        }),
-      }
-    )
-      .then((data) => {
-        console.log(data);
-        this.router.navigate(['/fees-management/fees-head']);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+
+    if (
+      this.editFeesHeadForm.controls.instituteType.value !==
+        this.activatedRoute.snapshot.params.instituteType ||
+      this.editFeesHeadForm.controls.feesHeadName.value !==
+        this.activatedRoute.snapshot.params.feesHeadName ||
+      this.editFeesHeadForm.controls.parentFees.value !==
+        this.activatedRoute.snapshot.params.parentFees
+    ) {
+      fetch(
+        `https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/fees/${this.activatedRoute.snapshot.params.id}`,
+        {
+          method: 'PUT',
+          body: JSON.stringify({
+            attribute: ['instituteType', 'feesHeadName', 'parentFees'],
+            value: [
+              this.editFeesHeadForm.controls.instituteType.value,
+              this.editFeesHeadForm.controls.feesHeadName.value,
+              this.editFeesHeadForm.controls.parentFees.value,
+            ],
+          }),
+        }
+      )
+        .then((data) => {
+          this.router.navigate(['/fees-management/fees-head']);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      this.router.navigate(['/fees-management/fees-head']);
+    }
+  }
+
+  get feesHeadName(): AbstractControl {
+    return this.editFeesHeadForm.controls.feesHeadName;
+  }
+  get parentFees(): AbstractControl {
+    return this.editFeesHeadForm.get('parentFees');
+  }
+  get instituteType(): AbstractControl {
+    return this.editFeesHeadForm.get('instituteType');
   }
 }

@@ -110,9 +110,9 @@
                 <tr
                   role="row"
                   class="odd"
-                  *ngFor="let fees of feesHead; let i = index"
+                  *ngFor="let fees of feesHeadList; let i = index"
                 >
-                  <td class="">{{ i }}</td>
+                  <td class="">{{ i + 1 }}</td>
                   <td>{{ fees.feesHeadName }}</td>
                   <td class="sorting_1">{{ fees.parentFees }}</td>
                   <td>
@@ -128,7 +128,7 @@
                     ></a>
                     <a
                       id="cusEdit1"
-                      href="#"
+                      (click)="onDelete(fees.fees_head_id)"
                       class="btn-dark-blue-light btn btn-sm"
                       ><i class="far fa-trash-alt"></i
                     ></a>
