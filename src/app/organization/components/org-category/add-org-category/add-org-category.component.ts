@@ -12,6 +12,15 @@ export class AddOrgCategoryComponent implements OnInit {
 
   constructor() { }
 
+  enableButton() {
+    if(this.orgCategory.trim() === '') {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
   onAddOrgCategory( event : Event ){
     //this.disableButton = false
     this.orgCategory = (<HTMLInputElement>event.target).value
