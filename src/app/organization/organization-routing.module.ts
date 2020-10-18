@@ -8,7 +8,6 @@ import { ListAssociatedPostComponent } from './components/associated-post/list-a
 import { EditInstituteTypeComponent } from './components/institute-type/edit-institute-type/edit-institute-type.component';
 import { InstituteTypeComponent } from './components/institute-type/institute-type/institute-type.component';
 import { ListInstituteTypeComponent } from './components/institute-type/list-institute-type/list-institute-type.component';
-
 import { OrganizationComponent } from './organization.component';
 
 const routes: Routes = [
@@ -26,14 +25,11 @@ const routes: Routes = [
     },
 
     { path: 'list-institute-type', component: ListInstituteTypeComponent },
-    { path: 'edit-institute-type', component: EditInstituteTypeComponent },
-    { path: 'add-associated-post', component: AddAssociatedPostComponent },
-    { path: 'edit-associated-post/:itemId/:associated_post', component: EditAssociatedPostComponent },
-    { path: 'list-associated-post', component: ListAssociatedPostComponent }
+    { path: 'edit-institute-type/:itemId/:instituteType', component: EditInstituteTypeComponent },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
 export class OrganizationRoutingModule {}

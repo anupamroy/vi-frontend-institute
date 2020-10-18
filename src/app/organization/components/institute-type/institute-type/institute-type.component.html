@@ -125,9 +125,13 @@
                                         <span class="float-right"
                                             ><a
                                                 class="btn mb-3"
-                                                href="list-fees-type.html"
+                                                routerLink="../list-institute-type"
+
                                             >
-                                                <i class="fas fa-eye"></i> View
+                                                <i 
+                                                class="fas fa-eye"
+                                                routerLink="../list-institute-type"
+                                                ></i> View
                                             </a>
                                         </span>
                                     </h5>
@@ -160,6 +164,8 @@
                                                 required
                                                 minlength="1"
                                                 maxlength="20"
+                                                (input) = 'onAddInstituteType($event)'
+                                                 
                                             />
                                         </div>
                                         <div
@@ -168,7 +174,10 @@
                                             <button
                                                 type="button"
                                                 id="cusEdit"
-                                                class="btn btn-block btn-common-color btn-lg mt-3 text-white"
+                                                class="btn btn-warning btn-common-color btn-lg mt-3 text-white"
+                                                (click) = 'onSubmit()'
+                                                routerLink="../list-institute-type"
+
                                             >
                                                 <span>
                                                     Add
