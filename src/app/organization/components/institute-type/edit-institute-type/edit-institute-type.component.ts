@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
+import { Validations} from '../../../../shared/Services/Validations'
+
+
 
 @Component({
   selector: 'app-edit-institute-type',
@@ -9,38 +12,51 @@ import { ActivatedRoute, Router } from '@angular/router'
 export class EditInstituteTypeComponent implements OnInit {
   oldInstituteType = "MTech"
   newInstituteType = ""
+  id = ""
+  showDangerMessage : boolean = false
+  validations : any
 
   constructor(private activatedRoute : ActivatedRoute, private router : Router ) { }
 
   onClick(){
-    if(this.oldInstituteType !== this.newInstituteType){
-      console.log(this.oldInstituteType, this.newInstituteType)
-
-      fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/${id}', {
-        method : 'PUT',
-        body : JSON.stringify({
-          "attribute" : ["instituteType"],
-          "value" : [this.newInstituteType]
+    console.log(this.newInstituteType)
+    const validationResult = this.validations.validateName(this.newInstituteType)
+    console.log(validationResult)
+    if(validationResult)
+    {
+      if(this.oldInstituteType !== this.newInstituteType)
+      {
+        console.log(this.oldInstituteType, this.newInstituteType)
+  
+        fetch(`https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/${this.id}`, {
+          method : 'PUT',
+          body : JSON.stringify({
+            "attribute" : ["instituteType"],
+            "value" : [this.newInstituteType]
+          })
         })
-      })
-      .then( result => {
-        console.log(result)
-        this.router.navigate(['/org/list-institute-type'])
-      })
-      .catch(err => {
-        console.log(err)
-      })
-
+        .then( result => {
+          console.log(result)
+            console.log(result)
+            this.router.navigate(['/org/list-institute-type'])
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+     
+    }   
+    else {
+      this.showDangerMessage = true
     }
   }
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.params.itemId;
+    this.validations = new Validations()
+    this.id = this.activatedRoute.snapshot.params.itemId;
     const instituteType =this.activatedRoute.snapshot.params.instituteType
-    console.log(id, instituteType)
-    this.oldInstituteType = instituteType
-
-
+    console.log(this.id, instituteType)
+    this.newInstituteType = instituteType
   }
 
 }
