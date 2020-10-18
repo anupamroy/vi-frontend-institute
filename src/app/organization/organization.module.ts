@@ -8,7 +8,8 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { InstituteTypeComponent } from './components/institute-type/institute-type/institute-type.component';
 import { EditInstituteTypeComponent } from './components/institute-type/edit-institute-type/edit-institute-type.component';
 import { ListInstituteTypeComponent } from './components/institute-type/list-institute-type/list-institute-type.component';
-import { FormsModule } from '@angular/forms'
+import { ViewMastersComponent } from './components/view-masters/view-masters.component';
+import { EditMastersComponent } from './components/edit-masters/edit-masters.component';
 
 @NgModule({
     declarations: [
@@ -18,10 +19,8 @@ import { FormsModule } from '@angular/forms'
         InstituteTypeComponent,
         EditInstituteTypeComponent,
         ListInstituteTypeComponent,
-        AddAssociatedPostComponent,
-        EditAssociatedPostComponent,
-        ListAssociatedPostComponent,
         ViewMastersComponent,
+        EditMastersComponent,
     ],
     imports: [CommonModule, OrganizationRoutingModule, FormsModule],
 })
