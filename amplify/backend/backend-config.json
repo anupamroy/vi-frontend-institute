@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "viauth9b65c4c2": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
