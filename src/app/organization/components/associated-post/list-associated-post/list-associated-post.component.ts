@@ -12,6 +12,20 @@ export class ListAssociatedPostComponent implements OnInit {
 
   constructor() { }
 
+  onDelete(id: string){
+    fetch(`https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/${id}`, {
+      method: 'DELETE'
+    }).then((res) => {
+      console.log(res)
+
+      this.final_items = this.final_items.filter((item) => {
+        return item.itemId !== id;
+      })
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+
   ngOnInit(): void {
     fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/all')
     .then(res => res.json())

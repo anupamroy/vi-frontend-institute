@@ -11,9 +11,16 @@ export class AddAssociatedPostComponent implements OnInit {
 
   constructor() { }
 
-  onKey(event: any) { // without type info
-    this.associatedPost = event.target.value;
+  enableButton(){
+    const regEx = /^[a-zA-Z\s]+$/;
+    // const regEx = /(-?([A-Z].\s)?([A-Z][a-z]+)\s?)+([A-Z]'([A-Z][a-z]+))?/
+
+    return regEx.test(this.associatedPost);
   }
+
+  // onKey(event: any) { // without type info
+  //   this.associatedPost = event.target.value;
+  // }
 
   onClick() {
     console.log(this.associatedPost);
