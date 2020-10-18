@@ -34,12 +34,18 @@ const routes: Routes = [
     ],
   },
 
-    { path: 'list-institute-type', component: ListInstituteTypeComponent },
-    { path: 'edit-institute-type/:itemId/:instituteType', component: EditInstituteTypeComponent },
+  { path: 'list-institute-type', component: ListInstituteTypeComponent },
+  {
+    path: 'edit-institute-type/:itemId/:instituteType',
+    component: EditInstituteTypeComponent,
+  },
+  { path: 'add-associated-post', component: AddAssociatedPostComponent },
+  { path: 'edit-associated-post/:id', component: EditAssociatedPostComponent },
+  { path: 'list-associated-post', component: ListAssociatedPostComponent },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class OrganizationRoutingModule {}

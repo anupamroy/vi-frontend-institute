@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeesService } from '../../../services/fees.service';
 
@@ -10,6 +10,8 @@ import { FeesService } from '../../../services/fees.service';
 })
 export class EditFeesHeadComponent implements OnInit {
   editFeesHeadForm: FormGroup;
+  instituteType = [];
+  finalItems = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,10 +23,40 @@ export class EditFeesHeadComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.activatedRoute.snapshot.params);
     this.editFeesHeadForm = this.formBuilder.group({
-      instituteType: [this.activatedRoute.snapshot.params.instituteType],
-      feesHeadName: [this.activatedRoute.snapshot.params.feesHeadName],
-      parentFees: [this.activatedRoute.snapshot.params.parentFees],
+      instituteType: [
+        this.activatedRoute.snapshot.params.instituteType,
+        [Validators.required, Validators.nullValidator],
+      ],
+      feesHeadName: [
+        this.activatedRoute.snapshot.params.feesHeadName,
+        [
+          Validators.nullValidator,
+          Validators.required,
+          Validators.maxLength(25),
+          Validators.pattern(RegExp('^[A-Za-z_ ]*$')),
+        ],
+      ],
+      parentFees: [
+        this.activatedRoute.snapshot.params.parentFees,
+        [Validators.required, Validators.nullValidator],
+      ],
     });
+
+    fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/all')
+      .then((res) => res.json())
+      .then((res) => {
+        this.instituteType = JSON.parse(res).Items;
+        const temp = [];
+        this.instituteType.forEach((record) => {
+          if (record.instituteType) {
+            temp.push(record);
+          }
+        });
+        this.finalItems = temp;
+        console.log(this.finalItems);
+        // console.log(this.instituteType);
+      })
+      .catch((err) => console.log(err));
   }
 
   // tslint:disable-next-line: typedef

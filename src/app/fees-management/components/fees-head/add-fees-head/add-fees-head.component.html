@@ -115,10 +115,10 @@
                         name="instituteType"
                         formControlName="instituteType"
                       >
-                        <option>Select Option</option>
-                        <option>UG</option>
-                        <option>PG</option>
-                        <option>Professional Type</option>
+                        <option *ngFor="let item of finalItems">
+                          {{ item.instituteType.toString() }}
+                        </option>
+                        >
                       </select>
                     </div>
                     <div class="col-lg-5 cl-sm-12 mb-3 form-group">
@@ -141,15 +141,15 @@
 
                     <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
                       <label for="parentFees"> Parent Fees</label><br />
-                      <!-- <button
+                      <button
                         class="btn form-control text-left bg-white dropdown-toggle"
                         type="button"
                         data-toggle="dropdown"
                       >
                         Select fees type
                         <span class="caret"></span>
-                      </button> -->
-                      <input
+                      </button>
+                      <!-- <input
                         data-toggle="tooltip"
                         data-placement="bottom"
                         title="Demo tooltip text"
@@ -162,12 +162,15 @@
                         minlength="1"
                         maxlength="50"
                         formControlName="parentFees"
-                      />
+                      /> -->
 
                       <ul class="dropdown-menu">
                         <li>
                           <a href="#"
-                            ><input type="checkbox" id="selectall" /> Fruit</a
+                            ><input
+                              type="checkbox"
+                              id="selectall"
+                            />Organization</a
                           >
                           <ul class="list-style-none pl-3">
                             <li>
@@ -177,7 +180,7 @@
                                   class="selectedId"
                                   name="selectedId"
                                 />
-                                Apple</a
+                                Library</a
                               >
                             </li>
                             <li>
@@ -187,7 +190,7 @@
                                   class="selectedId"
                                   name="selectedId"
                                 />
-                                Guava</a
+                                Bill</a
                               >
                             </li>
                           </ul>
@@ -197,7 +200,7 @@
 
                         <li>
                           <a href="#"
-                            ><input type="checkbox" id="selectall1" /> Flower</a
+                            ><input type="checkbox" id="selectall1" />Canteen</a
                           >
                           <ul class="list-style-none pl-3">
                             <li>
@@ -207,7 +210,7 @@
                                   class="selectedId1"
                                   name="selectedId1"
                                 />
-                                Lily</a
+                                Cafeteria</a
                               >
                             </li>
                             <li>
@@ -217,7 +220,7 @@
                                   class="selectedId1"
                                   name="selectedId1"
                                 />
-                                Rose</a
+                                Office</a
                               >
                             </li>
                           </ul>
