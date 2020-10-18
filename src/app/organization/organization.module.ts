@@ -11,6 +11,9 @@ import { ListInstituteTypeComponent } from './components/institute-type/list-ins
 import { ViewMastersComponent } from './components/view-masters/view-masters.component';
 import { EditMastersComponent } from './components/edit-masters/edit-masters.component';
 import { FormsModule } from '@angular/forms';
+import { AddAssociatedPostComponent } from './components/associated-post/add-associated-post/add-associated-post.component';
+import { EditAssociatedPostComponent } from './components/associated-post/edit-associated-post/edit-associated-post.component';
+import { ListAssociatedPostComponent } from './components/associated-post/list-associated-post/list-associated-post.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +25,9 @@ import { FormsModule } from '@angular/forms';
         ListInstituteTypeComponent,
         ViewMastersComponent,
         EditMastersComponent,
+        AddAssociatedPostComponent,
+        EditAssociatedPostComponent,
+        ListAssociatedPostComponent
     ],
     imports: [CommonModule, OrganizationRoutingModule, FormsModule],
 })
