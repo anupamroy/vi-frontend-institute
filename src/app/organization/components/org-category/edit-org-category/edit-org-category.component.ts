@@ -13,6 +13,15 @@ export class EditOrgCategoryComponent implements OnInit {
 
   constructor(private activatedRoute : ActivatedRoute, private router : Router ) { }
 
+  enableButton() {
+    if(this.OrgCategory.trim() === '') {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
   onClick(){
    
       console.log(this.OrgCategory)

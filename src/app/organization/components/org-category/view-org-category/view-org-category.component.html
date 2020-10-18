@@ -71,7 +71,7 @@
                             <td>{{item.orgCategory}}</td>
                             <td>
                                 <button routerLink="../edit-org-category/{{item.itemId}}/{{item.orgCategory}}" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-edit"></i></button>
-                                <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                <button (click)="onDelete(item.itemId)" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
                                 <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i></button>
                             </td>
                           </tr>
