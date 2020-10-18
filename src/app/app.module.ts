@@ -5,8 +5,13 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http';
 
+/* Add Amplify imports */
+import Amplify from 'aws-amplify';
+import awsconfig from '../aws-exports';
+
+/* Configure Amplify resources */
+Amplify.configure(awsconfig);
 
 @NgModule({
   declarations: [
