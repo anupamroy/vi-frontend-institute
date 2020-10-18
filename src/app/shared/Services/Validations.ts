@@ -5,8 +5,9 @@ export class Validations {
   // A-Z a-z
 
   validateName(name: string): boolean {
+    console.log(name)
     if (name.trim().length <= 25) {
-      const regex = /^[A-Za-z]+$/;
+      const regex = /^[A-Z a-z 0-9]+$/;
       return regex.test(name);
     } else {
       return false;

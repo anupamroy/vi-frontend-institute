@@ -135,6 +135,8 @@
                                             </a>
                                         </span>
                                     </h5>
+                                    <div class= "alert alert-danger" *ngIf = 'showDangerMessage'>Institute Type must not be empty or number</div>
+
                                 </div>
                                 <!--  <div class="col-lg-3 col-sm-12">
                             <button type="submit" class="btn-mat"><span>View Department</span></button>
@@ -162,8 +164,6 @@
                                                 class="form-control inputFocus"
                                                 placeholder="Institute Type"
                                                 required
-                                                minlength="1"
-                                                maxlength="20"
                                                 (input) = 'onAddInstituteType($event)'
                                                  
                                             />
@@ -176,7 +176,6 @@
                                                 id="cusEdit"
                                                 class="btn btn-warning btn-common-color btn-lg mt-3 text-white"
                                                 (click) = 'onSubmit()'
-                                                routerLink="../list-institute-type"
 
                                             >
                                                 <span>
