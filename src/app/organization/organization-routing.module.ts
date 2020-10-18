@@ -44,7 +44,7 @@ const routes: Routes = [
     component: EditInstituteTypeComponent,
   },
   { path: 'add-associated-post', component: AddAssociatedPostComponent },
-  { path: 'edit-associated-post/:id', component: EditAssociatedPostComponent },
+  { path: 'edit-associated-post/:id/:associated_post', component: EditAssociatedPostComponent },
   { path: 'list-associated-post', component: ListAssociatedPostComponent },
   { path: 'list-org-category', component: ViewOrgCategoryComponent },
   { path: 'edit-org-category/:itemId/:orgCategory', component: EditOrgCategoryComponent }

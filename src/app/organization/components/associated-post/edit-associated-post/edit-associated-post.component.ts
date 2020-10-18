@@ -13,13 +13,20 @@ export class EditAssociatedPostComponent implements OnInit {
 
   instituteType = "MTech";
 
+  enableButton(){
+    const regEx = /^[a-zA-Z\s]+$/;
+    // const regEx = /(-?([A-Z].\s)?([A-Z][a-z]+)\s?)+([A-Z]'([A-Z][a-z]+))?/
+
+    return regEx.test(this.associated_post);
+  }
+
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   onClick(){
     console.log(this.id)
     if (this.instituteType !== this.associated_post) {
-      fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/${id}', {
+      fetch(`https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/${this.id}`, {
         method: 'PUT',
         body: JSON.stringify({
           attribute: ["associated_post"],
@@ -36,8 +43,8 @@ export class EditAssociatedPostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log(this.activatedRoute.snapshot.params.itemId)
-    this.id = this.activatedRoute.snapshot.params.itemId;
+    // console.log(this.activatedRoute.snapshot.params.id)
+    this.id = this.activatedRoute.snapshot.params.id;
     this.associated_post = this.activatedRoute.snapshot.params.associated_post;
   }
 

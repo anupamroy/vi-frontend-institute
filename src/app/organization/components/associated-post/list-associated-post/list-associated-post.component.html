@@ -1,20 +1,3 @@
-<!-- <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="J">
-    <meta name=”robots” content="index, follow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>NTA e Solutions Private Limited</title>
-    <link rel="icon" type="text/css" href="assest/images/logo2.png">
-    <link rel="stylesheet" href="assest/css/dataTables.bootstrap4.min.css">
-    <link rel='stylesheet' href="assest/css/sweet-alert.css">
-    <link rel="stylesheet" href="assest/css/bootstrap.min.css">
-     <link rel="stylesheet" href="assest/css/daterangepicker.min.css">
-     <link rel='stylesheet' href="assest/css/chosen.css">
-    <link rel="stylesheet" href="assest/css/style.css">
-    <link rel="stylesheet" href="assest/css/responsive.css">
-</head> -->
 <div class="bg-light-blue">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light-yellow navbar-nav p-0" id="mainNav">
@@ -89,7 +72,7 @@
                                     <td >{{ item.associated_post }}</td>
                                     <td>
                                         <button routerLink="../edit-associated-post/{{ item.itemId }}/{{ item.associated_post }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-edit"></i></button>
-                                        <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                        <button (click)="onDelete(item.itemId)" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
                                         <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i></button>
                                     </td>
                                   </tr>                       
@@ -103,17 +86,6 @@
         </div>
     </section>
 
-    <!-- <footer class="py-2 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">
-                &copy;
-                <script type="text/javascript">
-                    document.write(new Date().getFullYear());
-                </script>
-                | All Rights Reserved
-            </p>
-        </div>
-    </footer> -->
     <footer class="footer-bottom">
         <a href="#">
             <img src="/assets/images/float-support.png" alt="support" class="float-support" />
@@ -121,55 +93,4 @@
         <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat" />
         </a>
     </footer>
-
-    <!-- <script src="assest/js/jquery.min.js"></script>
-    <script src="assest/js/popper.min.js"></script>
-    <script src="assest/js/bootstrap.min.js"></script>
-    <script src="assest/js/sweet-alert.min.js"></script>
-    
-    <script src="assest/js/jquery.dataTables.min.js"></script>
-    <script src="assest/js/dataTables.bootstrap4.min.js"></script>
-    <script src="assest/js/moment.min.js"></script>
-    <script src="assest/js/jquery.daterangepicker.min.js"></script>
-    <script src="assest/js/chosen.jquery.js"></script>
-    <script src="assest/js/script.js"></script>
-    <script type="text/javascript">
-      jq = jQuery.noConflict();
-        jq(function(){
-          jq(".inputFocus").focus();
-        });
-    </script>
-    
-<script type="text/javascript">
-    
-document.getElementById('cusEdit').onclick = function(){
-    swal("Good job!", "You clicked the button!", "success");
-};
-
-</script>
-<script type="text/javascript">
-  // checkAll
-  jq = jQuery.noConflict();
-jq(document).ready(function () {
-    jq('#selectall').click(function () {
-        jq('.selectedId').prop('checked', this.checked);
-    });
-
-    jq('.selectedId').change(function () {
-        var check = (jq('.selectedId').filter(":checked").length == jq('.selectedId').length);
-        jq('#selectall').prop("checked", check);
-    });
-});
-
-jq(document).ready(function () {
-    jq('#selectall1').click(function () {
-        jq('.selectedId1').prop('checked', this.checked);
-    });
-
-    jq('.selectedId1').change(function () {
-        var check = (jq('.selectedId1').filter(":checked").length == jq('.selectedId1').length);
-        jq('#selectall1').prop("checked", check);
-    });
-});
-</script> -->
 </div>
