@@ -1,75 +1,52 @@
-<div class="bg-semester">
+<!-- <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="J">
+    <meta name=”robots” content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>NTA e Solutions Private Limited</title>
+    <link rel="icon" type="text/css" href="assest/images/logo2.png">
+    <link rel="stylesheet" href="assest/css/dataTables.bootstrap4.min.css">
+    <link rel='stylesheet' href="assest/css/sweet-alert.css">
+    <link rel="stylesheet" href="assest/css/bootstrap.min.css">
+     <link rel="stylesheet" href="assest/css/daterangepicker.min.css">
+     <link rel='stylesheet' href="assest/css/chosen.css">
+    <link rel="stylesheet" href="assest/css/style.css">
+    <link rel="stylesheet" href="assest/css/responsive.css">
+</head> -->
+<div class="bg-light-blue">
     <!-- Navigation -->
-    <nav
-        class="navbar navbar-expand-lg navbar-light bg-light-yellow navbar-nav p-0"
-        id="mainNav"
-    >
-        <a
-            class="navbar-brand js-scroll-trigger pl-5 pr-3 pt-0 pb-0 dx-block"
-            href="#page-top"
-        >
-            <img
-                src="/assets/images/mtjh.png"
-                class="logo"
-                alt="logo"
-            />
+    <nav class="navbar navbar-expand-lg navbar-light bg-light-yellow navbar-nav p-0" id="mainNav">
+        <a class="navbar-brand js-scroll-trigger pl-5 pr-3 pt-0 pb-0 dx-block" href="#page-top">
+            <img src="/assets/images/mtjh.png" class="logo" alt="logo" />
         </a>
         <div class="container-fluid">
-            <a
-                class="navbar-brand js-scroll-trigger mb-block pl-1"
-                href="#page-top"
-            >
-                <img
-                    src="/assets/images/mtjh.png"
-                    class="logo"
-                    alt="logo"
-                />
+            <a class="navbar-brand js-scroll-trigger mb-block pl-1" href="#page-top">
+                <img src="/assets/images/mtjh.png" class="logo" alt="logo" />
             </a>
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarResponsive"
-                aria-controls="navbarResponsive"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse pl-lg-0" id="navbarResponsive">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <span class="nav-link institute-title" href="#"
-                            >DUM DUM MOTIJHEEL COLLEGE
-                            <span class="sr-only">(current)</span></span
-                        >
+                        <span class="nav-link institute-title" href="#">DUM DUM MOTIJHEEL COLLEGE
+                            <span class="sr-only">(current)</span></span>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            id="navbarDropdownMenuLink"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            ><img
-                                src="/assets/images/profile-pic.jpg"
-                                alt="profile pic"
-                                class="img-stu-profile"
-                            />
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"><img src="/assets/images/profile-pic.jpg"
+                                alt="profile pic" class="img-stu-profile" />
                             Pritam Deb Nath
                         </a>
                         <small class="regNo">Department : Accounts</small>
-                        <div
-                            class="dropdown-menu"
-                            aria-labelledby="navbarDropdownMenuLink"
-                        >
-                            <a class="dropdown-item" href="#"
-                                >Sign Out <i class="fas fa-sign-out-alt"></i
-                            ></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Sign Out <i class="fas fa-sign-out-alt"></i></a>
                         </div>
                     </li>
                 </ul>
@@ -81,172 +58,48 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-sm-12">
-                    <h5
-                        class="text-white pt-1 text-blue text-left text-capitalize"
-                    >
-                        <i class="fas fa-arrows-alt"></i> List Institute Type
-                        <span class="float-right"
-                            ><a
-                                class="btn mb-3 text-white"
-                                href="view-dashboard.html"
-                            >
-                                <i class="fas fa-tachometer-alt"></i> Dashboard
-                            </a></span
-                        >
+                    <h5 class="text-white pt-1 text-blue text-left text-capitalize"><i class="fas fa-arrows-alt"></i>
+                        View Institute Types <span class="float-right"><a class="btn mb-3 text-white"
+                                href="view-dashboard.html"> <i class="fas fa-tachometer-alt"></i> Dashboard </a></span>
                     </h5>
-                    <hr class="hr-white" />
+                    <hr class="hr-white">
                 </div>
+
             </div>
         </div>
     </section>
 
     <section class="stu-dashboard cus-pay-wave">
         <div class="container">
+
             <div class="row">
                 <div class="col-lg-12 col-sm-12">
-                    <div class="table-responsive bg-light p-4 mb-5">
-                        <table
-                            id="dt-example"
-                            class="table-bordered table-active stripe row-border order-column cl-table dataTable no-footer"
-                            cellspacing="0"
-                            width="100%"
-                        >
-                            <thead>
-                                <select
-                                    class="form-control-clild filter-select col-lg-4 offset-lg-3"
-                                >
-                                    <option>Select Option</option>
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                </select>
-                                <tr>
-                                    <th>Sl&nbsp;No</th>
-                                    <th>Institute&nbsp;Type</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
+                    <table class="table table-bordered" style="background-color: aliceblue;">
+                        <thead>
+                          <tr>
+                            <th scope="col">Sl No</th>
+                            <th scope="col">Institute Types</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor = "let item of finalItems ; let  i = index" >
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{item.instituteType}}</td>
+                            <td>
+                                <button routerLink="../edit-institute-type/{{item.itemId}}/{{item.instituteType}}" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-edit"></i></button>
+                                <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i></button>
+                            </td>
+                          </tr>
+
+                        </tbody>
+                      </table>
                 </div>
             </div>
+
         </div>
     </section>
-
-    <!-- The approveBox -->
-    <div class="modal" id="approveBox">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Form Heading</h4>
-                    <button type="button" class="close" data-dismiss="modal">
-                        &times;
-                    </button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-lg-10 cl-sm-12 mb-3 form-group">
-                                <label
-                                    for="accountHead"
-                                    class="col-lg-12 pl-0 pr-0"
-                                    >Associated Accounts Head</label
-                                >
-                                <select
-                                    class="form-control"
-                                    id="accountHead"
-                                    name="accountHead"
-                                >
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                </select>
-                            </div>
-                            <div
-                                class="col-lg-1 col-sm-12 button-container mt-4"
-                            >
-                                <button
-                                    type="button"
-                                    id="cusEdit"
-                                    class="btn btn-dark-blue mt-2"
-                                >
-                                    <span
-                                        ><i class="fas fa-plus-circle"></i
-                                    ></span>
-                                </button>
-                            </div>
-                            <div class="col-lg-12 cl-sm-12 mb-3 form-group">
-                                <label for="Amount">Amount</label>
-                                <input
-                                    data-toggle="tooltip"
-                                    data-placement="bottom"
-                                    title=""
-                                    type="text"
-                                    name="Amount"
-                                    id="Amount"
-                                    class="form-control inputFocus"
-                                    placeholder="Amount"
-                                    required=""
-                                    minlength=""
-                                    maxlength=""
-                                    data-original-title="Demo tooltip text"
-                                />
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-common-color">
-                            Submit
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- approveBox end -->
-
-    <!-- The approveBox -->
-    <div class="modal" id="RejectBox">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Reject Form Heading</h4>
-                    <button type="button" class="close" data-dismiss="modal">
-                        &times;
-                    </button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-lg-12 cl-sm-12 mb-3 form-group">
-                                <label for="rejection"
-                                    >Reason of Rejection</label
-                                >
-                                <textarea
-                                    class="form-control"
-                                    name="Amount"
-                                    id="Amount"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title=""
-                                    data-original-title="Demo tooltip text"
-                                    rows="5"
-                                ></textarea>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-common-color">
-                            Submit
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- approveBox end -->
 
     <!-- <footer class="py-2 bg-dark">
         <div class="container">
@@ -259,24 +112,62 @@
             </p>
         </div>
     </footer> -->
+    <footer class="footer-bottom">
+        <a href="#">
+            <img src="/assets/images/float-support.png" alt="support" class="float-support" />
+        </a>
+        <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat" />
+        </a>
+    </footer>
 
-    <!-- <script src="../../assets/js/jquery.min.js"></script>
-    <script src="../../assets/js/popper.min.js"></script>
-    <script src="../../assets/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/sweet-alert.min.js"></script>
+    <!-- <script src="assest/js/jquery.min.js"></script>
+    <script src="assest/js/popper.min.js"></script>
+    <script src="assest/js/bootstrap.min.js"></script>
+    <script src="assest/js/sweet-alert.min.js"></script>
     
-    <script src="../../assets/js/child.dataTables.min.js"></script>
-
-    <script src="../../assets/js/fees-type.js"></script>
-
+    <script src="assest/js/jquery.dataTables.min.js"></script>
+    <script src="assest/js/dataTables.bootstrap4.min.js"></script>
+    <script src="assest/js/moment.min.js"></script>
+    <script src="assest/js/jquery.daterangepicker.min.js"></script>
+    <script src="assest/js/chosen.jquery.js"></script>
+    <script src="assest/js/script.js"></script>
+    <script type="text/javascript">
+      jq = jQuery.noConflict();
+        jq(function(){
+          jq(".inputFocus").focus();
+        });
+    </script>
+    
 <script type="text/javascript">
     
 document.getElementById('cusEdit').onclick = function(){
     swal("Good job!", "You clicked the button!", "success");
 };
-document.getElementById('cusEdit1').onclick = function(){
-    swal("Good job!", "You clicked the button!", "success");
-};
-// 
+
+</script>
+<script type="text/javascript">
+  // checkAll
+  jq = jQuery.noConflict();
+jq(document).ready(function () {
+    jq('#selectall').click(function () {
+        jq('.selectedId').prop('checked', this.checked);
+    });
+
+    jq('.selectedId').change(function () {
+        var check = (jq('.selectedId').filter(":checked").length == jq('.selectedId').length);
+        jq('#selectall').prop("checked", check);
+    });
+});
+
+jq(document).ready(function () {
+    jq('#selectall1').click(function () {
+        jq('.selectedId1').prop('checked', this.checked);
+    });
+
+    jq('.selectedId1').change(function () {
+        var check = (jq('.selectedId1').filter(":checked").length == jq('.selectedId1').length);
+        jq('#selectall1').prop("checked", check);
+    });
+});
 </script> -->
 </div>
