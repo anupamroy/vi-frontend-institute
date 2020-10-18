@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddMastersComponent } from './components/add-masters/add-masters.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AddAssociatedPostComponent } from './components/associated-post/add-associated-post/add-associated-post.component';
+import { EditAssociatedPostComponent } from './components/associated-post/edit-associated-post/edit-associated-post.component';
+import { ListAssociatedPostComponent } from './components/associated-post/list-associated-post/list-associated-post.component';
 import { EditInstituteTypeComponent } from './components/institute-type/edit-institute-type/edit-institute-type.component';
 import { InstituteTypeComponent } from './components/institute-type/institute-type/institute-type.component';
 import { ListInstituteTypeComponent } from './components/institute-type/list-institute-type/list-institute-type.component';
@@ -24,6 +27,9 @@ const routes: Routes = [
 
     { path: 'list-institute-type', component: ListInstituteTypeComponent },
     { path: 'edit-institute-type', component: EditInstituteTypeComponent },
+    { path: 'add-associated-post', component: AddAssociatedPostComponent },
+    { path: 'edit-associated-post/:itemId/:associated_post', component: EditAssociatedPostComponent },
+    { path: 'list-associated-post', component: ListAssociatedPostComponent }
 ];
 
 @NgModule({
