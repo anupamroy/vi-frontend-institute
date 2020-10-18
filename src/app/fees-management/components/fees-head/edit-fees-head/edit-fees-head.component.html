@@ -127,10 +127,9 @@
                         name="instituteType"
                         formControlName="instituteType"
                       >
-                        <option>Select Option</option>
-                        <option>UG</option>
-                        <option>PG</option>
-                        <option>Professional Type</option>
+                        <option *ngFor="let item of finalItems">
+                          {{ item.instituteType.toString() }}
+                        </option>
                       </select>
                     </div>
                     <div class="col-lg-5 cl-sm-12 mb-3 form-group">
