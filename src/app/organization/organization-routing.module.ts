@@ -5,9 +5,11 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { AddAssociatedPostComponent } from './components/associated-post/add-associated-post/add-associated-post.component';
 import { EditAssociatedPostComponent } from './components/associated-post/edit-associated-post/edit-associated-post.component';
 import { ListAssociatedPostComponent } from './components/associated-post/list-associated-post/list-associated-post.component';
+import { EditMastersComponent } from './components/edit-masters/edit-masters.component';
 import { EditInstituteTypeComponent } from './components/institute-type/edit-institute-type/edit-institute-type.component';
 import { InstituteTypeComponent } from './components/institute-type/institute-type/institute-type.component';
 import { ListInstituteTypeComponent } from './components/institute-type/list-institute-type/list-institute-type.component';
+import { ViewMastersComponent } from './components/view-masters/view-masters.component';
 import { OrganizationComponent } from './organization.component';
 
 const routes: Routes = [

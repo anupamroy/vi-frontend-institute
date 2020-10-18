@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 /* Add Amplify imports */
 import Amplify from 'aws-amplify';
 import awsconfig from '../aws-exports';
+import { HttpClientModule } from '@angular/common/http';
 
 /* Configure Amplify resources */
 Amplify.configure(awsconfig);

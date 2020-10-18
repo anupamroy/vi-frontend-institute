@@ -10,6 +10,7 @@ import { EditInstituteTypeComponent } from './components/institute-type/edit-ins
 import { ListInstituteTypeComponent } from './components/institute-type/list-institute-type/list-institute-type.component';
 import { ViewMastersComponent } from './components/view-masters/view-masters.component';
 import { EditMastersComponent } from './components/edit-masters/edit-masters.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
