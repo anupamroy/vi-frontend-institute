@@ -9,6 +9,9 @@ import { EditMastersComponent } from './components/edit-masters/edit-masters.com
 import { EditInstituteTypeComponent } from './components/institute-type/edit-institute-type/edit-institute-type.component';
 import { InstituteTypeComponent } from './components/institute-type/institute-type/institute-type.component';
 import { ListInstituteTypeComponent } from './components/institute-type/list-institute-type/list-institute-type.component';
+import { AddOrgCategoryComponent } from './components/org-category/add-org-category/add-org-category.component';
+import { EditOrgCategoryComponent } from './components/org-category/edit-org-category/edit-org-category.component';
+import { ViewOrgCategoryComponent } from './components/org-category/view-org-category/view-org-category.component';
 import { ViewMastersComponent } from './components/view-masters/view-masters.component';
 import { OrganizationComponent } from './organization.component';
 
@@ -31,6 +34,7 @@ const routes: Routes = [
       },
       { path: 'add-institute-type', component: InstituteTypeComponent },
       { path: '', component: AdminDashboardComponent },
+      { path: 'add-org-category', component: AddOrgCategoryComponent}
     ],
   },
 
@@ -42,6 +46,8 @@ const routes: Routes = [
   { path: 'add-associated-post', component: AddAssociatedPostComponent },
   { path: 'edit-associated-post/:id', component: EditAssociatedPostComponent },
   { path: 'list-associated-post', component: ListAssociatedPostComponent },
+  { path: 'list-org-category', component: ViewOrgCategoryComponent },
+  { path: 'edit-org-category/:itemId/:orgCategory', component: EditOrgCategoryComponent }
 ];
 
 @NgModule({
