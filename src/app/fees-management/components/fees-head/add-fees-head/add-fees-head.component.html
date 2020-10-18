@@ -105,6 +105,51 @@
               <div class="row">
                 <div class="col-lg-12 col-sm-12">
                   <div
+                    class="m-1 p-2 alert alert-danger"
+                    *ngIf="
+                      (feesHeadName.dirty || feesHeadName.touched) &&
+                      feesHeadName.errors &&
+                      feesHeadName.errors.required
+                    "
+                  >
+                    Fees Head is required
+                  </div>
+                  <div
+                    class="m-1 p-2 alert alert-danger"
+                    *ngIf="
+                      (feesHeadName.dirty || feesHeadName.touched) &&
+                      feesHeadName.errors &&
+                      feesHeadName.errors.pattern
+                    "
+                  >
+                    Fees Head should not have numbers or special characters
+                  </div>
+                  <div
+                    class="m-1 p-2 alert alert-danger"
+                    *ngIf="
+                      (instituteType.dirty || instituteType.touched) &&
+                      instituteType.errors &&
+                      instituteType.errors.required
+                    "
+                  >
+                    Institute Type is required
+                  </div>
+                  <div
+                    class="m-1 p-2 alert alert-danger"
+                    *ngIf="
+                      (parentFees.dirty || parentFees.touched) &&
+                      parentFees.errors &&
+                      parentFees.errors.required
+                    "
+                  >
+                    Parent Fees is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                  <div
                     class="bg-light-yellow ml-1 mr-1 p-3 row position-relative"
                   >
                     <div class="col-lg-3 cl-sm-12 mb-3 form-group">
@@ -115,6 +160,7 @@
                         name="instituteType"
                         formControlName="instituteType"
                       >
+                        <option selected value="null">Institute Type</option>
                         <option *ngFor="let item of finalItems">
                           {{ item.instituteType.toString() }}
                         </option>
@@ -132,24 +178,21 @@
                         id="feesHead"
                         class="form-control inputFocus"
                         placeholder="Fees Head"
-                        required
-                        minlength="1"
-                        maxlength="50"
                         formControlName="feesHeadName"
                       />
                     </div>
 
                     <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
                       <label for="parentFees"> Parent Fees</label><br />
-                      <button
+                      <!-- <button
                         class="btn form-control text-left bg-white dropdown-toggle"
                         type="button"
                         data-toggle="dropdown"
                       >
                         Select fees type
                         <span class="caret"></span>
-                      </button>
-                      <!-- <input
+                      </button> -->
+                      <input
                         data-toggle="tooltip"
                         data-placement="bottom"
                         title="Demo tooltip text"
@@ -162,7 +205,7 @@
                         minlength="1"
                         maxlength="50"
                         formControlName="parentFees"
-                      /> -->
+                      />
 
                       <ul class="dropdown-menu">
                         <li>

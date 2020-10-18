@@ -4,9 +4,9 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
+  AbstractControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import FeesHeadModel from '../../../models/fees-head.model';
 
 @Component({
   selector: 'app-add-fees-head',
@@ -15,7 +15,7 @@ import FeesHeadModel from '../../../models/fees-head.model';
 })
 export class AddFeesHeadComponent implements OnInit {
   addFeesHeadForm: FormGroup;
-  instituteType = [];
+  instituteTypeList = [];
   finalItems = [];
 
   constructor(private formBuilder: FormBuilder, private router: Router) {}
@@ -26,28 +26,26 @@ export class AddFeesHeadComponent implements OnInit {
       feesHeadName: [
         '',
         [
-          Validators.nullValidator,
           Validators.required,
+          Validators.nullValidator,
           Validators.maxLength(25),
-          Validators.pattern(RegExp('^[A-Za-z_ ]*$')),
+          Validators.pattern(RegExp(`^[a-zA-Z_ ]*$`)),
         ],
       ],
-      parentFees: ['', [Validators.required]],
+      parentFees: ['', [Validators.required, Validators.nullValidator]],
     });
 
     fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/all')
       .then((res) => res.json())
       .then((res) => {
-        this.instituteType = JSON.parse(res).Items;
+        this.instituteTypeList = JSON.parse(res).Items;
         const temp = [];
-        this.instituteType.forEach((record) => {
+        this.instituteTypeList.forEach((record) => {
           if (record.instituteType) {
             temp.push(record);
           }
         });
         this.finalItems = temp;
-        console.log(this.finalItems);
-        // console.log(this.instituteType);
       })
       .catch((err) => console.log(err));
   }
@@ -60,11 +58,20 @@ export class AddFeesHeadComponent implements OnInit {
       body: JSON.stringify(this.addFeesHeadForm.value),
     })
       .then((data) => {
-        console.log(data);
         this.router.navigate(['/fees-management/fees-head']);
       })
       .catch((err) => {
         console.error(err);
       });
+  }
+
+  get feesHeadName(): AbstractControl {
+    return this.addFeesHeadForm.get('feesHeadName');
+  }
+  get parentFees(): AbstractControl {
+    return this.addFeesHeadForm.get('parentFees');
+  }
+  get instituteType(): AbstractControl {
+    return this.addFeesHeadForm.get('instituteType');
   }
 }
