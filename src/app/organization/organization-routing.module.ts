@@ -11,18 +11,26 @@ import { ListInstituteTypeComponent } from './components/institute-type/list-ins
 import { OrganizationComponent } from './organization.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: OrganizationComponent,
-        children: [
-            {
-                path: 'add-masters',
-                component: AddMastersComponent,
-            },
-            { path: 'add-institute-type', component: InstituteTypeComponent },
-            { path: '', component: AdminDashboardComponent },
-        ],
-    },
+  {
+    path: '',
+    component: OrganizationComponent,
+    children: [
+      {
+        path: 'add-masters',
+        component: AddMastersComponent,
+      },
+      {
+        path: 'view-masters',
+        component: ViewMastersComponent,
+      },
+      {
+        path: 'edit-masters',
+        component: EditMastersComponent,
+      },
+      { path: 'add-institute-type', component: InstituteTypeComponent },
+      { path: '', component: AdminDashboardComponent },
+    ],
+  },
 
     { path: 'list-institute-type', component: ListInstituteTypeComponent },
     { path: 'edit-institute-type/:itemId/:instituteType', component: EditInstituteTypeComponent },
