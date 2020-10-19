@@ -21,8 +21,9 @@ deploy:
   only:
     - dev
   script:
-    - pip install awscli:2.0.6
-    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - pip install awscli
+    - aws configure set aws_default_region us-east-2
+    - aws configure set aws_access_key_id AKIAQ26RTVO4MAN2J5K7
+    - aws configure set aws_secret_access_key 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
     - aws s3 rm s3://virtual-institute --recursive
     - aws s3 sync ./dist s3://virtual-institute --acl public-read
