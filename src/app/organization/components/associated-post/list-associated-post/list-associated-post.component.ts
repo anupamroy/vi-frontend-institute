@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
+import {AssociatedPostService} from '../services/associated-post.service'
 
 @Component({
   selector: 'app-list-associated-post',
@@ -10,42 +13,67 @@ export class ListAssociatedPostComponent implements OnInit {
   associated_Post: any;
   final_items: any;
 
-  constructor() { }
+  constructor(private router: Router,private associatedPostService:AssociatedPostService) { }
 
-  onDelete(id: string){
-    fetch(`https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/${id}`, {
-      method: 'DELETE'
-    }).then((res) => {
-      console.log(res)
+  onDelete(id: string) {
+    Swal.fire({
+      title: 'Are you sure you want to delete?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonColor: "#DD6B55"
+    }).then((result) => {
+      if (result.value) {
+        this.associatedPostService.deleteAssociatedPostById(id).subscribe(()=>{
+          this.final_items = this.final_items.filter((item)=>{
+            return item.itemId !== id;
+          })
+        });
+        Swal.fire(
+          'Deleted!',
+          'Your Associated Post has been deleted.',
+          'success'
+        )
 
-      this.final_items = this.final_items.filter((item) => {
-        return item.itemId !== id;
-      })
-    }).catch((err) => {
-      console.log(err)
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Your Associated Post is safe :)',
+          'error'
+        )
+      }
     })
+    
+  }
+
+  onDashboard() {
+    this.router.navigate(["./org"])
+  }
+
+  onAdd() {
+    this.router.navigate(["/org/add-associated-post"])
   }
 
   ngOnInit(): void {
-    fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/all')
-    .then(res => res.json())
-    .then((res) => {
-      this.associated_Post = JSON.parse(res).Items;
-      // this.associated_Post = this.associated_Post.find(item => item === 'associated_post')
-      console.log('hello....',this.associated_Post);
-      let temp = [];
+    this.associatedPostService.getAssociatedPost().subscribe(responseData => {
+      this.associated_Post = JSON.parse(responseData).Items
+      console.log(this.associated_Post)
+      let temp = []
       this.associated_Post.forEach(record => {
-        if(record.associated_post){
+        if (record.associated_post) {
           temp.push(record)
         }
       })
-      this.final_items = temp;
-      }).catch(err=>console.log(err)
-      )
-      
-      
-      
-  } 
+      this.final_items = temp
+    },
+      error => {
+        console.log("Could not Fetch Data")
+      }
+    )
+
+
+  }
 
 
 }

@@ -1,4 +1,4 @@
-<div class="bg-light-blue">
+<div style="height:100%" class="bg-light-blue">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light-yellow navbar-nav p-0" id="mainNav">
         <a class="navbar-brand js-scroll-trigger pl-5 pr-3 pt-0 pb-0 dx-block" href="#page-top">
@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="offset-lg-2 col-lg-8">
                     <h5>
-                        <span class="float-right"><a class="text-light btn mb-3" routerLink="../add-masters">
+                        <span class="float-right"><a class="text-light btn mb-3" (click)="onDashboard()">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard
                             </a>
                         </span>
@@ -62,7 +62,18 @@
                                     </h5>
                                 </div>
                             </div>
+                            <div [hidden]="!enableButton()||!associateControl.dirty" class="alert alert-danger" role="alert">
+                                Null field not allowed .
+                             </div>
+                            <div [hidden]="enableAlert()" class="alert alert-danger" role="alert">
+                                This field accept only ['A-Z','a-z','_',' ']
+                             </div>
 
+                             <div [hidden]="true" class="alert alert-success" id="alert" role="alert">
+                                Data Saved Successfully!!
+                             </div>
+
+                             
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
                                     <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
@@ -78,10 +89,11 @@
                                                     placeholder="Associated Post" 
                                                     required minlength="1" 
                                                     maxlength="20"
-                                                    [(ngModel)]="associatedPost" />
+                                                    [(ngModel)]="associatedPost" 
+                                                    #associateControl="ngModel"/>
                                         </div>
                                         <div class="col-lg-3 button-container mt-3 text-center">
-                                            <button type="button" [disabled]="!enableButton()" routerLink="../list-associated-post" (click)="onClick()" id="cusEdit" style="background-color: #ebc034;"
+                                            <button type="button" [disabled]="enableButton()||!enableAlert()"  (click)="onClick()" id="cusEdit" style="background-color: #ebc034;"
                                                 class="btn btn-block btn-common-color btn-lg mt-3 text-white">
                                                 <span>
                                                     Add

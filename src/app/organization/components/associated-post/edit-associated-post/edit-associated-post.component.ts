@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2'
+import {AssociatedPostService} from '../services/associated-post.service'
 
 @Component({
   selector: 'app-edit-associated-post',
@@ -14,32 +16,58 @@ export class EditAssociatedPostComponent implements OnInit {
   instituteType = "MTech";
 
   enableButton(){
-    const regEx = /^[a-zA-Z\s]+$/;
-    // const regEx = /(-?([A-Z].\s)?([A-Z][a-z]+)\s?)+([A-Z]'([A-Z][a-z]+))?/
-
-    return regEx.test(this.associated_post);
+    if(this.associated_post.trim() === '') {
+      return true
+    }
+    else {
+      return false
+    }
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
+  enableAlert(){
+    const regex = /^[a-zA-Z_ ]*$/
+    return regex.test(this.associated_post)
+  }
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,private associatedPostService:AssociatedPostService) {
   }
 
   onClick(){
     console.log(this.id)
     if (this.instituteType !== this.associated_post) {
-      fetch(`https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/${this.id}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-          attribute: ["associated_post"],
-          value: [this.associated_post]
+      this.associatedPostService
+        .updateAssociatedPostById(this.id, {
+          attribute: ['associated_post'],
+          value: [
+            this.associated_post
+          ],
         })
-      }).then((res) => {
-        console.log(res);
-        console.log('SUCCESS')
-        this.router.navigate(["/org/list-associated-post"])
-      }).catch((err) => {
-        console.log(err);
-      })
+        .subscribe((data) => {
+          console.log(data);
+        });
     }
+    Swal.fire({
+      title: 'Editted',
+      text: 'Data Editted Successfully',
+      icon: 'success',
+      confirmButtonText: 'Ok'
+    }).then(()=>{
+      setTimeout(() => {
+        this.router.navigate(['./org/list-associated-post']);
+      }, 500);
+    })
+    // document.getElementById('alert').hidden = false
+  }
+
+  onView(){
+    this.router.navigate(["/org/list-associated-post"])
+  }
+  onDashboard(){
+    this.router.navigate(["./org"])
+  }
+
+  onAdd(){
+    this.router.navigate(["/org/add-associated-post"])
   }
 
   ngOnInit(): void {
