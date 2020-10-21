@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Router } from '@angular/router';
+import Swal from 'sweetalert2'
+import {AssociatedPostService} from '../services/associated-post.service'
 
 @Component({
   selector: 'app-add-associated-post',
@@ -9,13 +12,20 @@ export class AddAssociatedPostComponent implements OnInit {
 
   associatedPost: string = "";
 
-  constructor() { }
+  constructor(private router: Router,private associatedPostService:AssociatedPostService) { }
 
   enableButton(){
-    const regEx = /^[a-zA-Z\s]+$/;
-    // const regEx = /(-?([A-Z].\s)?([A-Z][a-z]+)\s?)+([A-Z]'([A-Z][a-z]+))?/
+    if(this.associatedPost.trim() === '') {
+      return true
+    }
+    else {
+      return false
+    }
+  }
 
-    return regEx.test(this.associatedPost);
+  enableAlert(){
+    const regex = /^[a-zA-Z_ ]*$/
+    return regex.test(this.associatedPost)
   }
 
   // onKey(event: any) { // without type info
@@ -24,16 +34,29 @@ export class AddAssociatedPostComponent implements OnInit {
 
   onClick() {
     console.log(this.associatedPost);
-    fetch("https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org", {
-      method: 'POST',
-      body: JSON.stringify({
-        associated_post: this.associatedPost
-      })
-    }).then((res) => {
-      console.log(res)
-    }).catch((err) => {
-      console.log(err)
-    })
+    const associatedPostObj = {
+      associated_post : this.associatedPost
+    }
+    this.associatedPostService
+        .addAssociatedPost(associatedPostObj)
+        .subscribe((data) => {
+          console.log(data);
+        });
+        Swal.fire({
+          title: 'Added',
+          text: 'Data Added Successfully',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(()=>{
+          setTimeout(() => {
+            this.router.navigate(['./org/list-associated-post']);
+          }, 500);
+        })
+    
+  }
+
+  onDashboard(){
+    this.router.navigate(["./org"])
   }
 
   ngOnInit(): void {
