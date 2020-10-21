@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { OrganizationCategoryService } from '../Services/organization-category.service'
+import Swal from 'sweetalert2';
+import { read } from 'fs';
 
 @Component({
   selector: 'app-view-org-category',
@@ -7,41 +10,61 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewOrgCategoryComponent implements OnInit {
 
-  orgCategory : any;
-  finalItems : any
-  constructor() { }
+  orgCategory: any;
+  finalItems: any
+  constructor(private organizationService: OrganizationCategoryService) { }
 
-  onDelete(id: string){
-    fetch(`https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/${id}`, {
-      method: 'DELETE'
-    }).then((res) => {
-      console.log(res)
+  onDelete(id: string) {
 
-      this.finalItems = this.finalItems.filter((item) => {
-        return item.itemId !== id;
-      })
-    }).catch((err) => {
-      console.log(err)
+    Swal.fire({
+      title: 'Are you sure you want to delete?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonColor: "#DD6B55"
+    }).then((result) => {
+      if (result.value) {
+        this.organizationService.deleteOrganizationById(id).subscribe(() => {
+          this.finalItems = this.finalItems.filter((item) => {
+            return item.itemId !== id;
+          })
+        });
+        Swal.fire(
+          'Deleted!',
+          'Your Organization Category has been deleted.',
+          'success'
+        )
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Your Organization Category is safe :)',
+          'error'
+        )
+      }
     })
+   
   }
 
 
   ngOnInit(): void {
-    fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/all')
-    .then( res=> res.json())
-    .then( res => {
-      this.orgCategory = JSON.parse(res).Items;
+    this.organizationService.getOrganizationCategory().subscribe(responseData => {
+      this.orgCategory = JSON.parse(responseData).Items
       console.log(this.orgCategory)
-
-      let temp= []
+      let temp = []
       this.orgCategory.forEach(record => {
-        if(record.orgCategory){
+        if (record.orgCategory) {
           temp.push(record)
         }
       })
       this.finalItems = temp
-    })
-    .catch(err => console.log(err))
+    },
+      error => {
+        console.log("Could not Fetch Data")
+      }
+    )
+
   }
 }
 
