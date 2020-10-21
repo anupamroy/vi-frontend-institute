@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { OrganizationCategoryService } from '../Services/organization-category.service'
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-add-org-category',
@@ -10,7 +13,7 @@ export class AddOrgCategoryComponent implements OnInit {
   disableButton : boolean = true
   orgCategory : string = ''
 
-  constructor() { }
+  constructor(private router : Router, private organizationService : OrganizationCategoryService) { }
 
   enableButton() {
     if(this.orgCategory.trim() === '') {
@@ -21,12 +24,11 @@ export class AddOrgCategoryComponent implements OnInit {
     }
   }
 
-  onAddOrgCategory( event : Event ){
-    //this.disableButton = false
-    this.orgCategory = (<HTMLInputElement>event.target).value
-
+  enableAlert(){
+    const regex = /^[a-zA-Z ]*$/
+    return regex.test(this.orgCategory)
   }
-
+  
   onSubmit(){
     const orgCategoryObj = {
       orgCategory : this.orgCategory
@@ -34,19 +36,22 @@ export class AddOrgCategoryComponent implements OnInit {
 
     console.log(orgCategoryObj)
 
-    fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org', {
-      method : 'post',
-      body : JSON.stringify(orgCategoryObj)
+    this.organizationService
+        .addOrganizationCategory(orgCategoryObj)
+        .subscribe((data) => {
+          console.log(data);
+        });
+    
+    Swal.fire({
+      title: 'Added',
+      text: 'Data Added Successfully',
+      icon: 'success',
+      confirmButtonText: 'Ok'
+    }).then(()=>{
+      setTimeout(() => {
+        this.router.navigate(['./org/list-org-category']);
+      }, 500);
     })
-    .then(result =>{
-      console.log(result)
-      
-    })
-    .catch(err => {
-      console.log(err)
-    })
-
-
   }
 
   ngOnInit(): void {

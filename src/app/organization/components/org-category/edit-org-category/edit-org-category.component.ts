@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
+import { OrganizationCategoryService } from '../Services/organization-category.service'
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-edit-org-category',
@@ -11,7 +13,7 @@ export class EditOrgCategoryComponent implements OnInit {
   OrgCategory: string
   id: string
 
-  constructor(private activatedRoute : ActivatedRoute, private router : Router ) { }
+  constructor(private activatedRoute : ActivatedRoute, private router : Router, private organizationService : OrganizationCategoryService ) { }
 
   enableButton() {
     if(this.OrgCategory.trim() === '') {
@@ -22,26 +24,47 @@ export class EditOrgCategoryComponent implements OnInit {
     }
   }
 
+  enableAlert(){
+    const regex = /^[a-zA-Z_ ]*$/
+    return regex.test(this.OrgCategory)
+  }
+
   onClick(){
    
       console.log(this.OrgCategory)
-
-      fetch(`https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org/${this.id}`, {
-        method : 'PUT',
-        body : JSON.stringify({
-          "attribute" : ["orgCategory"],
-          "value" : [this.OrgCategory]
+      this.organizationService
+        .updateOrganizationById(this.id, {
+          attribute: ['orgCategory'],
+          value: [
+            this.OrgCategory
+          ],
         })
-      })
-      .then( result => {
-        console.log(result)
-        this.router.navigate(['/org/list-org-category'])
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        .subscribe((data) => {
+          console.log(data);
+        });
+        
+        Swal.fire({
+          title: 'Editted',
+          text: 'Data Editted Successfully',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(()=>{
+          setTimeout(() => {
+            this.router.navigate(['./org/list-org-category']);
+          }, 500);
+        })
+  }
 
-    
+  onAdd(){
+    this.router.navigate(['./org/add-org-category'])
+  }
+
+  onView(){
+    this.router.navigate(['./org/list-org-category'])
+  }
+
+  onDashboard(){
+    this.router.navigate(['./org'])
   }
 
   ngOnInit(): void {
