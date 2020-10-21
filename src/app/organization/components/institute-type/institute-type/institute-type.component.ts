@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { Validations } from '../../../../shared/Services/Validations'
+import { InstituteTypeService} from '../Services/institute-type.service'
+import Swal from 'sweetalert2'
 
 
 @Component({
@@ -9,51 +11,70 @@ import { Validations } from '../../../../shared/Services/Validations'
   styleUrls: ['./institute-type.component.scss']
 })
 export class InstituteTypeComponent implements OnInit {
-  disableButton : boolean = true
+  disabledButton : boolean = true
   instituteType : string = ''
-  showDangerMessage: boolean = false
   validations : any
+  showMessage : boolean = false
+  message : string
+  class : string = ""
 
-  constructor( private activatedRoute : ActivatedRoute, private router : Router) { }
+  constructor( 
+    private activatedRoute : ActivatedRoute, 
+    private router : Router,
+    private InstituteTypeService : InstituteTypeService) { }
 
   onAddInstituteType( event : Event ){
-    this.disableButton = false
     this.instituteType = (<HTMLInputElement>event.target).value
+    const validationResult = this.validations.validateName(this.instituteType)
+    console.log(validationResult)
+    if(validationResult){
+      this.disabledButton = false
+      this.showMessage = false
+    }
+    else{
+      if(this.instituteType.trim() === ''){
+        this.disabledButton = true
+        this.showMessage = true
+        this.class = 'alert alert-danger'
+        this.message = 'Institute Type Can Not Be Blank'
+      } else{
+        this.disabledButton=true
+        this.showMessage = true
+        this.class = 'alert alert-danger'
+        this.message = 'Numbers And  Special Characters Are Not Allowed . '
+
+      }
+    }
 
   }
 
   onSubmit(){
-    const validationResult = this.validations.validateName(this.instituteType)
-    console.log(validationResult)
-    if(validationResult){
+        Swal.fire(
+          'Congratulations!',
+          'Institute Type has been added',
+          'success'
+        )
       const instituteTypeObj = {
         instituteType : this.instituteType
       }
-  
-      console.log(instituteTypeObj)
-  
-      fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/org', {
-        method : 'post',
-        body : JSON.stringify(instituteTypeObj)
+      this.InstituteTypeService.postInstituteType(instituteTypeObj)
+      .subscribe({
+        next : responseData =>{
+          console.log(responseData)
+        
+          this.router.navigate(['/org/list-institute-type'])
+                 
+        }, 
+        error : error => {
+          console.log(error)
+        }
       })
-
-      .then(result =>{
-        console.log(result)
-        this.router.navigate(['/org/list-institute-type'])
-        })
-      .catch(err => {
-        console.log(err)
-      })
-
-    }
-    else {
-      this.showDangerMessage = true
-    }
-
-  }
+      }
+  
 
   ngOnInit(): void {
     this.validations = new Validations()
   }
 
 }
+
