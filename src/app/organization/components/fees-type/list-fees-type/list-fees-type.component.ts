@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { OrganizationCategoryService } from '../Services/organization-category.service'
-import Swal from 'sweetalert2';
-import { read } from 'fs';
+import { FeesService } from '../../../services/fees-type.service'
+import Swal from 'sweetalert2'
 
 @Component({
-  selector: 'app-view-org-category',
-  templateUrl: './view-org-category.component.html',
-  styleUrls: ['./view-org-category.component.scss']
+  selector: 'app-list-fees-type',
+  templateUrl: './list-fees-type.component.html',
+  styleUrls: ['./list-fees-type.component.scss']
 })
-export class ViewOrgCategoryComponent implements OnInit {
+export class ListFeesTypeComponent implements OnInit {
 
-  orgCategory: any;
+  feesType: any;
   finalItems: any
-  constructor(private organizationService: OrganizationCategoryService) { }
+  constructor(private feesService: FeesService) { }
 
   onDelete(id: string) {
 
@@ -25,21 +24,21 @@ export class ViewOrgCategoryComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-        this.organizationService.deleteOrganizationById(id).subscribe(() => {
+        this.feesService.deleteFeesTypeById(id).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
-            return item.itemId !== id;
+            return item.fees_head_id !== id;
           })
         });
         Swal.fire(
           'Deleted!',
-          'Your Organization Category has been deleted.',
+          'Your Fees type has been deleted.',
           'success'
         )
 
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled',
-          'Your Organization Category is safe :)',
+          'Your Fees type is safe :)',
           'error'
         )
       }
@@ -49,7 +48,6 @@ export class ViewOrgCategoryComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // Swal.showLoading();
     Swal.fire({
       title: 'Please Wait',
       allowEscapeKey: false,
@@ -58,12 +56,12 @@ export class ViewOrgCategoryComponent implements OnInit {
       showConfirmButton: false,
       didOpen: ()=>{
         Swal.showLoading();
-        this.organizationService.getOrganizationCategory().subscribe(responseData => {
-          this.orgCategory = JSON.parse(responseData).Items
-          console.log(this.orgCategory)
+        this.feesService.getFeesType().subscribe(responseData => {
+          this.feesType = JSON.parse(responseData).Items
+          console.log(this.feesType)
           let temp = []
-          this.orgCategory.forEach(record => {
-            if (record.orgCategory) {
+          this.feesType.forEach(record => {
+            if (record.feesType) {
               temp.push(record)
             }
           })
@@ -88,12 +86,12 @@ export class ViewOrgCategoryComponent implements OnInit {
       // timer: 3000,
       // timerProgressBar: true
     });
-    // this.organizationService.getOrganizationCategory().subscribe(responseData => {
-    //   this.orgCategory = JSON.parse(responseData).Items
-    //   console.log(this.orgCategory)
+    // this.feesService.getFeesType().subscribe(responseData => {
+    //   this.feesType = JSON.parse(responseData).Items
+    //   console.log(this.feesType)
     //   let temp = []
-    //   this.orgCategory.forEach(record => {
-    //     if (record.orgCategory) {
+    //   this.feesType.forEach(record => {
+    //     if (record.feesType) {
     //       temp.push(record)
     //     }
     //   })
@@ -105,6 +103,5 @@ export class ViewOrgCategoryComponent implements OnInit {
     // )
 
   }
+
 }
-
-

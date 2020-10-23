@@ -51,7 +51,8 @@
     <section class="stu-dashboard mt-5">
         <div class="container">
             <div class="row">
-                <div class="offset-lg-2 col-lg-8">
+                <div class="offset-lg-1 col-lg-10">
+                <!-- <div class="offset-lg-2 col-lg-8"> -->
                     <h5>
                         <span class="float-right"><a class="text-light btn mb-3" routerLink="../">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard
@@ -59,28 +60,29 @@
                         </span>
                     </h5>
                 </div>
-                <div class="col-lg-8 offset-lg-2 col-sm-12">
+                <div class="col-lg-10 offset-lg-1 col-sm-12">
+                <!-- <div class="col-lg-8 offset-lg-2 col-sm-12"> -->
                     <div class="border-double">
                         <form class="bg-light p-4" action="">
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
                                     <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
                                         <i class="fas fa-arrows-alt"></i>
-                                        Add Organization Category
-                                        <span class="float-right"><a class="btn mb-3" routerLink="../list-org-category">
+                                        Add Accounts Head
+                                        <span class="float-right"><a class="btn mb-3"
+                                                routerLink="../list-accounts-head">
                                                 <i class="fas fa-eye"></i> View
                                             </a>
                                         </span>
                                     </h5>
                                     <div [hidden]="enableAlert()" class="alert alert-danger text-center"
                                         style="height: 40px; padding-top: 10px;" role="alert">
-                                        {{validationError}}
+                                        Special Characters and Numbers are not Allowed
                                     </div>
-
-                                    <div [hidden]="!enableButton()||!orgCategoryControl.dirty"
+                                    <div [hidden]="!enableButton()||!accountsHeadControl.dirty"
                                         class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;"
                                         role="alert">
-                                        {{requiredError}}
+                                        Accounts Head cannot be blank
                                     </div>
                                 </div>
                                 <!--  <div class="col-lg-3 col-sm-12">
@@ -90,23 +92,54 @@
 
 
 
+
+
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
                                     <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
-                                        <div class="col-lg-12 cl-sm-12 mb-3 form-group">
-                                            <label for="instituteType">Organization Category</label>
-                                            <input data-toggle="tooltip" data-placement="bottom"
-                                                title="Demo tooltip text" type="text" name="orgCategory"
-                                                id="instituteType" class="form-control inputFocus"
-                                                placeholder="Organization Category" required [(ngModel)]="orgCategory"
-                                                #orgCategoryControl="ngModel" />
-                                        </div>
                                         
-                                        <div
-                                            class="col-lg-3 button-container mt-3 text-center"
-                                        >
-                                            <button [disabled]="enableButton()||!enableAlert()"
-                                                type="button"
+                                        <!-- <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
+                                            <label for="parentFees"> Parent Account Head</label><br />
+                                            <select class="form-control" id="parentFees" name="institparentFees"
+                                                formControlName="parentFees">
+                                                <option selected value="">None</option>
+                                                 <option *ngFor="let item of parentFeesList">
+                                                    {{ item.feesHeadName }}
+                                                </option>
+                                            </select>
+                                        </div> -->
+                                        <div class="col-lg-8 cl-sm-12 mb-3 form-group">
+                                            <label for="instituteType">Accounts Head</label>
+                                            <input data-toggle="tooltip" data-placement="bottom"
+                                                title="Demo tooltip text" type="text" name="accountsHead"
+                                                id="instituteType" class="form-control inputFocus"
+                                                placeholder="Accounts Head" required minlength="1" maxlength="25"
+                                                [(ngModel)]="accountsHead" #accountsHeadControl="ngModel" />
+                                        </div>
+
+                                        <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
+                                            <label for="parentAccountHead"> Parent Account Head</label>
+                                            <!-- <select class="form-control" name="parentAccountHead" id="parentAccountHead" [(ngModel)]="parentAccountHead">
+                                                <option value="">1</option>
+                                                <option value="">2</option>
+                                            </select> -->
+                                            <select #parentAccount (change)="selectParentAccount(parentAccount.value)" class="form-control">
+                                                <!-- <option value="" selected disabled>Select Parent AccountHead</option> -->
+                                                <option value="None">None</option>
+                                                <option *ngFor="let item of finalItems" value={{item.accountsHead}}>
+                                                    {{ item.accountsHead }}
+                                                </option>
+                                                <!-- <option value="2">2</option> -->
+                                                <!-- <option *ngFor="let o of organizationList"
+                                                    [value]="organization.id" 
+                                                    [selected]="organizationFromDB == o.organization_name">
+                                                    {{ o.organization_name }}
+                                                </option> -->
+                                            </select>
+                                        </div>
+                                       
+                                        <div class="col-lg-3 button-container mt-3 text-center">
+                                            <button [disabled]="enableButton()||!enableAlert()" type="button"
                                                 id="cusEdit"
                                                 class="btn btn-warning btn-common-color btn-lg mt-3 text-white"
                                                 (click)='onSubmit()'>

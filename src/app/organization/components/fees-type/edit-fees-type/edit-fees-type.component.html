@@ -82,7 +82,7 @@
     <section class="stu-dashboard mt-5">
         <div class="container">
             <div class="row">
-                <div class="offset-lg-2 col-lg-8">
+                <div class="offset-lg-1 col-lg-10">
                     <h5>
                         <span class="float-right"
                             ><a
@@ -94,7 +94,7 @@
                         </span>
                     </h5>
                 </div>
-                <div class="col-lg-8 offset-lg-2 col-sm-12">
+                <div class="col-lg-10 offset-lg-1 col-sm-12">
                     <div class="border-double">
                         <form class="bg-light p-4" action="">
                             <div class="row">
@@ -103,7 +103,7 @@
                                         class="pb-3 pt-1 text-blue text-left text-capitalize"
                                     >
                                         <i class="fas fa-arrows-alt"></i> Edit
-                                        Organization Category
+                                        Fees Type
                                         <span class="float-right"
                                             ><a
                                                 class="btn mb-3"
@@ -125,8 +125,8 @@
                                         Special Characters and Numbers are not Allowed
                                     </div>
         
-                                    <div [hidden]="!enableButton()||!orgCategoryControl.dirty" class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;" role="alert">
-                                        Organization Category cannot be blank
+                                    <div [hidden]="!enableButton()||!feesTypeControl.dirty" class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;" role="alert">
+                                        Fees Type Required
                                      </div>
                                 </div>
                                 <!--  <div class="col-lg-3 col-sm-12">
@@ -141,27 +141,29 @@
                                         class="bg-light-yellow ml-1 mr-1 p-3 row position-relative"
                                     >
                                         <div
-                                            class="col-lg-12 cl-sm-12 mb-3 form-group"
+                                            class="col-lg-8 cl-sm-12 mb-3 form-group"
                                         >
                                             <label for="feesGroup"
-                                                >Organization Category</label
+                                                >Fees Type</label
                                             >
                                             <input
                                                 data-toggle="tooltip"
                                                 data-placement="bottom"
                                                 title="Demo tooltip text"
                                                 type="text"
-                                                name="oldOrgCategory"
+                                                name="feesType"
                                                 id="feesGroup"
                                                 class="form-control inputFocus"
-                                                placeholder="Organization Category"
+                                                placeholder="Fees Type"
                                                 required
-                                                [(ngModel)] = 'OrgCategory'
-                                                #orgCategoryControl="ngModel"
+                                                minlength="1"
+                                                maxlength="25"
+                                                [(ngModel)] = 'feesType'
+                                                #feesTypeControl="ngModel"
                                             />
                                         </div>
                                         <div
-                                            class="col-lg-3 button-container mt-3 text-right"
+                                            class="col-lg-2 button-container mt-3"
                                         >
                                             <button [disabled]="enableButton()||!enableAlert()"
                                                 type="button"

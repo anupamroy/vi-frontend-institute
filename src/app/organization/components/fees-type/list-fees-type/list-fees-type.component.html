@@ -1,4 +1,4 @@
-<div class="bg-light-blue" style="height:100%">
+<div class="bg-light-blue" style="height: 100%;">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light-yellow navbar-nav p-0" id="mainNav">
         <a class="navbar-brand js-scroll-trigger pl-5 pr-3 pt-0 pb-0 dx-block" href="#page-top">
@@ -37,95 +37,64 @@
         </div>
     </nav>
 
-    <!-- <section>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 dashboard-logo mt-3 text-center cus-wave">
-                <img src="assest/images/logo.png" alt="Logo" class="img-nta-logo">
-                <span class="nta-logo-text">NTA e Solutions Private Limited</span>
-            </div>
-        </div>
-    </div>
-</section> -->
-
-    <section class="stu-dashboard mt-5">
+    <section class="pt-4 pb-2">
         <div class="container">
             <div class="row">
-                <div class="offset-lg-2 col-lg-8">
-                    <h5>
-                        <span class="float-right"><a class="text-light btn mb-3" routerLink="../">
+                <div class="col-lg-12 col-sm-12">
+                    <h5 class="text-white pt-1 text-blue text-left text-capitalize">
+                        <i class="fas fa-arrows-alt"></i> View Fees Type<span class="float-right"><a
+                                class="btn mb-3 text-white" routerLink="../">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a></span>
+                        <span class="float-right"><a class="btn mb-3 text-white" routerLink="../add-fees-type">
+                                <i class="fas fa-edit"></i> Add
                             </a>
                         </span>
                     </h5>
-                </div>
-                <div class="col-lg-8 offset-lg-2 col-sm-12">
-                    <div class="border-double">
-                        <form class="bg-light p-4" action="">
-                            <div class="row">
-                                <div class="col-lg-12 col-sm-12">
-                                    <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
-                                        <i class="fas fa-arrows-alt"></i>
-                                        Add Organization Category
-                                        <span class="float-right"><a class="btn mb-3" routerLink="../list-org-category">
-                                                <i class="fas fa-eye"></i> View
-                                            </a>
-                                        </span>
-                                    </h5>
-                                    <div [hidden]="enableAlert()" class="alert alert-danger text-center"
-                                        style="height: 40px; padding-top: 10px;" role="alert">
-                                        {{validationError}}
-                                    </div>
-
-                                    <div [hidden]="!enableButton()||!orgCategoryControl.dirty"
-                                        class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;"
-                                        role="alert">
-                                        {{requiredError}}
-                                    </div>
-                                </div>
-                                <!--  <div class="col-lg-3 col-sm-12">
-                            <button type="submit" class="btn-mat"><span>View Department</span></button>
-                        </div> -->
-                            </div>
-
-
-
-                            <div class="row">
-                                <div class="col-lg-12 col-sm-12">
-                                    <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
-                                        <div class="col-lg-12 cl-sm-12 mb-3 form-group">
-                                            <label for="instituteType">Organization Category</label>
-                                            <input data-toggle="tooltip" data-placement="bottom"
-                                                title="Demo tooltip text" type="text" name="orgCategory"
-                                                id="instituteType" class="form-control inputFocus"
-                                                placeholder="Organization Category" required [(ngModel)]="orgCategory"
-                                                #orgCategoryControl="ngModel" />
-                                        </div>
-                                        
-                                        <div
-                                            class="col-lg-3 button-container mt-3 text-center"
-                                        >
-                                            <button [disabled]="enableButton()||!enableAlert()"
-                                                type="button"
-                                                id="cusEdit"
-                                                class="btn btn-warning btn-common-color btn-lg mt-3 text-white"
-                                                (click)='onSubmit()'>
-                                                <span>
-                                                    Add
-                                                    <i class="fas fa-caret-right btn-style1"></i></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- add more row end-->
-                        </form>
-                    </div>
+                    <hr class="hr-white" />
                 </div>
             </div>
         </div>
     </section>
+
+    <section class="stu-dashboard cus-pay-wave">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <table class="table table-bordered" style="background-color: aliceblue">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sl No</th>
+                                <th scope="col">Fees Type</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of finalItems; let i = index">
+                                <th scope="row">{{ i + 1 }}</th>
+                                <td>{{ item.feesType }}</td>
+                                <td>
+                                    <button routerLink="../edit-fees-type/{{ item.fees_head_id }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button id="cusEdit"
+                                        class="btn-dark-blue-light btn btn-sm" (click)="onDelete(item.fees_head_id)"
+                                        data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                    <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
 
     <!-- <footer class="py-2 bg-dark">
         <div class="container">
