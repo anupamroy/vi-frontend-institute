@@ -14,6 +14,10 @@ import { EditOrgCategoryComponent } from './components/org-category/edit-org-cat
 import { ViewOrgCategoryComponent } from './components/org-category/view-org-category/view-org-category.component';
 import { ViewMastersComponent } from './components/view-masters/view-masters.component';
 import { OrganizationComponent } from './organization.component';
+import { AddModuleComponent } from './components/module/add-module/add-module.component'
+import { EditModuleComponent } from './components/module/edit-module/edit-module.component'
+import { ListModuleComponent } from './components/module/list-module/list-module.component'
+
 
 const routes: Routes = [
   {
@@ -33,12 +37,18 @@ const routes: Routes = [
         component: EditMastersComponent,
       },
       { path: 'add-institute-type', component: InstituteTypeComponent },
+      { path: 'add-module', component: AddModuleComponent },
+
       { path: '', component: AdminDashboardComponent },
       { path: 'add-org-category', component: AddOrgCategoryComponent}
     ],
   },
 
   { path: 'list-institute-type', component: ListInstituteTypeComponent },
+  { path: 'list-module', component: ListModuleComponent },
+  { path: 'edit-module/:module', component: EditModuleComponent },
+
+
   {
     path: 'edit-institute-type/:itemId/:instituteType',
     component: EditInstituteTypeComponent,
