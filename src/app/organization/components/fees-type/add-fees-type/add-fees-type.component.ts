@@ -1,24 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { OrganizationCategoryService } from '../Services/organization-category.service'
+import { FeesService } from '../../../services/fees-type.service'
 import Swal from 'sweetalert2'
 
 @Component({
-  selector: 'app-add-org-category',
-  templateUrl: './add-org-category.component.html',
-  styleUrls: ['./add-org-category.component.scss']
+  selector: 'app-add-fees-type',
+  templateUrl: './add-fees-type.component.html',
+  styleUrls: ['./add-fees-type.component.scss']
 })
-export class AddOrgCategoryComponent implements OnInit {
+export class AddFeesTypeComponent implements OnInit {
 
   disableButton : boolean = true
-  orgCategory : string = ''
-  requiredError : string = 'Organization Category cannot be blank'
-  validationError : string = 'Special Characters and Numbers are not Allowed'
+  feesType : string = ''
 
-  constructor(private router : Router, private organizationService : OrganizationCategoryService) { }
+  constructor(private router : Router, private feesService : FeesService) { }
 
   enableButton() {
-    if(this.orgCategory.trim() === '') {
+    if(this.feesType.trim() === '') {
       return true
     }
     else {
@@ -28,15 +26,15 @@ export class AddOrgCategoryComponent implements OnInit {
 
   enableAlert(){
     const regex = /^[a-zA-Z ]*$/
-    return regex.test(this.orgCategory)
+    return regex.test(this.feesType)
   }
   
   onSubmit(){
-    const orgCategoryObj = {
-      orgCategory : this.orgCategory
+    const feesTypeObj = {
+      feesType : this.feesType
     }
 
-    console.log(orgCategoryObj)
+    console.log(feesTypeObj)
 
     Swal.fire({
       title: 'Please Wait',
@@ -46,8 +44,8 @@ export class AddOrgCategoryComponent implements OnInit {
       showConfirmButton: false,
       onOpen: ()=>{
         Swal.showLoading();
-        this.organizationService
-          .addOrganizationCategory(orgCategoryObj)
+        this.feesService
+          .addFeesType(feesTypeObj)
           .subscribe((data) => {
           console.log('ID'+data);
           if(data){
@@ -57,7 +55,7 @@ export class AddOrgCategoryComponent implements OnInit {
               showConfirmButton: false,
               timer: 1500,
             }).then(()=>{
-              this.router.navigate(['./org/list-org-category']);
+              this.router.navigate(['./org/list-fees-type']);
             })  
           }
         });
@@ -66,11 +64,22 @@ export class AddOrgCategoryComponent implements OnInit {
       }
     });
 
-    // this.organizationService
-    //     .addOrganizationCategory(orgCategoryObj)
+    // this.feesService
+    //     .addFeesType(feesTypeObj)
     //     .subscribe((data) => {
-    //       console.log(data);
+    //       console.log('hello'+data);
     //     });
+
+        // fetch('https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/fees', {
+        //   method: 'POST',
+        //   body: JSON.stringify(feesTypeObj),
+        // })
+        //   .then((data) => {
+        //     // this.router.navigate(['/fees-management/fees-type']);
+        //   })
+        //   .catch((err) => {
+        //     console.error(err);
+        //   });
     
     // Swal.fire({
     //   title: 'Added',
@@ -79,7 +88,7 @@ export class AddOrgCategoryComponent implements OnInit {
     //   confirmButtonText: 'Ok'
     // }).then(()=>{
     //   setTimeout(() => {
-    //     this.router.navigate(['./org/list-org-category']);
+    //     this.router.navigate(['./org/list-fees-type']);
     //   }, 500);
     // })
   }

@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router'
-import { OrganizationCategoryService } from '../Services/organization-category.service'
+import { ActivatedRoute, Router } from '@angular/router';
+import { FeesService } from '../../../services/fees-type.service'
 import Swal from 'sweetalert2'
 
 @Component({
-  selector: 'app-edit-org-category',
-  templateUrl: './edit-org-category.component.html',
-  styleUrls: ['./edit-org-category.component.scss']
+  selector: 'app-edit-fees-type',
+  templateUrl: './edit-fees-type.component.html',
+  styleUrls: ['./edit-fees-type.component.scss']
 })
-export class EditOrgCategoryComponent implements OnInit {
+export class EditFeesTypeComponent implements OnInit {
 
-  OrgCategory: string = ''
+  feesType: string = ''
   id: string
 
-  constructor(private activatedRoute : ActivatedRoute, private router : Router, private organizationService : OrganizationCategoryService ) { }
+  constructor(private activatedRoute : ActivatedRoute, private router : Router, private feesService : FeesService ) { }
 
   enableButton() {
-    if(this.OrgCategory.trim() === '') {
+    if(this.feesType.trim() === '') {
       return true
     }
     else {
@@ -26,12 +26,12 @@ export class EditOrgCategoryComponent implements OnInit {
 
   enableAlert(){
     const regex = /^[a-zA-Z_ ]*$/
-    return regex.test(this.OrgCategory)
+    return regex.test(this.feesType)
   }
 
   onClick(){
    
-      console.log(this.OrgCategory)
+      console.log(this.feesType)
       Swal.fire({
         title: 'Please Wait',
         allowEscapeKey: false,
@@ -40,11 +40,11 @@ export class EditOrgCategoryComponent implements OnInit {
         showConfirmButton: false,
         onOpen: ()=>{
           Swal.showLoading();
-          this.organizationService
-            .updateOrganizationById(this.id,{
-              attribute: ['orgCategory'],
+          this.feesService
+            .updateFeesTypeById(this.id,{
+              attribute: ['feesType'],
               value: [
-              this.OrgCategory
+              this.feesType
               ],
             })
             .subscribe((data) => {
@@ -56,7 +56,7 @@ export class EditOrgCategoryComponent implements OnInit {
                 showConfirmButton: false,
                 timer: 1500,
               }).then(()=>{
-                this.router.navigate(['./org/list-org-category']);
+                this.router.navigate(['./org/list-fees-type']);
               })  
             }
           });
@@ -64,11 +64,11 @@ export class EditOrgCategoryComponent implements OnInit {
          
         }
       });
-      // this.organizationService
-      //   .updateOrganizationById(this.id, {
-      //     attribute: ['orgCategory'],
+      // this.feesService
+      //   .updateFeesTypeById(this.id, {
+      //     attribute: ['feesType'],
       //     value: [
-      //       this.OrgCategory
+      //       this.feesType
       //     ],
       //   })
       //   .subscribe((data) => {
@@ -82,17 +82,17 @@ export class EditOrgCategoryComponent implements OnInit {
       //     confirmButtonText: 'Ok'
       //   }).then(()=>{
       //     setTimeout(() => {
-      //       this.router.navigate(['./org/list-org-category']);
+      //       this.router.navigate(['./org/list-fees-type']);
       //     }, 500);
       //   })
   }
 
   onAdd(){
-    this.router.navigate(['./org/add-org-category'])
+    this.router.navigate(['./org/add-fees-type'])
   }
 
   onView(){
-    this.router.navigate(['./org/list-org-category'])
+    this.router.navigate(['./org/list-fees-type'])
   }
 
   onDashboard(){
@@ -101,15 +101,14 @@ export class EditOrgCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.itemId;
-    this.organizationService.getOrganizationCategoryById(this.id).subscribe((item)=>{
+    this.feesService.getFeesTypeById(this.id).subscribe((item)=>{
       item = JSON.parse(item);
-      this.OrgCategory = item.orgCategory
+      this.feesType = item.feesType
       console.log(item)
     })
-
-    // const orgCategory =this.activatedRoute.snapshot.params.orgCategory
-    // console.log(this.id, orgCategory)
-    // this.OrgCategory = orgCategory
+    // const feesType =this.activatedRoute.snapshot.params.feesType
+    // console.log(this.id, feesType)
+    // this.feesType = feesType
   }
 
 }
