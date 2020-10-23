@@ -17,6 +17,9 @@ import { ListAssociatedPostComponent } from './components/associated-post/list-a
 import { AddOrgCategoryComponent } from './components/org-category/add-org-category/add-org-category.component';
 import { EditOrgCategoryComponent } from './components/org-category/edit-org-category/edit-org-category.component';
 import { ViewOrgCategoryComponent } from './components/org-category/view-org-category/view-org-category.component';
+import { AddModuleComponent } from './components/module/add-module/add-module.component';
+import { EditModuleComponent } from './components/module/edit-module/edit-module.component';
+import { ListModuleComponent } from './components/module/list-module/list-module.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +36,10 @@ import { ViewOrgCategoryComponent } from './components/org-category/view-org-cat
         ListAssociatedPostComponent,
         AddOrgCategoryComponent,
         EditOrgCategoryComponent,
-        ViewOrgCategoryComponent
+        ViewOrgCategoryComponent,
+        AddModuleComponent,
+        EditModuleComponent,
+        ListModuleComponent
     ],
     imports: [CommonModule, OrganizationRoutingModule, FormsModule],
 })
