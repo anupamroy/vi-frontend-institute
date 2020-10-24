@@ -70,14 +70,24 @@
                           </tr>
                         </thead>
                         <tbody>
-                                <tr *ngFor="let item of final_items; let i = index">
-                                    
+                                <tr *ngFor="let item of final_items; let i = index">                                    
                                     <th scope="row">{{ i+1 }}</th>
                                     <td >{{ item.associated_post }}</td>
                                     <td>
                                         <button routerLink="../edit-associated-post/{{ item.itemId }}/{{ item.associated_post }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-edit"></i></button>
                                         <button (click)="onDelete(item.itemId)" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
-                                        <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i></button>
+                                        <button
+                                        *ngIf="item.isActivated==true"
+                                        (click)="onDeactivate(item.itemId)" 
+                                        href="#" 
+                                        id="cusEdit" 
+                                        class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i></button>
+                                        <button
+                                        *ngIf="item.isActivated==false"
+                                        (click)="onActivate(item.itemId)" 
+                                        href="#" 
+                                        id="cusEdit" 
+                                        class="btn-dark-blue-light btn btn-sm"><i class="fas fa-check-circle"></i></button>
                                     </td>
                                   </tr>                       
                             
