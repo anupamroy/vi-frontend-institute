@@ -33,7 +33,8 @@ export class AddOrgCategoryComponent implements OnInit {
   
   onSubmit(){
     const orgCategoryObj = {
-      orgCategory : this.orgCategory
+      orgCategory : this.orgCategory,
+      isActivated: true
     }
 
     console.log(orgCategoryObj)
