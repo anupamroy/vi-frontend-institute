@@ -26,6 +26,7 @@ import { ListAccountsHeadComponent } from './components/accounts-head/list-accou
 import { AddModuleComponent } from './components/module/add-module/add-module.component';
 import { EditModuleComponent } from './components/module/edit-module/edit-module.component';
 import { ListModuleComponent } from './components/module/list-module/list-module.component';
+import { ListOrganizationComponent } from './components/list-organization/list-organization.component';
 import { AddPackageComponent } from './components/packages-master/add-package/add-package.component';
 import { EditPackageComponent } from './components/packages-master/edit-package/edit-package.component';
 import { ListPackageComponent } from './components/packages-master/list-package/list-package.component';
@@ -55,6 +56,7 @@ import { ListPackageComponent } from './components/packages-master/list-package/
         AddModuleComponent,
         EditModuleComponent,
         ListModuleComponent,
+        ListOrganizationComponent,
         AddPackageComponent,
         EditPackageComponent,
         ListPackageComponent
