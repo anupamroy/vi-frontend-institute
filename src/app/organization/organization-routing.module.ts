@@ -23,6 +23,7 @@ import { OrganizationComponent } from './organization.component';
 import { AddModuleComponent } from './components/module/add-module/add-module.component'
 import { EditModuleComponent } from './components/module/edit-module/edit-module.component'
 import { ListModuleComponent } from './components/module/list-module/list-module.component'
+import { ListOrganizationComponent } from './components/list-organization/list-organization.component';
 import { AddPackageComponent } from './components/packages-master/add-package/add-package.component';
 import { ListPackageComponent } from './components/packages-master/list-package/list-package.component';
 import { EditPackageComponent } from './components/packages-master/edit-package/edit-package.component';
@@ -74,6 +75,7 @@ const routes: Routes = [
   { path: 'edit-fees-type/:itemId', component: EditFeesTypeComponent},
   { path: 'list-accounts-head', component: ListAccountsHeadComponent},
   { path: 'edit-accounts-head/:itemId', component: EditAccountsHeadComponent},
+  { path: 'list-organization', component: ListOrganizationComponent },
   { path: 'list-packages' , component: ListPackageComponent },
   { path: 'edit-package/:itemId' , component: EditPackageComponent }
 ];
