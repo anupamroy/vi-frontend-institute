@@ -274,9 +274,23 @@ export class OrganizationModel {
   }
 }
 
+export interface OrganizationProps {
+  itemId: string;
+  isActivated: boolean;
+  isDeleted: boolean;
+  organization: OrganizationModel;
+}
+
 export default class Organization {
   itemId = 'ORGANIZATION';
   isActivated: boolean;
   isDeleted: boolean;
   organization: OrganizationModel;
+  constructor(params: OrganizationProps ){
+    this.itemId = params.itemId
+    this.isActivated = params.isActivated
+    this.isDeleted = params.isDeleted
+    this.organization = params.organization
+  }
 }
+
