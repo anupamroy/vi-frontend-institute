@@ -28,6 +28,7 @@ import { AddPackageComponent } from './components/packages-master/add-package/ad
 import { ListPackageComponent } from './components/packages-master/list-package/list-package.component';
 import { EditPackageComponent } from './components/packages-master/edit-package/edit-package.component';
 import { AddOrganizationComponent } from './components/add-organization/add-organization.component';
+import { EditOrganizationComponent } from './components/edit-organization/edit-organization.component';
 
 const routes: Routes = [
   {
@@ -81,6 +82,7 @@ const routes: Routes = [
   { path: 'list-organization', component: ListOrganizationComponent },
   { path: 'list-packages', component: ListPackageComponent },
   { path: 'edit-package/:itemId', component: EditPackageComponent },
+  { path: 'edit-org', component: EditOrganizationComponent },
 ];
 
 @NgModule({

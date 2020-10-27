@@ -744,10 +744,12 @@ export class AddOrganizationComponent implements OnInit {
   onSubmit(): void {
     const formValue = this.addOrganizationForm.value;
     const newOrganizationData = new OrganizationModel(formValue);
-    const newOrganization = new Organization();
-    newOrganization.organization = newOrganizationData;
-    newOrganization.isActivated = true;
-    newOrganization.isDeleted = false;
+    const newOrganization = new Organization({
+      isActivated: true,
+      isDeleted: false,
+      itemId: "ORGANIZATION",
+      organization: newOrganizationData
+    });
     Swal.fire({
       title: 'Please Wait',
       allowEscapeKey: false,
