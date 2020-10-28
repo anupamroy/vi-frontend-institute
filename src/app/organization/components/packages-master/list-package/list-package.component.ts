@@ -160,7 +160,7 @@ export class ListPackageComponent implements OnInit {
       if(item) {
         Swal.fire({
           title : `Package Details`,
-          html : `<hr><h5>Package Name: ${this.packageName}</h5><h5>Package Type: ${this.packageType}</h5><p>${this.packageDescription}</p><p>Payment Plan: ${this.paymentPlan}</p><p>Package Price: ${this.packagePrice}</p><p>Trial Package: ${this.isTrial}</p>`,
+          html : `<hr><h5>Package Name: ${this.packageName}</h5><h5>Package Type: ${this.packageType}</h5><p>${this.packageDescription}</p><p>Package Duration: ${this.packageDuration}</p><p>Payment Plan: ${this.paymentPlan}</p><p>Package Price: ${this.packagePrice}</p><p>Trial Package: ${this.isTrial}</p>`,
           showConfirmButton : true
         })
       }
