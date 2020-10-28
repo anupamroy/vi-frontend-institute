@@ -33,7 +33,7 @@ export class EditOrgCategoryComponent implements OnInit {
     }
   }
   enableButton() {
-    if(this.OrgCategory && this.OrgCategory.trim() === '') {
+    if(this.OrgCategory.trim() === '') {
       return true
     }
     else {
@@ -67,7 +67,7 @@ export class EditOrgCategoryComponent implements OnInit {
             console.log('ID'+data);
             if(data){
               Swal.fire({
-                title: 'Editted',
+                title: 'Edited',
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 1500,

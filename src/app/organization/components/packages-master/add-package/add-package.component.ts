@@ -10,9 +10,9 @@ import {Packages} from '../../../../shared/models/packages';
   styleUrls: ['./add-package.component.scss']
 })
 export class AddPackageComponent implements OnInit {
-  packageType : string = 'Choose'
-  packageName : string
-  paymentPlan : string ='Choose'
+  packageType : string
+  packageName : string =''
+  paymentPlan : string 
   packageDuration : string
   packagePrice : string
   packageDescription : string = ''
@@ -29,7 +29,7 @@ export class AddPackageComponent implements OnInit {
 
 
   requiredTrialDuration(): boolean{
-    // console.log(this.isTrial);
+   
     
     if(this.isTrial){
       if(this.trialDuration.trim()==='')
@@ -52,30 +52,29 @@ export class AddPackageComponent implements OnInit {
   checkBoxOnChange(event:any) {
     console.log('checkBox: '+this.isTrial);
     
-    // console.log(document.getElementById('trialPackage'));
-    // console.log('Value of checkbox'+event.target.value)
+    
   }
 
   requiredPackageValidator(): boolean{
     if(this.packageName.trim()==='')
-      return false;
-    else
       return true;
+    else
+      return false;
   }
   requiredDurationValidator(): boolean{
     if(this.packageDuration.trim()==='')
-      return false;
-    else
       return true;
+    else
+      return false;
   }
   requiredPriceValidator(): boolean{
     if(this.packagePrice.trim()==='')
-      return false;
-    else
       return true;
+    else
+      return false;
   }
   onSubmit(){
-    // console.log(document.getElementById('trialPackage').contains);
+    
     
     let obj = new Packages();
     
