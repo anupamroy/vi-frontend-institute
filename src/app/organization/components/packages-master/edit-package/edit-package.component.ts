@@ -3,6 +3,7 @@ import { ModelForPackage } from '../model'
 import { PackagesService } from '../../../services/packages.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Packages } from '../../../../shared/models/packages'
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-edit-package',
@@ -115,6 +116,7 @@ export class EditPackageComponent implements OnInit {
     obj.isActivated = true;
     obj.isDeleted = false;
 
+<<<<<<< HEAD
     this.packageService.updatePackageById(this.id, this.processObjUpdated(obj)
     ).subscribe((data) => {
       console.log(data);
@@ -124,6 +126,44 @@ export class EditPackageComponent implements OnInit {
 
     })
 
+=======
+    Swal.fire({
+      title: 'Please Wait',
+      allowEscapeKey: false,
+      allowOutsideClick: true,
+      background: '#fff',
+      showConfirmButton: false,
+      onOpen: ()=>{
+        Swal.showLoading();
+        this.packageService
+          .updatePackageById(this.id,this.processObjUpdated(obj))
+          .subscribe((data) => {
+          console.log('ID'+data);
+          if(data){
+            Swal.fire({
+              title: 'Edited',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1500,
+            }).then(()=>{
+              this.router.navigate(['./org/list-packages']);
+            })  
+          }
+        });
+        // Swal.close()
+       
+      }
+    });
+    // this.packageService.updatePackageById(this.id,this.processObjUpdated(obj)
+    // ).subscribe((data)=> {
+    //   console.log(data);
+    //   if(data) {
+    //     this.router.navigate(['./org/list-packages'])
+    //   }
+      
+    // })
+    
+>>>>>>> 44c6a27ccbe7f5a47c833c1117f08bf15b2f3b1e
   }
 
   ngOnInit(): void {
