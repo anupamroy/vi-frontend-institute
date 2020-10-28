@@ -16,12 +16,12 @@ export class InstituteTypeComponent implements OnInit {
 
 
   constructor(
-    private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute, //not used
     private router: Router,
     private InstituteTypeService: InstituteTypeService) { }
 
-    
-  processObjUpdated(object: InstituteType){
+
+  processObjUpdated(object: InstituteType) {
     var attribute = [];
     var value = [];
     for (const key in object) {
@@ -47,7 +47,7 @@ export class InstituteTypeComponent implements OnInit {
     }
   }
 
-  enableAlert() {
+  enableAlert() { // need to add in commom framework validationss
     const regex = /^[a-zA-Z ]*$/
     return regex.test(this.instituteType)
   }
@@ -58,46 +58,46 @@ export class InstituteTypeComponent implements OnInit {
     instituteTypeObj.isActivated = true
     instituteTypeObj.instituteType = this.instituteType
 
-    
+
     Swal.fire({
-        title: "Please Wait",
-        willOpen: () => {
-          Swal.showLoading()
-        },
-      }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log('Adding Institute Type ')
-        }
-      })
+      title: "Please Wait",
+      willOpen: () => {
+        Swal.showLoading()
+      },
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('Adding Institute Type ')
+      }
+    })
 
     this.InstituteTypeService.postInstituteType(instituteTypeObj)
-        .subscribe({
-          next: responseData => {
-            console.log(responseData)
-            if (responseData) {
-              Swal.fire(
-                'Congratulations!',
-                'Institute Type has been added',
-                'success'
-              ).then(result => {
-                console.log(instituteTypeObj)
-                this.router.navigate(['/org/list-institute-type'])
+      .subscribe({
+        next: responseData => {
+          console.log(responseData)
+          if (responseData) {
+            Swal.fire(
+              'Congratulations!',
+              'Institute Type has been added',
+              'success'
+            ).then(result => {
+              console.log(instituteTypeObj)
+              this.router.navigate(['/org/list-institute-type'])
 
-              })
-            }
-
-          },
-          error: error => {
-            console.log(error)
+            })
           }
-        })
-    }
+
+        },
+        error: error => {
+          console.log(error)
+        }
+      })
+  }
 
 
-    ngOnInit(): void {
-
-    }
+  ngOnInit(): void {
 
   }
+
+}
 

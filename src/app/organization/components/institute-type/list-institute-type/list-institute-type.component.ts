@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InstituteTypeService} from '../Services/institute-type.service'
+import { InstituteTypeService } from '../Services/institute-type.service'
 import { InstituteType } from '../../../../shared/models/institute-type'
 import { Router } from '@angular/router';
 
@@ -13,12 +13,12 @@ import Swal from 'sweetalert2'
 })
 export class ListInstituteTypeComponent implements OnInit {
 
-  institute_Type : any;
-  temp=[]
-  finalItems : any
-  constructor(private router: Router, private InstituteTypeService : InstituteTypeService) { }
+  institute_Type: any;
+  temp = []
+  finalItems: any
+  constructor(private router: Router, private InstituteTypeService: InstituteTypeService) { }
 
-  processObjUpdated(object: InstituteType){
+  processObjUpdated(object: InstituteType) {
     var attribute = [];
     var value = [];
     for (const key in object) {
@@ -45,7 +45,7 @@ export class ListInstituteTypeComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-          
+
         Swal.fire({
           title: "Please Wait",
           willOpen: () => {
@@ -54,7 +54,7 @@ export class ListInstituteTypeComponent implements OnInit {
         })
         var newObj = new InstituteType();
         newObj.isDeleted = true;
-        console.log("After Deleting  -- "+ newObj)
+        console.log("After Deleting  -- " + newObj)
 
         this.InstituteTypeService.deleteInstituteType(id, this.processObjUpdated(newObj)).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
@@ -66,7 +66,7 @@ export class ListInstituteTypeComponent implements OnInit {
             'success'
           )
         });
-       
+
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled',
@@ -167,21 +167,21 @@ export class ListInstituteTypeComponent implements OnInit {
       this.institute_Type = JSON.parse(responseData).Items
       console.log(this.institute_Type)
       Swal.close()
-      let temp= []
-          this.institute_Type.forEach(record => {
-            if(record.isDeleted === false && record.itemId === 'INSTITUTE_TYPE'){
-              temp.push(record)
-            }
-          })
-          this.finalItems = temp
-          console.log(this.finalItems)
-        },
-        error =>{
-          console.log("Could not Fetch Data")
-        })
-
+      let temp = []
+      this.institute_Type.forEach(record => {
+        if (record.isDeleted === false && record.itemId === 'INSTITUTE_TYPE') {
+          temp.push(record)
         }
+      })
+      this.finalItems = temp
+      console.log(this.finalItems)
+    },
+      error => {
+        console.log("Could not Fetch Data")
+      })
+
   }
-    
-    
+}
+
+
 

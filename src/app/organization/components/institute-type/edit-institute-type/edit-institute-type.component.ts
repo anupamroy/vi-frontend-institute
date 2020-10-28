@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
-import { InstituteTypeService} from '../Services/institute-type.service'
+import { InstituteTypeService } from '../Services/institute-type.service'
 import Swal from 'sweetalert2'
 import { InstituteType } from '../../../../shared/models/institute-type';
 
@@ -11,18 +11,18 @@ import { InstituteType } from '../../../../shared/models/institute-type';
   styleUrls: ['./edit-institute-type.component.scss']
 })
 export class EditInstituteTypeComponent implements OnInit {
- 
-  newInstituteType = ""
-  id = ""
-  institute_type=''
-  
-  constructor(
-    private activatedRoute : ActivatedRoute, 
-    private router : Router ,
-    private InstituteTypeService : InstituteTypeService) { }
 
-    
-  processObjUpdated(object: InstituteType){
+  newInstituteType: string = ""
+  id: string = ""
+  institute_type: string = ''
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private InstituteTypeService: InstituteTypeService) { }
+
+
+  processObjUpdated(object: InstituteType) {
     var attribute = [];
     var value = [];
     for (const key in object) {
@@ -39,53 +39,53 @@ export class EditInstituteTypeComponent implements OnInit {
     }
   }
 
-    enableButton() {
-      if(this.newInstituteType && this.newInstituteType.trim() === '') {
-        return true
-      }
-      else {
-        return false
-      }
+  enableButton() {
+    if (this.newInstituteType && this.newInstituteType.trim() === '') {
+      return true
     }
-  
-    enableAlert(){
-      const regex = /^[a-zA-Z_ ]*$/
-      return regex.test(this.newInstituteType)
+    else {
+      return false
     }
-      
-    
-  goToView(){
+  }
+
+  enableAlert() { //common validation
+    const regex = /^[a-zA-Z_ ]*$/
+    return regex.test(this.newInstituteType)
+  }
+
+
+  goToView() {
     this.router.navigate(['/org/list-institute-type'])
   }
-  goToAdd(){
+  goToAdd() {
     this.router.navigate(['/org/add-institute-type'])
   }
-  goToDashboard(){
+  goToDashboard() {
     this.router.navigate(['/org'])
   }
 
-  onClick(){
+  onClick() {
     Swal.fire({
-      title : "Updating Institute Type",
+      title: "Updating Institute Type",
       willOpen: () => {
-        Swal.showLoading()        
-      },     
+        Swal.showLoading()
+      },
     }).then((result) => {
-     
+
       if (result.dismiss === Swal.DismissReason.timer) {
         console.log('Adding Institute Type ')
       }
-      })
-    
-      const instituteTypeObj = new InstituteType();
-      instituteTypeObj.instituteType = this.newInstituteType
+    })
+
+    const instituteTypeObj = new InstituteType();
+    instituteTypeObj.instituteType = this.newInstituteType
 
 
 
     this.InstituteTypeService.updateInstituteTypeById(this.id, this.processObjUpdated(instituteTypeObj)).subscribe({
-      next : responseData =>{
+      next: responseData => {
         console.log(responseData)
-        if(responseData){
+        if (responseData) {
           Swal.fire(
             'Congratulations!',
             'Institute Type has been Updated',
@@ -95,7 +95,7 @@ export class EditInstituteTypeComponent implements OnInit {
           })
         }
       },
-      error : error => {
+      error: error => {
         console.log(error)
       }
     })
@@ -106,7 +106,7 @@ export class EditInstituteTypeComponent implements OnInit {
     this.institute_type = this.activatedRoute.snapshot.params.instituteType;
 
     this.id = this.activatedRoute.snapshot.params.itemId;
-    const instituteType =this.activatedRoute.snapshot.params.instituteType
+    const instituteType = this.activatedRoute.snapshot.params.instituteType
     console.log(this.id, instituteType)
     this.newInstituteType = instituteType
   }
