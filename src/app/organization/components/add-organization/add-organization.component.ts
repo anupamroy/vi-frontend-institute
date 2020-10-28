@@ -45,10 +45,10 @@ export class AddOrganizationComponent implements OnInit {
   ];
   daysList = [this.phoneDays];
   shiftList = ['Day', 'Evening', 'Night'];
-  associatedWithList = ['Principal', 'Dean'];
+  associatedWithList = [];
   emailTypeList = ['Primary', 'Secondary', 'Emergency'];
   socialMediaList = ['Facebook', 'Instagram', 'Twitter'];
-  organizationCategoryList = ['Private', 'LLP'];
+  organizationCategoryList = [];
   documentTypeList = ['Regular', 'Confidential'];
   moduleList = [];
 
@@ -164,13 +164,25 @@ export class AddOrganizationComponent implements OnInit {
 
         const tempInstituteType = [];
         const tempModules = [];
+        const tempAssociatedWith = [];
+        const tempOrganizationCategory = [];
 
         data.forEach((item) => {
           if (item.isDeleted === false) {
-            if (item.itemId === 'INSTITUTE_TYPE') {
+            if (item.itemId === 'INSTITUTE_TYPE' && item.instituteType !== '') {
               tempInstituteType.push(item);
-            } else if (item.itemId === 'MODULE') {
+            } else if (item.itemId === 'MODULE' && item.moduleName !== '') {
               tempModules.push(item);
+            } else if (
+              item.itemId === 'ORGANIZATION_CATEGORY' &&
+              item.organizationCategory !== ''
+            ) {
+              tempOrganizationCategory.push(item.organizationCategory);
+            } else if (
+              item.itemId === 'ASSOCIATED_POST' &&
+              item.associatedPost !== ''
+            ) {
+              tempAssociatedWith.push(item.associatedPost);
             }
           }
         });
@@ -181,6 +193,8 @@ export class AddOrganizationComponent implements OnInit {
         this.moduleList = tempModules.map((item) => {
           return { type: item.moduleName, value: false };
         });
+        this.associatedWithList = tempAssociatedWith;
+        this.organizationCategoryList = tempOrganizationCategory;
       },
       (error) => console.error(error)
     );
@@ -364,8 +378,8 @@ export class AddOrganizationComponent implements OnInit {
           return;
         }
         i++;
-        this.instituteTypeList[ind].value = false;
       });
+      this.instituteTypeList[ind].value = false;
     }
     if (
       this.instituteTypeFormArray.controls.length ===
@@ -445,9 +459,11 @@ export class AddOrganizationComponent implements OnInit {
         item.value = false;
       });
     }
+    console.log(this.daysArray(index));
   }
 
   onDaySelectChange(index, ind, e): void {
+    console.log(index);
     if (e.target.checked) {
       this.daysArray(index).push(new FormControl(e.target.value));
       this.daysList[index][ind].value = true;
@@ -459,14 +475,15 @@ export class AddOrganizationComponent implements OnInit {
           return;
         }
         i++;
-        this.daysList[index][ind].value = false;
       });
+      this.daysList[index][ind].value = false;
     }
     if (this.daysArray(index).controls.length === this.daysList[index].length) {
       this.selectAllDays[index] = true;
     } else {
       this.selectAllDays[index] = false;
     }
+    console.log(this.daysArray(index));
   }
 
   // Adding Groups
@@ -502,6 +519,9 @@ export class AddOrganizationComponent implements OnInit {
   deletePhoneGroup(index: number): void {
     if (this.phoneArray.length > 1) {
       this.phoneArray.removeAt(index);
+      this.daysList.filter((item, i) => {
+        return i !== index;
+      });
     }
   }
   deleteEmailGroup(index: number): void {
@@ -747,8 +767,8 @@ export class AddOrganizationComponent implements OnInit {
     const newOrganization = new Organization({
       isActivated: true,
       isDeleted: false,
-      itemId: "ORGANIZATION",
-      organization: newOrganizationData
+      itemId: 'ORGANIZATION',
+      organization: newOrganizationData,
     });
     Swal.fire({
       title: 'Please Wait',
