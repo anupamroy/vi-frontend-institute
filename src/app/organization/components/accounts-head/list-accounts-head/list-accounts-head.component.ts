@@ -15,7 +15,7 @@ export class ListAccountsHeadComponent implements OnInit {
   finalItems: any
   constructor(private accountsHeadService: AccountsHeadService) { }
 
-  processObjUpdated(object: AccountsHead){
+  processObjUpdated(object: AccountsHead) {
     var attribute = [];
     var value = [];
     for (const key in object) {
@@ -44,11 +44,11 @@ export class ListAccountsHeadComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         console.log(id);
-        
+
         let obj = new AccountsHead();
         obj.isDeleted = true;
 
-        this.accountsHeadService.deleteAccountsHeadById(id,this.processObjUpdated(obj)).subscribe(() => {
+        this.accountsHeadService.deleteAccountsHeadById(id, this.processObjUpdated(obj)).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
             return item.institue_type !== id;
           })
@@ -67,7 +67,7 @@ export class ListAccountsHeadComponent implements OnInit {
         )
       }
     })
-   
+
   }
 
   onDeactivate(id: string) {
@@ -150,7 +150,7 @@ export class ListAccountsHeadComponent implements OnInit {
       allowOutsideClick: true,
       background: '#fff',
       showConfirmButton: false,
-      didOpen: ()=>{
+      didOpen: () => {
         Swal.showLoading();
         this.accountsHeadService.getAccountsHead().subscribe(responseData => {
           this.accountsHead = JSON.parse(responseData).Items
@@ -172,32 +172,11 @@ export class ListAccountsHeadComponent implements OnInit {
             })
           }
         )
-       
-        
-        // this.router.navigate(['./org/list-org-category']);
-        // Swal.close()
 
       }
 
-      // timer: 3000,
-      // timerProgressBar: true
     });
 
-    // this.accountsHeadService.getAccountsHead().subscribe(responseData => {
-    //   this.accountsHead = JSON.parse(responseData).Items
-    //   console.log(this.accountsHead)
-    //   let temp = []
-    //   this.accountsHead.forEach(record => {
-    //     if (record.accountsHead) {
-    //       temp.push(record)
-    //     }
-    //   })
-    //   this.finalItems = temp
-    // },
-    //   error => {
-    //     console.log("Could not Fetch Data")
-    //   }
-    // )
 
   }
 

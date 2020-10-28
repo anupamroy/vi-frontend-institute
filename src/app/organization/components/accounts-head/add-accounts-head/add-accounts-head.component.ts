@@ -46,12 +46,6 @@ export class AddAccountsHeadComponent implements OnInit {
     obj.parentAccountsHead = this.parentAccountHead
     obj.isDeleted = false
     obj.isActivated = true
-    // const accountsHeadObj = {
-    //   accountsHead : this.accountsHead,
-    //   parentAccountHead : this.parentAccountHead,
-    //   isActivated: true
-    // }
-
     console.log(obj)
 
     Swal.fire({
@@ -81,23 +75,6 @@ export class AddAccountsHeadComponent implements OnInit {
        
       }
     });
-
-    // this.accountsHeadService
-    //     .addAccountsHead(accountsHeadObj)
-    //     .subscribe((data) => {
-    //       console.log(data);
-    //     });
-    
-    // Swal.fire({
-    //   title: 'Added',
-    //   text: 'Data Added Successfully',
-    //   icon: 'success',
-    //   confirmButtonText: 'Ok'
-    // }).then(()=>{
-    //   setTimeout(() => {
-    //     this.router.navigate(['./org/list-accounts-head']);
-    //   }, 500);
-    // })
   }
 
   ngOnInit(): void {

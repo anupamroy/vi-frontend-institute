@@ -43,7 +43,7 @@ export class ListFeesTypeComponent implements OnInit {
         )
       }
     })
-   
+
   }
 
 
@@ -54,7 +54,7 @@ export class ListFeesTypeComponent implements OnInit {
       allowOutsideClick: true,
       background: '#fff',
       showConfirmButton: false,
-      didOpen: ()=>{
+      didOpen: () => {
         Swal.showLoading();
         this.feesService.getFeesType().subscribe(responseData => {
           this.feesType = JSON.parse(responseData).Items
@@ -76,31 +76,10 @@ export class ListFeesTypeComponent implements OnInit {
             })
           }
         )
-       
-        
-        // this.router.navigate(['./org/list-org-category']);
-        // Swal.close()
 
       }
-
-      // timer: 3000,
-      // timerProgressBar: true
     });
-    // this.feesService.getFeesType().subscribe(responseData => {
-    //   this.feesType = JSON.parse(responseData).Items
-    //   console.log(this.feesType)
-    //   let temp = []
-    //   this.feesType.forEach(record => {
-    //     if (record.feesType) {
-    //       temp.push(record)
-    //     }
-    //   })
-    //   this.finalItems = temp
-    // },
-    //   error => {
-    //     console.log("Could not Fetch Data")
-    //   }
-    // )
+
 
   }
 

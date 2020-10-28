@@ -13,10 +13,10 @@ export class EditFeesTypeComponent implements OnInit {
   feesType: string = ''
   id: string
 
-  constructor(private activatedRoute : ActivatedRoute, private router : Router, private feesService : FeesService ) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private feesService: FeesService) { }
 
   enableButton() {
-    if(this.feesType.trim() === '') {
+    if (this.feesType.trim() === '') {
       return true
     }
     else {
@@ -24,91 +24,69 @@ export class EditFeesTypeComponent implements OnInit {
     }
   }
 
-  enableAlert(){
+  enableAlert() {
     const regex = /^[a-zA-Z_ ]*$/
     return regex.test(this.feesType)
   }
 
-  onClick(){
-   
-      console.log(this.feesType)
-      Swal.fire({
-        title: 'Please Wait',
-        allowEscapeKey: false,
-        allowOutsideClick: true,
-        background: '#fff',
-        showConfirmButton: false,
-        onOpen: ()=>{
-          Swal.showLoading();
-          this.feesService
-            .updateFeesTypeById(this.id,{
-              attribute: ['feesType'],
-              value: [
+  onClick() {
+
+    console.log(this.feesType)
+    Swal.fire({
+      title: 'Please Wait',
+      allowEscapeKey: false,
+      allowOutsideClick: true,
+      background: '#fff',
+      showConfirmButton: false,
+      onOpen: () => {
+        Swal.showLoading();
+        this.feesService
+          .updateFeesTypeById(this.id, {
+            attribute: ['feesType'],
+            value: [
               this.feesType
-              ],
-            })
-            .subscribe((data) => {
-            console.log('ID'+data);
-            if(data){
+            ],
+          })
+          .subscribe((data) => {
+            console.log('ID' + data);
+            if (data) {
               Swal.fire({
-                title: 'Editted',
+                title: 'Edited',
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 1500,
-              }).then(()=>{
+              }).then(() => {
                 this.router.navigate(['./org/list-fees-type']);
-              })  
+              })
             }
           });
-          // Swal.close()
-         
-        }
-      });
-      // this.feesService
-      //   .updateFeesTypeById(this.id, {
-      //     attribute: ['feesType'],
-      //     value: [
-      //       this.feesType
-      //     ],
-      //   })
-      //   .subscribe((data) => {
-      //     console.log(data);
-      //   });
-        
-      //   Swal.fire({
-      //     title: 'Editted',
-      //     text: 'Data Editted Successfully',
-      //     icon: 'success',
-      //     confirmButtonText: 'Ok'
-      //   }).then(()=>{
-      //     setTimeout(() => {
-      //       this.router.navigate(['./org/list-fees-type']);
-      //     }, 500);
-      //   })
+        // Swal.close()
+
+      }
+    });
+
   }
 
-  onAdd(){
+  onAdd() {
     this.router.navigate(['./org/add-fees-type'])
   }
 
-  onView(){
+  onView() {
     this.router.navigate(['./org/list-fees-type'])
   }
 
-  onDashboard(){
+  onDashboard() {
     this.router.navigate(['./org'])
   }
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.itemId;
-    this.feesService.getFeesTypeById(this.id).subscribe((item)=>{
+    this.feesService.getFeesTypeById(this.id).subscribe((item) => {
       item = JSON.parse(item);
       this.feesType = item.feesType
       console.log(item)
     })
-    // const feesType =this.activatedRoute.snapshot.params.feesType
-    // console.log(this.id, feesType)
-    // this.feesType = feesType
+
   }
 
 }

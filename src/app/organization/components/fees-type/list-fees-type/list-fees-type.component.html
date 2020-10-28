@@ -36,12 +36,13 @@
                                 <th scope="row">{{ i + 1 }}</th>
                                 <td>{{ item.feesType }}</td>
                                 <td>
-                                    <button routerLink="../edit-fees-type/{{ item.fees_head_id }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
+                                    <button routerLink="../edit-fees-type/{{ item.fees_head_id }}" id="cusEdit"
+                                        class="btn-dark-blue-light btn btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button id="cusEdit"
-                                        class="btn-dark-blue-light btn btn-sm" (click)="onDelete(item.fees_head_id)"
-                                        data-toggle="modal" data-target="#exampleModal">
+                                    <button id="cusEdit" class="btn-dark-blue-light btn btn-sm"
+                                        (click)="onDelete(item.fees_head_id)" data-toggle="modal"
+                                        data-target="#exampleModal">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                     <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
@@ -56,7 +57,7 @@
         </div>
     </section>
 
-   
+
 
     <!-- <footer class="py-2 bg-dark">
         <div class="container">
@@ -77,54 +78,4 @@
         </a>
     </footer>
 
-    <!-- <script src="assest/js/jquery.min.js"></script>
-    <script src="assest/js/popper.min.js"></script>
-    <script src="assest/js/bootstrap.min.js"></script>
-    <script src="assest/js/sweet-alert.min.js"></script>
-    
-    <script src="assest/js/jquery.dataTables.min.js"></script>
-    <script src="assest/js/dataTables.bootstrap4.min.js"></script>
-    <script src="assest/js/moment.min.js"></script>
-    <script src="assest/js/jquery.daterangepicker.min.js"></script>
-    <script src="assest/js/chosen.jquery.js"></script>
-    <script src="assest/js/script.js"></script>
-    <script type="text/javascript">
-      jq = jQuery.noConflict();
-        jq(function(){
-          jq(".inputFocus").focus();
-        });
-    </script>
-    
-<script type="text/javascript">
-    
-document.getElementById('cusEdit').onclick = function(){
-    swal("Good job!", "You clicked the button!", "success");
-};
-
-</script>
-<script type="text/javascript">
-  // checkAll
-  jq = jQuery.noConflict();
-jq(document).ready(function () {
-    jq('#selectall').click(function () {
-        jq('.selectedId').prop('checked', this.checked);
-    });
-
-    jq('.selectedId').change(function () {
-        var check = (jq('.selectedId').filter(":checked").length == jq('.selectedId').length);
-        jq('#selectall').prop("checked", check);
-    });
-});
-
-jq(document).ready(function () {
-    jq('#selectall1').click(function () {
-        jq('.selectedId1').prop('checked', this.checked);
-    });
-
-    jq('.selectedId1').change(function () {
-        var check = (jq('.selectedId1').filter(":checked").length == jq('.selectedId1').length);
-        jq('#selectall1').prop("checked", check);
-    });
-});
-</script> -->
 </div>

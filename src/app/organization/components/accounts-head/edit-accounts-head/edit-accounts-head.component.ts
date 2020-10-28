@@ -88,27 +88,7 @@ export class EditAccountsHeadComponent implements OnInit {
          
         }
       });
-      // this.accountsHeadService
-      //   .updateAccountsHeadById(this.id, {
-      //     attribute: ['accountsHead'],
-      //     value: [
-      //       this.accountsHead
-      //     ],
-      //   })
-      //   .subscribe((data) => {
-      //     console.log(data);
-      //   });
-        
-      //   Swal.fire({
-      //     title: 'Editted',
-      //     text: 'Data Editted Successfully',
-      //     icon: 'success',
-      //     confirmButtonText: 'Ok'
-      //   }).then(()=>{
-      //     setTimeout(() => {
-      //       this.router.navigate(['./org/list-accounts-head']);
-      //     }, 500);
-      //   })
+ 
   }
 
   onAdd(){
