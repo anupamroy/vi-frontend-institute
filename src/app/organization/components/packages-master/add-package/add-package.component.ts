@@ -3,6 +3,7 @@ import { ModelForPackage } from '../model';
 import { PackagesService } from '../../../services/packages.service'
 import { Router } from '@angular/router';
 import {Packages} from '../../../../shared/models/packages';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-add-package',
@@ -90,13 +91,41 @@ export class AddPackageComponent implements OnInit {
     obj.isDeleted = false;
     
     console.log(obj);
-    this.packageService.addPackage(obj).subscribe((data)=> {
-      console.log(data);
-      if(data) {
-        this.router.navigate(['./org/list-packages'])
+
+    Swal.fire({
+      title: 'Please Wait',
+      allowEscapeKey: false,
+      allowOutsideClick: true,
+      background: '#fff',
+      showConfirmButton: false,
+      onOpen: ()=>{
+        Swal.showLoading();
+        this.packageService
+          .addPackage(obj)
+          .subscribe((data) => {
+          console.log('ID'+data);
+          if(data){
+            Swal.fire({
+              title: 'Added',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1500,
+            }).then(()=>{
+              this.router.navigate(['./org/list-packages']);
+            })  
+          }
+        });
+        // Swal.close()
+       
       }
+    });
+    // this.packageService.addPackage(obj).subscribe((data)=> {
+    //   console.log(data);
+    //   if(data) {
+    //     this.router.navigate(['./org/list-packages'])
+    //   }
       
-    })
+    // })
     
   }
   ngOnInit(): void {
