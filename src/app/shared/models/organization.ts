@@ -286,11 +286,10 @@ export default class Organization {
   isActivated: boolean;
   isDeleted: boolean;
   organization: OrganizationModel;
-  constructor(params: OrganizationProps ){
-    this.itemId = params.itemId
-    this.isActivated = params.isActivated
-    this.isDeleted = params.isDeleted
-    this.organization = params.organization
+  constructor(params: OrganizationProps) {
+    this.itemId = params.itemId;
+    this.isActivated = params.isActivated;
+    this.isDeleted = params.isDeleted;
+    this.organization = params.organization;
   }
 }
-
