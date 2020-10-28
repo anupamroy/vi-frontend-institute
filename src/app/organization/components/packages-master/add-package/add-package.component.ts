@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ModelForPackage } from '../model';
 import { PackagesService } from '../../../services/packages.service'
 import { Router } from '@angular/router';
-<<<<<<< HEAD
-import { Packages } from '../../../../shared/models/packages';
-=======
+
 import {Packages} from '../../../../shared/models/packages';
 import Swal from 'sweetalert2'
->>>>>>> 44c6a27ccbe7f5a47c833c1117f08bf15b2f3b1e
 
 @Component({
   selector: 'app-add-package',
@@ -95,16 +92,6 @@ export class AddPackageComponent implements OnInit {
     obj.isDeleted = false;
 
     console.log(obj);
-<<<<<<< HEAD
-    this.packageService.addPackage(obj).subscribe((data) => {
-      console.log(data);
-      if (data) {
-        this.router.navigate(['./org/list-packages'])
-      }
-
-    })
-
-=======
 
     Swal.fire({
       title: 'Please Wait',
@@ -141,7 +128,6 @@ export class AddPackageComponent implements OnInit {
       
     // })
     
->>>>>>> 44c6a27ccbe7f5a47c833c1117f08bf15b2f3b1e
   }
   ngOnInit(): void {
     this.packageTypeArray = this.packageService.getPackageType()

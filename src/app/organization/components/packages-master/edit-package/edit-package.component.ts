@@ -116,17 +116,6 @@ export class EditPackageComponent implements OnInit {
     obj.isActivated = true;
     obj.isDeleted = false;
 
-<<<<<<< HEAD
-    this.packageService.updatePackageById(this.id, this.processObjUpdated(obj)
-    ).subscribe((data) => {
-      console.log(data);
-      if (data) {
-        this.router.navigate(['./org/list-packages'])
-      }
-
-    })
-
-=======
     Swal.fire({
       title: 'Please Wait',
       allowEscapeKey: false,
@@ -163,7 +152,6 @@ export class EditPackageComponent implements OnInit {
       
     // })
     
->>>>>>> 44c6a27ccbe7f5a47c833c1117f08bf15b2f3b1e
   }
 
   ngOnInit(): void {
