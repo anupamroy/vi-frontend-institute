@@ -186,7 +186,7 @@ export class ListPackageComponent implements OnInit {
           console.log(this.package)
           let temp = []
           this.package.forEach(record => {
-            if (record.isDeleted === false && record.itemId==="PACKAGE_MASTER") {
+            if (record.isDeleted === false && record.itemId==="PACKAGE") {
               temp.push(record)
             }
           })

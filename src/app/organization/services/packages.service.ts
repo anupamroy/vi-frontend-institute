@@ -26,7 +26,7 @@ export class PackagesService {
   }
 
   getPackageById(id: string):Observable<any> {
-    return this.http.get<any>(`${this.api}/${id}?masterType=PACKAGE_MASTER`)
+    return this.http.get<any>(`${this.api}/${id}?masterType=PACKAGE`)
   }
 
   updatePackageById(id: string, body: any):Observable<any> {

@@ -12,7 +12,7 @@ import { Packages } from '../../../../shared/models/packages'
 export class EditPackageComponent implements OnInit {
 
   packageType : string
-  packageName : string
+  packageName : string = ''
   paymentPlan : string
   packageDuration : string
   packagePrice : string
@@ -150,14 +150,15 @@ export class EditPackageComponent implements OnInit {
       this.isTrial = item.Items[0].isTrial
       this.trialDuration = item.Items[0].trialDuration
 
+      // Filtering Duplicates
       this.packageTypeArray = this.packageService.getPackageType().filter((items)=>{
         return items!==this.packageType;
       })
 
-      
-    this.paymentPlanArray = this.packageService.getPaymentPlan().filter((items)=>{
-      return items!==this.paymentPlan;
-    })
+      // Filtering Duplicates
+      this.paymentPlanArray = this.packageService.getPaymentPlan().filter((items)=>{
+        return items!==this.paymentPlan;
+      })
       // this.accountsHead = item.accountsHead
       // this.parentAccountHead = item.parentAccountHead
       console.log(item)

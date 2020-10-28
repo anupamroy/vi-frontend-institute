@@ -32,7 +32,6 @@ export class ViewOrgCategoryComponent implements OnInit {
   }
 
   onDelete(id: string) {
-
     Swal.fire({
       title: 'Are you sure you want to delete?',
       icon: 'warning',
@@ -42,31 +41,40 @@ export class ViewOrgCategoryComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
+          
+        Swal.fire({
+          title: "Please Wait",
+          willOpen: () => {
+            Swal.showLoading()
+          },
+        })
         var newObj = new OrganizationCategory();
         newObj.isDeleted = true;
+        console.log("After Deleting  -- "+ newObj)
+
         this.organizationService.deleteOrganizationById(id, this.processObjUpdated(newObj)).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
             return item.institue_type !== id;
           })
+          Swal.fire(
+            'Deleted!',
+            'Your Data has been deleted.',
+            'success'
+          )
         });
-        Swal.fire(
-          'Deleted!',
-          'Your Organization Category has been deleted.',
-          'success'
-        )
-
+       
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled',
-          'Your Organization Category is safe :)',
+          'Your Data is safe :)',
           'error'
         )
       }
     })
-   
+
   }
 
-  onDeactivate(id: string){
+  onDeactivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to deactivate?',
       icon: 'warning',
@@ -75,32 +83,33 @@ export class ViewOrgCategoryComponent implements OnInit {
       cancelButtonText: 'No',
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
-      if(result.isConfirmed) {
+      if (result.isConfirmed) {
         // Deactivate Logic
-        console.log('Deactivate');
+        console.log('Deactivate')
 
         var newObj = new OrganizationCategory();
-        newObj.isActivated = true;
-        
+        newObj.isActivated = false;
+        console.log('NEW: ', newObj);
         this.organizationService.updateOrganizationById(id, this.processObjUpdated(newObj)).subscribe((data) => {
-          console.log(data)
+          console.log(data);
+
           this.finalItems = this.finalItems.map((item) => {
-            if (item.institue_type === id){
-              item.isActivated = false;
+            if (item.institue_type === id) {
+              item.isActivated = false
             }
 
             return item;
           })
         })
 
-        Swal.fire('Deactivated!', 'Your Organization Category has been deactivated', 'success');
-      } else if(result.isDismissed) {
-        Swal.fire('Cancelled!', 'Your Organization Category is not deactivated', 'error');
+        Swal.fire('Deactivated!', 'Your Data has been deactivated', 'success');
+      } else if (result.isDismissed) {
+        Swal.fire('Cancelled!', 'Your Data is not deactivated', 'error');
       }
     })
   }
 
-  onActivate(id: string){
+  onActivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to activate?',
       icon: 'warning',
@@ -109,7 +118,7 @@ export class ViewOrgCategoryComponent implements OnInit {
       cancelButtonText: 'No',
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
-      if(result.isConfirmed) {
+      if (result.isConfirmed) {
         // Activate Logic
         console.log('Activate');
 
@@ -120,7 +129,7 @@ export class ViewOrgCategoryComponent implements OnInit {
           console.log(data);
 
           this.finalItems = this.finalItems.map((item) => {
-            if (item.institue_type === id){
+            if (item.institue_type === id) {
               item.isActivated = true;
             }
 
@@ -128,12 +137,14 @@ export class ViewOrgCategoryComponent implements OnInit {
           })
         })
 
-        Swal.fire('Activated!', 'Your Organization Category has been activated', 'success');
-      } else if(result.isDismissed) {
-        Swal.fire('Cancelled!', 'Your Organization Category is not activated', 'error');
+        Swal.fire('Activated!', 'Your Data has been activated', 'success');
+      } else if (result.isDismissed) {
+        Swal.fire('Cancelled!', 'Your Data is not activated', 'error');
       }
     })
   }
+
+  
 
 
   ngOnInit(): void {

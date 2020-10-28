@@ -29,6 +29,6 @@ export class EditOrganizationService {
   }
 
   updateOrganizationById(id : string,body: any): Observable<any> {
-    return this.http.put<any>(`${this.api}`, body);
+    return this.http.put<any>(`${this.api}/${id}`, body);
   }
 }
