@@ -20,6 +20,24 @@ export class InstituteTypeComponent implements OnInit {
     private router: Router,
     private InstituteTypeService: InstituteTypeService) { }
 
+    
+  processObjUpdated(object: InstituteType){
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'itemId') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
+
+    return {
+      attribute,
+      value,
+      itemId: object.itemId
+    }
+  }
+
   enableButton() {
     if (this.instituteType.trim() === '') {
       return true
@@ -35,16 +53,14 @@ export class InstituteTypeComponent implements OnInit {
   }
 
   onSubmit() {
-    Swal.fire(
-      'Congratulations!',
-      'Institute Type has been added',
-      'success'
-    )
     const instituteTypeObj = new InstituteType();
+    instituteTypeObj.isDeleted = false
+    instituteTypeObj.isActivated = true
     instituteTypeObj.instituteType = this.instituteType
+
     
     Swal.fire({
-        title: "Adding Institute Type",
+        title: "Please Wait",
         willOpen: () => {
           Swal.showLoading()
         },
@@ -65,6 +81,7 @@ export class InstituteTypeComponent implements OnInit {
                 'Institute Type has been added',
                 'success'
               ).then(result => {
+                console.log(instituteTypeObj)
                 this.router.navigate(['/org/list-institute-type'])
 
               })
