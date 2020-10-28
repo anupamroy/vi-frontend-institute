@@ -153,9 +153,7 @@ export class ListPackageComponent implements OnInit {
       this.packageDescription = item.Items[0].packageDescription
       this.isTrial = item.Items[0].isTrial
       this.trialDuration = item.Items[0].trialDuration
-      
-      // this.accountsHead = item.accountsHead
-      // this.parentAccountHead = item.parentAccountHead
+
       console.log(item)
       if(item) {
         Swal.fire({
@@ -165,11 +163,7 @@ export class ListPackageComponent implements OnInit {
         })
       }
     })
-    // Swal.fire({
-    //   title : `${this.packageName}`,
-    //   html : `<h5>${this.packageType}</h5><p>${this.packageDescription}</p><p>${this.paymentPlan}</p><p>${this.packagePrice}</p>`,
-    //   showConfirmButton : true
-    // })
+
   }
 
   ngOnInit(): void {
@@ -202,14 +196,10 @@ export class ListPackageComponent implements OnInit {
           }
         )
        
-        
-        // this.router.navigate(['./org/list-org-category']);
-        // Swal.close()
+
 
       }
 
-      // timer: 3000,
-      // timerProgressBar: true
     });
 
   }

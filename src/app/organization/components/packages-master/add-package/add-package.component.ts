@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModelForPackage } from '../model';
 import { PackagesService } from '../../../services/packages.service'
 import { Router } from '@angular/router';
-import {Packages} from '../../../../shared/models/packages';
+import { Packages } from '../../../../shared/models/packages';
 
 @Component({
   selector: 'app-add-package',
@@ -10,74 +10,74 @@ import {Packages} from '../../../../shared/models/packages';
   styleUrls: ['./add-package.component.scss']
 })
 export class AddPackageComponent implements OnInit {
-  packageType : string
-  packageName : string =''
-  paymentPlan : string 
-  packageDuration : string
-  packagePrice : string
-  packageDescription : string = ''
-  isTrial : boolean = false
-  trialDuration : string = ''
+  packageType: string
+  packageName: string = ''
+  paymentPlan: string
+  packageDuration: string
+  packagePrice: string
+  packageDescription: string = ''
+  isTrial: boolean = false
+  trialDuration: string = ''
 
-  package : ModelForPackage
+  package: ModelForPackage
 
-  packageTypeArray : string[]
-  paymentPlanArray : string[]
-
-
-  constructor(private packageService : PackagesService, private router : Router) { }
+  packageTypeArray: string[]
+  paymentPlanArray: string[]
 
 
-  requiredTrialDuration(): boolean{
-   
-    
-    if(this.isTrial){
-      if(this.trialDuration.trim()==='')
+  constructor(private packageService: PackagesService, private router: Router) { }
+
+
+  requiredTrialDuration(): boolean {
+
+
+    if (this.isTrial) {
+      if (this.trialDuration.trim() === '')
         return true
       else
         return false
-    } else 
-        return false
+    } else
+      return false
   }
 
-  paymentPlanOnChange(event:any){
+  paymentPlanOnChange(event: any) {
     console.log(event.target.value);
-    
+
     this.paymentPlan = event.target.value
   }
-  packageTypeOnChange(event:any){
+  packageTypeOnChange(event: any) {
     this.packageType = event.target.value
   }
-  
-  checkBoxOnChange(event:any) {
-    console.log('checkBox: '+this.isTrial);
-    
-    
+
+  checkBoxOnChange(event: any) {
+    console.log('checkBox: ' + this.isTrial);
+
+
   }
 
-  requiredPackageValidator(): boolean{
-    if(this.packageName.trim()==='')
+  requiredPackageValidator(): boolean {
+    if (this.packageName.trim() === '')
       return true;
     else
       return false;
   }
-  requiredDurationValidator(): boolean{
-    if(this.packageDuration.trim()==='')
+  requiredDurationValidator(): boolean {
+    if (this.packageDuration.trim() === '')
       return true;
     else
       return false;
   }
-  requiredPriceValidator(): boolean{
-    if(this.packagePrice.trim()==='')
+  requiredPriceValidator(): boolean {
+    if (this.packagePrice.trim() === '')
       return true;
     else
       return false;
   }
-  onSubmit(){
-    
-    
+  onSubmit() {
+
+
     let obj = new Packages();
-    
+
     obj.packageType = this.packageType;
     obj.packageName = this.packageName;
     obj.paymentPlan = this.paymentPlan;
@@ -88,16 +88,16 @@ export class AddPackageComponent implements OnInit {
     obj.trialDuration = this.trialDuration;
     obj.isActivated = true;
     obj.isDeleted = false;
-    
+
     console.log(obj);
-    this.packageService.addPackage(obj).subscribe((data)=> {
+    this.packageService.addPackage(obj).subscribe((data) => {
       console.log(data);
-      if(data) {
+      if (data) {
         this.router.navigate(['./org/list-packages'])
       }
-      
+
     })
-    
+
   }
   ngOnInit(): void {
     this.packageTypeArray = this.packageService.getPackageType()
