@@ -1,144 +1,150 @@
-
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-
-
 <body class="bg-light-blue">
 
-<section class="stu-dashboard mt-5">
-    <div class="container">
-        <div class="row">
-            <div class="offset-lg-1 col-lg-10">
-                <h5><span class="float-right "><a class="text-light btn mb-3" routerLink = "../"> <i class="fas fa-tachometer-alt"></i> Dashboard </a>
-                              </span></h5>
-            </div>
-            <div class="col-lg-10 offset-lg-1 col-sm-12">
-                <div class="border-double ">
-
-                <form class="bg-light p-4" action="">
-                    <div class="row">
-                        <div class="col-lg-12 col-sm-12">
-                            <h5 class="pb-3 pt-1 text-blue text-left text-capitalize"><i class="fas fa-arrows-alt"></i> Add Modules<span class="float-right"><a class="btn mb-3" routerLink = "../list-module"> <i class="fas fa-eye"></i> View </a>
-                              </span>
-                             </h5>
-                        </div>
-                       <!--  <div class="col-lg-3 col-sm-12">
-                            <button type="submit" class="btn-mat"><span>View Department</span></button>
-                        </div> -->
-                    </div>
-                
-                
-        <div class="row">
-            <div class="col-lg-12 col-sm-12">
-            <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
-            
-
-            <div class="col-lg-3 cl-sm-12 mb-3 form-group">
-                <label for="insType">Parent Module </label>
-                <select class="form-control" id="insType" name="insType">
-                    <option>Select Option</option>
-                    <option>E Exam</option>
-                    <option>E Fees</option>
-                    <option>E Library</option>
-                </select>
-            </div>
-            <div class="col-lg-5 cl-sm-12 mb-3 form-group">
-                <label for="feesHead">Module Name</label>
-                <input data-toggle="tooltip" data-placement="bottom" title="Demo tooltip text" type="text" name="feesHead" id="feesHead" class="form-control inputFocus" placeholder="Module Name" required >
-            </div>
-
-            <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
-              <label for="parentFees"> Connected Modules</label><br>
-              <div class="form-group">
-               
-                <input data-toggle="tooltip" data-placement="bottom" title="Demo tooltip text" type="text" name="feesHead" id="feesHead" class="form-control inputFocus" placeholder="Module Name" required >
-
-              </div>
-    
-              
-            </div>
-                <div class="col-lg-2 offset-lg-5 button-container mt-3 text-center">
-                    <button type="button" id="cusEdit" 
-                    class="btn btn-block btn-common-color btn-lg text-white"
-                    style="
-                          background: linear-gradient(
-                            180deg,
-                            #f4bd22 50%,
-                            #eeae20 50%
-                          );
-                          padding: 0.5rem;
-                        "
-                    ><span> Add <i class="fas fa-caret-right btn-style1"></i></span></button>
-                </div>
-        </div>
-
-    </div>
-
-
-        </div>
-                            <!-- add more row end-->
-
-    <!-- </div> -->
-                               
-                            </form>
-                      </div>
-                        </div>
-                    </div>
-                </div>
-            </section> 
-
-     <footer class="py-2 bg-dark">
+    <section class="stu-dashboard mt-5">
         <div class="container">
-            <p class="m-0 text-center text-white"> &copy;
-                <script type="text/javascript">
-                    document.write(new Date().getFullYear());
-                </script> | All Rights Reserved</p>
+            <div class="row">
+                <div class="offset-lg-1 col-lg-10">
+                    <h5><span class="float-right "><a class="text-light btn mb-3" routerLink = "../"> <i class="fas fa-tachometer-alt"></i> Dashboard </a>
+                                  </span></h5>
+                </div>
+                <div class="col-lg-10 offset-lg-1 col-sm-12">
+                    <div class="border-double ">
+    
+                    <form class="bg-light p-4" action="">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <h5 class="pb-3 pt-1 text-blue text-left text-capitalize"><i class="fas fa-arrows-alt"></i> Add Modules<span class="float-right"><a class="btn mb-3" routerLink = "../list-module"> <i class="fas fa-eye"></i> View </a>
+                                  </span>
+                                 </h5>
+                                 <div [hidden]="!enableAlert()" class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
+                                    Special Characters and Numbers are not Allowed
+                                </div>
+        
+                                <div [hidden] = '!showAlert' class="alert alert-danger" role="alert" style="height: 40px; text-align: center;font-size: medium;padding-top: 10px;">
+                                    All Fields Are Required
+                                 </div>
+                            </div>
+                           <!--  <div class="col-lg-3 col-sm-12">
+                                <button type="submit" class="btn-mat"><span>View Department</span></button>
+                            </div> -->
+                        </div>
+                    
+                    
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
+                
+    
+                <div class="col-lg-3 cl-sm-12 mb-3 form-group">
+                    <label for="insType">Parent Module </label>
+                    <select class="form-control" id="insType" name="insType" [(ngModel)] = 'parentModule' (change) = 'enableButton()'>
+                        <option value ='' disabled selected>Select Option</option>
+                        <option>E Exam</option>
+                        <option>E Fees</option>
+                        <option>E Library</option>
+                        <option>E Org</option>
+                    </select>
+                </div>
+                <div class="col-lg-5 cl-sm-12 mb-3 form-group">
+                    <label for="feesHead">Module Name</label>
+                    <input data-toggle="tooltip" data-placement="bottom" (input) = 'enableButton()' [(ngModel)] = "moduleName" #moduleNameControl='ngModel'title="Demo tooltip text" type="text" name="moduleName" id="moduleName" class="form-control inputFocus" placeholder="Module Name" required >
+                </div>
+    
+                <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
+                  <label for="parentFees"> Connected Modules</label><br>
+                  <div class="form-group">
+                   
+                    <input data-toggle="tooltip" (input) = 'enableButton()' [(ngModel)] = "connectedModules"  #connectedModuleControl='ngModel' data-placement="bottom" title="Demo tooltip text" type="text" name="connectedModules" id="connectedModules" class="form-control inputFocus" placeholder=" Connected Modules" required >
+    
+                  </div>
+        
+                  
+                </div>
+                    <div class="col-lg-2 offset-lg-5 button-container mt-3 text-center">
+                        <button type="button" id="cusEdit" 
+                        class="btn btn-block btn-common-color btn-lg text-white"
+                        (click) = "onSubmit()"
+                        [disabled]="!showButton||enableAlert()"
+                        style="
+                              background: linear-gradient(
+                                180deg,
+                                #f4bd22 50%,
+                                #eeae20 50%
+                              );
+                              padding: 0.5rem;
+                            "
+                        ><span> Add <i class="fas fa-caret-right btn-style1"></i></span></button>
+                    </div>
+            </div>
+    
         </div>
-        <!-- /.container -->
-    </footer>
-    <footer class="footer-bottom">
-        <a href="#" >
-            <img src="/assets/images/float-support.png" alt="support" class="float-support">
-        </a>
-        <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat">
-        </a>
-    </footer>
-<!-- 
-    <script>
-        $(document).ready(function(){
-            $(".mul-select").select2({
-                placeholder : "select here",
-                tags : true,
-                tokenSeparators : ['/', ',' , ',' ,""]
-
-            });
-        })
+    
+    
+            </div>
+                                <!-- add more row end-->
+    
+        <!-- </div> -->
+                                   
+                                </form>
+                          </div>
+                            </div>
+                        </div>
+                    </div>
+                </section> 
+    
+         <footer class="py-2 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white"> &copy;
+                    <script type="text/javascript">
+                        document.write(new Date().getFullYear());
+                    </script> | All Rights Reserved</p>
+            </div>
+            <!-- /.container -->
+        </footer>
+        <footer class="footer-bottom">
+            <a href="#" >
+                <img src="/assets/images/float-support.png" alt="support" class="float-support">
+            </a>
+            <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat">
+            </a>
+        </footer>
+    <!-- 
+        <script>
+            $(document).ready(function(){
+                $(".mul-select").select2({
+                    placeholder : "select here",
+                    tags : true,
+                    tokenSeparators : ['/', ',' , ',' ,""]
+    
+                });
+            })
+        </script>
+         -->
+    
+        <!-- <script src="assest/js/jquery.min.js"></script>
+        <script src="assest/js/popper.min.js"></script>
+        <script src="assest/js/bootstrap.min.js"></script>
+        <script src="assest/js/sweet-alert.min.js"></script>
+        
+        <script src="assest/js/jquery.dataTables.min.js"></script>
+        <script src="assest/js/dataTables.bootstrap4.min.js"></script>
+        <script src="assest/js/moment.min.js"></script>
+        <script src="assest/js/jquery.daterangepicker.min.js"></script>
+        <script src="assest/js/chosen.jquery.js"></script>
+        <script src="assest/js/script.js"></script>
+        
+    
+        
+    <script type="text/javascript">
+        
+    document.getElementById('cusEdit').onclick = function(){
+        swal("Good job!", "You clicked the button!", "success");
+    };
+    
     </script>
+    <script type="text/javascript">
+      
+    </script>
+    </body>
      -->
-
-    <!-- <script src="assest/js/jquery.min.js"></script>
-    <script src="assest/js/popper.min.js"></script>
-    <script src="assest/js/bootstrap.min.js"></script>
-    <script src="assest/js/sweet-alert.min.js"></script>
     
-    <script src="assest/js/jquery.dataTables.min.js"></script>
-    <script src="assest/js/dataTables.bootstrap4.min.js"></script>
-    <script src="assest/js/moment.min.js"></script>
-    <script src="assest/js/jquery.daterangepicker.min.js"></script>
-    <script src="assest/js/chosen.jquery.js"></script>
-    <script src="assest/js/script.js"></script>
-    
-
-    
-<script type="text/javascript">
-    
-document.getElementById('cusEdit').onclick = function(){
-    swal("Good job!", "You clicked the button!", "success");
-};
-
-</script>
-<script type="text/javascript">
-  
-</script>
-</body>
- -->
