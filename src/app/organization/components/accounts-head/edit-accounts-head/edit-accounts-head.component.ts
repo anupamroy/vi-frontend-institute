@@ -19,11 +19,11 @@ export class EditAccountsHeadComponent implements OnInit {
 
   constructor(private activatedRoute : ActivatedRoute, private router : Router, private accountsHeadService : AccountsHeadService ) { }
 
-  processObjUpdated(object: AccountsHead){
+  processObjUpdated(object: AccountsHead) {
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key !== 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -32,7 +32,8 @@ export class EditAccountsHeadComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      master: object.master,
+      masterId: object.masterId
     }
   }
 
@@ -66,7 +67,8 @@ export class EditAccountsHeadComponent implements OnInit {
         showConfirmButton: false,
         onOpen: ()=>{
           Swal.showLoading();
-          let obj = new AccountsHead()
+          let obj = new AccountsHead();
+          obj.masterId = this.id;
           obj.accountsHead = this.accountsHead
           obj.parentAccountsHead = this.parentAccountHead
           this.accountsHeadService

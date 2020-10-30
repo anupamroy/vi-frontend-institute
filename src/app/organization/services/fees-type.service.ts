@@ -1,32 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment'
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class FeesService {
-  api = 'https://r3mm6rz433.execute-api.us-east-1.amazonaws.com/Prod/fees';
+  api = environment.api;
+  api2 = environment.api2;
+  apiSuffix = "?masterType=FEES_TYPE";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getFeesType():Observable<any> {
-    return this.http.get<any>(`${this.api}/all`)
+  getFeesType(): Observable<any> {
+    return this.http.get<any>(`${this.api}//feestype/list/${this.apiSuffix}`)
   }
 
-  getFeesTypeById(id: string):Observable<any> {
-    return this.http.get<any>(`${this.api}/${id}`)
+  getFeesTypeById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.api2}/feestype/getbyid/${id}/${this.apiSuffix}`)
   }
 
-  updateFeesTypeById(id: string, body: any):Observable<any> {
-    return this.http.put<any>(`${this.api}/${id}`, body)
+  updateFeesTypeById(id: string, body: any): Observable<any> {
+    return this.http.put<any>(`${this.api2}/feestype/update`, body)
   }
 
-  deleteFeesTypeById(id: string):Observable<any> {
-    return this.http.delete<any>(`${this.api}/${id}`)
+  deleteFeesTypeById(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.api2}/feestype/delete`)
   }
 
-  addFeesType(body: any):Observable<any> {
-    return this.http.post<any>(`${this.api}`,body)
+  addFeesType(body: any): Observable<any> {
+    return this.http.post<any>(`${this.api2}/feestype/save`, body)
   }
 }

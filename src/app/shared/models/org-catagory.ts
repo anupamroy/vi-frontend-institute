@@ -1,6 +1,7 @@
 export class OrganizationCategory{
-    itemId:string="ORGANIZATION_CATEGORY";
-    isActivated : boolean;
+    master:string="ORGANIZATION_CATEGORY";
+    masterId?: string;
+    isActivated: boolean;
     isDeleted:boolean;
     organizationCategory:string;
 }

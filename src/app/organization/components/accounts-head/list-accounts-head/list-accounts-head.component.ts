@@ -19,7 +19,7 @@ export class ListAccountsHeadComponent implements OnInit {
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key !== 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -28,10 +28,10 @@ export class ListAccountsHeadComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      master: object.master,
+      masterId: object.masterId
     }
   }
-
   onDelete(id: string) {
 
     Swal.fire({
@@ -46,11 +46,12 @@ export class ListAccountsHeadComponent implements OnInit {
         console.log(id);
 
         let obj = new AccountsHead();
+        obj.masterId = id;
         obj.isDeleted = true;
 
         this.accountsHeadService.deleteAccountsHeadById(id, this.processObjUpdated(obj)).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
-            return item.institue_type !== id;
+            return item.masterId !== id;
           })
         });
         Swal.fire(
@@ -84,13 +85,14 @@ export class ListAccountsHeadComponent implements OnInit {
         console.log('Deactivate')
 
         var newObj = new AccountsHead();
+        newObj.masterId = id;
         newObj.isActivated = false;
         console.log('NEW: ', newObj);
         this.accountsHeadService.updateAccountsHeadById(id, this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
           this.finalItems = this.finalItems.map((item) => {
-            if (item.institue_type === id) {
+            if (item.masterId === id) {
               item.isActivated = false
             }
 
@@ -119,13 +121,14 @@ export class ListAccountsHeadComponent implements OnInit {
         console.log('Activate');
 
         var newObj = new AccountsHead();
+        newObj.masterId = id;
         newObj.isActivated = true;
 
         this.accountsHeadService.updateAccountsHeadById(id, this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
           this.finalItems = this.finalItems.map((item) => {
-            if (item.institue_type === id) {
+            if (item.masterId === id) {
               item.isActivated = true;
             }
 
@@ -157,7 +160,7 @@ export class ListAccountsHeadComponent implements OnInit {
           console.log(this.accountsHead)
           let temp = []
           this.accountsHead.forEach(record => {
-            if (record.itemId === 'ACCOUNTS_HEAD' && record.isDeleted === false) {
+            if (record.master === 'ACCOUNTS_HEAD' && record.isDeleted === false) {
               temp.push(record)
             }
           })

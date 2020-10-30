@@ -9,26 +9,30 @@ import { environment } from '../../../../../environments/environment';
 export class OrganizationCategoryService {
 
   api = environment.api;
+  api2 = environment.api2;
+  apiSuffix = "?masterType=ORGANIZATION_CATEGORY"
   constructor(private http : HttpClient) { }
 
   getOrganizationCategory():Observable<any> {
-    return this.http.get<any>(`${this.api}/all`)
+    return this.http.get<any>(`${this.api2}/orgcategory/list/${this.apiSuffix}`)
   }
 
   getOrganizationCategoryById(id: string): any {
-    return this.http.get(`${this.api}/${id}?masterType=ORGANIZATION_CATEGORY`);
+    return this.http.get(`${this.api2}/orgcategory/getbyid/${id}/${this.apiSuffix}`);
   }
 
   updateOrganizationById(id: string, body: any): Observable<any> {
-    return this.http.put<any>(`${this.api}/${id}`, body);
+    console.log(body);
+    
+    return this.http.put<any>(`${this.api2}/orgcategory/update`, body);
   }
 
   deleteOrganizationById(id: string,body: any): Observable<any> {
-    return this.http.put<any>(`${this.api}/${id}`, body);
+    return this.http.put<any>(`${this.api2}/orgcategory/delete`, body);
   }
 
   addOrganizationCategory(body: any): Observable<any> {
-    return this.http.post<any>(`${this.api}`, body);
+    return this.http.post<any>(`${this.api2}/orgcategory/save`, body);
   }
 
 

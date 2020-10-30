@@ -1,5 +1,6 @@
 export class AccountsHead {
-    itemId: string = 'ACCOUNTS_HEAD';
+    master: string = 'ACCOUNTS_HEAD';
+    masterId?: string;
     isActivated: boolean;
     isDeleted: boolean;
     accountsHead: string;

@@ -26,7 +26,7 @@ export class ListFeesTypeComponent implements OnInit {
       if (result.value) {
         this.feesService.deleteFeesTypeById(id).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
-            return item.fees_head_id !== id;
+            return item.masterId !== id;
           })
         });
         Swal.fire(

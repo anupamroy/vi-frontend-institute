@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FeesService } from '../../../services/fees-type.service'
+import { FeesType } from '../../../../shared/models/fees-type';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -30,11 +31,9 @@ export class AddFeesTypeComponent implements OnInit {
   }
 
   onSubmit() {
-    const feesTypeObj = {
-      feesType: this.feesType
-    }
-
-    console.log(feesTypeObj)
+    const obj = new FeesType();
+    obj.feesType = this.feesType;
+    console.log(obj)
 
     Swal.fire({
       title: 'Please Wait',
@@ -45,7 +44,7 @@ export class AddFeesTypeComponent implements OnInit {
       onOpen: () => {
         Swal.showLoading();
         this.feesService
-          .addFeesType(feesTypeObj)
+          .addFeesType(obj)
           .subscribe((data) => {
             console.log('ID' + data);
             if (data) {

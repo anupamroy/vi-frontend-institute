@@ -16,11 +16,11 @@ export class EditOrgCategoryComponent implements OnInit {
 
   constructor(private activatedRoute : ActivatedRoute, private router : Router, private organizationService : OrganizationCategoryService ) { }
 
-  processObjUpdated(object: OrganizationCategory){
+  processObjUpdated(object: OrganizationCategory) {
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key !== 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -29,7 +29,8 @@ export class EditOrgCategoryComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      master: object.master,
+      masterId: object.masterId
     }
   }
   enableButton() {
@@ -60,7 +61,7 @@ export class EditOrgCategoryComponent implements OnInit {
           
           var obj = new OrganizationCategory();
           obj.organizationCategory = this.OrgCategory;
-
+obj.masterId = this.id;
           this.organizationService
             .updateOrganizationById(this.id, this.processObjUpdated(obj))
             .subscribe((data) => {

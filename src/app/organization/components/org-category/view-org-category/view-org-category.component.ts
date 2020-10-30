@@ -14,11 +14,11 @@ export class ViewOrgCategoryComponent implements OnInit {
   finalItems: any
   constructor(private organizationService: OrganizationCategoryService) { }
 
-  processObjUpdated(object: OrganizationCategory){
+  processObjUpdated(object: OrganizationCategory) {
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key !== 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -27,7 +27,8 @@ export class ViewOrgCategoryComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      master: object.master,
+      masterId: object.masterId
     }
   }
 
@@ -49,12 +50,13 @@ export class ViewOrgCategoryComponent implements OnInit {
           },
         })
         var newObj = new OrganizationCategory();
+        newObj.masterId = id;
         newObj.isDeleted = true;
         console.log("After Deleting  -- "+ newObj)
 
         this.organizationService.deleteOrganizationById(id, this.processObjUpdated(newObj)).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
-            return item.institue_type !== id;
+            return item.masterId !== id;
           })
           Swal.fire(
             'Deleted!',
@@ -88,13 +90,14 @@ export class ViewOrgCategoryComponent implements OnInit {
         console.log('Deactivate')
 
         var newObj = new OrganizationCategory();
+        newObj.masterId = id;
         newObj.isActivated = false;
         console.log('NEW: ', newObj);
         this.organizationService.updateOrganizationById(id, this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
           this.finalItems = this.finalItems.map((item) => {
-            if (item.institue_type === id) {
+            if (item.masterId === id) {
               item.isActivated = false
             }
 
@@ -124,12 +127,12 @@ export class ViewOrgCategoryComponent implements OnInit {
 
         var newObj = new OrganizationCategory();
         newObj.isActivated = true;
-
+        newObj.masterId = id;
         this.organizationService.updateOrganizationById(id, this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
           this.finalItems = this.finalItems.map((item) => {
-            if (item.institue_type === id) {
+            if (item.masterId === id) {
               item.isActivated = true;
             }
 
@@ -162,7 +165,7 @@ export class ViewOrgCategoryComponent implements OnInit {
           console.log(this.orgCategory)
           let temp = []
           this.orgCategory.forEach(record => {
-            if (record.itemId==="ORGANIZATION_CATEGORY" && record.isDeleted===false) {
+            if (record.master==="ORGANIZATION_CATEGORY" && record.isDeleted===false) {
               temp.push(record)
             }
           })

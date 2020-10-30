@@ -39,17 +39,17 @@
                                 <th scope="row">{{ i + 1 }}</th>
                                 <td>{{ item.organizationCategory }}</td>
                                 <td>
-                                    <button routerLink="../edit-org-category/{{ item.institue_type }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
+                                    <button routerLink="../edit-org-category/{{ item.masterId }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button id="cusEdit"
-                                        class="btn-dark-blue-light btn btn-sm" (click)="onDelete(item.institue_type)"
+                                        class="btn-dark-blue-light btn btn-sm" (click)="onDelete(item.masterId)"
                                         data-toggle="modal" data-target="#exampleModal">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                     <button
                                     *ngIf="item.isActivated==true"
-                                    (click)="onDeactivate(item.institue_type)" 
+                                    (click)="onDeactivate(item.masterId)" 
                                     href="#" 
                                     id="cusEdit" 
                                     class="btn-dark-blue-light btn btn-sm">
@@ -57,7 +57,7 @@
                                     </button>
                                     <button
                                     *ngIf="item.isActivated==false"
-                                    (click)="onActivate(item.institue_type)" 
+                                    (click)="onActivate(item.masterId)" 
                                     href="#" 
                                     id="cusEdit" 
                                     class="btn-dark-blue-light btn btn-sm">

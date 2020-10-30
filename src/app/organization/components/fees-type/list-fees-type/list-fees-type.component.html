@@ -36,12 +36,12 @@
                                 <th scope="row">{{ i + 1 }}</th>
                                 <td>{{ item.feesType }}</td>
                                 <td>
-                                    <button routerLink="../edit-fees-type/{{ item.fees_head_id }}" id="cusEdit"
+                                    <button routerLink="../edit-fees-type/{{ item.masterId }}" id="cusEdit"
                                         class="btn-dark-blue-light btn btn-sm">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button id="cusEdit" class="btn-dark-blue-light btn btn-sm"
-                                        (click)="onDelete(item.fees_head_id)" data-toggle="modal"
+                                        (click)="onDelete(item.masterId)" data-toggle="modal"
                                         data-target="#exampleModal">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
