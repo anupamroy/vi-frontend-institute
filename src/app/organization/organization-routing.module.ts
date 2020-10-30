@@ -76,7 +76,7 @@ const routes: Routes = [
   { path: 'list-org-category', component: ViewOrgCategoryComponent },
   { path: 'edit-org-category/:itemId', component: EditOrgCategoryComponent },
   { path: 'list-fees-type', component: ListFeesTypeComponent },
-  { path: 'edit-fees-type/:itemId', component: EditFeesTypeComponent },
+  { path: 'edit-fees-type/:masterId', component: EditFeesTypeComponent },
   { path: 'list-accounts-head', component: ListAccountsHeadComponent },
   { path: 'edit-accounts-head/:itemId', component: EditAccountsHeadComponent },
   { path: 'list-organization', component: ListOrganizationComponent },

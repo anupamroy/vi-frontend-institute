@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FeesService } from '../../../services/fees-type.service'
+import { FeesService } from '../../../services/fees-type.service';
+import {FeesType} from '../../../../shared/models/fees-type';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -10,13 +11,15 @@ import Swal from 'sweetalert2'
 })
 export class EditFeesTypeComponent implements OnInit {
 
-  feesType: string = ''
-  id: string
+  feesType: string ;
+  id: string;
+  feesData :any
+  
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private feesService: FeesService) { }
 
   enableButton() {
-    if (this.feesType.trim() === '') {
+    if (this.feesType && this.feesType.trim() === "") {
       return true
     }
     else {
@@ -29,8 +32,31 @@ export class EditFeesTypeComponent implements OnInit {
     return regex.test(this.feesType)
   }
 
+  processObjUpdated(object: FeesType) {
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'master' && key !== 'masterId') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
+
+    return {
+      attribute,
+      value,
+      master: object.master,
+      masterId: object.masterId
+    }
+  }
+
   onClick() {
 
+    const editObj = new FeesType();
+
+    editObj.masterId = this.id;
+    editObj.feesType = this.feesType;
+    
     console.log(this.feesType)
     Swal.fire({
       title: 'Please Wait',
@@ -41,12 +67,7 @@ export class EditFeesTypeComponent implements OnInit {
       onOpen: () => {
         Swal.showLoading();
         this.feesService
-          .updateFeesTypeById(this.id, {
-            attribute: ['feesType'],
-            value: [
-              this.feesType
-            ],
-          })
+          .updateFeesTypeById(this.id,this.processObjUpdated(editObj) )
           .subscribe((data) => {
             console.log('ID' + data);
             if (data) {
@@ -61,7 +82,6 @@ export class EditFeesTypeComponent implements OnInit {
             }
           });
         // Swal.close()
-
       }
     });
 
@@ -80,13 +100,31 @@ export class EditFeesTypeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.params.itemId;
+    this.id = this.activatedRoute.snapshot.params.masterId;
+    console.log('id....',this.id);
+    
     this.feesService.getFeesTypeById(this.id).subscribe((item) => {
       item = JSON.parse(item);
-      this.feesType = item.feesType
+      this.feesType = item.Items[0].feesType
       console.log(item)
+      console.log('this fees type',this.feesType);
+      
     })
+    // console.log( 'this...is parram', this.activatedRoute.queryParams)
+   
+    // this.activatedRoute.queryParams.subscribe(
+  
+    //   (queryParams: Params) => {
+    //     this.feesData = JSON.parse(queryParams.params)
+    //     console.log('fee edit.....',this.feesData);
 
+    //   }
+      
+  // );
+
+    
   }
+
+  
 
 }
