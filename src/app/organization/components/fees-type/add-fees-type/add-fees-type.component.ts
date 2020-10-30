@@ -31,10 +31,13 @@ export class AddFeesTypeComponent implements OnInit {
   }
 
   onSubmit() {
-    const obj = new FeesType();
-    obj.feesType = this.feesType;
-    console.log(obj)
+    const feesTypeObj = new FeesType();
+    feesTypeObj.feesType = this.feesType;
+    feesTypeObj.isActivated = true;
+    feesTypeObj.isDeleted = false;
 
+
+    console.log(feesTypeObj)
     Swal.fire({
       title: 'Please Wait',
       allowEscapeKey: false,
@@ -44,7 +47,7 @@ export class AddFeesTypeComponent implements OnInit {
       onOpen: () => {
         Swal.showLoading();
         this.feesService
-          .addFeesType(obj)
+          .addFeesType(feesTypeObj)
           .subscribe((data) => {
             console.log('ID' + data);
             if (data) {
