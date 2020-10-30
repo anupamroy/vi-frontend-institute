@@ -1,5 +1,6 @@
 export class Module{
-    itemId: string = 'MODULE';
+    master: string = 'MODULE';
+    masterId?: string;
     isActivated: boolean;
     isDeleted: boolean;
     parentModule: string;

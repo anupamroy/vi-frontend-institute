@@ -37,13 +37,13 @@
                 <td>{{item.connectedModules}}</td>
 
                 <td>
-                  <button routerLink="../edit-module/{{item.institue_type}}" [queryParams]="{ params: item | json}"
+                  <button routerLink="../edit-module/{{item.masterId}}" [queryParams]="{ params: item | json}"
                     id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-edit"></i></button>
-                  <button href="#" id="cusEdit" (click)="onDelete(item.institue_type)"
+                  <button href="#" id="cusEdit" (click)="onDelete(item.masterId)"
                     class="btn-dark-blue-light btn btn-sm"><i class="fas fa-trash-alt"></i></button>
-                  <button *ngIf="item.isActivated==true" (click)="onDeactivate(item.institue_type)" href="#"
+                  <button *ngIf="item.isActivated==true" (click)="onDeactivate(item.masterId)" href="#"
                     id="cusEdit" class="btn-dark-blue-light btn btn-sm"><i class="fas fa-ban"></i></button>
-                  <button *ngIf="item.isActivated==false" (click)="onActivate(item.institue_type)" href="#" id="cusEdit"
+                  <button *ngIf="item.isActivated==false" (click)="onActivate(item.masterId)" href="#" id="cusEdit"
                     class="btn-dark-blue-light btn btn-sm"><i class="fas fa-check-circle"></i></button>
                 </td>
               </tr>

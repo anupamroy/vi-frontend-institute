@@ -34,7 +34,7 @@ export class EditPackageComponent implements OnInit {
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key != 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -43,7 +43,8 @@ export class EditPackageComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      masterId: object.masterId,
+      master: object.master
     }
   }
 
@@ -104,7 +105,7 @@ export class EditPackageComponent implements OnInit {
 
   onSubmit() {
     var obj = new Packages();
-
+    obj.masterId = this.id;
     obj.packageType = this.packageType;
     obj.packageName = this.packageName;
     obj.paymentPlan = this.paymentPlan;
@@ -155,7 +156,7 @@ export class EditPackageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.params.itemId;
+    this.id = this.activatedRoute.snapshot.params.masterId;
     this.packageService.getPackageById(this.id).subscribe((item) => {
       item = JSON.parse(item);
       this.packageType = item.Items[0].packageType

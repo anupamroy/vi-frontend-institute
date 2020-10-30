@@ -27,7 +27,7 @@ export class ListPackageComponent implements OnInit {
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key !== 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -36,7 +36,8 @@ export class ListPackageComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      master: object.master,
+      masterId: object.masterId
     }
   }
   onDeactivate(id: string) {
@@ -54,12 +55,13 @@ export class ListPackageComponent implements OnInit {
 
         var newObj = new Packages();
         newObj.isActivated = false;
+        newObj.masterId = id;
         console.log('NEW: ', newObj);
         this.packageService.updatePackageById(id, this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
           this.finalItems = this.finalItems.map((item) => {
-            if (item.institue_type === id) {
+            if (item.masterId === id) {
               item.isActivated = false
             }
 
@@ -88,13 +90,14 @@ export class ListPackageComponent implements OnInit {
         console.log('Activate');
 
         var newObj = new Packages();
+        newObj.masterId = id;
         newObj.isActivated = true;
 
         this.packageService.updatePackageById(id, this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
           this.finalItems = this.finalItems.map((item) => {
-            if (item.institue_type === id) {
+            if (item.masterId === id) {
               item.isActivated = true;
             }
 
@@ -120,10 +123,11 @@ export class ListPackageComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         var obj = new Packages();
+        obj.masterId = id;
         obj.isDeleted = true;
         this.packageService.deletePackagebyId(id,this.processObjUpdated(obj)).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
-            return item.institue_type !== id;
+            return item.masterId !== id;
           })
         });
         Swal.fire(
@@ -180,7 +184,7 @@ export class ListPackageComponent implements OnInit {
           console.log(this.package)
           let temp = []
           this.package.forEach(record => {
-            if (record.isDeleted === false && record.itemId==="PACKAGE") {
+            if (record.isDeleted === false && record.master==="PACKAGE") {
               temp.push(record)
             }
           })

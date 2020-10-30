@@ -81,7 +81,7 @@ const routes: Routes = [
   { path: 'edit-accounts-head/:itemId', component: EditAccountsHeadComponent },
   { path: 'list-organization', component: ListOrganizationComponent },
   { path: 'list-packages', component: ListPackageComponent },
-  { path: 'edit-package/:itemId', component: EditPackageComponent },
+  { path: 'edit-package/:masterId', component: EditPackageComponent },
   { path: 'edit-org', component: EditOrganizationComponent },
 ];
 

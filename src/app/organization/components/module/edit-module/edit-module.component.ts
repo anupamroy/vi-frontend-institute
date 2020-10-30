@@ -68,7 +68,7 @@ export class EditModuleComponent implements OnInit {
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key != 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -77,7 +77,8 @@ export class EditModuleComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      master: object.master,
+      masterId: object.masterId
     }
   }
 
@@ -94,7 +95,7 @@ export class EditModuleComponent implements OnInit {
     console.log(this.id)
     
       var obj = new Module();
-
+      obj.masterId = this.id;
       obj.parentModule = this.newParentModule
       obj.moduleName = this.newModuleName
       obj.connectedModules = this.newConnectedModules
@@ -146,7 +147,7 @@ export class EditModuleComponent implements OnInit {
       }
       
   );
-  this.id = this.module.institue_type
+  this.id = this.module.masterId
   this.newParentModule = this.module.parentModule
   this.newModuleName = this.module.moduleName
   this.newConnectedModules =this. module.connectedModules

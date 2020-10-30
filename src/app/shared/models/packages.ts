@@ -1,5 +1,6 @@
 export class Packages {
-    itemId: string = 'PACKAGE';
+    master: string = 'PACKAGE';
+    masterId?: string;
     isActivated: boolean;
     isDeleted: boolean;
     packageType : string;

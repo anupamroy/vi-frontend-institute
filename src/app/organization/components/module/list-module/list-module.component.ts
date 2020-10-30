@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
-import {Module} from '../../../../shared/models/module'
+import { Module } from '../../../../shared/models/module'
 import Swal from 'sweetalert2'
 import { ModuleService } from '../Services/module.service';
 
@@ -10,19 +10,19 @@ import { ModuleService } from '../Services/module.service';
   styleUrls: ['./list-module.component.scss']
 })
 export class ListModuleComponent implements OnInit {
-  modules : Module[] 
-  finalItems : any
+  modules: Module[]
+  finalItems: any
 
-  constructor(private activatedRoute : ActivatedRoute, 
-    private router : Router,
-    private ModuleService : ModuleService) { }
+  constructor(private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private ModuleService: ModuleService) { }
 
-    
-  processObjUpdated(object: Module){
+
+  processObjUpdated(object: Module) {
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key !== 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -31,7 +31,8 @@ export class ListModuleComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      master: object.master,
+      masterId: object.masterId
     }
   }
 
@@ -45,7 +46,7 @@ export class ListModuleComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-          
+
         Swal.fire({
           title: "Please Wait",
           willOpen: () => {
@@ -54,6 +55,7 @@ export class ListModuleComponent implements OnInit {
         })
         var newObj = new Module();
         newObj.isDeleted = true;
+        newObj.masterId = id;
         this.ModuleService.deleteModule(id, this.processObjUpdated(newObj)).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
             return item.institue_type !== id;
@@ -64,7 +66,7 @@ export class ListModuleComponent implements OnInit {
             'success'
           )
         });
-       
+
 
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
@@ -99,6 +101,7 @@ export class ListModuleComponent implements OnInit {
         console.log('Deactivate')
 
         var newObj = new Module();
+        newObj.masterId = id;
         newObj.isActivated = false;
         console.log('NEW: ', newObj);
         this.ModuleService.updateModule(id, this.processObjUpdated(newObj)).subscribe((data) => {
@@ -134,6 +137,7 @@ export class ListModuleComponent implements OnInit {
         console.log('Activate');
 
         var newObj = new Module();
+        newObj.masterId = id;
         newObj.isActivated = true;
 
         this.ModuleService.updateModule(id, this.processObjUpdated(newObj)).subscribe((data) => {
@@ -156,7 +160,7 @@ export class ListModuleComponent implements OnInit {
   }
 
 
-       
+
 
   ngOnInit(): void {
     Swal.fire({
@@ -169,15 +173,15 @@ export class ListModuleComponent implements OnInit {
       this.modules = JSON.parse(responseData).Items
       console.log(this.modules)
       Swal.close()
-      let temp= []
-      this.finalItems = this.modules.filter(record  => 
-        record.itemId === 'MODULE' && record.isDeleted === false)
-        console.log(this.finalItems)
+      let temp = []
+      this.finalItems = this.modules.filter(record =>
+        record.master === 'MODULE' && record.isDeleted === false)
+      console.log(this.finalItems)
 
     },
-    error =>{
-      console.log("Could not Fetch Data")
-    })
+      error => {
+        console.log("Could not Fetch Data")
+      })
 
-}
+  }
 }
