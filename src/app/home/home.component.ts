@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Auth } from 'aws-amplify';
+import { Auth, input } from 'aws-amplify';
+import Swal from 'sweetalert2';
+import { AuthDataService } from '../shared/Services/auth-data.service';
 
 @Component({
   selector: 'app-home',
@@ -11,27 +13,57 @@ export class HomeComponent implements OnInit {
 
   phone_number: number;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authDataService: AuthDataService) { }
 
   ngOnInit(): void {
   }
 
   signIn = (event) => {
     let phoneNumber = "+91" + this.phone_number;
-    let otp = prompt(`OTP sent to your phone number to ${phoneNumber} ::${Date.now().toString().slice(-4)}`)
+    // let otp = prompt(`OTP sent to your phone number to ${phoneNumber} ::${Date.now().toString().slice(-4)}`)
 
-    if (otp.length > 4) {
-      alert('Please enter 4 digit')
-    }
-    else {
-      Auth.signIn(phoneNumber).then(user => {
-        user = user;
-        console.log(user);
-        this.router.navigate(['org'])
-      }).catch(err => {
-        alert(`${this.phone_number} is not registered as Super Admin.`)
-        this.router.navigate([''])
-      })
-    }
+    // if (otp.length > 4) {
+    //   alert('Please enter 4 digit')
+    // }
+    // else {
+    //   Auth.signIn(phoneNumber).then(user => {
+    //     user = user;
+    //     console.log(user);
+
+    //     //setting up the username
+    //     this.authDataService.setUserName(user.username);
+
+    //     this.router.navigate(['org'])
+    //   }).catch(err => {
+    //     alert(`${this.phone_number} is not registered as Super Admin.`)
+    //     this.router.navigate([''])
+    //   })
+    // }
+
+    Swal.fire({
+      title: "OTP",
+      text: `OTP sent to your phone number ${phoneNumber} :: ${Date.now().toString().slice(-4)}`,
+      input: "text",
+      showCancelButton: true
+    }).then((result) => {
+      const otp = result.value;
+      
+      if (otp.length > 4) {
+        Swal.fire('Invalid OTP', '', 'error')
+      }
+      else {
+        Auth.signIn(phoneNumber).then(user => {
+          user = user;
+          console.log(user);
+
+          //setting up the username
+          this.authDataService.setUserName(user.username);
+          this.router.navigate(['org'])
+        }).catch(err => {
+          Swal.fire('Authentication Failed', `${this.phone_number} is not registered as Super Admin.`, 'error')
+          this.router.navigate([''])
+        })
+      }
+    })
   }
 }

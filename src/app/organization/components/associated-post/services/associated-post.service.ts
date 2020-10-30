@@ -8,26 +8,26 @@ import { environment } from '../../../../../environments/environment';
 })
 export class AssociatedPostService {
 
-  api = environment.api;
+  api = 'https://vs9ge0mhi9.execute-api.ap-south-1.amazonaws.com/Prod/associatedpost';
   constructor(private http : HttpClient) { }
 
   getAssociatedPost():Observable<any> {
-    return this.http.get<any>(`${this.api}/all`)
+    return this.http.get<any>(`${this.api}/list?masterType=ASSOCIATED_POST`)
   }
 
   getAssociatedPostById(id: string): any {
     return this.http.get(`${this.api}/${id}`);
   }
 
-  updateAssociatedPostById(id: string, body: any): Observable<any> {
-    return this.http.put<any>(`${this.api}/${id}`, body);
+  updateAssociatedPostById(body: any): Observable<any> {
+    return this.http.put<any>(`${this.api}/update`, body);
   }
 
-  deleteAssociatedPostById(id: string, body: any): Observable<any> {
-    return this.http.put<any>(`${this.api}/${id}`, body);
+  deleteAssociatedPostById(body: any): Observable<any> {
+    return this.http.put<any>(`${this.api}/update`, body);
   }
 
   addAssociatedPost(body: any): Observable<any> {
-    return this.http.post<any>(`${this.api}`, body);
+    return this.http.post<any>(`${this.api}/save`, body);
   }
 }

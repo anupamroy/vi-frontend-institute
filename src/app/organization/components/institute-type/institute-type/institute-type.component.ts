@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { InstituteTypeService } from '../Services/institute-type.service'
-import { InstituteType } from '../../../../shared/models/institute-type';
+import { InstituteType } from '../instituteType.model';
 import Swal from 'sweetalert2'
 
 
@@ -25,7 +25,7 @@ export class InstituteTypeComponent implements OnInit {
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key !== 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -34,7 +34,8 @@ export class InstituteTypeComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      master: object.master,
+      masterId: object.masterId
     }
   }
 
@@ -54,9 +55,9 @@ export class InstituteTypeComponent implements OnInit {
 
   onSubmit() {
     const instituteTypeObj = new InstituteType();
-    instituteTypeObj.isDeleted = false
-    instituteTypeObj.isActivated = true
-    instituteTypeObj.instituteType = this.instituteType
+    instituteTypeObj.isDeleted = false;
+    instituteTypeObj.isActivated = true;
+    instituteTypeObj.institute_type_name = this.instituteType;
 
 
     Swal.fire({

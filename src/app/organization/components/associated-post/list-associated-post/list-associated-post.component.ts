@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import { AssociatedPostService } from '../services/associated-post.service'
-import { AssociatePost } from '../../../../shared/models/associate-post'
+import { AssociatedPost } from '../associate-post.model'
 
 @Component({
   selector: 'app-list-associated-post',
@@ -11,16 +11,15 @@ import { AssociatePost } from '../../../../shared/models/associate-post'
 })
 export class ListAssociatedPostComponent implements OnInit {
 
-  associated_Post: any;
-  final_items: any;
+  associated_Post_list = [];
 
   constructor(private router: Router, private associatedPostService: AssociatedPostService) { }
 
-  processObjUpdated(object: AssociatePost){
+  processObjUpdated(object: AssociatedPost){
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key !== 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -29,7 +28,8 @@ export class ListAssociatedPostComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      master: object.master,
+      masterId: object.masterId
     }
   }
 
@@ -43,11 +43,12 @@ export class ListAssociatedPostComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-        var newObj = new AssociatePost();
+        var newObj = new AssociatedPost();
         newObj.isDeleted = true;
-        this.associatedPostService.deleteAssociatedPostById(id, this.processObjUpdated(newObj)).subscribe(() => {
-          this.final_items = this.final_items.filter((item) => {
-            return item.institue_type !== id;
+        newObj.masterId = id;
+        this.associatedPostService.deleteAssociatedPostById(this.processObjUpdated(newObj)).subscribe(() => {
+          this.associated_Post_list = this.associated_Post_list.filter((item) => {
+            return item.masterId !== id;
           })
         });
         Swal.fire(
@@ -88,14 +89,15 @@ export class ListAssociatedPostComponent implements OnInit {
         // Deactivate Logic
         console.log('Deactivate')
 
-        var newObj = new AssociatePost();
+        var newObj = new AssociatedPost();
+        newObj.masterId = id;
         newObj.isActivated = false;
         console.log('NEW: ', newObj);
-        this.associatedPostService.updateAssociatedPostById(id, this.processObjUpdated(newObj)).subscribe((data) => {
+        this.associatedPostService.updateAssociatedPostById(this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
-          this.final_items = this.final_items.map((item) => {
-            if (item.institue_type === id) {
+          this.associated_Post_list = this.associated_Post_list.map((item) => {
+            if (item.masterId === id) {
               item.isActivated = false
             }
 
@@ -123,14 +125,15 @@ export class ListAssociatedPostComponent implements OnInit {
         // Activate Logic
         console.log('Activate');
 
-        var newObj = new AssociatePost();
+        var newObj = new AssociatedPost();
         newObj.isActivated = true;
+        newObj.masterId = id;
 
-        this.associatedPostService.updateAssociatedPostById(id, this.processObjUpdated(newObj)).subscribe((data) => {
+        this.associatedPostService.updateAssociatedPostById(this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
-          this.final_items = this.final_items.map((item) => {
-            if (item.institue_type === id) {
+          this.associated_Post_list = this.associated_Post_list.map((item) => {
+            if (item.masterId === id) {
               item.isActivated = true;
             }
 
@@ -156,15 +159,16 @@ export class ListAssociatedPostComponent implements OnInit {
         Swal.showLoading();
 
         this.associatedPostService.getAssociatedPost().subscribe(responseData => {
-          this.associated_Post = JSON.parse(responseData).Items
-          console.log(this.associated_Post)
-          let temp = []
-          this.associated_Post.forEach(record => {
-            if (record.isDeleted === false) {
-              temp.push(record)
+          const fetchData = JSON.parse(responseData).Items
+          console.log('DATA FROM DATABASE: ', fetchData)
+
+          this.associated_Post_list = fetchData.filter((item) => {
+            if (item.isDeleted === false){
+              return item;
             }
           })
-          this.final_items = temp
+
+          console.log('DATA TO BE POPULATED: ', this.associated_Post_list)
 
           Swal.close();
         }, error => {
