@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InstituteTypeService } from '../Services/institute-type.service'
-import { InstituteType } from '../../../../shared/models/institute-type'
+import { InstituteType } from '../instituteType.model';
 import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2'
@@ -13,16 +13,14 @@ import Swal from 'sweetalert2'
 })
 export class ListInstituteTypeComponent implements OnInit {
 
-  institute_Type: any;
-  temp = []
-  finalItems: any
+  instituteTypeList = [];
   constructor(private router: Router, private InstituteTypeService: InstituteTypeService) { }
 
   processObjUpdated(object: InstituteType) {
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key !== 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -31,7 +29,8 @@ export class ListInstituteTypeComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      master: object.master,
+      masterId: object.masterId
     }
   }
 
@@ -53,12 +52,13 @@ export class ListInstituteTypeComponent implements OnInit {
           },
         })
         var newObj = new InstituteType();
-        newObj.isDeleted = true;
-        console.log("After Deleting  -- " + newObj)
 
-        this.InstituteTypeService.deleteInstituteType(id, this.processObjUpdated(newObj)).subscribe(() => {
-          this.finalItems = this.finalItems.filter((item) => {
-            return item.institue_type !== id;
+        newObj.isDeleted = true;
+        newObj.masterId = id;
+
+        this.InstituteTypeService.deleteInstituteType(this.processObjUpdated(newObj)).subscribe(() => {
+          this.instituteTypeList = this.instituteTypeList.filter((item) => {
+            return item.masterId !== id;
           })
           Swal.fire(
             'Deleted!',
@@ -100,13 +100,15 @@ export class ListInstituteTypeComponent implements OnInit {
         console.log('Deactivate')
 
         var newObj = new InstituteType();
+
         newObj.isActivated = false;
-        console.log('NEW: ', newObj);
-        this.InstituteTypeService.updateInstituteTypeById(id, this.processObjUpdated(newObj)).subscribe((data) => {
+        newObj.masterId = id;
+        
+        this.InstituteTypeService.updateInstituteTypeById(this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
-          this.finalItems = this.finalItems.map((item) => {
-            if (item.institue_type === id) {
+          this.instituteTypeList = this.instituteTypeList.map((item) => {
+            if (item.masterId === id) {
               item.isActivated = false
             }
 
@@ -135,13 +137,15 @@ export class ListInstituteTypeComponent implements OnInit {
         console.log('Activate');
 
         var newObj = new InstituteType();
-        newObj.isActivated = true;
 
-        this.InstituteTypeService.updateInstituteTypeById(id, this.processObjUpdated(newObj)).subscribe((data) => {
+        newObj.isActivated = true;
+        newObj.masterId = id;
+
+        this.InstituteTypeService.updateInstituteTypeById(this.processObjUpdated(newObj)).subscribe((data) => {
           console.log(data);
 
-          this.finalItems = this.finalItems.map((item) => {
-            if (item.institue_type === id) {
+          this.instituteTypeList = this.instituteTypeList.map((item) => {
+            if (item.masterId === id) {
               item.isActivated = true;
             }
 
@@ -164,17 +168,17 @@ export class ListInstituteTypeComponent implements OnInit {
       },
     })
     this.InstituteTypeService.getInstituteType().subscribe(responseData => {
-      this.institute_Type = JSON.parse(responseData).Items
-      console.log(this.institute_Type)
+      const fetchData = JSON.parse(responseData).Items
+      console.log('DATA FROM DATABASE: ', fetchData)
       Swal.close()
-      let temp = []
-      this.institute_Type.forEach(record => {
-        if (record.isDeleted === false && record.itemId === 'INSTITUTE_TYPE') {
-          temp.push(record)
+      
+      this.instituteTypeList = fetchData.filter((item) => {
+        if (item.isDeleted === false){
+          return item
         }
       })
-      this.finalItems = temp
-      console.log(this.finalItems)
+
+      console.log('FINAL DATA TO BE POPULATED: ', this.instituteTypeList);
     },
       error => {
         console.log("Could not Fetch Data")

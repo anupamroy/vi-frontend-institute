@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import {AssociatedPostService} from '../services/associated-post.service'
-import { AssociatePost } from '../../../../shared/models/associate-post';
+import { AssociatedPost } from '../associate-post.model';
 
 @Component({
   selector: 'app-edit-associated-post',
@@ -13,8 +13,6 @@ export class EditAssociatedPostComponent implements OnInit {
 
   associated_post :string= '';
   id:string;
-
-  instituteType = "MTech";
 
   enableButton(){
     if(this.associated_post && 
@@ -34,11 +32,11 @@ export class EditAssociatedPostComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router,private associatedPostService:AssociatedPostService) {
   }
 
-  processObjUpdated(object: AssociatePost){
+  processObjUpdated(object: AssociatedPost){
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key !== 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -47,23 +45,24 @@ export class EditAssociatedPostComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      master: object.master,
+      masterId: object.masterId
     }
   }
 
   onClick(){
     console.log(this.id)
-    if (this.instituteType !== this.associated_post) {
-      var obj = new AssociatePost();
+    var obj = new AssociatedPost();
 
-      obj.associatedPost = this.associated_post;
+    obj.associated_post_name = this.associated_post;
+    obj.masterId = this.id;
 
-      this.associatedPostService
-        .updateAssociatedPostById(this.id, this.processObjUpdated(obj))
-        .subscribe((data) => {
-          console.log(data);
-        });
-    }
+    this.associatedPostService
+      .updateAssociatedPostById(this.processObjUpdated(obj))
+      .subscribe((data) => {
+        console.log(data);
+      });
+
     Swal.fire({
       title: 'Edited',
       text: 'Data Edited Successfully',

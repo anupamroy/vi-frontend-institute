@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { InstituteTypeService } from '../Services/institute-type.service'
 import Swal from 'sweetalert2'
-import { InstituteType } from '../../../../shared/models/institute-type';
+import { InstituteType } from '../instituteType.model';
 
 
 @Component({
@@ -26,7 +26,7 @@ export class EditInstituteTypeComponent implements OnInit {
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'master' && key !== 'masterId') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -35,7 +35,8 @@ export class EditInstituteTypeComponent implements OnInit {
     return {
       attribute,
       value,
-      itemId: object.itemId
+      master: object.master,
+      masterId: object.masterId
     }
   }
 
@@ -78,11 +79,11 @@ export class EditInstituteTypeComponent implements OnInit {
     })
 
     const instituteTypeObj = new InstituteType();
-    instituteTypeObj.instituteType = this.newInstituteType
 
-
-
-    this.InstituteTypeService.updateInstituteTypeById(this.id, this.processObjUpdated(instituteTypeObj)).subscribe({
+    instituteTypeObj.institute_type_name = this.newInstituteType
+    instituteTypeObj.masterId = this.id;
+    
+    this.InstituteTypeService.updateInstituteTypeById(this.processObjUpdated(instituteTypeObj)).subscribe({
       next: responseData => {
         console.log(responseData)
         if (responseData) {
