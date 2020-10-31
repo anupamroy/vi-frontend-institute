@@ -21,6 +21,7 @@
     "@angular/router": "~10.0.2",
     "aws-amplify": "^3.3.4",
     "bootstrap": "^4.5.2",
+    "joi": "^17.3.0",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.5",

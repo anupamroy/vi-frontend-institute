@@ -11,11 +11,21 @@ import { OrganizationCategory } from '../../../../shared/models/org-catagory';
 })
 export class EditOrgCategoryComponent implements OnInit {
 
-  OrgCategory: string = ''
+   /** Attribute of OrganizationCategory Table */
+  OrgCategory: string = '';
+
+   /** Attribute of OrganizationCategory Table */
   id: string
 
   constructor(private activatedRoute : ActivatedRoute, private router : Router, private organizationService : OrganizationCategoryService ) { }
 
+
+  /**
+ * Process Model attributes to format as Request Parameter
+ * 
+ * @returns {OrganizationCategory} 
+ * @memberof EditOrgCategoryComponent
+ */
   processObjUpdated(object: OrganizationCategory) {
     var attribute = [];
     var value = [];

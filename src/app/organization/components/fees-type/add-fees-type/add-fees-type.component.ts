@@ -11,11 +11,20 @@ import Swal from 'sweetalert2'
 })
 export class AddFeesTypeComponent implements OnInit {
 
-  disableButton: boolean = true
-  feesType: string = ''
+  /** flag holds the form submit status */
+  disableButton: boolean = true;
+
+  /** Short Key for Masters Table NoSQL DynamoDB */
+  feesType: string = '';
 
   constructor(private router: Router, private feesService: FeesService) { }
 
+  /**
+   * 
+   * Enable disable submit button 
+   *
+   * @memberof AddFeesTypeComponent
+   */
   enableButton() {
     if (this.feesType.trim() === '') {
       return true

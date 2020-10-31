@@ -12,24 +12,50 @@ import Swal from 'sweetalert2'
 })
 export class EditPackageComponent implements OnInit {
 
-  packageType: string
-  packageName: string = ''
-  paymentPlan: string
-  packageDuration: string
-  packagePrice: string
-  packageDescription: string = ''
-  isTrial: boolean
+  /** Attribute of Package Table */
+  packageType: string;
+
+  /** Attribute of Package Table */
+  packageName: string = '';
+
+  /** Attribute of Package Table */
+  paymentPlan: string;
+
+  /** Attribute of Package Table */
+  packageDuration: string;
+
+  /** Attribute of Package Table */
+  packagePrice: string;
+
+  /** Attribute of Package Table */
+  packageDescription: string = '';
+
+  /** Attribute of Package Table */
+  isTrial: boolean;
+
+  /** Attribute of Package Table */
   trialDuration: string
 
-
+  /** Attribute of Package Table partition Key */
   id: string
 
-  package: ModelForPackage
-  packageTypeArray: string[]
+  /** Attribute of Package Table */
+  package: ModelForPackage;
+
+  /** Array contains package type array */
+  packageTypeArray: string[];
+
+  /** Array contains playment plan array */
   paymentPlanArray: string[]
 
   constructor(private packageService: PackagesService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
+/**
+ * Process Model attributes to format as Request Parameter
+ * 
+ * @returns {Packages} 
+ * @memberof EditPackageComponent
+ */
   processObjUpdated(object: Packages) {
     var attribute = [];
     var value = [];
@@ -48,30 +74,75 @@ export class EditPackageComponent implements OnInit {
     }
   }
 
+  /**
+ * Route to list packages component
+ * 
+ * 
+ * @memberof EditPackageComponent
+ */
   onView() {
     this.router.navigate(['./org/list-packages'])
   }
 
+  /**
+ * Route to add packages component
+ * 
+ * 
+ * @memberof EditPackageComponent
+ */
   onAdd() {
-    this.router.navigate(['./org/add-package'])
+    this.router.navigate(['./org/add-package']);
   }
 
+/**
+ * Route to org component
+ * 
+ * @returns {boolean} 
+ * @memberof EditPackageComponent
+ */
   onDashboard() {
     this.router.navigate(['./org'])
   }
 
+/**
+ * Update value on selection
+ * 
+ * @param {Dropdown change event} event
+ * @memberof EditPackageComponent
+ */
   paymentPlanOnChange(event: any) {
     this.paymentPlan = event.target.value
   }
+
+/**
+ * Update value on selection
+ * 
+ * @param {Dropdown change event} event
+ * @memberof EditPackageComponent
+ */
   packageTypeOnChange(event: any) {
     this.packageType = event.target.value
   }
+
+  /**
+ * chackbox checked event handle
+ * 
+ * @returns {checked} event
+ * @memberof EditPackageComponent
+ */
   checkBoxOnChange(event: any) {
     console.log('checkBox: ' + this.isTrial);
 
     // console.log(document.getElementById('trialPackage'));
     // console.log('Value of checkbox'+event.target.value)
   }
+
+  /**
+ * Validation of duration entered by user
+ * 
+ * @returns {boolean} 
+ * @memberof EditPackageComponent
+ */
   requiredTrialDuration(): boolean {
     // console.log(this.isTrial);
 
@@ -84,18 +155,39 @@ export class EditPackageComponent implements OnInit {
       return false
   }
 
+
+  /**
+ * Validation of package entered by user
+ * 
+ * @returns {boolean} 
+ * @memberof EditPackageComponent
+ */
   requiredPackageValidator(): boolean {
     if (this.packageName.trim() === '')
       return false;
     else
       return true;
   }
+
+  /**
+ * Validation of duration entered by user
+ * 
+ * @returns {boolean} 
+ * @memberof EditPackageComponent
+ */
   requiredDurationValidator(): boolean {
     if (this.packageDuration.trim() === '')
       return false;
     else
       return true;
   }
+
+  /**
+ * Validation of price entered by user
+ * 
+ * @returns {boolean} 
+ * @memberof EditPackageComponent
+ */
   requiredPriceValidator(): boolean {
     if (this.packagePrice.trim() === '')
       return false;
@@ -103,6 +195,12 @@ export class EditPackageComponent implements OnInit {
       return true;
   }
 
+  /**
+ * Submit handler call Api and update the data
+ * 
+ * @returns {any} 
+ * @memberof EditPackageComponent
+ */
   onSubmit() {
     var obj = new Packages();
     obj.masterId = this.id;
@@ -123,25 +221,25 @@ export class EditPackageComponent implements OnInit {
       allowOutsideClick: true,
       background: '#fff',
       showConfirmButton: false,
-      onOpen: ()=>{
+      onOpen: () => {
         Swal.showLoading();
         this.packageService
-          .updatePackageById(this.id,this.processObjUpdated(obj))
+          .updatePackageById(this.id, this.processObjUpdated(obj))
           .subscribe((data) => {
-          console.log('ID'+data);
-          if(data){
-            Swal.fire({
-              title: 'Edited',
-              icon: 'success',
-              showConfirmButton: false,
-              timer: 1500,
-            }).then(()=>{
-              this.router.navigate(['./org/list-packages']);
-            })  
-          }
-        });
+            console.log('ID' + data);
+            if (data) {
+              Swal.fire({
+                title: 'Edited',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500,
+              }).then(() => {
+                this.router.navigate(['./org/list-packages']);
+              })
+            }
+          });
         // Swal.close()
-       
+
       }
     });
     // this.packageService.updatePackageById(this.id,this.processObjUpdated(obj)
@@ -150,11 +248,17 @@ export class EditPackageComponent implements OnInit {
     //   if(data) {
     //     this.router.navigate(['./org/list-packages'])
     //   }
-      
+
     // })
-    
+
   }
 
+  /**
+ * load package data by Id to edit
+ * 
+ * @returns {boolean} 
+ * @memberof EditPackageComponent
+ */
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.masterId;
     this.packageService.getPackageById(this.id).subscribe((item) => {

@@ -7,30 +7,65 @@ import { environment } from '../../../environments/environment'
   providedIn: 'root'
 })
 export class AccountsHeadService {
- 
-  api = environment.api;
-  api2 = environment.api2;
-  apiSuffix = "?masterType=ACCOUNTS_HEAD";
 
-  constructor(private http: HttpClient) {}
+  private api = environment.api;
+  private api2 = environment.api2;
+  private apiSuffix = "?masterType=ACCOUNTS_HEAD";
 
-  getAccountsHead():Observable<any> {
+  constructor(private http: HttpClient) { }
+
+  /**
+   * sends a single request
+   * 
+   * @param {AccountsHead} body  
+   * @returns {Observable<any>} 
+   * @memberof HttpQueue
+   */
+  getAccountsHead(): Observable<any> {
     return this.http.get<any>(`${this.api2}/accountshead/list/${this.apiSuffix}`)
   }
 
-  getAccountsHeadById(id: string):Observable<any> {
+  /**
+   * sends a single request
+   * 
+   * @param {AccountsHead} body  
+   * @returns {Observable<any>} 
+   * @memberof HttpQueue
+   */
+  getAccountsHeadById(id: string): Observable<any> {
     return this.http.get<any>(`${this.api2}/accountshead/getbyid/${id}/${this.apiSuffix}`)
   }
 
-  updateAccountsHeadById(id: string, body: any):Observable<any> {
+  /**
+   * sends a single request
+   * 
+   * @param {AccountsHead} body  
+   * @returns {Observable<any>} 
+   * @memberof HttpQueue
+   */
+  updateAccountsHeadById(id: string, body: any): Observable<any> {
     return this.http.put<any>(`${this.api2}/accountshead/update`, body)
   }
 
-  deleteAccountsHeadById(id: string, body: any):Observable<any> {
-    return this.http.put<any>(`${this.api2}/accountshead/delete`,body)
+  /**
+   * sends a single request
+   * 
+   * @param {AccountsHead} body  
+   * @returns {Observable<any>} 
+   * @memberof HttpQueue
+   */
+  deleteAccountsHeadById(id: string, body: any): Observable<any> {
+    return this.http.put<any>(`${this.api2}/accountshead/delete`, body)
   }
 
-  addAccountsHead(body: any):Observable<any> {
-    return this.http.post<any>(`${this.api2}/accountshead/save`,body)
+  /**
+   * sends a single request
+   * 
+   * @param {AccountsHead} body  
+   * @returns {Observable<any>} 
+   * @memberof HttpQueue
+   */
+  addAccountsHead(body: any): Observable<any> {
+    return this.http.post<any>(`${this.api2}/accountshead/save`, body)
   }
 }

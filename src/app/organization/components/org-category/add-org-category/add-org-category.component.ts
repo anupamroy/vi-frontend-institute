@@ -10,15 +10,28 @@ import { OrganizationCategory } from '../../../../shared/models/org-catagory';
 })
 export class AddOrgCategoryComponent implements OnInit {
 
-  disableButton : boolean = true
-  orgCategory : string = ''
-  requiredError : string = 'Organization Category cannot be blank'
+   /** Attribute of OrganizationCategory Table */
+  disableButton : boolean = true;
+
+   /** Attribute of OrganizationCategory Table */
+  orgCategory : string = '';
+
+   /** Attribute of OrganizationCategory Table */
+  requiredError : string = 'Organization Category cannot be blank';
+
+   /** Attribute of OrganizationCategory Table */
   validationError : string = 'Special Characters and Numbers are not Allowed'
 
   constructor(private router : Router, private organizationService : OrganizationCategoryService) { }
 
+/**
+ * Enable disable button
+ * 
+ * @param {boolean} 
+ * @memberof OrganizationCategory
+ */
   enableButton() {
-    if(this.orgCategory.trim() === '') {
+    if(this.orgCategory && this.orgCategory.trim() === '') {
       return true
     }
     else {
@@ -26,11 +39,23 @@ export class AddOrgCategoryComponent implements OnInit {
     }
   }
 
+  /**
+ * Validate against reg expression 
+ * 
+ * @param {boolean} 
+ * @memberof OrganizationCategory
+ */
   enableAlert(){
     const regex = /^[a-zA-Z ]*$/
     return regex.test(this.orgCategory)
   }
-  
+
+/**
+ * Submit handler to create a Organization category
+ * 
+ * 
+ * @memberof OrganizationCategory
+ */
   onSubmit(){
     const orgCategoryObj = new OrganizationCategory();
     orgCategoryObj.organizationCategory = this.orgCategory;
