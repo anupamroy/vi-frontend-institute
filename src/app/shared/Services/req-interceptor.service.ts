@@ -15,7 +15,7 @@ export class ReqInterceptorService implements HttpInterceptor{
     if (headerSecret) {
       req = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${headerSecret}`
+          Authorization: `${headerSecret}`
         }
       })
     }

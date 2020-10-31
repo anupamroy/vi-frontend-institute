@@ -83,7 +83,7 @@ export class AddAccountsHeadComponent implements OnInit {
       console.log(this.parentAccount)
       let temp = []
       this.parentAccount.forEach(record => {
-        if (record.itemId === 'ACCOUNTS_HEAD' && record.isDeleted === false) {
+        if (record.master === 'ACCOUNTS_HEAD' && record.isDeleted === false) {
           temp.push(record)
         }
       })
