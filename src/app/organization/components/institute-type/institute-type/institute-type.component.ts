@@ -11,7 +11,11 @@ import Swal from 'sweetalert2'
   styleUrls: ['./institute-type.component.scss']
 })
 export class InstituteTypeComponent implements OnInit {
+
+  /** Holds thevlaue for enabling or disabling the button */
   disableButton: boolean = true
+
+  /** Holds the value of institute Type */
   instituteType: string = ''
 
 
@@ -20,7 +24,13 @@ export class InstituteTypeComponent implements OnInit {
     private router: Router,
     private InstituteTypeService: InstituteTypeService) { }
 
-
+  
+  /**
+   * Process the obejct that is to be passed as body
+   * @param object of Institute Type
+   * @returns {object} of Institute Type
+   * @memberof InstituteTypeComponent
+   */
   processObjUpdated(object: InstituteType) {
     var attribute = [];
     var value = [];
@@ -39,6 +49,12 @@ export class InstituteTypeComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Enable disbale edit button
+   * @returns {boolean}
+   * @memberof InstituteTypeComponent
+   */
   enableButton() {
     if (this.instituteType.trim() === '') {
       return true
@@ -48,11 +64,22 @@ export class InstituteTypeComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Enable disable validation warning
+   * @returns {boolean}
+   * @memberof InstituteTypeComponent
+   */
   enableAlert() { // need to add in commom framework validationss
     const regex = /^[a-zA-Z ]*$/
     return regex.test(this.instituteType)
   }
 
+
+  /**
+   * Submits the add institute type form
+   * @memberof InstituteTypeComponent
+   */
   onSubmit() {
     const instituteTypeObj = new InstituteType();
     instituteTypeObj.isDeleted = false;
@@ -97,7 +124,6 @@ export class InstituteTypeComponent implements OnInit {
 
 
   ngOnInit(): void {
-
   }
 
 }

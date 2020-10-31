@@ -11,10 +11,17 @@ import { AssociatedPost } from '../associate-post.model'
 })
 export class ListAssociatedPostComponent implements OnInit {
 
+  /** Holds the list of associated post */
   associated_Post_list = [];
 
   constructor(private router: Router, private associatedPostService: AssociatedPostService) { }
 
+  /**
+   * Process the object to pass as body to update api
+   * @memberof ListAssociatedPostComponent
+   * @param object of Associate Post
+   * @returns {object} of Associate Post
+   */
   processObjUpdated(object: AssociatedPost){
     var attribute = [];
     var value = [];
@@ -33,6 +40,12 @@ export class ListAssociatedPostComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Deletes the selected list item
+   * @memberof ListAssociatedPostComponent
+   * @param id of the item to be deleted
+   */
   onDelete(id: string) {
     Swal.fire({
       title: 'Are you sure you want to delete?',
@@ -44,8 +57,10 @@ export class ListAssociatedPostComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         var newObj = new AssociatedPost();
+
         newObj.isDeleted = true;
         newObj.masterId = id;
+
         this.associatedPostService.deleteAssociatedPostById(this.processObjUpdated(newObj)).subscribe(() => {
           this.associated_Post_list = this.associated_Post_list.filter((item) => {
             return item.masterId !== id;
@@ -68,14 +83,30 @@ export class ListAssociatedPostComponent implements OnInit {
 
   }
 
+
+  /**
+   * Redirects to dashboard
+   * @memberof ListAssociatedPostComponent
+   */
   onDashboard() {
     this.router.navigate(["./org"])
   }
 
+
+  /**
+   * Redirects to add associate page
+   * @memberof ListAssociatedPostComponent
+   */
   onAdd() {
     this.router.navigate(["/org/add-associated-post"])
   }
 
+
+  /**
+   * Deactivate the selected item
+   * @param id of the selected item
+   * @memberof ListAssociatedPostComponent
+   */
   onDeactivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to deactivate?',
@@ -86,15 +117,17 @@ export class ListAssociatedPostComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.isConfirmed) {
-        // Deactivate Logic
-        console.log('Deactivate')
+        // console.log('Deactivate')
 
         var newObj = new AssociatedPost();
+
         newObj.masterId = id;
         newObj.isActivated = false;
-        console.log('NEW: ', newObj);
+
+        // console.log('NEW: ', newObj);
+
         this.associatedPostService.updateAssociatedPostById(this.processObjUpdated(newObj)).subscribe((data) => {
-          console.log(data);
+          // console.log(data);
 
           this.associated_Post_list = this.associated_Post_list.map((item) => {
             if (item.masterId === id) {
@@ -112,6 +145,12 @@ export class ListAssociatedPostComponent implements OnInit {
     })
   }
 
+
+  /**
+   * Activates the selected item
+   * @param id
+   * @memberof ListAssociatedPostComponent 
+   */
   onActivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to activate?',
@@ -180,8 +219,5 @@ export class ListAssociatedPostComponent implements OnInit {
         })
       }
     })
-
   }
-
-
 }

@@ -13,9 +13,17 @@ import Swal from 'sweetalert2'
 })
 export class ListInstituteTypeComponent implements OnInit {
 
+  /** Holds the list of institute type list */
   instituteTypeList = [];
   constructor(private router: Router, private InstituteTypeService: InstituteTypeService) { }
 
+
+  /**
+   * Process the obejct that is to be passed as body
+   * @param object of Institute Type
+   * @returns {object} of Institute Type
+   * @memberof ListInstituteTypeComponent
+   */
   processObjUpdated(object: InstituteType) {
     var attribute = [];
     var value = [];
@@ -34,6 +42,12 @@ export class ListInstituteTypeComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Delete the selected item
+   * @param id of the item to be deleted
+   * @memberof ListInstituteTypeComponent
+   */
   onDelete(id: string) {
     Swal.fire({
       title: 'Are you sure you want to delete?',
@@ -78,14 +92,28 @@ export class ListInstituteTypeComponent implements OnInit {
 
   }
 
+  /**
+   * Redirects to dashboard
+   * @memberof ListInstituteTypeComponent
+   */
   onDashboard() {
     this.router.navigate(["./org"])
   }
 
+  /**
+   * Redirects to add view
+   * @memberof ListInstituteTypeComponent
+   */
   onAdd() {
     this.router.navigate(["/org/add-associated-post"])
   }
 
+
+  /**
+   * Deactivate a selected item
+   * @param id of the selected item to be deactivated
+   * @memberof ListInstituteTypeComponent
+   */
   onDeactivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to deactivate?',
@@ -97,7 +125,7 @@ export class ListInstituteTypeComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         // Deactivate Logic
-        console.log('Deactivate')
+        // console.log('Deactivate')
 
         var newObj = new InstituteType();
 
@@ -105,7 +133,7 @@ export class ListInstituteTypeComponent implements OnInit {
         newObj.masterId = id;
         
         this.InstituteTypeService.updateInstituteTypeById(this.processObjUpdated(newObj)).subscribe((data) => {
-          console.log(data);
+          // console.log(data);
 
           this.instituteTypeList = this.instituteTypeList.map((item) => {
             if (item.masterId === id) {
@@ -123,6 +151,12 @@ export class ListInstituteTypeComponent implements OnInit {
     })
   }
 
+
+  /**
+   * Activate a selected item
+   * @param id of the selected item to be activated
+   * @memberof ListInstituteTypeComponent
+   */
   onActivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to activate?',
@@ -134,7 +168,7 @@ export class ListInstituteTypeComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         // Activate Logic
-        console.log('Activate');
+        // console.log('Activate');
 
         var newObj = new InstituteType();
 
@@ -142,7 +176,7 @@ export class ListInstituteTypeComponent implements OnInit {
         newObj.masterId = id;
 
         this.InstituteTypeService.updateInstituteTypeById(this.processObjUpdated(newObj)).subscribe((data) => {
-          console.log(data);
+          // console.log(data);
 
           this.instituteTypeList = this.instituteTypeList.map((item) => {
             if (item.masterId === id) {
