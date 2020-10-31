@@ -12,22 +12,51 @@ export class AssociatedPostService {
   api =environment.api2;
   constructor(private http : HttpClient) { }
 
+  /**
+   * Provides the list of all associated post
+   * @returns {Observable} with associated post
+   * @memberof AssociatedPostService
+   */
   getAssociatedPost():Observable<any> {
     return this.http.get<any>(`${this.api}/associatedpost/list?masterType=ASSOCIATED_POST`)
   }
 
+  /**
+   * Provides a specific associated post
+   * @param id of selected associate post
+   * @returns {Observable} with associated post
+   * @memberof AssociatedPostService
+   */
   getAssociatedPostById(id: string): any {
     return this.http.get(`${this.api}/associatedpost/getbyid/${id}`);
   }
 
+  /**
+   * Updates a specific associate post
+   * @param body of newly updated object
+   * @returns {Observable} with associated post
+   * @memberof AssociatedPostService
+   */
   updateAssociatedPostById(body: any): Observable<any> {
     return this.http.put<any>(`${this.api}/associatedpost/update`, body);
   }
 
+  /**
+   * Updates a specific associate post
+   * @param body of newly updated object
+   * @returns {Observable} with associated post
+   * @memberof AssociatedPostService
+   */
   deleteAssociatedPostById(body: any): Observable<any> {
     return this.http.put<any>(`${this.api}/associatedpost/delete`, body);
   }
 
+  /**
+   * Adds a specific associate post
+   * @param body of newly updated object
+   * @returns {Observable} with associated post
+   * @memberof AssociatedPostService
+   */
   addAssociatedPost(body: any): Observable<any> {
     return this.http.post<any>(`${this.api}/associatedpost/save`, body);
   }

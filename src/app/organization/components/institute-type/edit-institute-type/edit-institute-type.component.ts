@@ -12,8 +12,13 @@ import { InstituteType } from '../instituteType.model';
 })
 export class EditInstituteTypeComponent implements OnInit {
 
+  /** Holds the value of new institute type */
   newInstituteType: string = ""
+
+  /** Holds the id of the institute */
   id: string = ""
+
+  /** Holds the original vlue of the institute type */
   institute_type: string = ''
 
   constructor(
@@ -21,7 +26,13 @@ export class EditInstituteTypeComponent implements OnInit {
     private router: Router,
     private InstituteTypeService: InstituteTypeService) { }
 
-
+  
+  /**
+   * Process the obejct that is to be passed as body
+   * @param object of Institute Type
+   * @returns {object} of Institute Type
+   * @memberof EditInstituteTypeComponent
+   */
   processObjUpdated(object: InstituteType) {
     var attribute = [];
     var value = [];
@@ -40,6 +51,11 @@ export class EditInstituteTypeComponent implements OnInit {
     }
   }
 
+  /**
+   * Enable disbale edit button
+   * @returns {boolean}
+   * @memberof EditInstituteTypeComponent
+   */
   enableButton() {
     if (this.newInstituteType && this.newInstituteType.trim() === '') {
       return true
@@ -49,22 +65,45 @@ export class EditInstituteTypeComponent implements OnInit {
     }
   }
 
+  /**
+   * Enable disable validation warning
+   * @returns {boolean}
+   * @memberof EditInstituteTypeComponent
+   */
   enableAlert() { //common validation
     const regex = /^[a-zA-Z_ ]*$/
     return regex.test(this.newInstituteType)
   }
 
-
+  /**
+   * Redirects to go to view
+   * @memberof EditInstituteTypeComponent
+   */
   goToView() {
     this.router.navigate(['/org/list-institute-type'])
   }
+
+  /**
+   * Redirects to add view
+   * @memberof EditInstituteTypeComponent
+   */
   goToAdd() {
     this.router.navigate(['/org/add-institute-type'])
   }
+
+  /**
+   * Redirects to dashboard view
+   * @memberof EditInstituteTypeComponent
+   */
   goToDashboard() {
     this.router.navigate(['/org'])
   }
 
+
+  /**
+   * Submits teh edited form
+   * @memberof EditInstituteTypeComponent
+   */
   onClick() {
     Swal.fire({
       title: "Updating Institute Type",
@@ -74,7 +113,7 @@ export class EditInstituteTypeComponent implements OnInit {
     }).then((result) => {
 
       if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('Adding Institute Type ')
+        // console.log('Adding Institute Type ')
       }
     })
 
@@ -85,7 +124,7 @@ export class EditInstituteTypeComponent implements OnInit {
     
     this.InstituteTypeService.updateInstituteTypeById(this.processObjUpdated(instituteTypeObj)).subscribe({
       next: responseData => {
-        console.log(responseData)
+        // console.log(responseData)
         if (responseData) {
           Swal.fire(
             'Congratulations!',
@@ -105,10 +144,12 @@ export class EditInstituteTypeComponent implements OnInit {
 
   ngOnInit(): void {
     this.institute_type = this.activatedRoute.snapshot.params.instituteType;
-
     this.id = this.activatedRoute.snapshot.params.itemId;
+
     const instituteType = this.activatedRoute.snapshot.params.instituteType
-    console.log(this.id, instituteType)
+
+    // console.log(this.id, instituteType)
+
     this.newInstituteType = instituteType
   }
 

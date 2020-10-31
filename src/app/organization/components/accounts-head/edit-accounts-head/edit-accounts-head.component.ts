@@ -11,14 +11,29 @@ import Swal from 'sweetalert2'
 })
 export class EditAccountsHeadComponent implements OnInit {
 
+  /** To be populated with Accounts Head */
   accountsHead: string = ''
+
+  /** Contains parent account Head */
   parentAccountHead: string = ''
+
+  /** Contains masterId of the Accounts Head which is to be edited */
   id: string
+
+  /** Holds parent account */
   parentAccount: any
+
+  /** Holds the list of final items of account head */
   finalItems: any
 
   constructor(private activatedRoute : ActivatedRoute, private router : Router, private accountsHeadService : AccountsHeadService ) { }
 
+  /**
+   * Process the object for passing as body in api
+   * @memberof EditAccountsHeadComponent
+   * @param object of AccountsHead
+   * @returns {object} of AccountsHead
+   */
   processObjUpdated(object: AccountsHead) {
     var attribute = [];
     var value = [];
@@ -37,6 +52,12 @@ export class EditAccountsHeadComponent implements OnInit {
     }
   }
 
+
+  /** 
+   * Enable disable submit button
+   * @memberof EditAccountsHeadComponent
+   * @returns {boolean}
+   */
   enableButton() {
     if(this.accountsHead.trim() === '') {
       return true
@@ -46,18 +67,34 @@ export class EditAccountsHeadComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Enable disable validation alert
+   * @memberof EditAccountsHeadComponent
+   * @returns {boolean}
+   */
   enableAlert(){
     const regex = /^[a-zA-Z_ ]*$/
     return regex.test(this.accountsHead)
   }
 
+
+  /**
+   * Populate parent account head
+   * @memberof EditAccountsHeadComponent
+   * @param value
+   */
   selectParentAccount(value){
     this.parentAccountHead = value
   }
 
+
+  /**
+   * Submits the edit form
+   * @memberof EditAccountsHeadComponent
+   */
   onClick(){
-   
-      console.log(this.accountsHead)
+      // console.log(this.accountsHead)
       
       Swal.fire({
         title: 'Please Wait',
@@ -67,14 +104,17 @@ export class EditAccountsHeadComponent implements OnInit {
         showConfirmButton: false,
         onOpen: ()=>{
           Swal.showLoading();
+
           let obj = new AccountsHead();
+
           obj.masterId = this.id;
           obj.accountsHead = this.accountsHead
           obj.parentAccountsHead = this.parentAccountHead
+
           this.accountsHeadService
             .updateAccountsHeadById(this.id,this.processObjUpdated(obj))
             .subscribe((data) => {
-            console.log('ID'+data);
+            // console.log('ID'+data);
             if(data){
               Swal.fire({
                 title: 'Edited',
@@ -87,61 +127,70 @@ export class EditAccountsHeadComponent implements OnInit {
             }
           });
           // Swal.close()
-         
         }
       });
  
   }
 
+
+  /**
+   * Redirects to add-accounts-head
+   * @memberof EditAccountsHeadComponent
+   */
   onAdd(){
     this.router.navigate(['./org/add-accounts-head'])
   }
 
+  /**
+   * Redirects to list-accounts-head
+   * @memberof EditAccountsHeadComponent
+   */
   onView(){
     this.router.navigate(['./org/list-accounts-head'])
   }
 
+  /**
+   * Redirects to Dashboard Page
+   * @memberof EditAccountsHeadComponent
+   */
   onDashboard(){
     this.router.navigate(['./org'])
   }
 
+
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.itemId;
-    console.log('My ID',this.id);
+
+    // console.log('My ID',this.id);
     
     this.accountsHeadService.getAccountsHeadById(this.id).subscribe((item)=>{
       item = JSON.parse(item);
-      console.log("HELLO: ",item);
-      console.log("accountsHead:",item.Items[0].accountsHead);
+
+      // console.log("HELLO: ",item);
+      // console.log("accountsHead:",item.Items[0].accountsHead);
       
       this.accountsHead = item.Items[0].accountsHead
       this.parentAccountHead = item.Items[0].parentAccountsHead
       console.log(item)
     })
-    // console.log(this.getResult);
-    
-    // const accountsHead =this.activatedRoute.snapshot.params.accountsHead
-    // console.log(this.id, accountsHead)
-    // this.accountsHead = accountsHead
 
     this.accountsHeadService.getAccountsHead().subscribe(responseData => {
       this.parentAccount = JSON.parse(responseData).Items
-      console.log(this.parentAccount)
-      let temp = []
+
+      // console.log(this.parentAccount)
+
+      let temp = [];
+
       this.parentAccount.forEach(record => {
         if (record.itemId === 'ACCOUNTS_HEAD' && record.isDeleted === false) {
           temp.push(record)
         }
       })
-      this.finalItems = temp
-      // Swal.close()
+
+      this.finalItems = temp;
     },
       error => {
         console.log("Could not Fetch Data")
-        // Swal.fire({
-        //   text: 'Error Fetching',
-        //   icon: 'warning'
-        // })
       }
     )
   }

@@ -11,10 +11,20 @@ import { from } from 'rxjs';
 })
 export class ListAccountsHeadComponent implements OnInit {
 
+  /** Holds the accounts Head */
   accountsHead: any;
-  finalItems: any
+
+  /** Holds the list of finalItems */
+  finalItems: any;
+
   constructor(private accountsHeadService: AccountsHeadService) { }
 
+  /**
+   * Process the object for passing it as body in post api
+   * @memberof ListAccountsHeadComponent
+   * @param object of Accounts Head
+   * @returns {object} of Accounts Head
+   */
   processObjUpdated(object: AccountsHead) {
     var attribute = [];
     var value = [];
@@ -32,6 +42,13 @@ export class ListAccountsHeadComponent implements OnInit {
       masterId: object.masterId
     }
   }
+
+
+  /**
+   * Deletes the selected list item
+   * @memberof ListAccountsHeadComponent
+   * @param id of the item to be deleted
+   */
   onDelete(id: string) {
 
     Swal.fire({
@@ -43,7 +60,8 @@ export class ListAccountsHeadComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-        console.log(id);
+
+        // console.log(id);
 
         let obj = new AccountsHead();
         obj.masterId = id;
@@ -59,7 +77,6 @@ export class ListAccountsHeadComponent implements OnInit {
           'Your Accounts Head has been deleted.',
           'success'
         )
-
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled',
@@ -71,6 +88,12 @@ export class ListAccountsHeadComponent implements OnInit {
 
   }
 
+
+  /**
+   * Deactivates the selected item
+   * @memberof ListAccountsHeadComponent
+   * @param id 
+   */
   onDeactivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to deactivate?',
@@ -107,6 +130,12 @@ export class ListAccountsHeadComponent implements OnInit {
     })
   }
 
+
+  /**
+   * Activates the selected item
+   * @param id of selected item
+   * @memberof ListAccountsHeadComponent
+   */
   onActivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to activate?',
@@ -117,15 +146,15 @@ export class ListAccountsHeadComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.isConfirmed) {
-        // Activate Logic
-        console.log('Activate');
+
+        // console.log('Activate');
 
         var newObj = new AccountsHead();
         newObj.masterId = id;
         newObj.isActivated = true;
 
         this.accountsHeadService.updateAccountsHeadById(id, this.processObjUpdated(newObj)).subscribe((data) => {
-          console.log(data);
+          // console.log(data);
 
           this.finalItems = this.finalItems.map((item) => {
             if (item.masterId === id) {
@@ -145,7 +174,6 @@ export class ListAccountsHeadComponent implements OnInit {
 
 
 
-
   ngOnInit(): void {
     Swal.fire({
       title: 'Please Wait',
@@ -157,7 +185,9 @@ export class ListAccountsHeadComponent implements OnInit {
         Swal.showLoading();
         this.accountsHeadService.getAccountsHead().subscribe(responseData => {
           this.accountsHead = JSON.parse(responseData).Items
-          console.log(this.accountsHead)
+
+          // console.log(this.accountsHead)
+          
           let temp = []
           this.accountsHead.forEach(record => {
             if (record.master === 'ACCOUNTS_HEAD' && record.isDeleted === false) {

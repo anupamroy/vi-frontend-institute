@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router } from '@angular/router';
 import Swal from 'sweetalert2'
-import {AssociatedPostService} from '../services/associated-post.service'
+import {AssociatedPostService} from '../services/associated-post.service';
 import { AssociatedPost } from '../associate-post.model';
 
 @Component({
@@ -11,10 +11,16 @@ import { AssociatedPost } from '../associate-post.model';
 })
 export class AddAssociatedPostComponent implements OnInit {
 
+  /** Holds the associatedPost name */
   associatedPost: string = "";
 
   constructor(private router: Router,private associatedPostService:AssociatedPostService) { }
 
+  /**
+   * Enable disable the add button
+   * @memberof AddAssociatedPostComponent
+   * @returns {boolean}
+   */
   enableButton(){
     if(this.associatedPost.trim() === '') {
       return true
@@ -24,17 +30,22 @@ export class AddAssociatedPostComponent implements OnInit {
     }
   }
 
+  /**
+   * Enable disable validation alert
+   * @memberof AddAssociatedPostComponent
+   * @returns {boolean}
+   */
   enableAlert(){
     const regex = /^[a-zA-Z_ ]*$/
     return regex.test(this.associatedPost)
   }
 
-  // onKey(event: any) { // without type info
-  //   this.associatedPost = event.target.value;
-  // }
-
+  /**
+   * Submits the add form
+   * @memberof AddAssociatedPostComponent
+   */
   onClick() {
-    console.log(this.associatedPost);
+    // console.log(this.associatedPost);
     const obj = new AssociatedPost();
 
     obj.associated_post_name = this.associatedPost;
@@ -68,6 +79,11 @@ export class AddAssociatedPostComponent implements OnInit {
     })
   }
 
+
+  /**
+   * Redirects to dashboard
+   * @memberof AddAssociatedPostComponent
+   */
   onDashboard(){
     this.router.navigate(["./org"])
   }

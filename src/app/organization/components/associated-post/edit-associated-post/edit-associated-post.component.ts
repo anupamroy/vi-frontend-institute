@@ -11,9 +11,17 @@ import { AssociatedPost } from '../associate-post.model';
 })
 export class EditAssociatedPostComponent implements OnInit {
 
+  /** Holds the name of associate post to be edited */
   associated_post :string= '';
+
+  /** Holds the id of the item to be edited */
   id:string;
 
+  /**
+   * Enable disable edit button
+   * @memberof EditAssociatedPostComponent
+   * @returns {boolean}
+   */
   enableButton(){
     if(this.associated_post && 
       this.associated_post.trim() === '') {
@@ -24,6 +32,11 @@ export class EditAssociatedPostComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Enable disable validation alert
+   * @memberof EditAssociatedPostComponent
+   */
   enableAlert(){
     const regex = /^[a-zA-Z_ ]*$/
     return regex.test(this.associated_post)
@@ -32,6 +45,13 @@ export class EditAssociatedPostComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router,private associatedPostService:AssociatedPostService) {
   }
 
+
+  /**
+   * Process the object to pass as body to update api
+   * @memberof EditAssociatedPostComponent
+   * @param object of Associate Post
+   * @returns {object} of Associate Post
+   */
   processObjUpdated(object: AssociatedPost){
     var attribute = [];
     var value = [];
@@ -50,8 +70,13 @@ export class EditAssociatedPostComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Submits the edit form
+   * @memberof EditAssociatedPostComponent
+   */
   onClick(){
-    console.log(this.id)
+    // console.log(this.id)
     var obj = new AssociatedPost();
 
     obj.associated_post_name = this.associated_post;
@@ -73,16 +98,28 @@ export class EditAssociatedPostComponent implements OnInit {
         this.router.navigate(['./org/list-associated-post']);
       }, 500);
     })
-    // document.getElementById('alert').hidden = false
   }
 
+  /**
+   * Redirects to list of associated post page
+   * @memberof EditAssociatedPostComponent
+   */
   onView(){
     this.router.navigate(["/org/list-associated-post"])
   }
+
+  /**
+   * Redirects to dashboard
+   * @memberof EditAssociatedPostComponent
+   */
   onDashboard(){
     this.router.navigate(["./org"])
   }
 
+  /**
+   * Redirects to add associated post page
+   * @memberof EditAssociatedPostComponent
+   */
   onAdd(){
     this.router.navigate(["/org/add-associated-post"])
   }
