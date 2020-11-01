@@ -17,31 +17,12 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private authDataService: AuthDataService, private auth : AuthService) { }
 
   ngOnInit(): void {
+    
   }
 
   signIn = (event) => {
     let phone_number = "+91" + this.phone_number;
     let password = "helloWorld";
-    // let otp = prompt(`OTP sent to your phone number to ${phoneNumber} ::${Date.now().toString().slice(-4)}`)
-
-    // if (otp.length > 4) {
-    //   alert('Please enter 4 digit')
-    // }
-    // else {
-    //   Auth.signIn(phoneNumber).then(user => {
-    //     user = user;
-    //     console.log(user);
-
-    //     //setting up the username
-    //     this.authDataService.setUserName(user.username);
-
-    //     this.router.navigate(['org'])
-    //   }).catch(err => {
-    //     alert(`${this.phone_number} is not registered as Super Admin.`)
-    //     this.router.navigate([''])
-    //   })
-    // }
-
     Swal.fire({
       title: "OTP",
       text: `OTP sent to your phone number ${phone_number} :: ${Date.now().toString().slice(-4)}`,
@@ -54,19 +35,6 @@ export class HomeComponent implements OnInit {
         Swal.fire('Invalid OTP', '', 'error')
       }
       else {
-
-        // Auth.signIn(phone_number).then(user => {
-        //   user = user;
-        //   console.log(user);
-
-
-        //   //setting up the username
-        //   this.authDataService.setUserName(user.username);
-        //   this.router.navigate(['org'])
-        // }).catch(err => {
-        //   Swal.fire('Authentication Failed', `${this.phone_number} is not registered as Super Admin.`, 'error')
-        //   this.router.navigate([''])
-        // })
         this.auth.signIn(phone_number, password).subscribe((data) => {
           this.router.navigate(['org']);
         }, (err)=> {
