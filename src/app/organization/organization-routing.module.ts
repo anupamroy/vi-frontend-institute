@@ -27,7 +27,7 @@ import { ListOrganizationComponent } from './components/list-organization/list-o
 import { AddPackageComponent } from './components/packages-master/add-package/add-package.component';
 import { ListPackageComponent } from './components/packages-master/list-package/list-package.component';
 import { EditPackageComponent } from './components/packages-master/edit-package/edit-package.component';
-import { AddOrganizationComponent } from './components/add-organization/add-organization.component';
+// import { AddOrganizationComponent } from './components/add-organization/add-organization.component';
 import { EditOrganizationComponent } from './components/edit-organization/edit-organization.component';
 
 const routes: Routes = [
@@ -55,7 +55,7 @@ const routes: Routes = [
       { path: 'add-fees-type', component: AddFeesTypeComponent },
       { path: 'add-accounts-head', component: AddAccountsHeadComponent },
       { path: 'add-package', component: AddPackageComponent },
-      { path: 'add-org', component: AddOrganizationComponent },
+      // { path: 'add-org', component: AddOrganizationComponent },
     ],
   },
 

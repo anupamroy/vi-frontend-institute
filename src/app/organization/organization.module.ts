@@ -30,7 +30,6 @@ import { ListOrganizationComponent } from './components/list-organization/list-o
 import { AddPackageComponent } from './components/packages-master/add-package/add-package.component';
 import { EditPackageComponent } from './components/packages-master/edit-package/edit-package.component';
 import { ListPackageComponent } from './components/packages-master/list-package/list-package.component';
-import { AddOrganizationComponent } from './components/add-organization/add-organization.component';
 import { EditOrganizationComponent } from './components/edit-organization/edit-organization.component';
 
 @NgModule({
@@ -62,7 +61,6 @@ import { EditOrganizationComponent } from './components/edit-organization/edit-o
         AddPackageComponent,
         EditPackageComponent,
         ListPackageComponent,
-        AddOrganizationComponent,
         EditOrganizationComponent
     ],
     imports: [CommonModule, OrganizationRoutingModule, FormsModule, ReactiveFormsModule],
