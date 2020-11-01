@@ -34,19 +34,30 @@ export class AddFeesTypeComponent implements OnInit {
     }
   }
 
+
+  /**
+   * 
+   * Test input against reg expression and return alert boolean
+   *
+   * @memberof AddFeesTypeComponent
+   */
   enableAlert() {
     const regex = /^[a-zA-Z ]*$/
     return regex.test(this.feesType)
   }
 
+  /**
+   * 
+   * Submit Handler for Add Feestype
+   *
+   * @memberof AddFeesTypeComponent
+   */
   onSubmit() {
     const feesTypeObj = new FeesType();
     feesTypeObj.feesType = this.feesType;
     feesTypeObj.isActivated = true;
     feesTypeObj.isDeleted = false;
 
-
-    console.log(feesTypeObj)
     Swal.fire({
       title: 'Please Wait',
       allowEscapeKey: false,
@@ -70,7 +81,6 @@ export class AddFeesTypeComponent implements OnInit {
               })
             }
           });
-        // Swal.close()
 
       }
     });

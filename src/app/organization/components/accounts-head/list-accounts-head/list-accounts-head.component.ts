@@ -60,9 +60,6 @@ export class ListAccountsHeadComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-
-        // console.log(id);
-
         let obj = new AccountsHead();
         obj.masterId = id;
         obj.isDeleted = true;
@@ -146,16 +143,11 @@ export class ListAccountsHeadComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.isConfirmed) {
-
-        // console.log('Activate');
-
         var newObj = new AccountsHead();
         newObj.masterId = id;
         newObj.isActivated = true;
 
         this.accountsHeadService.updateAccountsHeadById(id, this.processObjUpdated(newObj)).subscribe((data) => {
-          // console.log(data);
-
           this.finalItems = this.finalItems.map((item) => {
             if (item.masterId === id) {
               item.isActivated = true;
@@ -186,8 +178,6 @@ export class ListAccountsHeadComponent implements OnInit {
         this.accountsHeadService.getAccountsHead().subscribe(responseData => {
           this.accountsHead = JSON.parse(responseData).Items
 
-          // console.log(this.accountsHead)
-          
           let temp = []
           this.accountsHead.forEach(record => {
             if (record.master === 'ACCOUNTS_HEAD' && record.isDeleted === false) {

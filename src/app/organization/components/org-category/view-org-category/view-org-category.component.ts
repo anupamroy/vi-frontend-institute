@@ -10,10 +10,19 @@ import { OrganizationCategory } from '../../../../shared/models/org-catagory';
 })
 export class ViewOrgCategoryComponent implements OnInit {
 
+   /** Attribute of OrganizationCategory Table */
   orgCategory: any;
+
+   /** Array of OrgCatagory Data in the  Table */
   finalItems: any
   constructor(private organizationService: OrganizationCategoryService) { }
 
+  /**
+   * Process the obejct that is to be passed as body
+   * @param object of Institute Type
+   * @returns {object} of Institute Type
+   * @memberof ViewOrgCategoryComponent
+   */
   processObjUpdated(object: OrganizationCategory) {
     var attribute = [];
     var value = [];
@@ -32,6 +41,11 @@ export class ViewOrgCategoryComponent implements OnInit {
     }
   }
 
+  /**
+  * Delete the selected item
+  * @param id of the item to be deleted
+  * @memberof ViewOrgCategoryComponent
+  */
   onDelete(id: string) {
     Swal.fire({
       title: 'Are you sure you want to delete?',
@@ -42,7 +56,7 @@ export class ViewOrgCategoryComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-          
+
         Swal.fire({
           title: "Please Wait",
           willOpen: () => {
@@ -52,7 +66,7 @@ export class ViewOrgCategoryComponent implements OnInit {
         var newObj = new OrganizationCategory();
         newObj.masterId = id;
         newObj.isDeleted = true;
-        console.log("After Deleting  -- "+ newObj)
+        console.log("After Deleting  -- " + newObj)
 
         this.organizationService.deleteOrganizationById(id, this.processObjUpdated(newObj)).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
@@ -64,7 +78,7 @@ export class ViewOrgCategoryComponent implements OnInit {
             'success'
           )
         });
-       
+
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled',
@@ -76,6 +90,11 @@ export class ViewOrgCategoryComponent implements OnInit {
 
   }
 
+  /**
+   * Deactivate a selected item
+   * @param id of the selected item to be deactivated
+   * @memberof ViewOrgCategoryComponent
+   */
   onDeactivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to deactivate?',
@@ -112,6 +131,11 @@ export class ViewOrgCategoryComponent implements OnInit {
     })
   }
 
+  /**
+ * Activate a selected item
+ * @param id of the selected item to be activated
+ * @memberof ViewOrgCategoryComponent
+ */
   onActivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to activate?',
@@ -147,7 +171,7 @@ export class ViewOrgCategoryComponent implements OnInit {
     })
   }
 
-  
+
 
 
   ngOnInit(): void {
@@ -158,14 +182,14 @@ export class ViewOrgCategoryComponent implements OnInit {
       allowOutsideClick: true,
       background: '#fff',
       showConfirmButton: false,
-      didOpen: ()=>{
+      didOpen: () => {
         Swal.showLoading();
         this.organizationService.getOrganizationCategory().subscribe(responseData => {
           this.orgCategory = JSON.parse(responseData).Items
           console.log(this.orgCategory)
           let temp = []
           this.orgCategory.forEach(record => {
-            if (record.master==="ORGANIZATION_CATEGORY" && record.isDeleted===false) {
+            if (record.master === "ORGANIZATION_CATEGORY" && record.isDeleted === false) {
               temp.push(record)
             }
           })
@@ -180,8 +204,8 @@ export class ViewOrgCategoryComponent implements OnInit {
             })
           }
         )
-       
-        
+
+
         // this.router.navigate(['./org/list-org-category']);
         // Swal.close()
 

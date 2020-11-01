@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FeesService } from '../../../services/fees-type.service'
 import Swal from 'sweetalert2'
-import {FeesType} from '../../../../shared/models/fees-type'
+import { FeesType } from '../../../../shared/models/fees-type'
 @Component({
   selector: 'app-list-fees-type',
   templateUrl: './list-fees-type.component.html',
@@ -9,10 +9,21 @@ import {FeesType} from '../../../../shared/models/fees-type'
 })
 export class ListFeesTypeComponent implements OnInit {
 
+  /** Attroibute for FeesType Table NoSQL DynamoDB */
   feesType: any;
-  finalItems: any
+
+  /** Array of FeesType to show data for FeesType Table NoSQL DynamoDB */
+  finalItems: any;
+
+
   constructor(private feesService: FeesService) { }
 
+  /**
+    * 
+    * Process the Fees Type Object to send for updation 
+    *
+    * @memberof AddFeesTypeComponent
+    */
   processObjUpdated(object: FeesType) {
     var attribute = [];
     var value = [];
@@ -30,8 +41,13 @@ export class ListFeesTypeComponent implements OnInit {
       masterId: object.masterId
     }
   }
-    
 
+  /**
+   * 
+   * handler for delete Operation
+   *
+   * @memberof AddFeesTypeComponent
+   */
   onDelete(id: string) {
     const deleteObj = new FeesType();
     deleteObj.masterId = id;
@@ -46,7 +62,7 @@ export class ListFeesTypeComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.value) {
-        this.feesService.deleteFeesTypeById(id,this.processObjUpdated(deleteObj)).subscribe(() => {
+        this.feesService.deleteFeesTypeById(id, this.processObjUpdated(deleteObj)).subscribe(() => {
           this.finalItems = this.finalItems.filter((item) => {
             return item.masterId !== id;
           })
@@ -68,6 +84,12 @@ export class ListFeesTypeComponent implements OnInit {
 
   }
 
+  /**
+ * 
+ * handler for deactivate Operation
+ *
+ * @memberof AddFeesTypeComponent
+ */
   onDeactivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to deactivate?',
@@ -103,6 +125,12 @@ export class ListFeesTypeComponent implements OnInit {
     })
   }
 
+  /**
+ * 
+ * handler for Activate Operation
+ *
+ * @memberof AddFeesTypeComponent
+ */
   onActivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to activate?',
@@ -140,6 +168,12 @@ export class ListFeesTypeComponent implements OnInit {
 
 
 
+  /**
+ * 
+ * Load FeesType data by Id
+ *
+ * @memberof AddFeesTypeComponent
+ */
   ngOnInit(): void {
     Swal.fire({
       title: 'Please Wait',

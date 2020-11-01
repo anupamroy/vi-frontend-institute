@@ -13,13 +13,13 @@ import Swal from 'sweetalert2'
 export class AddAccountsHeadComponent implements OnInit {
 
   /** This is for enabling and disabling the add button */
-  disableButton : boolean = true
+  disableButton: boolean = true
 
   /** Here parents acoount head is populated */
-  parentAccountHead : string = 'None'
+  parentAccountHead: string = 'None'
 
   /** Here accounts head is populated */
-  accountsHead : string = ''
+  accountsHead: string = ''
 
   /** Validation model */
   validate: Validations
@@ -30,7 +30,7 @@ export class AddAccountsHeadComponent implements OnInit {
   /** Contains the final list of parentAccounts */
   parentAccount: any
 
-  constructor(private router : Router, private accountsHeadService : AccountsHeadService) { }
+  constructor(private router: Router, private accountsHeadService: AccountsHeadService) { }
 
   /**
    * Enable submit button
@@ -38,7 +38,7 @@ export class AddAccountsHeadComponent implements OnInit {
    * @memberof AddAccountsHeadComponent
    */
   enableButton() {
-    if(this.accountsHead.trim() === '') {
+    if (this.accountsHead.trim() === '') {
       return true
     }
     else {
@@ -51,7 +51,7 @@ export class AddAccountsHeadComponent implements OnInit {
    * 
    * @memberof AddAccountsHeadComponent
    */
-  enableAlert(){
+  enableAlert() {
     const regex = /^[a-zA-Z ]*$/
     return regex.test(this.accountsHead)
   }
@@ -62,7 +62,7 @@ export class AddAccountsHeadComponent implements OnInit {
    * @param value 
    * @memberof AddAccountsHeadComponent
    */
-  selectParentAccount(value){
+  selectParentAccount(value) {
     this.parentAccountHead = value
   }
 
@@ -71,16 +71,13 @@ export class AddAccountsHeadComponent implements OnInit {
    * Submit the form
    * 
    * @memberof AddAccountsHeadComponent
-   */  
-  onSubmit(){
+   */
+  onSubmit() {
     let obj = new AccountsHead();
-
     obj.accountsHead = this.accountsHead
     obj.parentAccountsHead = this.parentAccountHead
     obj.isDeleted = false
     obj.isActivated = true
-
-    // console.log(obj)
 
     Swal.fire({
       title: 'Please Wait',
@@ -88,26 +85,24 @@ export class AddAccountsHeadComponent implements OnInit {
       allowOutsideClick: true,
       background: '#fff',
       showConfirmButton: false,
-      didOpen: ()=>{
+      didOpen: () => {
         Swal.showLoading();
 
         this.accountsHeadService
           .addAccountsHead(obj)
           .subscribe((data) => {
 
-          // console.log('ID'+data);
-
-          if(data){
-            Swal.fire({
-              title: 'Added',
-              icon: 'success',
-              showConfirmButton: false,
-              timer: 1500,
-            }).then(()=>{
-              this.router.navigate(['./org/list-accounts-head']);
-            })  
-          }
-        });
+            if (data) {
+              Swal.fire({
+                title: 'Added',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500,
+              }).then(() => {
+                this.router.navigate(['./org/list-accounts-head']);
+              })
+            }
+          });
       }
     });
   }

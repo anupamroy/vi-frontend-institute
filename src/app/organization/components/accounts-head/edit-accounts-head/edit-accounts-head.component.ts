@@ -94,8 +94,6 @@ export class EditAccountsHeadComponent implements OnInit {
    * @memberof EditAccountsHeadComponent
    */
   onClick(){
-      // console.log(this.accountsHead)
-      
       Swal.fire({
         title: 'Please Wait',
         allowEscapeKey: false,
@@ -114,7 +112,6 @@ export class EditAccountsHeadComponent implements OnInit {
           this.accountsHeadService
             .updateAccountsHeadById(this.id,this.processObjUpdated(obj))
             .subscribe((data) => {
-            // console.log('ID'+data);
             if(data){
               Swal.fire({
                 title: 'Edited',
@@ -126,7 +123,6 @@ export class EditAccountsHeadComponent implements OnInit {
               })  
             }
           });
-          // Swal.close()
         }
       });
  
@@ -161,14 +157,9 @@ export class EditAccountsHeadComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.itemId;
 
-    // console.log('My ID',this.id);
-    
     this.accountsHeadService.getAccountsHeadById(this.id).subscribe((item)=>{
       item = JSON.parse(item);
-
-      // console.log("HELLO: ",item);
-      // console.log("accountsHead:",item.Items[0].accountsHead);
-      
+    
       this.accountsHead = item.Items[0].accountsHead
       this.parentAccountHead = item.Items[0].parentAccountsHead
       console.log(item)
@@ -176,8 +167,6 @@ export class EditAccountsHeadComponent implements OnInit {
 
     this.accountsHeadService.getAccountsHead().subscribe(responseData => {
       this.parentAccount = JSON.parse(responseData).Items
-
-      // console.log(this.parentAccount)
 
       let temp = [];
 

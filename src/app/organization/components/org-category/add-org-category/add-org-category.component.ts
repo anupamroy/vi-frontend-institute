@@ -62,9 +62,6 @@ export class AddOrgCategoryComponent implements OnInit {
     orgCategoryObj.isActivated = true;
     orgCategoryObj.isDeleted = false;
     
-
-    console.log(orgCategoryObj)
-
     Swal.fire({
       title: 'Please Wait',
       allowEscapeKey: false,

@@ -124,17 +124,12 @@ export class ListInstituteTypeComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.isConfirmed) {
-        // Deactivate Logic
-        // console.log('Deactivate')
-
         var newObj = new InstituteType();
 
         newObj.isActivated = false;
         newObj.masterId = id;
         
         this.InstituteTypeService.updateInstituteTypeById(this.processObjUpdated(newObj)).subscribe((data) => {
-          // console.log(data);
-
           this.instituteTypeList = this.instituteTypeList.map((item) => {
             if (item.masterId === id) {
               item.isActivated = false
@@ -167,16 +162,12 @@ export class ListInstituteTypeComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.isConfirmed) {
-        // Activate Logic
-        // console.log('Activate');
-
         var newObj = new InstituteType();
 
         newObj.isActivated = true;
         newObj.masterId = id;
 
         this.InstituteTypeService.updateInstituteTypeById(this.processObjUpdated(newObj)).subscribe((data) => {
-          // console.log(data);
 
           this.instituteTypeList = this.instituteTypeList.map((item) => {
             if (item.masterId === id) {

@@ -76,7 +76,6 @@ export class EditAssociatedPostComponent implements OnInit {
    * @memberof EditAssociatedPostComponent
    */
   onClick(){
-    // console.log(this.id)
     var obj = new AssociatedPost();
 
     obj.associated_post_name = this.associated_post;
@@ -125,7 +124,6 @@ export class EditAssociatedPostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log(this.activatedRoute.snapshot.params.id)
     this.id = this.activatedRoute.snapshot.params.id;
     this.associated_post = this.activatedRoute.snapshot.params.associated_post;
   }

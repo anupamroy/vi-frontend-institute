@@ -117,18 +117,11 @@ export class ListAssociatedPostComponent implements OnInit {
       confirmButtonColor: "#DD6B55"
     }).then((result) => {
       if (result.isConfirmed) {
-        // console.log('Deactivate')
-
         var newObj = new AssociatedPost();
 
         newObj.masterId = id;
         newObj.isActivated = false;
-
-        // console.log('NEW: ', newObj);
-
         this.associatedPostService.updateAssociatedPostById(this.processObjUpdated(newObj)).subscribe((data) => {
-          // console.log(data);
-
           this.associated_Post_list = this.associated_Post_list.map((item) => {
             if (item.masterId === id) {
               item.isActivated = false

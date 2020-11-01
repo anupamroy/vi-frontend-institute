@@ -17,19 +17,46 @@ export class ModuleService {
   constructor(private http : HttpClient) { }
 
   
-
+    /**
+   * sends a single request
+   * 
+   * @returns {Observable<any>} 
+   * @memberof ModuleService
+   */
   getModules():Observable<any> {
     return this.http.get<any>(`${this.api2}/module/list${this.apiSuffix}`)
   }
 
+      /**
+   * sends a single request
+   * 
+   * @param {string} id
+   * @param {Module} body 
+   * @returns {Observable<any>} 
+   * @memberof ModuleService
+   */
   updateModule(id : string, body : any):Observable<any>{
     return this.http.put<any>(`${this.api2}/module/update`,body) 
   }
 
+      /**
+   * sends a single request
+   * 
+   * @param {Module} body 
+   * @returns {Observable<any>} 
+   * @memberof ModuleService
+   */
   postModule(body: any):Observable<any>{
     return this.http.post<any>(`${this.api2}/module/save`, body)
   }
 
+      /**
+   * sends a single request
+   * 
+   * @param {Module} body 
+   * @returns {Observable<any>} 
+   * @memberof ModuleService
+   */
   deleteModule(id : string, body: any):Observable<any>{
     console.log(body);
     

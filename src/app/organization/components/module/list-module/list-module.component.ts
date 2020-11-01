@@ -18,6 +18,12 @@ export class ListModuleComponent implements OnInit {
     private ModuleService: ModuleService) { }
 
 
+  /**
+   * Process the obejct that is to be passed as body
+   * @param object of Institute Type
+   * @returns {object} of Institute Type
+   * @memberof ListModuleComponent
+   */
   processObjUpdated(object: Module) {
     var attribute = [];
     var value = [];
@@ -36,6 +42,11 @@ export class ListModuleComponent implements OnInit {
     }
   }
 
+  /**
+   * Delete the selected item
+   * @param id of the item to be deleted
+   * @memberof ListModuleComponent
+   */
   onDelete(id: string) {
     Swal.fire({
       title: 'Are you sure you want to delete?',
@@ -79,14 +90,28 @@ export class ListModuleComponent implements OnInit {
 
   }
 
+
+  /**
+   * Redirects to dashboard
+   * @memberof ListModuleComponent
+   */
   onDashboard() {
     this.router.navigate(["./org"])
   }
 
+  /**
+   * Redirects to add view
+   * @memberof ListModuleComponent
+   */
   onAdd() {
     this.router.navigate(["/org/add-module"])
   }
 
+  /**
+   * Deactivate a selected item
+   * @param id of the selected item to be deactivated
+   * @memberof ListModuleComponent
+   */
   onDeactivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to deactivate?',
@@ -123,6 +148,11 @@ export class ListModuleComponent implements OnInit {
     })
   }
 
+  /**
+   * Activate a selected item
+   * @param id of the selected item to be activated
+   * @memberof ListModuleComponent
+   */
   onActivate(id: string) {
     Swal.fire({
       title: 'Are you sure you want to activate?',

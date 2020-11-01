@@ -16,12 +16,26 @@ export class AddModuleComponent implements OnInit {
   constructor(  private router: Router,
     private ModuleService : ModuleService) { }
 
-  parentModule =''
-  moduleName =''
-  connectedModules =''
-  showButton : boolean = false
-  showAlert : boolean = false
+      /** Holds the parent module value of the Module */
+  parentModule ='';
 
+    /** Holds the moduleName value of the Module */
+  moduleName ='';
+
+    /** Holds the connected module value of the Module */
+  connectedModules ='';
+
+    /** Toggle view for enable button*/
+  showButton : boolean = false;
+
+    /** Holds the falg to enable / disable alert */
+  showAlert : boolean = false;
+
+   /**
+   * Enable disbale edit button
+   * @returns {boolean}
+   * @memberof AddModuleComponent
+   */ 
   enableButton() {
     if(this.moduleName.trim()==='' || this.connectedModules.trim() === ''  ){
       this.showAlert = true
@@ -50,6 +64,11 @@ export class AddModuleComponent implements OnInit {
     
   }
 
+    /**
+   * Enable disable validation warning
+   * @returns {boolean}
+   * @memberof AddModuleComponent
+   */
   enableAlert(){
     const regex = /^[a-zA-Z_ ]*$/
     const parent = regex.test(this.parentModule)
@@ -63,9 +82,11 @@ export class AddModuleComponent implements OnInit {
   }
 
   
-
+  /**
+   * Submits the Module form
+   * @memberof AddModuleComponent
+   */
   onSubmit() {
-
     const moduleObj = new Module()
     moduleObj.parentModule=this.parentModule
     moduleObj.moduleName = this.moduleName

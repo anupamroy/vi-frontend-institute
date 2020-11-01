@@ -101,7 +101,7 @@ export class EditInstituteTypeComponent implements OnInit {
 
 
   /**
-   * Submits teh edited form
+   * Submits the edited form
    * @memberof EditInstituteTypeComponent
    */
   onClick() {
@@ -124,7 +124,6 @@ export class EditInstituteTypeComponent implements OnInit {
     
     this.InstituteTypeService.updateInstituteTypeById(this.processObjUpdated(instituteTypeObj)).subscribe({
       next: responseData => {
-        // console.log(responseData)
         if (responseData) {
           Swal.fire(
             'Congratulations!',
@@ -147,9 +146,6 @@ export class EditInstituteTypeComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params.itemId;
 
     const instituteType = this.activatedRoute.snapshot.params.instituteType
-
-    // console.log(this.id, instituteType)
-
     this.newInstituteType = instituteType
   }
 

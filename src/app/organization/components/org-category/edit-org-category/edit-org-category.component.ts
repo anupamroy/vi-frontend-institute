@@ -11,13 +11,13 @@ import { OrganizationCategory } from '../../../../shared/models/org-catagory';
 })
 export class EditOrgCategoryComponent implements OnInit {
 
-   /** Attribute of OrganizationCategory Table */
+  /** Attribute of OrganizationCategory Table */
   OrgCategory: string = '';
 
-   /** Attribute of OrganizationCategory Table */
+  /** Attribute of OrganizationCategory Table */
   id: string
 
-  constructor(private activatedRoute : ActivatedRoute, private router : Router, private organizationService : OrganizationCategoryService ) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private organizationService: OrganizationCategoryService) { }
 
 
   /**
@@ -43,8 +43,14 @@ export class EditOrgCategoryComponent implements OnInit {
       masterId: object.masterId
     }
   }
+
+  /**
+ * Enable disbale edit button
+ * @returns {boolean}
+ * @memberof EditOrgCategoryComponent
+ */
   enableButton() {
-    if(this.OrgCategory.trim() === '') {
+    if (this.OrgCategory.trim() === '') {
       return true
     }
     else {
@@ -52,91 +58,87 @@ export class EditOrgCategoryComponent implements OnInit {
     }
   }
 
-  enableAlert(){
+  /**
+ * Enable disable validation warning
+ * @returns {boolean}
+ * @memberof EditOrgCategoryComponent
+ */
+  enableAlert() {
     const regex = /^[a-zA-Z_ ]*$/
     return regex.test(this.OrgCategory)
   }
 
-  onClick(){
-   
-      console.log(this.OrgCategory)
-      Swal.fire({
-        title: 'Please Wait',
-        allowEscapeKey: false,
-        allowOutsideClick: true,
-        background: '#fff',
-        showConfirmButton: false,
-        onOpen: ()=>{
-          Swal.showLoading();
-          
-          var obj = new OrganizationCategory();
-          obj.organizationCategory = this.OrgCategory;
-obj.masterId = this.id;
-          this.organizationService
-            .updateOrganizationById(this.id, this.processObjUpdated(obj))
-            .subscribe((data) => {
-            console.log('ID'+data);
-            if(data){
+    /**
+   * Submits the edited form
+   * @memberof EditOrgCategoryComponent
+   */
+  onClick() {
+
+    console.log(this.OrgCategory)
+    Swal.fire({
+      title: 'Please Wait',
+      allowEscapeKey: false,
+      allowOutsideClick: true,
+      background: '#fff',
+      showConfirmButton: false,
+      onOpen: () => {
+        Swal.showLoading();
+
+        var obj = new OrganizationCategory();
+        obj.organizationCategory = this.OrgCategory;
+        obj.masterId = this.id;
+        this.organizationService
+          .updateOrganizationById(this.id, this.processObjUpdated(obj))
+          .subscribe((data) => {
+            console.log('ID' + data);
+            if (data) {
               Swal.fire({
                 title: 'Edited',
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 1500,
-              }).then(()=>{
+              }).then(() => {
                 this.router.navigate(['./org/list-org-category']);
-              })  
+              })
             }
           });
-          // Swal.close()
-         
-        }
-      });
-      // this.organizationService
-      //   .updateOrganizationById(this.id, {
-      //     attribute: ['orgCategory'],
-      //     value: [
-      //       this.OrgCategory
-      //     ],
-      //   })
-      //   .subscribe((data) => {
-      //     console.log(data);
-      //   });
-        
-      //   Swal.fire({
-      //     title: 'Editted',
-      //     text: 'Data Editted Successfully',
-      //     icon: 'success',
-      //     confirmButtonText: 'Ok'
-      //   }).then(()=>{
-      //     setTimeout(() => {
-      //       this.router.navigate(['./org/list-org-category']);
-      //     }, 500);
-      //   })
+
+      }
+    });
   }
 
-  onAdd(){
+  /**
+ * Redirects to add view
+ * @memberof EditOrgCategoryComponent
+ */
+  onAdd() {
     this.router.navigate(['./org/add-org-category'])
   }
 
-  onView(){
+    /**
+   * Redirects to go to view
+   * @memberof EditInstituteTypeComponent
+   */
+  onView() {
     this.router.navigate(['./org/list-org-category'])
   }
 
-  onDashboard(){
+  
+  /**
+   * Redirects to dashboard view
+   * @memberof EditOrgCategoryComponent
+   */
+  onDashboard() {
     this.router.navigate(['./org'])
   }
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.itemId;
-    this.organizationService.getOrganizationCategoryById(this.id).subscribe((item)=>{
+    this.organizationService.getOrganizationCategoryById(this.id).subscribe((item) => {
       item = JSON.parse(item);
       this.OrgCategory = item.Items[0].organizationCategory
       console.log(item)
     })
-
-    // const orgCategory =this.activatedRoute.snapshot.params.orgCategory
-    // console.log(this.id, orgCategory)
-    // this.OrgCategory = orgCategory
   }
 
 }

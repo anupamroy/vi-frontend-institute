@@ -19,7 +19,7 @@ export class AccountsHeadService {
    * 
    * @param {AccountsHead} body  
    * @returns {Observable<any>} 
-   * @memberof HttpQueue
+   * @memberof AccountsHeadService
    */
   getAccountsHead(): Observable<any> {
     return this.http.get<any>(`${this.api2}/accountshead/list/${this.apiSuffix}`)
@@ -30,7 +30,7 @@ export class AccountsHeadService {
    * 
    * @param {AccountsHead} body  
    * @returns {Observable<any>} 
-   * @memberof HttpQueue
+   * @memberof AccountsHeadService
    */
   getAccountsHeadById(id: string): Observable<any> {
     return this.http.get<any>(`${this.api2}/accountshead/getbyid/${id}/${this.apiSuffix}`)
@@ -41,7 +41,7 @@ export class AccountsHeadService {
    * 
    * @param {AccountsHead} body  
    * @returns {Observable<any>} 
-   * @memberof HttpQueue
+   * @memberof AccountsHeadService
    */
   updateAccountsHeadById(id: string, body: any): Observable<any> {
     return this.http.put<any>(`${this.api2}/accountshead/update`, body)
@@ -52,7 +52,7 @@ export class AccountsHeadService {
    * 
    * @param {AccountsHead} body  
    * @returns {Observable<any>} 
-   * @memberof HttpQueue
+   * @memberof AccountsHeadService
    */
   deleteAccountsHeadById(id: string, body: any): Observable<any> {
     return this.http.put<any>(`${this.api2}/accountshead/delete`, body)
@@ -63,7 +63,7 @@ export class AccountsHeadService {
    * 
    * @param {AccountsHead} body  
    * @returns {Observable<any>} 
-   * @memberof HttpQueue
+   * @memberof AccountsHeadService
    */
   addAccountsHead(body: any): Observable<any> {
     return this.http.post<any>(`${this.api2}/accountshead/save`, body)
