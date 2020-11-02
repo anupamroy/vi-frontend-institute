@@ -29,6 +29,9 @@ import { ListPackageComponent } from './components/packages-master/list-package/
 import { EditPackageComponent } from './components/packages-master/edit-package/edit-package.component';
 // import { AddOrganizationComponent } from './components/add-organization/add-organization.component';
 import { EditOrganizationComponent } from './components/edit-organization/edit-organization.component';
+import { AddStreamComponent } from './components/stream-master/add-stream/add-stream.component';
+import { ViewStreamComponent } from './components/stream-master/view-stream/view-stream.component';
+import { EditStreamComponent } from './components/stream-master/edit-stream/edit-stream.component';
 
 const routes: Routes = [
   {
@@ -55,6 +58,7 @@ const routes: Routes = [
       { path: 'add-fees-type', component: AddFeesTypeComponent },
       { path: 'add-accounts-head', component: AddAccountsHeadComponent },
       { path: 'add-package', component: AddPackageComponent },
+      { path: 'add-stream', component: AddStreamComponent }
       // { path: 'add-org', component: AddOrganizationComponent },
     ],
   },
@@ -83,6 +87,8 @@ const routes: Routes = [
   { path: 'list-packages', component: ListPackageComponent },
   { path: 'edit-package/:masterId', component: EditPackageComponent },
   { path: 'edit-org', component: EditOrganizationComponent },
+  { path: 'edit-stream/:masterId', component: EditStreamComponent },
+  { path: 'view-stream', component: ViewStreamComponent }
 ];
 
 @NgModule({

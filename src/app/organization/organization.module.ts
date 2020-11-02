@@ -31,6 +31,9 @@ import { AddPackageComponent } from './components/packages-master/add-package/ad
 import { EditPackageComponent } from './components/packages-master/edit-package/edit-package.component';
 import { ListPackageComponent } from './components/packages-master/list-package/list-package.component';
 import { EditOrganizationComponent } from './components/edit-organization/edit-organization.component';
+import { AddStreamComponent } from './components/stream-master/add-stream/add-stream.component'
+import { EditStreamComponent } from './components/stream-master/edit-stream/edit-stream.component';
+import { ViewStreamComponent } from './components/stream-master/view-stream/view-stream.component';
 
 @NgModule({
     declarations: [
@@ -61,7 +64,10 @@ import { EditOrganizationComponent } from './components/edit-organization/edit-o
         AddPackageComponent,
         EditPackageComponent,
         ListPackageComponent,
-        EditOrganizationComponent
+        EditOrganizationComponent,
+        AddStreamComponent,
+        EditStreamComponent,
+        ViewStreamComponent
     ],
     imports: [CommonModule, OrganizationRoutingModule, FormsModule, ReactiveFormsModule],
 })
