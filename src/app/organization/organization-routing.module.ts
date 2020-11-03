@@ -32,6 +32,9 @@ import { EditOrganizationComponent } from './components/edit-organization/edit-o
 import { AddStreamComponent } from './components/stream-master/add-stream/add-stream.component';
 import { ViewStreamComponent } from './components/stream-master/view-stream/view-stream.component';
 import { EditStreamComponent } from './components/stream-master/edit-stream/edit-stream.component';
+import { AddSubjectAttributesComponent } from './components/subject-attributes-master/add-subject-attributes/add-subject-attributes.component';
+import { EditSubjectAttributesComponent } from './components/subject-attributes-master/edit-subject-attributes/edit-subject-attributes.component';
+import { ViewSubjectAttributesComponent } from './components/subject-attributes-master/view-subject-attributes/view-subject-attributes.component';
 
 const routes: Routes = [
   {
@@ -58,7 +61,8 @@ const routes: Routes = [
       { path: 'add-fees-type', component: AddFeesTypeComponent },
       { path: 'add-accounts-head', component: AddAccountsHeadComponent },
       { path: 'add-package', component: AddPackageComponent },
-      { path: 'add-stream', component: AddStreamComponent }
+      { path: 'add-stream', component: AddStreamComponent },
+      {path:'add-subject-attributes',component:AddSubjectAttributesComponent}
       // { path: 'add-org', component: AddOrganizationComponent },
     ],
   },
@@ -75,20 +79,22 @@ const routes: Routes = [
   {
     path: 'edit-associated-post/:id/:associated_post',
     component: EditAssociatedPostComponent,
-  },
+  },  
+  { path: 'edit-org', component: EditOrganizationComponent },
+  { path: 'edit-org-category/:itemId', component: EditOrgCategoryComponent },
+  { path: 'edit-fees-type/:masterId', component: EditFeesTypeComponent },
+  { path: 'edit-accounts-head/:itemId', component: EditAccountsHeadComponent },
+  { path: 'edit-package/:masterId', component: EditPackageComponent },
+  { path: 'edit-stream/:masterId', component: EditStreamComponent },
+  {path:'edit-subject-attribute/:masterId',component:EditSubjectAttributesComponent},
   { path: 'list-associated-post', component: ListAssociatedPostComponent },
   { path: 'list-org-category', component: ViewOrgCategoryComponent },
-  { path: 'edit-org-category/:itemId', component: EditOrgCategoryComponent },
   { path: 'list-fees-type', component: ListFeesTypeComponent },
-  { path: 'edit-fees-type/:masterId', component: EditFeesTypeComponent },
   { path: 'list-accounts-head', component: ListAccountsHeadComponent },
-  { path: 'edit-accounts-head/:itemId', component: EditAccountsHeadComponent },
   { path: 'list-organization', component: ListOrganizationComponent },
   { path: 'list-packages', component: ListPackageComponent },
-  { path: 'edit-package/:masterId', component: EditPackageComponent },
-  { path: 'edit-org', component: EditOrganizationComponent },
-  { path: 'edit-stream/:masterId', component: EditStreamComponent },
-  { path: 'view-stream', component: ViewStreamComponent }
+  { path: 'list-stream', component: ViewStreamComponent },
+  {path:'list-subject-attribute',component:ViewSubjectAttributesComponent}
 ];
 
 @NgModule({
