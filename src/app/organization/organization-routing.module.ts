@@ -62,7 +62,7 @@ const routes: Routes = [
       { path: 'add-accounts-head', component: AddAccountsHeadComponent },
       { path: 'add-package', component: AddPackageComponent },
       { path: 'add-stream', component: AddStreamComponent },
-      {path:'add-subject-attributes',component:AddSubjectAttributesComponent}
+      { path: 'add-subject-attributes', component: AddSubjectAttributesComponent }
       // { path: 'add-org', component: AddOrganizationComponent },
     ],
   },
@@ -79,14 +79,14 @@ const routes: Routes = [
   {
     path: 'edit-associated-post/:id/:associated_post',
     component: EditAssociatedPostComponent,
-  },  
+  },
   { path: 'edit-org', component: EditOrganizationComponent },
   { path: 'edit-org-category/:itemId', component: EditOrgCategoryComponent },
   { path: 'edit-fees-type/:masterId', component: EditFeesTypeComponent },
   { path: 'edit-accounts-head/:itemId', component: EditAccountsHeadComponent },
   { path: 'edit-package/:masterId', component: EditPackageComponent },
   { path: 'edit-stream/:masterId', component: EditStreamComponent },
-  {path:'edit-subject-attribute/:masterId',component:EditSubjectAttributesComponent},
+  { path: 'edit-subject-attributes/:masterId', component: EditSubjectAttributesComponent },
   { path: 'list-associated-post', component: ListAssociatedPostComponent },
   { path: 'list-org-category', component: ViewOrgCategoryComponent },
   { path: 'list-fees-type', component: ListFeesTypeComponent },
@@ -94,7 +94,7 @@ const routes: Routes = [
   { path: 'list-organization', component: ListOrganizationComponent },
   { path: 'list-packages', component: ListPackageComponent },
   { path: 'list-stream', component: ViewStreamComponent },
-  {path:'list-subject-attribute',component:ViewSubjectAttributesComponent}
+  { path: 'list-subject-attributes', component: ViewSubjectAttributesComponent }
 ];
 
 @NgModule({

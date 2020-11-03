@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="offset-lg-1 col-lg-10">
                     <h5>
-                        <span class="float-right"><a class="text-light btn mb-3" routerLink='../'>
+                        <span class="float-right"><a class="text-light btn mb-3" routerLink='../../'>
                                 <i class="fas fa-tachometer-alt"></i> Dashboard
                             </a>
                         </span>
@@ -17,9 +17,9 @@
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
                                     <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
-                                        <i class="fas fa-arrows-alt"></i> 
+                                        <i class="fas fa-arrows-alt"></i>
                                         Edit Stream
-                                        <span class="float-right"><a class="btn mb-3" routerLink='../../view-stream'>
+                                        <span class="float-right"><a class="btn mb-3" routerLink='../../list-stream'>
                                                 <i class="fas fa-eye"></i> View
                                             </a>
                                         </span>
@@ -32,12 +32,11 @@
                                         style="height: 40px; padding-top: 10px;" role="alert">
                                         Special Characters and Numbers are not Allowed
                                     </div>
-<!-- 
+                                    <!-- 
                                     <div [hidden]="!enableButton()||!feesTypeControl.dirty" -->
 
-                                    <div [hidden]="!enableButton()"
-                                        class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;"
-                                        role="alert">
+                                    <div [hidden]="!enableButton()" class="alert alert-danger text-center"
+                                        style="height: 40px; padding-top: 10px;" role="alert">
                                         Stream Required
                                     </div>
                                 </div>
@@ -57,7 +56,7 @@
                                                 class="form-control inputFocus" placeholder="Fees Type" required
                                                 minlength="1" maxlength="25" [(ngModel)]='feesType'
                                                 #feesTypeControl="ngModel" /> -->
-                                                <input data-toggle="tooltip" data-placement="bottom"
+                                            <input data-toggle="tooltip" data-placement="bottom"
                                                 title="Demo tooltip text" type="text" name="feesType" id="feesGroup"
                                                 class="form-control inputFocus" placeholder="Enter Stream" required />
                                         </div>

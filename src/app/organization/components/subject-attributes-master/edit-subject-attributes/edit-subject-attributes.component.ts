@@ -12,4 +12,19 @@ export class EditSubjectAttributesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClick = () => {
+    console.log('on click');
+
+  }
+
+  enableButton = () => {
+    console.log('enable button');
+    return false;
+  }
+
+  enableAlert = () => {
+    console.log('enable Alert');
+    return true;
+  }
+
 }
