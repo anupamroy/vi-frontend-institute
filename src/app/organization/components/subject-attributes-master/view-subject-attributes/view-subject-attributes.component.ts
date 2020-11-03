@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewSubjectAttributesComponent implements OnInit {
 
+  item:any;
   constructor() { }
 
   ngOnInit(): void {
+    this.item={
+      masterId: '1'
+    }
+  }
+  onDelete = (event) => {
+    console.log('deleted data');
+
   }
 
 }

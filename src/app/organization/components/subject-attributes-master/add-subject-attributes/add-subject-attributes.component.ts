@@ -12,4 +12,20 @@ export class AddSubjectAttributesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  enableButton = () => {
+    console.log('enable button');
+    return false;
+  }
+
+  enableAlert = () => {
+    console.log('enable Alert');
+    return true;
+  }
+
+  onSubmit =()=>{
+    console.log('form submitted......');
+    
+  }
+
 }
