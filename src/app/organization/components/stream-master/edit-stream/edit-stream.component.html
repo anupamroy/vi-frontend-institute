@@ -58,7 +58,7 @@
                                                 #feesTypeControl="ngModel" /> -->
                                             <input data-toggle="tooltip" data-placement="bottom"
                                                 title="Demo tooltip text" type="text" name="feesType" id="feesGroup"
-                                                class="form-control inputFocus" placeholder="Enter Stream" required />
+                                                class="form-control inputFocus" placeholder="Enter Stream" [(ngModel)]="stream" required />
                                         </div>
                                         <div class="col-lg-2 button-container mt-3">
                                             <button [disabled]="enableButton()||!enableAlert()" type="button"
