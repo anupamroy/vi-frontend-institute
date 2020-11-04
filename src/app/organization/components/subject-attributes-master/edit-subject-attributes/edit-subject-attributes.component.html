@@ -17,13 +17,15 @@
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
                                     <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
-                                        <i class="fas fa-arrows-alt"></i> 
+                                        <i class="fas fa-arrows-alt"></i>
                                         Edit Subject Attribute
-                                        <span class="float-right"><a class="btn mb-3" routerLink='../../list-subject-attributes'>
+                                        <span class="float-right"><a class="btn mb-3"
+                                                routerLink='../../list-subject-attributes'>
                                                 <i class="fas fa-eye"></i> View
                                             </a>
                                         </span>
-                                        <span class="float-right"><a class="btn mb-3" routerLink='../../add-subject-attributes'>
+                                        <span class="float-right"><a class="btn mb-3"
+                                                routerLink='../../add-subject-attributes'>
                                                 <i class="fas fa-edit"></i> Add
                                             </a>
                                         </span>
@@ -32,12 +34,11 @@
                                         style="height: 40px; padding-top: 10px;" role="alert">
                                         Special Characters and Numbers are not Allowed
                                     </div>
-<!-- 
+                                    <!-- 
                                     <div [hidden]="!enableButton()||!feesTypeControl.dirty" -->
 
-                                    <div [hidden]="!enableButton()"
-                                        class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;"
-                                        role="alert">
+                                    <div [hidden]="!enableButton()" class="alert alert-danger text-center"
+                                        style="height: 40px; padding-top: 10px;" role="alert">
                                         Subject Attribute Required
                                     </div>
                                 </div>
@@ -52,14 +53,11 @@
                                     <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
                                         <div class="col-lg-8 cl-sm-12 mb-3 form-group">
                                             <label for="subject-attribute">Subject Attribute</label>
-                                            <!-- <input data-toggle="tooltip" data-placement="bottom"
-                                                title="Demo tooltip text" type="text" name="feesType" id="feesGroup"
-                                                class="form-control inputFocus" placeholder="Fees Type" required
-                                                minlength="1" maxlength="25" [(ngModel)]='feesType'
-                                                #feesTypeControl="ngModel" /> -->
-                                                <input data-toggle="tooltip" data-placement="bottom"
-                                                title="Demo tooltip text" type="text" name="subjectAttribute" id="subjectAttributeGroup"
-                                                class="form-control inputFocus" placeholder="Enter Subject Attribute" required />
+                                            <input data-toggle="tooltip" data-placement="bottom"
+                                                title="Demo tooltip text" type="text" name="subjectAttribute"
+                                                id="subjectAttributeGroup" class="form-control inputFocus"
+                                                placeholder="Enter Subject Attribute" [(ngModel)]="subjectAttribute"
+                                                required />
                                         </div>
                                         <div class="col-lg-2 button-container mt-3">
                                             <button [disabled]="enableButton()||!enableAlert()" type="button"
