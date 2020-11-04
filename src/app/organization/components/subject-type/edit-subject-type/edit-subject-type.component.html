@@ -1,0 +1,75 @@
+<div class="bg-light-blue" style="height: 100%;">
+    <section class="stu-dashboard mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="offset-lg-1 col-lg-10">
+                    <h5>
+                        <span class="float-right"><a class="text-light btn mb-3" (click)="onDashboard()">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </span>
+                    </h5>
+                </div>
+                <div class="col-lg-10 offset-lg-1 col-sm-12">
+                    <div class="border-double">
+                        <form class="bg-light p-4" action="">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
+                                        <i class="fas fa-arrows-alt"></i> Edit
+                                        Subject Type
+                                        <span class="float-right"><a class="btn mb-3" (click)="onView()">
+                                                <i class="fas fa-eye"></i> View
+                                            </a>
+                                        </span>
+                                        <span class="float-right"><a class="btn mb-3" (click)="onAdd()">
+                                                <i class="fas fa-edit"></i> Add
+                                            </a>
+                                        </span>
+                                    </h5>
+                                    <div [hidden]="enableAlert()" class="alert alert-danger text-center"
+                                        style="height: 40px; padding-top: 10px;" role="alert">
+                                        Special Characters and Numbers are not Allowed
+                                    </div>
+                                    <div [hidden]="!enableButton()"
+                                        class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;"
+                                        role="alert">
+                                        Subject Type Required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
+                                        <div class="col-lg-8 cl-sm-12 mb-3 form-group">
+                                            <label for="subjectTypeGroup">Subject Type</label>
+                                            <input data-toggle="tooltip" data-placement="bottom"
+                                                title="Demo tooltip text" type="text" name="subjectType" id="subjectTypeGroup"
+                                                class="form-control inputFocus" placeholder="Subject Type" required
+                                                minlength="1" maxlength="25" [(ngModel)]='subjectType' #subjectTypeControl="ngModel" />
+                                        </div>
+                                        <div class="col-lg-2 button-container mt-3">
+                                            <button [disabled]="enableButton()||!enableAlert()" type="button"
+                                                id="cusEdit" (click)="onClick()"
+                                                class="btn btn-warning btn-common-color btn-lg text-white mt-3">
+                                                <span>
+                                                    Edit
+                                                    <i class="fas fa-caret-right"></i></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- add more row end-->
+                            <!-- </div> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer-bottom">
+        <a href="#"><img src="assets/images/float-support.png" alt="support" class="float-support" /></a>
+        <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat" /></a>
+    </footer>
+</div>
