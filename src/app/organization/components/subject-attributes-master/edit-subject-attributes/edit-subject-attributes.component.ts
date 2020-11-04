@@ -78,14 +78,18 @@ export class EditSubjectAttributesComponent implements OnInit {
 
   }
 
-  enableButton = () => {
-    console.log('enable button');
-    return false;
+  enableButton() {
+    if (this.subjectAttribute !== '' && this.subjectAttribute.trim() === '') {
+      return true
+    }
+    else {
+      return false;
+    }
   }
 
-  enableAlert = () => {
-    console.log('enable Alert');
-    return true;
+  enableAlert() { // need to add in commom framework validationss
+    const regex = /^[a-zA-Z ]*$/
+    return regex.test(this.subjectAttribute)
   }
 
 }

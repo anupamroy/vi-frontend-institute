@@ -10,25 +10,34 @@ import { SubjectAttributeService } from '../services/subject-attribute.service'
 })
 export class AddSubjectAttributesComponent implements OnInit {
 
-  subjectAttribute: string = '';
+  subjectAttribute: string;
   constructor(private router: Router, private subjectAttributeService: SubjectAttributeService) { }
 
   ngOnInit(): void {
+    this.subjectAttribute = '';
+    console.log(this.subjectAttribute);
+
   }
 
 
-  enableButton = () => {
-    console.log('enable button');
-    return false;
+
+  enableButton() {
+    if (this.subjectAttribute !== '' && this.subjectAttribute.trim() === '') {
+      return true
+    }
+    else {
+      return false;
+    }
   }
 
-  enableAlert = () => {
-    console.log('enable Alert');
-    return true;
+  enableAlert() { // need to add in commom framework validationss
+    const regex = /^[a-zA-Z ]*$/
+    return regex.test(this.subjectAttribute)
   }
 
   onSubmit = () => {
-    console.log('form submitted......'); const obj = new SubjectAttribute();
+    console.log('form submitted......');
+    const obj = new SubjectAttribute();
     obj.subject_attribute = this.subjectAttribute;
     obj.isDeleted = false;
     obj.isActivated = true;
@@ -47,7 +56,7 @@ export class AddSubjectAttributesComponent implements OnInit {
     this.subjectAttributeService.saveSubjectAttribute(obj)
       .subscribe({
         next: responseData => {
-          console.log(responseData)
+          console.log('responseData',responseData)
           if (responseData) {
             Swal.fire(
               'Congratulations!',

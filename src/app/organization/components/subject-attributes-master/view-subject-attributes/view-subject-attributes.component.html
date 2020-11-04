@@ -32,10 +32,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                             <tr *ngFor="let item of subjectAttributeItems; let i = index"> -->
-                                
+                             <tr *ngFor="let item of subjectAttributeItems; let i = index">
                                 <th scope="row">{{ i+1 }}</th>
-                                <td>{{item.subjectAttibute}}</td>
+                                <td>{{item.subject_attribute}}</td>
                                 <td>
                                     <button routerLink="../edit-subject-attributes/{{ item.masterId }}" id="cusEdit"
                                         class="btn-dark-blue-light btn btn-sm">

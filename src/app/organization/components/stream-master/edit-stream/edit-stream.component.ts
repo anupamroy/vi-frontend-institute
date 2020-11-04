@@ -75,13 +75,18 @@ export class EditStreamComponent implements OnInit {
 
   }
 
-  enableButton = () => {
-    console.log('enable button');
-    return false;
+  enableButton() {
+    if (this.stream !== '' && this.stream.trim() === '') {
+      return true
+    }
+    else {
+      return false;
+    }
   }
 
-  enableAlert = () => {
-    console.log('enable Alert');
-    return true;
+  enableAlert() { // need to add in commom framework validationss
+    const regex = /^[a-zA-Z ]*$/
+    return regex.test(this.stream)
   }
+  
 }

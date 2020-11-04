@@ -18,14 +18,19 @@ export class AddStreamComponent implements OnInit {
   }
 
 
-  enableButton = () => {
-    console.log('enable button');
-    return false;
+ 
+  enableButton() {
+    if (this.streamType !== '' && this.streamType.trim() === '') {
+      return true
+    }
+    else {
+      return false;
+    }
   }
 
-  enableAlert = () => {
-    console.log('enable Alert');
-    return true;
+  enableAlert() { // need to add in commom framework validationss
+    const regex = /^[a-zA-Z ]*$/
+    return regex.test(this.streamType)
   }
 
   onSubmit =()=>{
