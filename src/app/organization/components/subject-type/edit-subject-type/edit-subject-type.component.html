@@ -45,8 +45,7 @@
                                             <label for="subjectTypeGroup">Subject Type</label>
                                             <input data-toggle="tooltip" data-placement="bottom"
                                                 title="Demo tooltip text" type="text" name="subjectType" id="subjectTypeGroup"
-                                                class="form-control inputFocus" placeholder="Subject Type" required
-                                                minlength="1" maxlength="25" [(ngModel)]='subjectType' #subjectTypeControl="ngModel" />
+                                                class="form-control inputFocus" placeholder="Subject Type" required [(ngModel)]='subjectType' #subjectTypeControl="ngModel" />
                                         </div>
                                         <div class="col-lg-2 button-container mt-3">
                                             <button [disabled]="enableButton()||!enableAlert()" type="button"

@@ -40,9 +40,22 @@
                                         data-target="#exampleModal">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
-                                    <!-- <button href="#" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
+                                    <button
+                                    *ngIf="item.isActivated==true"
+                                    (click)="onDeactivate(item.masterId)" 
+                                    href="#" 
+                                    id="cusEdit" 
+                                    class="btn-dark-blue-light btn btn-sm">
                                         <i class="fas fa-ban"></i>
-                                    </button> -->
+                                    </button>
+                                    <button
+                                    *ngIf="item.isActivated==false"
+                                    (click)="onActivate(item.masterId)" 
+                                    href="#" 
+                                    id="cusEdit" 
+                                    class="btn-dark-blue-light btn btn-sm">
+                                        <i class="fas fa-check-circle"></i>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

@@ -25,7 +25,6 @@
                                     </h5>
                                 </div>
                             </div>
-
                             <div [hidden]="!enableButton()"
                                 class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;"
                                 role="alert">
@@ -35,24 +34,21 @@
                                 style="height: 40px; padding-top: 10px;" role="alert">
                                 Special Characters and Numbers are not Allowed
                             </div>
-
                             <div [hidden]="true" class="m-1 p-2 alert alert-success" id="alert" role="alert">
                                 Data Saved Successfully!!
                             </div>
-
-
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
                                     <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
                                         <div class="col-lg-12 col-sm-12 mb-3 form-group">
-                                            <label for="instituteType">Subject Type</label>
+                                            <label for="subjectType">Subject Type</label>
                                             <div class="row">
                                                 <div class="col-lg-12 col-sm-12">
                                                     <input data-toggle="tooltip" data-placement="bottom"
                                                         title="Demo tooltip text" type="text" name="subjectType"
                                                         id="subjectType" class="form-control inputFocus"
-                                                        placeholder="Subject Type" required minlength="1" maxlength="25"
-                                                        [(ngModel)]="subjectType" #feesTypeControl="ngModel" />
+                                                        placeholder="Subject Type" required
+                                                        [(ngModel)]="subjectType" #subjectTypeControl="ngModel" />
                                                 </div>
                                             </div>
                                             <div class="row">
