@@ -9,17 +9,48 @@ import Swal from 'sweetalert2'
   styleUrls: ['./list-subject-type.component.scss']
 })
 export class ListSubjectTypeComponent implements OnInit {
-	/** Attroibute for FeesType Table NoSQL DynamoDB */
+	/** Attroibute for Subject Type Table NoSQL DynamoDB */
 	subjectType: any;
 
-	/** Array of FeesType to show data for FeesType Table NoSQL DynamoDB */
+	/** Array of SubjectType to show data for SubjectType Table NoSQL DynamoDB */
 	finalItems: any;
 
-	constructor(private subjectTypeService: SubjectTypeService) { }
+	constructor(private subjectTypeService: SubjectTypeService) { }	
 
 	/**
 	* 
-	* Process the Fees Type Object to send for updation 
+	* Load Subject Type data by Id
+	*
+	* @memberof AddFeesTypeComponent
+	*/
+	ngOnInit(): void {
+		Swal.fire({
+			title: 'Please Wait',
+			allowEscapeKey: false,
+			allowOutsideClick: true,
+			background: '#fff',
+			showConfirmButton: false,
+			didOpen: () => {
+				Swal.showLoading();
+				this.subjectTypeService.getSubjectType().subscribe(responseData => {
+					this.subjectType = JSON.parse(responseData).Items
+					Swal.close()
+					let temp = []
+					this.finalItems = this.subjectType.filter(record => record.master === 'SUBJECT_TYPE' && record.isDeleted === false)	
+				},
+				error => {
+					console.log("Could not Fetch Data")
+					Swal.fire({
+						text: 'Error Fetching',
+						icon: 'warning'
+					})
+				})
+			}
+		});
+	}
+	/**
+	* 
+	* Process the Subject Type Object to send for updation 
 	*
 	* @memberof ListSubjectTypeComponent
 	*/
@@ -153,43 +184,5 @@ export class ListSubjectTypeComponent implements OnInit {
 				Swal.fire('Cancelled!', 'Your Data is not activated', 'error');
 			}
 		})
-	}
-
-	/**
-	* 
-	* Load FeesType data by Id
-	*
-	* @memberof AddFeesTypeComponent
-	*/
-	ngOnInit(): void {
-		Swal.fire({
-			title: 'Please Wait',
-			allowEscapeKey: false,
-			allowOutsideClick: true,
-			background: '#fff',
-			showConfirmButton: false,
-			didOpen: () => {
-				Swal.showLoading();
-				this.subjectTypeService.getSubjectType().subscribe(responseData => {
-					this.subjectType = JSON.parse(responseData).Items
-					console.log(this.subjectType)
-					let temp = []
-					this.subjectType.forEach(record => {
-						if (record.subjectType) {
-							temp.push(record)
-						}
-					})
-					this.finalItems = temp
-					Swal.close()
-				},
-				error => {
-					console.log("Could not Fetch Data")
-					Swal.fire({
-						text: 'Error Fetching',
-						icon: 'warning'
-					})
-				})
-			}
-		});
 	}
 }

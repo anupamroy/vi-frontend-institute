@@ -10,17 +10,34 @@ import Swal from 'sweetalert2'
   styleUrls: ['./edit-subject-type.component.scss']
 })
 export class EditSubjectTypeComponent implements OnInit {
-	/** Attribute for FeesType Table NoSQL DynamoDB */
+	/** Attribute for subjectType Table NoSQL DynamoDB */
 	subjectType: string;
 
-	/** Short Key for FeesType Table NoSQL DynamoDB */
+	/** Short Key for subjectType Table NoSQL DynamoDB */
 	id: string;
 
-	/** feesData hold Feestype object */
+	/** subjectTypeData hold SubjectTypeData object */
 	subjectTypeData: any
 
 
 	constructor(private activatedRoute: ActivatedRoute, private router: Router, private subjectTypeService: SubjectTypeService) { }
+
+	/**
+	* 
+	* Load SubjectType by Id
+	*
+	* @memberof EditSubjectTypeComponent
+	*/
+	ngOnInit(): void {
+		this.id = this.activatedRoute.snapshot.params.masterId;
+		console.log('id....', this.id);
+		this.subjectTypeService.getSubjectTypeById(this.id).subscribe((item) => {
+			item = JSON.parse(item);
+			this.subjectType = item.Items[0].subjectType
+			console.log(item)
+			console.log('this fees type', this.subjectType);
+		})
+	}
 
 	/**
 	* 
@@ -44,13 +61,13 @@ export class EditSubjectTypeComponent implements OnInit {
 	*/
 	enableAlert() {
 	const regex = /^[a-zA-Z_ ]*$/
-	return regex.test(this.subjectType)
+		return regex.test(this.subjectType)
 	}
 
 
 	/**
 	* 
-	* Process the Fees Type Object to send for updation 
+	* Process the Subject Type Object to send for updation 
 	*
 	* @memberof EditSubjectTypeComponent
 	*/
@@ -108,7 +125,7 @@ export class EditSubjectTypeComponent implements OnInit {
 	}
 	/**
 	* 
-	* Route to Add fees type component
+	* Route to Add Subject Type component
 	*
 	* @memberof EditSubjectTypeComponent
 	*/
@@ -118,7 +135,7 @@ export class EditSubjectTypeComponent implements OnInit {
 
 	/**
 	* 
-	* Route to View Fees Type Component
+	* Route to View Subject Type Component
 	*
 	* @memberof EditSubjectTypeComponent
 	*/
@@ -133,22 +150,5 @@ export class EditSubjectTypeComponent implements OnInit {
 	*/
 	onDashboard() {
 		this.router.navigate(['./org'])
-	}
-
-	/**
-	* 
-	* Load FeesType by Id
-	*
-	* @memberof EditSubjectTypeComponent
-	*/
-	ngOnInit(): void {
-		this.id = this.activatedRoute.snapshot.params.masterId;
-		console.log('id....', this.id);
-		this.subjectTypeService.getSubjectTypeById(this.id).subscribe((item) => {
-			item = JSON.parse(item);
-			this.subjectType = item.Items[0].subjectType
-			console.log(item)
-			console.log('this fees type', this.subjectType);
-		})
 	}
 }

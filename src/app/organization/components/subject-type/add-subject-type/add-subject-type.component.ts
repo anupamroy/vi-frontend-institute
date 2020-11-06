@@ -13,11 +13,13 @@ export class AddSubjectTypeComponent implements OnInit {
 	/** flag holds the form submit status */
 	disableButton: boolean = true;
 
-	/** Short Key for Masters Table NoSQL DynamoDB */
+	/** Short Key for subjectType Table NoSQL DynamoDB */
 	subjectType: string = '';
 
   	constructor(private router: Router, private subjectTypeService: SubjectTypeService) { }
 
+	ngOnInit(): void {
+	}
 	/**
 	* 
 	* Enable disable submit button 
@@ -25,7 +27,7 @@ export class AddSubjectTypeComponent implements OnInit {
 	* @memberof AddSubjectTypeComponent
 	*/
 	enableButton() {
-		if (this.subjectType.trim() === '') {
+		if (this.subjectType !== '' && this.subjectType.trim() === '') {
 			return true
 		} else {
 			return false
@@ -46,7 +48,7 @@ export class AddSubjectTypeComponent implements OnInit {
 
 	/**
 	* 
-	* Submit Handler for Add Feestype
+	* Submit Handler for Add Subject Type
 	*
 	* @memberof AddSubjectTypeComponent
 	*/
@@ -78,7 +80,5 @@ export class AddSubjectTypeComponent implements OnInit {
 				});
 			}
 		});
-	}
-	ngOnInit(): void {
 	}
 }

@@ -1,9 +1,9 @@
 export class SubjectType{
 
-    /** Partition Key for Masters Table NoSQL DynamoDB */
+    /** Partition Key for Subject Type Masters Table NoSQL DynamoDB */
     master: string = 'SUBJECT_TYPE';
 
-    /** Short Key for Masters Table NoSQL DynamoDB */
+    /** Short Key for Subject Type Masters Table NoSQL DynamoDB */
     masterId?: string;
 
     /** hold the activation status of the Accounts Head */
