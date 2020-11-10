@@ -55,9 +55,11 @@
                 class="img-stu-profile" />
               {{ username }}
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Sign Out <i class="fas fa-sign-out-alt"></i></a>
-            </div>
+            <ng-container *ngIf="signoutButton">
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+              </div>
+            </ng-container>
           </li>
         </ul>
       </div>

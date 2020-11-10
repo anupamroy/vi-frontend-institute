@@ -14,7 +14,6 @@ import awsconfig from '../aws-exports';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SellerComponent } from './org-admin/seller/seller.component';
 import { InstituteComponent } from './org-admin/institute/institute.component';
-import { HeaderComponent } from './org-admin/shared/header/header.component';
 
 /* Configure Amplify resources */
 Amplify.configure(awsconfig);
@@ -24,8 +23,7 @@ Amplify.configure(awsconfig);
     AppComponent,
     HomeComponent,
     SellerComponent,
-    InstituteComponent,
-    HeaderComponent,
+    InstituteComponent
   
   ],
   imports: [
