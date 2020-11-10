@@ -12,6 +12,9 @@ import { ReqInterceptorService } from "./shared/Services/req-interceptor.service
 import Amplify from 'aws-amplify';
 import awsconfig from '../aws-exports';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SellerComponent } from './org-admin/seller/seller.component';
+import { InstituteComponent } from './org-admin/institute/institute.component';
+import { HeaderComponent } from './org-admin/shared/header/header.component';
 
 /* Configure Amplify resources */
 Amplify.configure(awsconfig);
@@ -20,6 +23,9 @@ Amplify.configure(awsconfig);
   declarations: [
     AppComponent,
     HomeComponent,
+    SellerComponent,
+    InstituteComponent,
+    HeaderComponent,
   
   ],
   imports: [
