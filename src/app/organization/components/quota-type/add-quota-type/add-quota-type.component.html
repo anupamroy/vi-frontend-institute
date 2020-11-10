@@ -1,0 +1,80 @@
+<div class="bg-light-blue" style="height:100%">
+    <section class="stu-dashboard mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="offset-lg-2 col-lg-8">
+                    <h5>
+                        <span class="float-right"><a class="text-light btn mb-3" routerLink="../"><i class="fas fa-tachometer-alt"></i> Dashboard</a></span>
+                    </h5>
+                </div>
+                <div class="col-lg-8 offset-lg-2 col-sm-12">
+                    <div class="border-double">
+                        <form class="bg-light p-4" action="">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
+                                        <i class="fas fa-arrows-alt"></i>
+                                        Add Quota Type
+                                        <span class="float-right"><a class="btn mb-3" routerLink="../list-quota-type">
+                                                <i class="fas fa-eye"></i> View
+                                            </a>
+                                        </span>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div [hidden]="!enableButton()"
+                                class="alert alert-danger text-center" style="height: 40px; padding-top: 10px;"
+                                role="alert">
+                                Quota Type cannot be blank
+                            </div>
+                            <div [hidden]="enableAlert()" class="alert alert-danger text-center"
+                                style="height: 40px; padding-top: 10px;" role="alert">
+                                Special Characters and Numbers are not Allowed
+                            </div>
+                            <div [hidden]="true" class="m-1 p-2 alert alert-success" id="alert" role="alert">
+                                Data Saved Successfully!!
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
+                                        <div class="col-lg-12 col-sm-12 mb-3 form-group">
+                                            <label for="quotaType">Quota Type</label>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12">
+                                                    <input data-toggle="tooltip" data-placement="bottom"
+                                                        title="Demo tooltip text" type="text" name="quotaType"
+                                                        id="quotaType" class="form-control inputFocus"
+                                                        placeholder="Quota Type" required
+                                                        [(ngModel)]="quotaType" #quotaTypeControl="ngModel" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12">
+                                                    <div class="button-container mt-3 text-center float-right">
+                                                        <button [disabled]="enableButton()||!enableAlert()"
+                                                            type="button" id="cusEdit"
+                                                            class="btn btn-warning btn-common-color btn-lg mt-3 text-white"
+                                                            (click)='onSubmit()'>
+                                                            <span>
+                                                            	Add
+                                                            	<i class="fas fa-caret-right btn-style1"></i></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- add more row end-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer-bottom">
+        <a href="#"><img src="/assets/images/float-support.png" alt="support" class="float-support" /></a>
+        <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat" /></a>
+    </footer>
+</div>

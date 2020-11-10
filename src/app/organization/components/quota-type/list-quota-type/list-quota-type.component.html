@@ -1,0 +1,71 @@
+<div class="bg-light-blue" style="height: 100%;">
+    <section class="pt-4 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <h5 class="text-white pt-1 text-blue text-left text-capitalize">
+                        <i class="fas fa-arrows-alt"></i> View Quota Type<span class="float-right"><a class="btn mb-3 text-white" routerLink="../">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a></span>
+                        <span class="float-right"><a class="btn mb-3 text-white" routerLink="../add-quota-type"><i class="fas fa-edit"></i> Add </a>
+                        </span>
+                    </h5>
+                    <hr class="hr-white" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="stu-dashboard cus-pay-wave">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <table class="table table-bordered" style="background-color: aliceblue">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sl No</th>
+                                <th scope="col">Quota Type</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of finalItems; let i = index">
+                                <th scope="row">{{ i + 1 }}</th>
+                                <td>{{ item.quota }}</td>
+                                <td>
+                                    <button routerLink="../edit-paper-type/{{ item.masterId }}" id="cusEdit" class="btn-dark-blue-light btn btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button id="cusEdit" class="btn-dark-blue-light btn btn-sm"
+                                        (click)="onDelete(item.masterId)" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                    <button
+                                    *ngIf="item.is_active==true"
+                                    (click)="onDeactivate(item.masterId)" 
+                                    href="#" 
+                                    id="cusEdit" 
+                                    class="btn-dark-blue-light btn btn-sm">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                                    <button
+                                    *ngIf="item.is_active==false"
+                                    (click)="onActivate(item.masterId)" 
+                                    href="#" 
+                                    id="cusEdit" 
+                                    class="btn-dark-blue-light btn btn-sm">
+                                        <i class="fas fa-check-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer-bottom">
+        <a href="#"><img src="/assets/images/float-support.png" alt="support" class="float-support" /></a>
+        <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat" /></a>
+    </footer>
+</div>

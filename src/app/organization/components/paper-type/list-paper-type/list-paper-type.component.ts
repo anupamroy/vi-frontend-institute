@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { SubjectTypeService } from '../../../services/subject-type.service'
-import { SubjectType } from '../../../../shared/models/subject-type';
+import { PaperTypeService } from '../../../services/paper-type.service'
+import { PaperType } from '../../../../shared/models/paper-type';
 import Swal from 'sweetalert2'
 
 @Component({
-  selector: 'app-list-subject-type',
-  templateUrl: './list-subject-type.component.html',
-  styleUrls: ['./list-subject-type.component.scss']
+  selector: 'app-list-paper-type',
+  templateUrl: './list-paper-type.component.html',
+  styleUrls: ['./list-paper-type.component.scss']
 })
-export class ListSubjectTypeComponent implements OnInit {
-	/** Attroibute for Subject Type Table NoSQL DynamoDB */
-	subjectType: any;
+export class ListPaperTypeComponent implements OnInit {
+	/** Attroibute for Paper Type Table NoSQL DynamoDB */
+	paperType: any;
 
-	/** Array of SubjectType to show data for SubjectType Table NoSQL DynamoDB */
+	/** Array of Paper Type to show data for QuotaType Table NoSQL DynamoDB */
 	finalItems: any;
 
-	constructor(private subjectTypeService: SubjectTypeService) { }	
+	constructor(private paperTypeService: PaperTypeService) { }	
 
 	/**
 	* 
-	* Load Subject Type data by Id
+	* Load Paper Type data by Id
 	*
-	* @memberof AddSubjectTypeComponent
+	* @memberof AddPaperTypeComponent
 	*/
 	ngOnInit(): void {
 		Swal.fire({
@@ -32,11 +32,11 @@ export class ListSubjectTypeComponent implements OnInit {
 			showConfirmButton: false,
 			didOpen: () => {
 				Swal.showLoading();
-				this.subjectTypeService.getSubjectType().subscribe(responseData => {
-					this.subjectType = JSON.parse(responseData).Items
+				this.paperTypeService.getPaperType().subscribe(responseData => {
+					this.paperType = JSON.parse(responseData).Items
 					Swal.close()
 					let temp = []
-					this.finalItems = this.subjectType.filter(record => record.master === 'SUBJECT_TYPE' && record.isDeleted === false)	
+					this.finalItems = this.paperType.filter(record => record.master === 'PAPER_TYPE' && record.is_delete === false)	
 				},
 				error => {
 					console.log("Could not Fetch Data")
@@ -51,11 +51,11 @@ export class ListSubjectTypeComponent implements OnInit {
 
 	/**
 	* 
-	* Process the Subject Type Object to send for updation 
+	* Process the Paper Type Object to send for updation 
 	*
-	* @memberof ListSubjectTypeComponent
+	* @memberof ListPaperTypeComponent
 	*/
-	processObjUpdated(object: SubjectType) {
+	processObjUpdated(object: PaperType) {
 		var attribute = [];
 		var value = [];
 		for (const key in object) {
@@ -77,12 +77,12 @@ export class ListSubjectTypeComponent implements OnInit {
 	* 
 	* handler for delete Operation
 	*
-	* @memberof ListSubjectTypeComponent
+	* @memberof ListPaperTypeComponent
 	*/
 	onDelete(id: string) {
-		const deleteObj = new SubjectType();
+		const deleteObj = new PaperType();
 		deleteObj.masterId = id;
-		deleteObj.isDeleted = true;
+		deleteObj.is_delete = true;
 		Swal.fire({
 			title: 'Are you sure you want to delete?',
 			icon: 'warning',
@@ -92,20 +92,20 @@ export class ListSubjectTypeComponent implements OnInit {
 			confirmButtonColor: "#DD6B55"
 		}).then((result) => {
 			if (result.value) {
-				this.subjectTypeService.deleteSubjectTypeById(id, this.processObjUpdated(deleteObj)).subscribe(() => {
+				this.paperTypeService.deletePaperTypeById(id, this.processObjUpdated(deleteObj)).subscribe(() => {
 					this.finalItems = this.finalItems.filter((item) => {
 						return item.masterId !== id;
 					})
 				});
 				Swal.fire(
 					'Deleted!',
-					'Your subject type has been deleted.',
+					'Your Paper Type has been deleted.',
 					'success'
 				)
 			} else if (result.dismiss === Swal.DismissReason.cancel) {
 				Swal.fire(
 					'Cancelled',
-					'Your subject type is safe :)',
+					'Your Paper Type is safe :)',
 					'error'
 				)
 			}
@@ -116,7 +116,7 @@ export class ListSubjectTypeComponent implements OnInit {
 	* 
 	* handler for deactivate Operation
 	*
-	* @memberof ListSubjectTypeComponent
+	* @memberof ListPaperTypeComponent
 	*/
 	onDeactivate(id: string) {
 		Swal.fire({
@@ -130,15 +130,15 @@ export class ListSubjectTypeComponent implements OnInit {
 			if (result.isConfirmed) {
 				// Deactivate Logic
 				console.log('Deactivate')
-				var deactivateObj = new SubjectType();
+				var deactivateObj = new PaperType();
 				deactivateObj.masterId = id;
-				deactivateObj.isActivated = false;
+				deactivateObj.is_active = false;
 				console.log('NEW: ', deactivateObj);
-				this.subjectTypeService.updateSubjectTypeById(id, this.processObjUpdated(deactivateObj)).subscribe((data) => {
+				this.paperTypeService.updatePaperTypeById(id, this.processObjUpdated(deactivateObj)).subscribe((data) => {
 					console.log(data);
 					this.finalItems = this.finalItems.map((item) => {
 						if (item.masterId === id) {
-							item.isActivated = false
+							item.is_active = false
 						}
 						return item;
 					})
@@ -154,7 +154,7 @@ export class ListSubjectTypeComponent implements OnInit {
 	* 
 	* handler for Activate Operation
 	*
-	* @memberof ListSubjectTypeComponent
+	* @memberof ListPaperTypeComponent
 	*/
 	onActivate(id: string) {
 		Swal.fire({
@@ -168,14 +168,14 @@ export class ListSubjectTypeComponent implements OnInit {
 			if (result.isConfirmed) {
 				// Activate Logic
 				console.log('Activate');
-				var activateObj = new SubjectType();
+				var activateObj = new PaperType();
 				activateObj.masterId = id;
-				activateObj.isActivated = true;
-				this.subjectTypeService.updateSubjectTypeById(id, this.processObjUpdated(activateObj)).subscribe((data) => {
+				activateObj.is_active = true;
+				this.paperTypeService.updatePaperTypeById(id, this.processObjUpdated(activateObj)).subscribe((data) => {
 					console.log(data);
 					this.finalItems = this.finalItems.map((item) => {
 						if (item.masterId === id) {
-							item.isActivated = true;
+							item.is_active = true;
 						}
 						return item;
 					})

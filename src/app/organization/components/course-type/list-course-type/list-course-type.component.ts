@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { SubjectTypeService } from '../../../services/subject-type.service'
-import { SubjectType } from '../../../../shared/models/subject-type';
+import { CourseTypeService } from '../../../services/course-type.service'
+import { CourseType } from '../../../../shared/models/course-type';
 import Swal from 'sweetalert2'
 
 @Component({
-  selector: 'app-list-subject-type',
-  templateUrl: './list-subject-type.component.html',
-  styleUrls: ['./list-subject-type.component.scss']
+	selector: 'app-list-course-type',
+	templateUrl: './list-course-type.component.html',
+	styleUrls: ['./list-course-type.component.scss']
 })
-export class ListSubjectTypeComponent implements OnInit {
-	/** Attroibute for Subject Type Table NoSQL DynamoDB */
-	subjectType: any;
+export class ListCourseTypeComponent implements OnInit {
+	/** Attroibute for Course Type Table NoSQL DynamoDB */
+	courseType: any;
 
-	/** Array of SubjectType to show data for SubjectType Table NoSQL DynamoDB */
+	/** Array of CourseType to show data for CourseType Table NoSQL DynamoDB */
 	finalItems: any;
 
-	constructor(private subjectTypeService: SubjectTypeService) { }	
+	constructor(private courseTypeService: CourseTypeService) { }	
 
 	/**
 	* 
-	* Load Subject Type data by Id
+	* Load Course Type data by Id
 	*
-	* @memberof AddSubjectTypeComponent
+	* @memberof ListCourseTypeComponent
 	*/
 	ngOnInit(): void {
 		Swal.fire({
@@ -32,11 +32,11 @@ export class ListSubjectTypeComponent implements OnInit {
 			showConfirmButton: false,
 			didOpen: () => {
 				Swal.showLoading();
-				this.subjectTypeService.getSubjectType().subscribe(responseData => {
-					this.subjectType = JSON.parse(responseData).Items
+				this.courseTypeService.getCourseType().subscribe(responseData => {
+					this.courseType = JSON.parse(responseData).Items
 					Swal.close()
 					let temp = []
-					this.finalItems = this.subjectType.filter(record => record.master === 'SUBJECT_TYPE' && record.isDeleted === false)	
+					this.finalItems = this.courseType.filter(record => record.master === 'COURSE_TYPE' && record.isDeleted === false)	
 				},
 				error => {
 					console.log("Could not Fetch Data")
@@ -48,14 +48,14 @@ export class ListSubjectTypeComponent implements OnInit {
 			}
 		});
 	}
-
+	
 	/**
 	* 
-	* Process the Subject Type Object to send for updation 
+	* Process the Course Type Object to send for updation 
 	*
-	* @memberof ListSubjectTypeComponent
+	* @memberof ListCourseTypeComponent
 	*/
-	processObjUpdated(object: SubjectType) {
+	processObjUpdated(object: CourseType) {
 		var attribute = [];
 		var value = [];
 		for (const key in object) {
@@ -77,10 +77,10 @@ export class ListSubjectTypeComponent implements OnInit {
 	* 
 	* handler for delete Operation
 	*
-	* @memberof ListSubjectTypeComponent
+	* @memberof ListCourseTypeComponent
 	*/
 	onDelete(id: string) {
-		const deleteObj = new SubjectType();
+		const deleteObj = new CourseType();
 		deleteObj.masterId = id;
 		deleteObj.isDeleted = true;
 		Swal.fire({
@@ -92,20 +92,20 @@ export class ListSubjectTypeComponent implements OnInit {
 			confirmButtonColor: "#DD6B55"
 		}).then((result) => {
 			if (result.value) {
-				this.subjectTypeService.deleteSubjectTypeById(id, this.processObjUpdated(deleteObj)).subscribe(() => {
+				this.courseTypeService.deleteCourseTypeById(id, this.processObjUpdated(deleteObj)).subscribe(() => {
 					this.finalItems = this.finalItems.filter((item) => {
 						return item.masterId !== id;
 					})
 				});
 				Swal.fire(
 					'Deleted!',
-					'Your subject type has been deleted.',
+					'Your course type has been deleted.',
 					'success'
 				)
 			} else if (result.dismiss === Swal.DismissReason.cancel) {
 				Swal.fire(
 					'Cancelled',
-					'Your subject type is safe :)',
+					'Your course type is safe :)',
 					'error'
 				)
 			}
@@ -116,7 +116,7 @@ export class ListSubjectTypeComponent implements OnInit {
 	* 
 	* handler for deactivate Operation
 	*
-	* @memberof ListSubjectTypeComponent
+	* @memberof ListCourseTypeComponent
 	*/
 	onDeactivate(id: string) {
 		Swal.fire({
@@ -130,11 +130,11 @@ export class ListSubjectTypeComponent implements OnInit {
 			if (result.isConfirmed) {
 				// Deactivate Logic
 				console.log('Deactivate')
-				var deactivateObj = new SubjectType();
+				var deactivateObj = new CourseType();
 				deactivateObj.masterId = id;
 				deactivateObj.isActivated = false;
 				console.log('NEW: ', deactivateObj);
-				this.subjectTypeService.updateSubjectTypeById(id, this.processObjUpdated(deactivateObj)).subscribe((data) => {
+				this.courseTypeService.updateCourseTypeById(id, this.processObjUpdated(deactivateObj)).subscribe((data) => {
 					console.log(data);
 					this.finalItems = this.finalItems.map((item) => {
 						if (item.masterId === id) {
@@ -154,7 +154,7 @@ export class ListSubjectTypeComponent implements OnInit {
 	* 
 	* handler for Activate Operation
 	*
-	* @memberof ListSubjectTypeComponent
+	* @memberof ListCourseTypeComponent
 	*/
 	onActivate(id: string) {
 		Swal.fire({
@@ -168,10 +168,10 @@ export class ListSubjectTypeComponent implements OnInit {
 			if (result.isConfirmed) {
 				// Activate Logic
 				console.log('Activate');
-				var activateObj = new SubjectType();
+				var activateObj = new CourseType();
 				activateObj.masterId = id;
 				activateObj.isActivated = true;
-				this.subjectTypeService.updateSubjectTypeById(id, this.processObjUpdated(activateObj)).subscribe((data) => {
+				this.courseTypeService.updateCourseTypeById(id, this.processObjUpdated(activateObj)).subscribe((data) => {
 					console.log(data);
 					this.finalItems = this.finalItems.map((item) => {
 						if (item.masterId === id) {
