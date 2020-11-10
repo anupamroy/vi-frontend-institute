@@ -40,6 +40,18 @@ import { ViewSubjectAttributesComponent } from './components/subject-attributes-
 import { EditSubjectTypeComponent } from './components/subject-type/edit-subject-type/edit-subject-type.component';
 import { AddSubjectTypeComponent } from './components/subject-type/add-subject-type/add-subject-type.component';
 import { ListSubjectTypeComponent } from './components/subject-type/list-subject-type/list-subject-type.component';
+import { AddCourseTypeComponent } from './components/course-type/add-course-type/add-course-type.component';
+import { EditCourseTypeComponent } from './components/course-type/edit-course-type/edit-course-type.component';
+import { ListCourseTypeComponent } from './components/course-type/list-course-type/list-course-type.component';
+import { AddCourseSubTypeComponent } from './components/course-sub-type/add-course-sub-type/add-course-sub-type.component';
+import { EditCourseSubTypeComponent } from './components/course-sub-type/edit-course-sub-type/edit-course-sub-type.component';
+import { ListCourseSubTypeComponent } from './components/course-sub-type/list-course-sub-type/list-course-sub-type.component';
+import { ListPaperTypeComponent } from './components/paper-type/list-paper-type/list-paper-type.component';
+import { EditPaperTypeComponent } from './components/paper-type/edit-paper-type/edit-paper-type.component';
+import { AddPaperTypeComponent } from './components/paper-type/add-paper-type/add-paper-type.component';
+import { AddQuotaTypeComponent } from './components/quota-type/add-quota-type/add-quota-type.component';
+import { EditQuotaTypeComponent } from './components/quota-type/edit-quota-type/edit-quota-type.component';
+import { ListQuotaTypeComponent } from './components/quota-type/list-quota-type/list-quota-type.component';
 
 @NgModule({
     declarations: [
@@ -79,7 +91,19 @@ import { ListSubjectTypeComponent } from './components/subject-type/list-subject
         ViewSubjectAttributesComponent,
         EditSubjectTypeComponent,
         AddSubjectTypeComponent,
-        ListSubjectTypeComponent
+        ListSubjectTypeComponent,
+        AddCourseTypeComponent,
+        EditCourseTypeComponent,
+        ListCourseTypeComponent,
+        AddCourseSubTypeComponent,
+        EditCourseSubTypeComponent,
+        ListCourseSubTypeComponent,
+        ListPaperTypeComponent,
+        EditPaperTypeComponent,
+        AddPaperTypeComponent,
+        AddQuotaTypeComponent,
+        EditQuotaTypeComponent,
+        ListQuotaTypeComponent
     ],
     imports: [CommonModule, OrganizationRoutingModule, FormsModule, ReactiveFormsModule],
 })

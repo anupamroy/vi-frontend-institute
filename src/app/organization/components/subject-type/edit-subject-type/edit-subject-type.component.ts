@@ -35,7 +35,7 @@ export class EditSubjectTypeComponent implements OnInit {
 			item = JSON.parse(item);
 			this.subjectType = item.Items[0].subjectType
 			console.log(item)
-			console.log('this fees type', this.subjectType);
+			console.log('this Subject type', this.subjectType);
 		})
 	}
 

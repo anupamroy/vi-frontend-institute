@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { SubjectTypeService } from '../../../services/subject-type.service'
-import { SubjectType } from '../../../../shared/models/subject-type';
+import { QuotaTypeService } from '../../../services/quota-type.service'
+import { QuotaType } from '../../../../shared/models/quota-type';
 import Swal from 'sweetalert2'
 
 @Component({
-  selector: 'app-list-subject-type',
-  templateUrl: './list-subject-type.component.html',
-  styleUrls: ['./list-subject-type.component.scss']
+  selector: 'app-list-quota-type',
+  templateUrl: './list-quota-type.component.html',
+  styleUrls: ['./list-quota-type.component.scss']
 })
-export class ListSubjectTypeComponent implements OnInit {
-	/** Attroibute for Subject Type Table NoSQL DynamoDB */
-	subjectType: any;
+export class ListQuotaTypeComponent implements OnInit {
+	/** Attroibute for Quota Type Table NoSQL DynamoDB */
+	quota: any;
 
-	/** Array of SubjectType to show data for SubjectType Table NoSQL DynamoDB */
+	/** Array of QuotaType to show data for QuotaType Table NoSQL DynamoDB */
 	finalItems: any;
 
-	constructor(private subjectTypeService: SubjectTypeService) { }	
+	constructor(private quotaTypeService: QuotaTypeService) { }	
 
 	/**
 	* 
-	* Load Subject Type data by Id
+	* Load Quota Type data by Id
 	*
-	* @memberof AddSubjectTypeComponent
+	* @memberof AddQuotaTypeComponent
 	*/
 	ngOnInit(): void {
 		Swal.fire({
@@ -32,11 +32,11 @@ export class ListSubjectTypeComponent implements OnInit {
 			showConfirmButton: false,
 			didOpen: () => {
 				Swal.showLoading();
-				this.subjectTypeService.getSubjectType().subscribe(responseData => {
-					this.subjectType = JSON.parse(responseData).Items
+				this.quotaTypeService.getQuotaType().subscribe(responseData => {
+					this.quota = JSON.parse(responseData).Items
 					Swal.close()
 					let temp = []
-					this.finalItems = this.subjectType.filter(record => record.master === 'SUBJECT_TYPE' && record.isDeleted === false)	
+					this.finalItems = this.quota.filter(record => record.master === 'QUOTA' && record.is_delete === false)	
 				},
 				error => {
 					console.log("Could not Fetch Data")
@@ -51,11 +51,11 @@ export class ListSubjectTypeComponent implements OnInit {
 
 	/**
 	* 
-	* Process the Subject Type Object to send for updation 
+	* Process the Quota Type Object to send for updation 
 	*
-	* @memberof ListSubjectTypeComponent
+	* @memberof ListQuotaTypeComponent
 	*/
-	processObjUpdated(object: SubjectType) {
+	processObjUpdated(object: QuotaType) {
 		var attribute = [];
 		var value = [];
 		for (const key in object) {
@@ -77,12 +77,12 @@ export class ListSubjectTypeComponent implements OnInit {
 	* 
 	* handler for delete Operation
 	*
-	* @memberof ListSubjectTypeComponent
+	* @memberof ListQuotaTypeComponent
 	*/
 	onDelete(id: string) {
-		const deleteObj = new SubjectType();
+		const deleteObj = new QuotaType();
 		deleteObj.masterId = id;
-		deleteObj.isDeleted = true;
+		deleteObj.is_delete = true;
 		Swal.fire({
 			title: 'Are you sure you want to delete?',
 			icon: 'warning',
@@ -92,20 +92,20 @@ export class ListSubjectTypeComponent implements OnInit {
 			confirmButtonColor: "#DD6B55"
 		}).then((result) => {
 			if (result.value) {
-				this.subjectTypeService.deleteSubjectTypeById(id, this.processObjUpdated(deleteObj)).subscribe(() => {
+				this.quotaTypeService.deleteQuotaTypeById(id, this.processObjUpdated(deleteObj)).subscribe(() => {
 					this.finalItems = this.finalItems.filter((item) => {
 						return item.masterId !== id;
 					})
 				});
 				Swal.fire(
 					'Deleted!',
-					'Your subject type has been deleted.',
+					'Your Quota Type has been deleted.',
 					'success'
 				)
 			} else if (result.dismiss === Swal.DismissReason.cancel) {
 				Swal.fire(
 					'Cancelled',
-					'Your subject type is safe :)',
+					'Your Quota Type is safe :)',
 					'error'
 				)
 			}
@@ -116,7 +116,7 @@ export class ListSubjectTypeComponent implements OnInit {
 	* 
 	* handler for deactivate Operation
 	*
-	* @memberof ListSubjectTypeComponent
+	* @memberof ListQuotaTypeComponent
 	*/
 	onDeactivate(id: string) {
 		Swal.fire({
@@ -130,15 +130,15 @@ export class ListSubjectTypeComponent implements OnInit {
 			if (result.isConfirmed) {
 				// Deactivate Logic
 				console.log('Deactivate')
-				var deactivateObj = new SubjectType();
+				var deactivateObj = new QuotaType();
 				deactivateObj.masterId = id;
-				deactivateObj.isActivated = false;
+				deactivateObj.is_active = false;
 				console.log('NEW: ', deactivateObj);
-				this.subjectTypeService.updateSubjectTypeById(id, this.processObjUpdated(deactivateObj)).subscribe((data) => {
+				this.quotaTypeService.updateQuotaTypeById(id, this.processObjUpdated(deactivateObj)).subscribe((data) => {
 					console.log(data);
 					this.finalItems = this.finalItems.map((item) => {
 						if (item.masterId === id) {
-							item.isActivated = false
+							item.is_active = false
 						}
 						return item;
 					})
@@ -154,7 +154,7 @@ export class ListSubjectTypeComponent implements OnInit {
 	* 
 	* handler for Activate Operation
 	*
-	* @memberof ListSubjectTypeComponent
+	* @memberof ListQuotaTypeComponent
 	*/
 	onActivate(id: string) {
 		Swal.fire({
@@ -168,14 +168,14 @@ export class ListSubjectTypeComponent implements OnInit {
 			if (result.isConfirmed) {
 				// Activate Logic
 				console.log('Activate');
-				var activateObj = new SubjectType();
+				var activateObj = new QuotaType();
 				activateObj.masterId = id;
-				activateObj.isActivated = true;
-				this.subjectTypeService.updateSubjectTypeById(id, this.processObjUpdated(activateObj)).subscribe((data) => {
+				activateObj.is_active = true;
+				this.quotaTypeService.updateQuotaTypeById(id, this.processObjUpdated(activateObj)).subscribe((data) => {
 					console.log(data);
 					this.finalItems = this.finalItems.map((item) => {
 						if (item.masterId === id) {
-							item.isActivated = true;
+							item.is_active = true;
 						}
 						return item;
 					})

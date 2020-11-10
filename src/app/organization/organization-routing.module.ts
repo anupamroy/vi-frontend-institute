@@ -38,6 +38,18 @@ import { ViewSubjectAttributesComponent } from './components/subject-attributes-
 import { AddSubjectTypeComponent } from './components/subject-type/add-subject-type/add-subject-type.component';
 import { EditSubjectTypeComponent } from './components/subject-type/edit-subject-type/edit-subject-type.component';
 import { ListSubjectTypeComponent } from './components/subject-type/list-subject-type/list-subject-type.component';
+import { AddCourseTypeComponent } from './components/course-type/add-course-type/add-course-type.component';
+import { EditCourseTypeComponent } from './components/course-type/edit-course-type/edit-course-type.component';
+import { ListCourseTypeComponent } from './components/course-type/list-course-type/list-course-type.component';
+import { AddCourseSubTypeComponent } from './components/course-sub-type/add-course-sub-type/add-course-sub-type.component';
+import { EditCourseSubTypeComponent } from './components/course-sub-type/edit-course-sub-type/edit-course-sub-type.component';
+import { ListCourseSubTypeComponent } from './components/course-sub-type/list-course-sub-type/list-course-sub-type.component';
+import { AddQuotaTypeComponent } from './components/quota-type/add-quota-type/add-quota-type.component';
+import { EditQuotaTypeComponent } from './components/quota-type/edit-quota-type/edit-quota-type.component';
+import { ListQuotaTypeComponent } from './components/quota-type/list-quota-type/list-quota-type.component';
+import { AddPaperTypeComponent } from './components/paper-type/add-paper-type/add-paper-type.component';
+import { EditPaperTypeComponent } from './components/paper-type/edit-paper-type/edit-paper-type.component';
+import { ListPaperTypeComponent } from './components/paper-type/list-paper-type/list-paper-type.component';
 
 const routes: Routes = [
   {
@@ -66,7 +78,11 @@ const routes: Routes = [
       { path: 'add-package', component: AddPackageComponent },
       { path: 'add-stream', component: AddStreamComponent },
       { path: 'add-subject-attributes', component: AddSubjectAttributesComponent },
-      { path: 'add-subject-type', component: AddSubjectTypeComponent }
+      { path: 'add-subject-type', component: AddSubjectTypeComponent },
+      { path: 'add-course-type', component: AddCourseTypeComponent },
+      { path: 'add-course-sub-type', component: AddCourseSubTypeComponent },
+      { path: 'add-quota-type', component: AddQuotaTypeComponent },
+      { path: 'add-paper-type', component: AddPaperTypeComponent }
       // { path: 'add-org', component: AddOrganizationComponent },
     ],
   },
@@ -92,6 +108,10 @@ const routes: Routes = [
   { path: 'edit-stream/:masterId', component: EditStreamComponent },
   { path: 'edit-subject-attributes/:masterId', component: EditSubjectAttributesComponent },
   { path: 'edit-subject-type/:masterId', component: EditSubjectTypeComponent },
+  { path: 'edit-course-type/:masterId', component: EditCourseTypeComponent },
+  { path: 'edit-course-sub-type/:masterId', component: EditCourseSubTypeComponent },
+  { path: 'edit-quota-type/:masterId', component: EditQuotaTypeComponent },
+  { path: 'edit-paper-type/:masterId', component: EditPaperTypeComponent },
   { path: 'list-associated-post', component: ListAssociatedPostComponent },
   { path: 'list-org-category', component: ViewOrgCategoryComponent },
   { path: 'list-fees-type', component: ListFeesTypeComponent },
@@ -100,7 +120,11 @@ const routes: Routes = [
   { path: 'list-packages', component: ListPackageComponent },
   { path: 'list-stream', component: ViewStreamComponent },
   { path: 'list-subject-attributes', component: ViewSubjectAttributesComponent },
-  { path: 'list-subject-type', component: ListSubjectTypeComponent }
+  { path: 'list-subject-type', component: ListSubjectTypeComponent },
+  { path: 'list-course-type', component: ListCourseTypeComponent },
+  { path: 'list-course-sub-type', component: ListCourseSubTypeComponent },
+  { path: 'list-quota-type', component: ListQuotaTypeComponent },
+  { path: 'list-paper-type', component: ListPaperTypeComponent }
 ];
 
 @NgModule({
