@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { InstituteComponent } from './org-admin/institute/institute.component';
+import { SellerComponent } from './org-admin/seller/seller.component';
 
 
 const routes: Routes = [
@@ -27,6 +29,21 @@ const routes: Routes = [
                 (m) => m.OrganizationModule
             ),
     },
+    {
+        path:'seller',
+        component:SellerComponent
+    },
+    {
+        path:'institute',
+        component:InstituteComponent
+    }
+    // {
+    //     path: 'seller',
+    //     loadChildren: () =>
+    //         import('./or').then(
+    //             (m) => m.OrganizationModule
+    //         ),
+    // }
 ];
 
 @NgModule({

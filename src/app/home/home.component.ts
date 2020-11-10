@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private authDataService: AuthDataService, private auth : AuthService) { }
 
   ngOnInit(): void {
+    this.authDataService.setUserName('SuperAdmin'); //obj in 
+    // this.auth.isLoggedIn();
     
   }
 
