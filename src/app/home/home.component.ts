@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private authDataService: AuthDataService, private auth : AuthService) { }
 
   ngOnInit(): void {
-    this.authDataService.setUserName('SuperAdmin'); //obj in 
     // this.auth.isLoggedIn();
     
   }
@@ -39,6 +38,7 @@ export class HomeComponent implements OnInit {
       else {
         this.auth.signIn(phone_number, password).subscribe((data) => {
           this.router.navigate(['org']);
+          this.authDataService.setUserName('SuperAdmin'); //obj in 
         }, (err)=> {
           // this.emailVerificationMessage = true;
           Swal.fire('Authentication Failed', `${this.phone_number} is not registered as Super Admin.`, 'error')

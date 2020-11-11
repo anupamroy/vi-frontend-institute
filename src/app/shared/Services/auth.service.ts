@@ -62,8 +62,11 @@ export class AuthService {
 
   isLoggedIn() {
     console.log('isLoggedIn...',userPool.getCurrentUser());
-    
-    return userPool.getCurrentUser() != null;
+    if(this.cognitoUser)
+      return true;
+    else 
+    return false;
+    // return userPool.getCurrentUser() != null;
   }
 
   getAuthenticatedUser() {
@@ -72,7 +75,7 @@ export class AuthService {
     return userPool.getCurrentUser();
   }
   logout = () => {
-    this.getAuthenticatedUser().signout();
+  //  this.getAuthenticatedUser().signout();
     this.cognitoUser = null;
   }
 }

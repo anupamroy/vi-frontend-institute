@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthDataService } from '../../Services/auth-data.service';
 import { AuthService } from '../../Services/auth.service';
 
@@ -11,7 +12,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   username: string;
   headerData: any;
   signoutButton: boolean;
-  constructor(private authDataService: AuthDataService, private _auth: AuthService) { }
+  constructor(private authDataService: AuthDataService, private _auth: AuthService,private _router : Router) { }
 
   ngOnInit(): void {
     this.authDataService.getUserName().subscribe((username) => {
@@ -20,16 +21,23 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.authDataService.getHeaderForUser().subscribe((obj) => {
       this.headerData = obj;
     });
-
-    this.signoutButton = this._auth.isLoggedIn()
+    console.log('this.auth.login',this._auth.isLoggedIn());
+    this.signoutButton = this._auth.isLoggedIn();
     console.log('signoutButton',this.signoutButton);
-    
-
   }
+  
 
   ngOnChanges(): void {
     // this.authDataService.getUserName().subscribe((username) => {
     //   this.username = username;
     // })
+    this.signoutButton = true;
+    console.log('signoutButton',this.signoutButton);
+  }
+
+  signOut():void{
+    this._auth.logout();
+    this._router.navigate(['home']);
+    this.username = 'Anonymous'
   }
 }
