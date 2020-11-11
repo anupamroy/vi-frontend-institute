@@ -1,0 +1,64 @@
+<mat-accordion *ngFor="let address of addressList">
+  <mat-expansion-panel class="my-1" style="background-color: bisque;">
+    <mat-expansion-panel-header>
+      <mat-panel-title> {{ address.addressTypeSelector }} </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>{{ address.address }}</p>
+    <div class="d-flex justify-content-end">
+      <button class="mx-3" mat-raised-button color="warn" (click)="removeAddress(address.id)">
+        Remove
+      </button>
+      <button mat-raised-button color="accent" (click)="editAddress(address.id)">
+        Edit
+      </button>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div class="my-3">
+  <form [formGroup]="addressForm">
+    <div class="row">
+      <div class="col-4">
+        <mat-form-field appearance='fill' class="w-100">
+          <mat-label>Address Type</mat-label>
+          <mat-select formControlName="addressTypeSelector">
+            <mat-option value="Primary">Primary</mat-option>
+            <mat-option value="Secondary">Secondary</mat-option>
+          </mat-select>
+
+          <!-- cutom validation start-->
+          <mat-hint>Please fill out the fields!</mat-hint>
+          <mat-error *ngIf="addressForm.controls.addressTypeSelector.hasError('pattern') && !addressForm.controls.addressTypeSelector.hasError('required')">
+            Please select a valid address Type
+          </mat-error>
+          <mat-error *ngIf="addressForm.controls.addressTypeSelector.hasError('required')">
+            Address Type <strong>required</strong>
+          </mat-error>
+          <!-- custom validation end -->
+        </mat-form-field>
+      </div>
+      <div class="col-8">
+        <mat-form-field appearance='fill' class="w-100">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address" required />
+
+          <!-- cutom validation start-->
+          <mat-hint>Please fill out the fields!</mat-hint>
+          <mat-error *ngIf="addressForm.controls.address.hasError('pattern') && !addressForm.controls.address.hasError('required')">
+            Please enter a valid Address, Special Charecters NOT Allowed.
+          </mat-error>
+          <mat-error *ngIf="addressForm.controls.address.hasError('minlength') || addressForm.controls.address.hasError('maxlength')">
+            Address should be 10 charecter or more.
+          </mat-error>
+          <mat-error *ngIf="addressForm.controls.address.hasError('required')">
+            Address <strong>required</strong>
+          </mat-error>
+          <!-- custom validation end -->
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <button (click)="addAddress()" [disabled]="!this.addressForm.valid" mat-raised-button color="primary">Add</button>
+    </div>
+  </form>
+</div>

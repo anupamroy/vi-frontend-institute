@@ -1,0 +1,46 @@
+<mat-card id="card">
+    <mat-horizontal-stepper #stepper>
+        <!-- form 1 -->
+        <mat-step [stepControl]="firstFormGroup" label="Organization Type">
+            <app-organization-type [firstFormGroup]="firstFormGroup"></app-organization-type>
+        </mat-step>
+
+        <!-- form 2 -->
+        <mat-step [stepControl]="secondFormGroup" label="Basic Details">
+            <app-basic-details [secondFormGroup]="secondFormGroup"></app-basic-details>
+        </mat-step>
+
+         <!-- form 3 -->
+        <mat-step [stepControl]="thirdFormGroup" label="Contact Details">
+            <app-contact-details [thirdFormGroup]="thirdFormGroup"></app-contact-details>
+        </mat-step>
+
+        <!-- form 4 -->
+        <mat-step [stepControl]="fourthFormGroup" label="Registration Details">
+            <app-registration [fourthFormGroup]="fourthFormGroup"></app-registration>
+        </mat-step>
+
+        <!-- form 5 -->
+        <mat-step [stepControl]="fifthFormGroup" label="Master">
+            <app-master-user [fifthFormGroup]="fifthFormGroup"></app-master-user>
+        </mat-step>
+
+        <!-- form 6 -->
+        <mat-step [stepControl]="sixthFormGroup" label="Settings">
+            <app-settings [sixthFormGroup]="sixthFormGroup"></app-settings>
+        </mat-step>
+
+        <!-- form 7 -->
+        <mat-step label="Preview">
+            <app-preview ></app-preview>
+        </mat-step>
+        <!-- <mat-step label="Preview">
+        <ng-template matStepLabel="Preview">
+            <!-- <mat-step label="Preview"> -->
+                <!-- <app-preview ></app-preview> -->
+            <!-- </mat-step> -->
+        <!-- </ng-template>
+        </mat-step> --> -->
+        
+    </mat-horizontal-stepper>
+</mat-card>

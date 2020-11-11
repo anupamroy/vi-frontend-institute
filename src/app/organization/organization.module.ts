@@ -53,6 +53,70 @@ import { AddQuotaTypeComponent } from './components/quota-type/add-quota-type/ad
 import { EditQuotaTypeComponent } from './components/quota-type/edit-quota-type/edit-quota-type.component';
 import { ListQuotaTypeComponent } from './components/quota-type/list-quota-type/list-quota-type.component';
 
+
+// Angular material
+import { A11yModule } from '@angular/cdk/a11y';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { PortalModule } from '@angular/cdk/portal';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CdkStepperModule, STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { CdkTableModule } from '@angular/cdk/table';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTreeModule } from '@angular/material/tree';
+import { OverlayModule } from '@angular/cdk/overlay';
+
+
+import { AddOrganizationComponent } from './components/add-organization/add-organization.component';
+import { BasicDetailsComponent } from './components/add-organization/basic-details/basic-details.component';
+import { ContactDetailsComponent } from './components/add-organization/contact-details/contact-details.component';
+import { AddressComponent } from './components/add-organization/common/address/address.component';
+import { PhoneComponent } from './components/add-organization/common/phone/phone.component';
+import { EmailComponent } from './components/add-organization/common/email/email.component';
+import { SocialComponent } from './components/add-organization/common/social/social.component';
+import { RegistrationComponent } from './components/add-organization/registration/registration.component';
+import { DocumentComponent } from './components/add-organization/common/document/document.component';
+import { SettingsComponent } from './components/add-organization/settings/settings.component';
+import { MasterUserComponent } from './components/add-organization/master-user/master-user.component';
+import { OrganizationTypeComponent } from './components/add-organization/organization-type/organization-type.component';
+import { ErrorMessageComponent } from './components/add-organization/common/Validations/error-message/error-message.component';
+import { PreviewComponent } from './components/add-organization/preview/preview.component';
+
+
+
 @NgModule({
     declarations: [
         OrganizationComponent,
@@ -103,8 +167,75 @@ import { ListQuotaTypeComponent } from './components/quota-type/list-quota-type/
         AddPaperTypeComponent,
         AddQuotaTypeComponent,
         EditQuotaTypeComponent,
-        ListQuotaTypeComponent
+        ListQuotaTypeComponent,
+        EditOrganizationComponent,
+        AddOrganizationComponent,
+        BasicDetailsComponent,
+        ContactDetailsComponent,
+        AddressComponent,
+        PhoneComponent,
+        EmailComponent,
+        SocialComponent,
+        RegistrationComponent,
+        DocumentComponent,
+        SettingsComponent,
+        MasterUserComponent,
+        OrganizationTypeComponent,
+        ErrorMessageComponent,
+        PreviewComponent,
     ],
-    imports: [CommonModule, OrganizationRoutingModule, FormsModule, ReactiveFormsModule],
+    imports: [
+        CommonModule, OrganizationRoutingModule, FormsModule, ReactiveFormsModule,
+        A11yModule,
+        ClipboardModule,
+        CdkStepperModule,
+        CdkTableModule,
+        CdkTreeModule,
+        DragDropModule,
+        MatAutocompleteModule,
+        MatBadgeModule,
+        MatBottomSheetModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatChipsModule,
+        MatStepperModule,
+        MatDatepickerModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatRadioModule,
+        MatRippleModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        MatSortModule,
+        MatTableModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatTreeModule,
+        OverlayModule,
+        PortalModule,
+        ScrollingModule
+    ],
+    providers: [
+        {
+            provide: STEPPER_GLOBAL_OPTIONS,
+            useValue: { showError: false }
+        }
+    ]
 })
 export class OrganizationModule {}

@@ -14,6 +14,7 @@ import awsconfig from '../aws-exports';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SellerComponent } from './org-admin/seller/seller.component';
 import { InstituteComponent } from './org-admin/institute/institute.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /* Configure Amplify resources */
 Amplify.configure(awsconfig);
@@ -32,7 +33,8 @@ Amplify.configure(awsconfig);
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [{provide : HTTP_INTERCEPTORS, useClass: ReqInterceptorService, multi: true}],
   bootstrap: [AppComponent]

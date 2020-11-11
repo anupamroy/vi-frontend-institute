@@ -1,0 +1,89 @@
+<mat-card class="my-5">
+    <h2>Registration Details</h2>
+    <form [formGroup]="fourthFormGroup">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Organization Category</mat-label>
+                    <mat-select formControlName="organizationCategory">
+                        <mat-option *ngFor="let item of items" [value]="item">
+                            {{ item }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Registration Number</mat-label>
+                    <input matInput formControlName="registrationNumber" required />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <input type='file' required>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Valid Up To</mat-label>
+                    <input matInput [matDatepicker]="registrationDate" formControlName="registrationDate" />
+                    <mat-datepicker-toggle matSuffix [for]="registrationDate"></mat-datepicker-toggle>
+                    <mat-datepicker #registrationDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <h4>Affiliation/Accredential Details</h4>
+        <div class="row">
+            <div class="col-4">
+                <mat-checkbox class="example-margin" formControlName="affAndAcc">Affiliation and Accrediation
+                </mat-checkbox>
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>From Date</mat-label>
+                    <input matInput [matDatepicker]="affiliationStartDate" formControlName="affiliationStartDate" />
+                    <mat-datepicker-toggle matSuffix [for]="affiliationStartDate"></mat-datepicker-toggle>
+                    <mat-datepicker #affiliationStartDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>To Date</mat-label>
+                    <input matInput [matDatepicker]="affiliationEndDate" formControlName="affiliationEndDate" />
+                    <mat-datepicker-toggle matSuffix [for]="affiliationEndDate"></mat-datepicker-toggle>
+                    <mat-datepicker #affiliationEndDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="col-6"></div>
+        </div>
+        <input type="file" class="my-3">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Certificate Number</mat-label>
+                    <input matInput formControlName="certificateNumber" required />
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-checkbox class="example-margin" formControlName="status">Status</mat-checkbox>
+            </div>
+        </div>
+        <div class="mt-4">
+            <h4>Additional Documents</h4>
+            <app-document (isDocumentValid)="handleFormValid($event)"></app-document>
+        </div>
+
+    </form>
+</mat-card>
+<div class="my-3 clearfix">
+    <button mat-raised-button color='primary' matStepperPrevious class="back">Back Step</button>
+    <button (click)="displayData()" [disabled]="!fourthFormGroup.valid && isValid" mat-raised-button color='primary'
+        matStepperNext class="float-right next">
+        Next Step
+    </button>
+</div>

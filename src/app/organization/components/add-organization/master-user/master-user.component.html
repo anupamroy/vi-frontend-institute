@@ -1,0 +1,46 @@
+<mat-card class="my-3">
+    <form [formGroup]="fifthFormGroup">
+        <h2>Master User</h2>
+        <div class="row">
+            <div class="col-4">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName">
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>Middle Name</mat-label>
+                    <input matInput formControlName="middleName">
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>Email Address</mat-label>
+                    <input matInput formControlName="emailAddress">
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput formControlName="phoneNumber">
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-card>
+<div class="my-3 clearfix">
+    <button mat-raised-button color='primary' matStepperPrevious class="back">Back Step</button>
+    <button (click)="displayData()" [disabled]="!this.fifthFormGroup.valid" mat-raised-button color='primary' matStepperNext
+        class="float-right next">
+        Next Step
+    </button>
+</div>

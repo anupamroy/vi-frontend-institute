@@ -1,0 +1,9 @@
+<!-- custom validation start -->
+<mat-hint>Only enter letters</mat-hint>
+<mat-error *ngIf="formField.hasError('pattern') && !formField.hasError('required')">
+    Please enter a abbreviated short form of organization
+</mat-error>
+<mat-error *ngIf="formField.hasError('required')">
+    Organization short code <strong>required</strong>
+</mat-error>
+<!-- custom validation end -->

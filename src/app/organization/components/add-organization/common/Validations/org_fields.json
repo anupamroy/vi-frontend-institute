@@ -1,0 +1,80 @@
+{
+    "organizationName": {
+        "validations": {
+            "required": true,
+            "pattern": "[a-zA-Z ]*",
+            "minLength": 3,
+            "maxLength": 50
+        },
+        "messages": {
+            "length": "Please enter letters between 3 to 50 characters long.",
+            "required": "Organization Name is Required.",
+            "pattern": "Please enter only letters.",
+            "hint": "Please fill out this fields"
+        },
+        "tooltip": "Please fill out this field."
+    },
+    "organizationShortCode": {
+        "validations": {
+            "required": true,
+            "pattern": "[a-zA-Z ]*",
+            "minLength": 3,
+            "maxLength": 15
+        },
+        "messages": {
+            "length": "Please enter letters between 3 to 50 characters long.",
+            "required": "Organization Short Code is Required.",
+            "pattern": "Please enter only letters.",
+            "hint": "Please fill out this fields"
+        },
+        "tooltip": "Please fill out this field."
+    },
+    "addressFields" : {
+        "addressType": {
+            "validations": {
+                "required": true
+            },
+            "messages": {
+                "length": "Please enter letters between 3 to 50 characters long.",
+                "required": "Organization Name is Required.",
+                "pattern": "Please enter only letters.",
+                "hint": "Please fill out this fields"
+            },
+            "tooltip": "Please fill out this field."
+        },
+        "address": {
+            "validations": {
+                "required": true,
+                "pattern": "^[a-zA-Z0-9_ ]*$",
+                "minLength": 10,
+                "maxLength": 50
+            },
+            "messages": {
+                "length": "Please enter letters between 10 to 50 characters long.",
+                "required": "Adress is Required.",
+                "pattern": "Please enter Alphanumeric charecters.",
+                "hint": "Please fill out this fields"
+            },
+            "tooltip": "Please fill out this field."
+        }
+    },
+    "phoneFields" : {
+        "phone" : {
+            "validations": {
+                "required": true,
+                "pattern": "[a-zA-Z ]*",
+                "minLength": 3,
+                "maxLength": 15
+            },
+            "messages": {
+                "length": "Please enter letters between 3 to 50 characters long.",
+                "required": "Organization Short Code is Required.",
+                "pattern": "Please enter only letters.",
+                "hint": "Please fill out this fields"
+            },
+            "tooltip": "Please fill out this field."
+
+        }
+    }
+   
+}

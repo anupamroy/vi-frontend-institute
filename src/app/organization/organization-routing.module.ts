@@ -50,6 +50,7 @@ import { ListQuotaTypeComponent } from './components/quota-type/list-quota-type/
 import { AddPaperTypeComponent } from './components/paper-type/add-paper-type/add-paper-type.component';
 import { EditPaperTypeComponent } from './components/paper-type/edit-paper-type/edit-paper-type.component';
 import { ListPaperTypeComponent } from './components/paper-type/list-paper-type/list-paper-type.component';
+import { AddOrganizationComponent } from './components/add-organization/add-organization.component';
 
 const routes: Routes = [
   {
@@ -82,8 +83,8 @@ const routes: Routes = [
       { path: 'add-course-type', component: AddCourseTypeComponent },
       { path: 'add-course-sub-type', component: AddCourseSubTypeComponent },
       { path: 'add-quota-type', component: AddQuotaTypeComponent },
-      { path: 'add-paper-type', component: AddPaperTypeComponent }
-      // { path: 'add-org', component: AddOrganizationComponent },
+      { path: 'add-paper-type', component: AddPaperTypeComponent },
+      { path: 'add-organization', component: AddOrganizationComponent },
     ],
   },
 

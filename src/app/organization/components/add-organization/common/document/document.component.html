@@ -1,0 +1,78 @@
+<mat-accordion *ngFor="let document of documentList">
+    <mat-expansion-panel class="my-1" style="background-color: bisque;">
+        <mat-expansion-panel-header>
+            <mat-panel-title> {{ document.documentType }} </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{ document.documentNumber }}</p>
+        <p>{{ document.documentRegistrationDate }}</p>
+        <div class="d-flex justify-content-end">
+            <button class="mx-3" mat-raised-button color="warn" (click)="removeDocument(document.id)">
+                Remove
+            </button>
+            <button mat-raised-button color="accent" (click)="editDocument(document.id)">
+                Edit
+            </button>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<div class="my-3">
+    <form [formGroup]="documentForm">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>Document Type</mat-label>
+                    <mat-select formControlName="documentType">
+                        <mat-option value="Primary">Primary</mat-option>
+                        <mat-option value="Secondary">Secondary</mat-option>
+                    </mat-select>
+
+                    <!-- cutom validation start-->
+                    <mat-hint>Please fill out the fields!</mat-hint>
+                    <mat-error
+                        *ngIf="documentForm.controls.documentType.hasError('email') && !documentForm.controls.documentType.hasError('required')">
+                        Please select a valid document type
+                    </mat-error>
+                    <mat-error *ngIf="documentForm.controls.documentType.hasError('required')">
+                        Document type <strong>required</strong>
+                    </mat-error>
+                    <!-- custom validation end -->
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>Document Number</mat-label>
+                    <input matInput formControlName="documentNumber" required />
+                    
+                    <!-- cutom validation start-->
+                    <mat-hint>Please fill out the fields!</mat-hint>
+                    <mat-error
+                        *ngIf="documentForm.controls.documentNumber.hasError('email') && !documentForm.controls.documentNumber.hasError('required')">
+                        Please enter a valid document number
+                    </mat-error>
+                    <mat-error *ngIf="documentForm.controls.documentNumber.hasError('required')">
+                        Document number <strong>required</strong>
+                    </mat-error>
+                    <!-- custom validation end -->
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <input type="file">
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>Valid Up To</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="documentRegistrationDate" />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button (click)="addDocument()" [disabled]="!documentForm.valid" mat-raised-button
+                color="primary">Add</button>
+        </div>
+    </form>
+</div>

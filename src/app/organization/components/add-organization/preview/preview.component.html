@@ -1,0 +1,110 @@
+<!-- <p>{{ organizationType?.organizationType }}</p>
+<p>{{basicDetails?.instituteTypeSelector}}</p>
+<p>{{basicDetails?.orgName}}</p>
+<p>{{basicDetails?.orgShortCode}}</p>
+<p>{{registrationDetails?.registrationNumber}}</p>
+<p>{{masterUserDetails?.emailAddress}}</p>
+<p>{{settingsDetails?.password}}</p>
+<br>
+<p *ngFor="let address of addressList">{{ address?.id }}</p>
+<p *ngFor="let document of documentList">{{ document?.documentNumber }}</p>
+<p *ngFor="let email of emailList">{{ email?.emailAddress }}</p>
+<p *ngFor="let phone of phoneList">{{ phone?.phoneNumber }}</p>
+<p *ngFor="let social of socialList">{{ social?.socialMediaLink }}</p> -->
+
+<mat-card class="my-3">
+    <h3>Organization Type</h3>
+    <p><strong>{{organizationType}}</strong></p>
+</mat-card>
+<mat-card class="my-3">
+    <h3>Basic Details</h3>
+    <p><strong>Institute Type : </strong>{{basicDetails?.instituteTypeSelector}}</p>
+    <p><strong>Organization Name : </strong>{{basicDetails?.orgName}}</p>
+    <p><strong>Organization Short Code : </strong>{{basicDetails?.orgShortCode}}</p>
+</mat-card>
+<mat-card class="my-3">
+    <h3>Contact Details</h3>
+    <mat-card class="mx-3 my-3">
+        <h4>Address List</h4>
+        <div *ngFor="let address of addressList">
+            <p><strong>Address Type : </strong>{{address?.addressTypeSelector}}</p>
+            <p><strong>Address : </strong>{{address?.address}}</p>
+        </div>
+    </mat-card>
+    <mat-card class="mx-3 my-3">
+        <h4>Phone List</h4>
+        <div *ngFor="let phone of phoneList; let i = index">
+            <label for="social">Number - {{i+1}}</label>
+            <p><strong>Phone Type : </strong>{{phone?.phoneType}}</p>
+            <p><strong>Phone Number : </strong>{{phone?.phoneNumber}}</p>
+            <p><strong>Time : </strong>{{phone?.time}}</p>
+            <p><strong>Shift : </strong>{{phone?.shift}}</p>
+            <p><strong>Days</strong></p>
+            <ul>
+                <li *ngFor="let day of phone?.daysSelector">{{day}}</li>
+            </ul>
+            <p><strong>Associated With : </strong>{{phone?.associatedWith}}</p>
+        </div>
+    </mat-card>
+    <mat-card class="mx-3 my-3">
+        <h4>Email List</h4>
+        <div *ngFor="let email of emailList; let i = index">
+            <label for="email">Number - {{i+1}}</label>
+            <p><strong>Email Type : </strong>{{email?.emailType}}</p>
+            <p><strong>Email Address : </strong>{{email?.emailAddress}}</p>
+            <p><strong>Email Text : </strong>{{email?.emailText}}</p>
+            <p><strong>Shift : </strong>{{email?.shift}}</p>
+            <p><strong>Associated With : </strong>{{email?.associatedWith}}</p>
+        </div>
+    </mat-card>
+    <mat-card class="mx-3 mx-3">
+        <h4>Social Handle List</h4>
+        <div *ngFor="let social of socialList; let i = index">
+            <label for="social">Number - {{i+1}}</label>
+            <p><strong>Social Media Type : </strong>{{social?.socialMediaType}}</p>
+            <p><strong>Social Media Link : </strong>{{social?.socialMediaLink}}</p>
+        </div>
+    </mat-card>
+</mat-card>
+<mat-card class="my-3">
+    <h3>Registration Details</h3>
+    <p><strong>Organization Category : </strong>{{registrationDetails?.organizationCategory}}</p>
+    <p><strong>Registration Number : </strong>{{registrationDetails?.registrationNumber}}</p>
+    <p><strong>Registration Date : </strong>{{registrationDetails?.registrationDate}}</p>
+    <p><strong>Affiliation Start Date : </strong>{{registrationDetails?.affiliationStartDate}}</p>
+    <p><strong>Affiliation End Date : </strong>{{registrationDetails?.affiliationEndDate}}</p>
+    <p><strong>Affiliation and Accredential : </strong>{{registrationDetails?.affAndAcc}}</p>
+    <p><strong>Certificate Number : </strong>{{registrationDetails?.certificateNumber}}</p>
+    <p><strong>Status : </strong>{{registrationDetails?.status}}</p>
+
+    <mat-card class="mx-3 my-3">
+        <h4>Document List</h4>
+        <div *ngFor="let document of documentList; let i = index">
+            <label for="document">Number - {{i+1}}</label>
+            <p><strong>Document Type : </strong>{{document?.documentType}}</p>
+            <p><strong>Document Number : </strong>{{document?.documentNumber}}</p>
+            <p><strong>Document Registration Date : </strong>{{document?.documentRegistrationDate}}</p>
+        </div>
+    </mat-card>
+</mat-card>
+<mat-card class="my-3">
+    <h3>Master User</h3>
+    <p><strong>First Name : </strong>{{masterUserDetails?.firstName}}</p>
+    <p><strong>Middle Name : </strong>{{masterUserDetails?.middleName}}</p>
+    <p><strong>Last Name : </strong>{{masterUserDetails?.lastName}}</p>
+    <p><strong>Email Address : </strong>{{masterUserDetails?.emailAddress}}</p>
+    <p><strong>Phone Number : </strong>{{masterUserDetails?.phoneNumber}}</p>
+</mat-card>
+<mat-card class="my-3">
+    <h3>Settings</h3>
+    <p><strong>Multifactor Authetication : </strong>{{settingsDetails?.multifactorAuthentication}}</p>
+    <p><strong>Password : </strong>{{settingsDetails?.password}}</p>
+    <p><strong>Modules : </strong></p>
+    <ul>
+        <li *ngFor="let module of settingsDetails?.moduleSelector">{{module}}</li>
+    </ul>
+</mat-card>
+<div class="mt-3 clearfix">
+    <button (click)="finalSubmit()" mat-raised-button matStepperNext color='primary'
+        class="float-right next">Final Submit</button>
+</div>

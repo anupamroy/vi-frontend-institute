@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   // api2: "https://1ofel67pn8.execute-api.ap-south-1.amazonaws.com/Prod",
   api2:"https://v9h57res1f.execute-api.ap-south-1.amazonaws.com/Prod",
-  api: 'https://rmxhxsszxg.execute-api.us-east-1.amazonaws.com/Prod/org'
+  api: 'https://rmxhxsszxg.execute-api.us-east-1.amazonaws.com/Prod/org',
+  orgAPI: 'https://ns8mvacvu1.execute-api.ap-south-1.amazonaws.com/Prod'
 };
 
 /*

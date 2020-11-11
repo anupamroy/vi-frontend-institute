@@ -1,0 +1,144 @@
+<mat-accordion *ngFor="let phone of phoneList">
+  <mat-expansion-panel class="my-1" style="background-color: bisque;">
+    <mat-expansion-panel-header>
+      <mat-panel-title> {{ phone.phoneType }} </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>{{ phone.phoneNumber }}</p>
+    <p>{{ phone.time }}</p>
+    <p>{{ phone.daysSelector }}</p>
+    <p>{{ phone.shift }}</p>
+    <p>{{ phone.associatedWith }}</p>
+    <div class="d-flex justify-content-end">
+      <button class="mx-3" mat-raised-button color="warn" (click)="removePhone(phone.id)">
+        Remove
+      </button>
+      <button mat-raised-button color="accent" (click)="editPhone(phone.id)">
+        Edit
+      </button>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div class="my-2">
+  <form [formGroup]="phoneForm">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Phone Number</mat-label>
+          <input matInput type="number" formControlName="phoneNumber" />
+
+          <!-- cutom validation start-->
+          <mat-hint>Please fill out the fields!</mat-hint>
+          <mat-error
+              *ngIf="phoneForm.controls.phoneNumber.hasError('email') && !phoneForm.controls.phoneNumber.hasError('required')">
+              Please enter a valid phone number
+          </mat-error>
+          <mat-error *ngIf="phoneForm.controls.phoneNumber.hasError('required')">
+              Phone number <strong>required</strong>
+          </mat-error>
+          <!-- custom validation end -->
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Phone Type</mat-label>
+          <mat-select formControlName="phoneType">
+            <mat-option value="Primary">Primary</mat-option>
+            <mat-option value="Secondary">Secondary</mat-option>
+            <mat-option value="Emergency">Emergency</mat-option>
+          </mat-select>
+
+          <!-- cutom validation start-->
+          <mat-hint>Please fill out the fields!</mat-hint>
+          <mat-error
+              *ngIf="phoneForm.controls.phoneType.hasError('email') && !phoneForm.controls.phoneType.hasError('required')">
+              Please enter a valid phone type
+          </mat-error>
+          <mat-error *ngIf="phoneForm.controls.phoneType.hasError('required')">
+              Phone Type <strong>required</strong>
+          </mat-error>
+          <!-- custom validation end -->
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Time</mat-label>
+          <input type="time" matInput formControlName="time" />
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Days</mat-label>
+          <mat-select multiple formControlName="daysSelector">
+            <mat-option value="false" (onSelectionChange)="toggleAll($event)"
+              >Select All</mat-option
+            >
+            <mat-option *ngFor="let day of days" [value]="day">{{
+              day
+            }}</mat-option>
+
+            <!-- cutom validation start-->
+            <mat-hint>Please fill out the fields!</mat-hint>
+            <mat-error
+                *ngIf="phoneForm.controls.daysSelector.hasError('email') && !phoneForm.controls.daysSelector.hasError('required')">
+                Please enter a valid days
+            </mat-error>
+            <mat-error *ngIf="phoneForm.controls.daysSelector.hasError('required')">
+                Days <strong>required</strong>
+            </mat-error>
+            <!-- custom validation end -->
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Shift</mat-label>
+          <mat-select formControlName="shift">
+            <mat-option value="Day">Day</mat-option>
+            <mat-option value="Evening">Evening</mat-option>
+            <mat-option value="Night">Night</mat-option>
+          </mat-select>
+
+          <!-- cutom validation start-->
+          <mat-hint>Please fill out the fields!</mat-hint>
+          <mat-error
+              *ngIf="phoneForm.controls.shift.hasError('email') && !phoneForm.controls.shift.hasError('required')">
+              Please enter a valid shift
+          </mat-error>
+          <mat-error *ngIf="phoneForm.controls.shift.hasError('required')">
+              Shift <strong>required</strong>
+          </mat-error>
+          <!-- custom validation end -->
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Associated with</mat-label>
+          <mat-select formControlName="associatedWith">
+            <mat-option *ngFor="let item of associatedPostList" value="{{item?.associated_post_name}}">{{item?.associated_post_name}}</mat-option>
+            <!-- <mat-option value="Dean">Dean</mat-option>
+            <mat-option value="Accountant">Accountant</mat-option> -->
+          </mat-select>
+
+          <!-- cutom validation start-->
+          <mat-hint>Please fill out the fields!</mat-hint>
+          <mat-error
+              *ngIf="phoneForm.controls.associatedWith.hasError('email') && !phoneForm.controls.associatedWith.hasError('required')">
+              Please enter a valid associated post
+          </mat-error>
+          <mat-error *ngIf="phoneForm.controls.associatedWith.hasError('required')">
+              Associated with <strong>required</strong>
+          </mat-error>
+          <!-- custom validation end -->
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button (click)="addPhone()" [disabled]="!this.phoneForm.valid" mat-raised-button color="primary">
+        Add
+      </button>
+    </div>
+  </form>
+</div>

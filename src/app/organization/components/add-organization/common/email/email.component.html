@@ -1,0 +1,130 @@
+<mat-accordion *ngFor="let emailForm of emailFormList">
+    <mat-expansion-panel class="my-1" style="background-color: bisque;">
+        <mat-expansion-panel-header>
+            <mat-panel-title> {{ emailForm.emailType }} </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>EMAIL TEXT : {{ emailForm.emailText }}</p>
+        <p>EMAIL ADDRESS : {{ emailForm.emailAddress }}</p>
+        <p>SHIFT : {{ emailForm.shift }}</p>
+        <p>ASSOCIATED WITH : {{ emailForm.associatedWith }}</p>
+        <div class="d-flex justify-content-end">
+            <button class="mx-3" mat-raised-button color="warn" (click)="removeEmail(emailForm.id)">
+                Remove
+            </button>
+            <button mat-raised-button color="accent" (click)="editEmail(emailForm.id)">
+                Edit
+            </button>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<div class="my-3">
+    <form [formGroup]="emailForm">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>Email Text</mat-label>
+                    <input matInput formControlName="emailText" />
+
+                    <!-- cutom validation start-->
+                    <mat-hint>Please fill out the fields!</mat-hint>
+                    <mat-error
+                        *ngIf="emailForm.controls.emailText.hasError('email') && !emailForm.controls.emailText.hasError('required')">
+                        Please enter a valid email text
+                    </mat-error>
+                    <mat-error *ngIf="emailForm.controls.emailText.hasError('required')">
+                        Email Text <strong>required</strong>
+                    </mat-error>
+                    <!-- custom validation end -->
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>Email Address</mat-label>
+                    <input matInput type="email" formControlName="emailAddress" />
+
+                    <!-- cutom validation start-->
+                    <mat-hint>Please fill out the fields!</mat-hint>
+                    <mat-error
+                        *ngIf="emailForm.controls.emailAddress.hasError('email') && !emailForm.controls.emailAddress.hasError('required')">
+                        Please enter a valid email Address
+                    </mat-error>
+                    <mat-error *ngIf="emailForm.controls.emailAddress.hasError('required')">
+                        Email Address <strong>required</strong>
+                    </mat-error>
+                    <!-- custom validation end -->
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>Email Type</mat-label>
+                    <mat-select formControlName="emailType">
+                        <mat-option value="Primary">Primary</mat-option>
+                        <mat-option value="Emergency">Emergency</mat-option>
+                        <mat-option value="Secondary">Secondary</mat-option>
+                    </mat-select>
+
+                    <!-- cutom validation start-->
+                    <mat-hint>Please fill out the fields!</mat-hint>
+                    <mat-error
+                        *ngIf="emailForm.controls.emailType.hasError('email') && !emailForm.controls.emailType.hasError('required')">
+                        Please enter a valid email type
+                    </mat-error>
+                    <mat-error *ngIf="emailForm.controls.emailType.hasError('required')">
+                        Email Type <strong>required</strong>
+                    </mat-error>
+                    <!-- custom validation end -->
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>Shift</mat-label>
+                    <mat-select formControlName="shift">
+                        <mat-option value="Day">Day</mat-option>
+                        <mat-option value="Evening">Evening</mat-option>
+                        <mat-option value="Night">Night</mat-option>
+                    </mat-select>
+
+                    <!-- cutom validation start-->
+                    <mat-hint>Please fill out the fields!</mat-hint>
+                    <mat-error
+                        *ngIf="emailForm.controls.shift.hasError('email') && !emailForm.controls.shift.hasError('required')">
+                        Please enter a valid shift
+                    </mat-error>
+                    <mat-error *ngIf="emailForm.controls.shift.hasError('required')">
+                        Shift <strong>required</strong>
+                    </mat-error>
+                    <!-- custom validation end -->
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance='fill' class="w-100">
+                    <mat-label>Associated with</mat-label>
+                    <mat-select formControlName="associatedWith">
+                        <mat-option *ngFor="let item of associatedPostList" value="{{item?.associated_post_name}}">{{item?.associated_post_name}}</mat-option>
+                        <!-- <mat-option value="Dean">Dean</mat-option>
+                        <mat-option value="Accountant">Accountant</mat-option> -->
+                    </mat-select>
+
+                    <!-- cutom validation start-->
+                    <mat-hint>Please fill out the fields!</mat-hint>
+                    <mat-error
+                        *ngIf="emailForm.controls.associatedWith.hasError('email') && !emailForm.controls.associatedWith.hasError('required')">
+                        Please enter a valid associated post
+                    </mat-error>
+                    <mat-error *ngIf="emailForm.controls.associatedWith.hasError('required')">
+                        Associated with <strong>required</strong>
+                    </mat-error>
+                    <!-- custom validation end -->
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button (click)="addEmail()" [disabled]="!this.emailForm.valid" mat-raised-button color="primary">
+                Add
+            </button>
+        </div>
+    </form>
+</div>

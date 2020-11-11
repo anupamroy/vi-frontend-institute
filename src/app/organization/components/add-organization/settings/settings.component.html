@@ -1,0 +1,59 @@
+<mat-card class="my-3">
+    <h2>Settings</h2>
+    <form [formGroup]="sixthFormGroup">
+
+        <mat-radio-group formControlName="authType" aria-label="Select an option">
+            <div class="row my-3">
+                <div class="col-6">
+                    <mat-radio-button value="mfa">
+                        Multifactor Authentication</mat-radio-button>
+                </div>
+                <div class="col-6">
+                    <mat-radio-button value="password">Password</mat-radio-button>
+                </div>
+            </div>
+        </mat-radio-group>
+
+        <!-- <div class="row">
+            <div class="col-6">
+                <mat-checkbox formControlName="multifactorAuthentication">Multifactor Authentication</mat-checkbox>
+            </div>
+            <div class="col-6">
+                <mat-checkbox formControlName="passwordSetting">Password</mat-checkbox>
+            </div>
+        </div> -->
+        <div *ngIf="sixthFormGroup.controls.authType.value == 'password'" class="row">
+            <div class="col-12">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password">
+                </mat-form-field>
+            </div>
+            <!-- <div class="col-6">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput type="password" formControlName="confirmPassword">
+                </mat-form-field>
+            </div> -->
+        </div>
+        <h4 class="my-2">Modules</h4>
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Modules</mat-label>
+                    <mat-select multiple formControlName="moduleSelector">
+                        <mat-option value="false" (onSelectionChange)="toggleAll($event)">Select All</mat-option>
+                        <mat-option *ngFor="let module of modules" [value]="module">{{ module }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-card>
+<div class="my-3 clearfix">
+    <button mat-raised-button color='primary' matStepperPrevious class="back">Back Step</button>
+    <button (click)="displayData()" [disabled]="!this.sixthFormGroup.valid" mat-raised-button color='primary'
+        matStepperNext class="float-right next">
+        Next Step
+    </button>
+</div>

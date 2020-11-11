@@ -1,778 +1,128 @@
-<div class="bg-light-blue" style="height: auto;">
-    <div class="page-content">
-      <div class="wizard-v4-content col-lg-8">
-        <div class="wizard-form">
-          <div class="wizard-header"></div>
-          <form class="form-register wizard" action="#" method="post">
-            <div id="form-total">
-              <!-- Start -->
-              <!-- <div class="steps clearfix">
-                <ul role="tablist">
-                  <li role="tab" aria-disabled="false" disabled>
-                    <a
-                      id="form-total-t-0"
-                      (click)="step(0)"
-                      aria-controls="form-total-p-0"
-                      ><span class="current-info audible"> </span>
-                      <div class="title">
-                        <span
-                          class="step-icon"
-                          [ngClass]="
-                            currentStep === 0 || validatedStep >= 0 ? 'back' : ''
-                          "
-                          ><i>1</i></span
-                        >
-                        <span class="step-text">Step 1</span>
-                      </div></a
-                    >
-                  </li>
-                  <li role="tab" aria-disabled="false">
-                    <a
-                      id="form-total-t-1"
-                      (click)="step(1)"
-                      aria-controls="form-total-p-1"
-                      ><div class="title">
-                        <span
-                          class="step-icon"
-                          [ngClass]="
-                            currentStep === 1 || validatedStep >= 1 ? 'back' : ''
-                          "
-                          ><i class="">2</i></span
-                        >
-                        <span class="step-text">Step 2</span>
-                      </div></a
-                    >
-                  </li>
-                  <li role="tab" aria-disabled="false">
-                    <a
-                      id="form-total-t-2"
-                      (click)="step(2)"
-                      aria-controls="form-total-p-2"
-                      ><div class="title">
-                        <span
-                          class="step-icon"
-                          [ngClass]="
-                            currentStep === 2 || validatedStep >= 2 ? 'back' : ''
-                          "
-                          ><i class="">3</i></span
-                        >
-                        <span class="step-text">Step 3</span>
-                      </div></a
-                    >
-                  </li>
-                  <li role="tab" aria-disabled="false">
-                    <a
-                      id="form-total-t-3"
-                      (click)="step(3)"
-                      aria-controls="form-total-p-3"
-                      ><div class="title">
-                        <span
-                          class="step-icon"
-                          [ngClass]="
-                            currentStep === 3 || validatedStep >= 3 ? 'back' : ''
-                          "
-                          ><i class="">4</i></span
-                        >
-                        <span class="step-text">Step 4</span>
-                      </div></a
-                    >
-                  </li>
-                  <li role="tab" aria-disabled="false">
-                    <a
-                      id="form-total-t-4"
-                      (click)="step(4)"
-                      aria-controls="form-total-p-4"
-                      ><div class="title">
-                        <span
-                          class="step-icon"
-                          [ngClass]="
-                            currentStep === 4 || validatedStep >= 4 ? 'back' : ''
-                          "
-                          ><i class="">5</i></span
-                        >
-                        <span class="step-text">Step 5</span>
-                      </div></a
-                    >
-                  </li>
-                  <li role="tab" aria-disabled="false">
-                    <a
-                      id="form-total-t-5"
-                      (click)="step(5)"
-                      aria-controls="form-total-p-5"
-                      ><div class="title">
-                        <span
-                          class="step-icon"
-                          [ngClass]="
-                            currentStep === 5 || validatedStep >= 5 ? 'back' : ''
-                          "
-                          ><i class="">6</i></span
-                        >
-                        <span class="step-text">Step 6</span>
-                      </div></a
-                    >
-                  </li>
-                  <li role="tab" aria-disabled="false" class="last">
-                    <a
-                      id="form-total-t-6"
-                      (click)="step(6)"
-                      aria-controls="form-total-p-6"
-                      ><div class="title">
-                        <span
-                          class="step-icon"
-                          [ngClass]="
-                            currentStep === 6 || validatedStep >= 6 ? 'back' : ''
-                          "
-                          ><i class="">7</i></span
-                        >
-                        <span class="step-text">Step 7</span>
-                      </div></a
-                    >
-                  </li>
-                </ul>
-              </div> -->
-              <div class="content clearfix">
-                <form>
-                  <section>
-                    <div class="inner">
-                      <h3>Preview</h3>
-                      <div class="form-row">
-                        <div class="bg-light p-4">
-                          <div class="row">
-                            <div class="col-lg-12 col-sm-12">
-                              <div class="row">
-                                <div class="col-lg-12 col-sm-12">
-                                  <h5
-                                    data-toggle="collapse"
-                                    data-target="#basic"
-                                    class="pt-1 text-blue text-left text-capitalize"
-                                  >
-                                    <i class="fas fa-arrows-alt"></i> Basic
-                                    Details
-                                  </h5>
-                                  <hr />
-                                </div>
-                              </div>
-                              <div
-                                class="row position-relative collapse show"
-                                id="basic"
-                              >
-                                <div class="col-lg-9 col-sm-12">
-                                  <div class="row">
-                                    <div
-                                      class="col-lg-4 cl-sm-12 mb-3 form-group"
-                                    >
-                                      <label>Organization Type</label>
-                                      <select name="" id="" class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info">
-                                          <option value="{{selectedOrganization.organization.orgType}}">{{selectedOrganization.organization.orgType}}</option>
-                                          <option *ngFor="let type of orgType" value="{{type}}">{{type}}</option>
-                                          <!-- <option value="Seller">Seller</option>
-                                          <option value="Institute">Institute</option> -->
-                                      </select>
-                                      <!-- <h5
-                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                      >
-                                        {{
-                                          addOrganizationForm.controls.orgType
-                                            .value
-                                        }}
-                                      </h5> -->
-                                    </div>
-                                    <div *ngIf='selectedOrganization.organization.orgType === "Institute"'
-                                      class="col-lg-8 cl-sm-12 mb-3 form-group"
-                                    >
-                                      <label>Institute Type</label>
-                                      <h5
-                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                      >
-                                        <span *ngFor = "let institute of selectedOrganization.organization.basicDetails.instituteType"
-                                         
-                                          >{{institute}}</span
-                                        >
-                                      </h5>
-                                    </div>
-  
-                                    <div class="col-lg-12 col-sm-12">
-                                      <div class="form-group">
-                                        <label for="multipleSelect">
-                                          Organization Name
-                                        </label>
-                                        <input type="text" name="orgName" [(ngModel)]="selectedOrganization.organization.basicDetails.organizationName" form-control class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60">
-                                        <!-- <h5
-                                          class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                        >
-                                          {{
-                                            addOrganizationForm.controls
-                                              .basicDetails['controls']
-                                              .organizationName.value
-                                          }}
-                                        </h5> -->
-                                      </div>
-                                    </div>
-                                    <div class="col-lg-8 col-sm-12">
-                                      <div class="form-group">
-                                        <label for="multipleSelect">
-                                          Organization Short Code
-                                        </label>
-                                        <input type="text" name="orgShort" [(ngModel)]="selectedOrganization.organization.basicDetails.organizationCode" form-control class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"> 
-                                        <!-- <h5
-                                          class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                        >
-                                          {{
-                                            addOrganizationForm.controls
-                                              .basicDetails['controls']
-                                              .organizationCode.value
-                                          }}
-                                        </h5> -->
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-  
-                                <div class="col-lg-3 col-sm-12">
-                                  <div class="form-group">
-                                    <label for="multipleSelect">
-                                      Organization Picture </label
-                                    ><br />
-                                    <img
-                                      id="imgPlaceholder"
-                                      class="img-fluid"
-                              
-                                      alt="image upload"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- basic details end end-->
-  
-                          <div class="row">
-                            <div class="col-lg-12 col-sm-12">
-                              <div class="row">
-                                <div class="col-lg-12 col-sm-12">
-                                  <hr />
-                                  <h5
-                                    data-toggle="collapse"
-                                    data-target="#contactdetails"
-                                    class="pt-1 text-blue text-left text-capitalize"
-                                  >
-                                    <i class="fas fa-arrows-alt"></i> Contact
-                                    Details
-                                  </h5>
-                                  <hr />
-                                </div>
-                              </div>
-                              <div
-                                class="row position-relative collapse"
-                                id="contactdetails"
-                              >
-                                <!-- Address Display -->
-                                <div class="row"
-                                    *ngFor="let addr of selectedOrganization.organization.contactDetails.address"
-                                >
-                                  <div class="col-lg-6 cl-sm-12 mb-3 form-group">
-                                    <label for="addressFor">Address For</label>
-                                    <input type="text" name="addFor" [(ngModel)]="addr.addressFor"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                    >
-                                    
-                                    
-                                  </div>
-  
-                                  <div class="col-lg-6 col-sm-12">
-                                    <div class="form-group">
-                                      <label for="address"> Address </label>
-                                      <input type="text" name="address" [(ngModel)]="addr.address"
-                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                      >
-                                       
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- Address Display Ends -->
-                                <!-- Phone Display Starts -->
-                                <div
-                                  class="form-row col-lg-12"
-                                  *ngFor="let phone of selectedOrganization.organization.contactDetails.phone"
-                                >
-                                  <div class="col-lg-4 col-sm-12 mb-3 form-group">
-                                    <label for="phoneno">Phone Text</label>
-                                    <input name="phoneText" [(ngModel)]="phone.phoneText"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                    >
-                                     
-                                   
-                                  </div>
-                                  <div class="col-lg-4 col-sm-12 mb-3 form-group">
-                                    <label for="addressFor">Phone Number</label>
-                                    <input type="text" name="phoneNo" [(ngModel)]="phone.phoneNumber"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                    >
-                                   
-            
-                                  </div>
-                                  <div class="col-lg-4 col-sm-12 mb-3 form-group">
-                                    <label for="phoneType">Phone Type</label>
-                                    <input name="phoneType" [(ngModel)]="phone.phoneType"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                    >
-                                     
-                                   
-                                  </div>
-                                  <div class="col-lg-3 col-sm-12 mb-3 form-group">
-                                    <label for="timings">Timings</label>
-                                    <input type="text" name="timings" [(ngModel)]="phone.timing"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                    >
-                                     
-                                  </div>
-                                  <div class="col-lg-9 col-sm-12 mb-3 form-group">
-                                    <label for="days">Days</label>
-                                    <h5
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                    >
-                                      <span *ngFor="let days of phone.days">{{days}}</span>
-                                       
-                                    </h5>
-                                  </div>
-                                  <div class="col-lg-4 col-sm-12 mb-3 form-group">
-                                    <label for="shift">Shift</label>
-                                    <input name="shift" [(ngModel)]="phone.shift"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                    >
-                                     
-                                
-                                  </div>
-                                  <div class="col-lg-4 col-sm-12 mb-3 form-group">
-                                    <label for="associatedWith"
-                                      >Associated with</label
-                                    >
-                                    <input name="associatedWith" [(ngModel)]="phone.associatedWith"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                    >
-                                   
-                                   
-                                  </div>
-                                </div>
-                                <!-- Phone Display Ends -->
-                                <hr />
-                                <!-- Email Display -->
-                                <div
-                                  class="form-row col-lg-12"
-                                  *ngFor = "let email of selectedOrganization.organization.contactDetails.email"
-                                >
-                                  <div class="col-lg-4 col-sm-12 mb-3 form-group">
-                                    <label for="emailText">Email Text</label>
-                                    <input type="text" name="emailText" [(ngModel)]="email.emailText"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                    >
-                                      
-                                  </div>
-                                  <div class="col-lg-4 col-sm-12 mb-3 form-group">
-                                    <label for="emailAddress"
-                                      >Email Address</label
-                                    >
-                                    <input type="text" name="emailAddress" [(ngModel)]="email.emailAddress"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                    >
-                                      
-                                  </div>
-                                  <div class="col-lg-4 col-sm-12 mb-3 form-group">
-                                    <label for="emailType">Email Type</label>
-                                    <select name="" class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info" id="">
-                                        <option value="email.emailType">{{email.emailType}}</option>
-                                        <option *ngFor="let type of emailType " value="{{type}}">{{type}}</option>
-                                    </select>
-                        
-                                      
-                                
-                                  </div>
-                                  <div class="col-lg-4 col-sm-12 mb-3 form-group">
-                                    <label for="shift">Shift</label>
-                                    <input name="shift" [(ngModel)]="email.shift"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                    >
-                                    
-                                
-                                  </div>
-                                  <div class="col-lg-4 col-sm-12 mb-3 form-group">
-                                    <label for="associatedWith"
-                                      >Associated with</label
-                                    >
-                                    <input name="associatedWith" [(ngModel)]="email.associatedWith"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                    >
-                                     
-                                   
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- Contact details end end-->
-  
-                          <div class="row">
-                            <div class="col-lg-12 col-sm-12">
-                              <div class="row">
-                                <div class="col-lg-12 col-sm-12">
-                                  <hr />
-                                  <h5
-                                    data-toggle="collapse"
-                                    data-target="#regMainDetails"
-                                    class="pt-1 text-blue text-left text-capitalize"
-                                  >
-                                    <i class="fas fa-arrows-alt"></i>
-                                    Registration Details
-                                  </h5>
-                                  <hr />
-                                </div>
-                              </div>
-                              <div
-                                class="row position-relative collapse"
-                                id="regMainDetails"
-                              >
-                                <div class="col-lg-12 col-sm-12">
-                                  <div class="row">
-                                    <div
-                                      class="col-lg-4 cl-sm-12 mb-3 form-group"
-                                    >
-                                      <label for="orgCategory"
-                                        >Organization Category</label
-                                      >
-                                      <input name="orgCategory" [(ngModel)]=" this.selectedOrganization.organization.registrationDetails.organizationCategory"
-                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                      >
-                                       
-                                     
-                                    </div>
-                                    <div
-                                      class="col-lg-4 cl-sm-12 mb-3 form-group"
-                                    >
-                                      <label for="regNo"
-                                        >Registration Number</label
-                                      >
-                                      <input type="text" name="regNo" [(ngModel)]="this.selectedOrganization.organization.registrationDetails.registrationNumber"
-                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                      >
-                                       
-                                    
-                                    </div>
-  
-                                    <div class="col-lg-4 col-sm-12">
-                                      <div class="form-group">
-                                        <label for="regDoc">
-                                          Registration Document
-                                        </label>
-                                        <h5
-                                          class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                        >
-                                         
-                                        </h5>
-                                      </div>
-                                    </div>
-                                    <div class="col-lg-4 col-sm-12">
-                                      <div class="form-group">
-                                        <label for="multipleSelect">
-                                          Valid Up to
-                                        </label>
-                                        <input type="date" name="validUpto" [(ngModel)]="selectedOrganization.organization.registrationDetails.validUpto"
-                                          class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                        >
-                                          
-                                        
-                                      </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                      <hr />
-                                    </div>
-                                  </div>
-                                  <div
-                                    class="row"
-                                    *ngFor="let reg of selectedOrganization.organization.registrationDetails.additionalDocument"
-                                  >
-                                    <div
-                                      class="col-lg-4 cl-sm-12 mb-3 form-group"
-                                    >
-                                      <label for="docType">Document Type</label>
-                                      <input name="docType" [(ngModel)]="reg.documentType"
-                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                      >
-                                        
-                        
-                                    </div>
-                                    <div
-                                      class="col-lg-4 cl-sm-12 mb-3 form-group"
-                                    >
-                                      <label for="docNo">Document Number</label>
-                                      <input type="text" name="docNo" [(ngModel)]="reg.documentNumber"
-                                        class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                      >
-                                       
-                                    </div>
-  
-                                    <div class="col-lg-4 col-sm-12">
-                                      <div class="form-group">
-                                        <label for="regDoc">
-                                          Registration Document
-                                        </label>
-                                        <h5
-                                          class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                        >
-                                         
-                                        </h5>
-                                      </div>
-                                    </div>
-                                    <div class="col-lg-4 col-sm-12">
-                                      <div class="form-group">
-                                        <label for="multipleSelect">
-                                          Valid Up to
-                                        </label>
-                                        <input type="date" name="validUpTo" [(ngModel)]="reg.validUpto"
-                                          class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                        >
-                                         
-                                    
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- Registration details end -->
-  
-                          <div class="row">
-                            <div class="col-lg-12 col-sm-12">
-                              <div class="row">
-                                <div class="col-lg-12 col-sm-12">
-                                  <hr />
-                                  <h5
-                                    data-toggle="collapse"
-                                    data-target="#affiliation"
-                                    class="pt-1 text-blue text-left text-capitalize"
-                                  >
-                                    <i class="fas fa-arrows-alt"></i>
-                                    Affiliation/Accreditation Details
-                                  </h5>
-                                  <hr />
-                                </div>
-                              </div>
-                              <div
-                                class="row position-relative collapse"
-                                id="affiliation"
-                              >
-                                <div class="col-lg-4 cl-sm-12 mb-3 form-group">
-                                  <label>From Date</label>
-                                  <input type="date" name="fromDate" [(ngModel)]="this.selectedOrganization.organization.registrationDetails.accreditionFrom"
-                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                  >
-                                    
-                                  
-                                </div>
-                                <div class="col-lg-4 cl-sm-12 mb-3 form-group">
-                                  <label>To Date</label>
-                                  <input type="date" name="toDate" [(ngModel)]="this.selectedOrganization.organization.registrationDetails.accreditionTo"
-                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                  >
-                                   
-                                  
-                                </div>
-  
-                                <div class="col-lg-4 col-sm-12">
-                                  <div class="form-group">
-                                    <label> Issuing Authority </label>
-                                    <input type="text" name="issuingAuthority" [(ngModel)]="this.selectedOrganization.organization.registrationDetails.issuingAuthority"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                    >
-                                     
-                                  </div>
-                                </div>
-                                <div class="col-lg-2 col-sm-12">
-                                  <div class="form-group">
-                                    <label for="grade"> Grade </label>
-                                    <input type="text" name="grade" [(ngModel)]="this.selectedOrganization.organization.registrationDetails.grade"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                    >
-                                      
-                                   
-                                  </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-12">
-                                  <div class="form-group">
-                                    <label for="grade">
-                                      Certificate Document
-                                    </label>
-                                    <h5
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                    >
-                                     
-                                    </h5>
-                                  </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-12">
-                                  <div class="form-group">
-                                    <label for="grade">
-                                      Certificate Number
-                                    </label>
-                                    <input type="text" name="certificateNumber" [(ngModel)]="this.selectedOrganization.organization.registrationDetails.certificateNumber"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                    >
-                                     
-                                
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- Affiliation/Accreditation details end -->
-  
-                          <div class="row">
-                            <div class="col-lg-12 col-sm-12">
-                              <div class="row">
-                                <div class="col-lg-12 col-sm-12">
-                                  <hr />
-                                  <h5
-                                    data-toggle="collapse"
-                                    data-target="#setting"
-                                    class="pt-1 text-blue text-left text-capitalize"
-                                  >
-                                    <i class="fas fa-arrows-alt"></i> Setting
-                                  </h5>
-                                  <hr />
-                                </div>
-                              </div>
-                              <div
-                                class="row position-relative collapse"
-                                id="setting"
-                              >
-                                <div class="col-lg-4 cl-sm-12 mb-3 form-group">
-                                  <label>Authentication</label>
-                                  <h5
-                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                  >
-                                   
-                                  </h5>
-                                </div>
-                                <div class="col-lg-8 col-sm-12">
-                                  <div class="form-group">
-                                    <label for="grade"> Modules </label>
-                                    <h5
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                    >
-                                      <span *ngFor="let mod of selectedOrganization.organization.settings.modules">{{mod}}</span>
-                                      
-                                    </h5>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- Setting end-->
-  
-                          <div class="row">
-                            <div class="col-lg-12 col-sm-12">
-                              <div class="row">
-                                <div class="col-lg-12 col-sm-12">
-                                  <hr />
-                                  <h5
-                                    data-toggle="collapse"
-                                    data-target="#masterUser"
-                                    class="pt-1 text-blue text-left text-capitalize"
-                                  >
-                                    <i class="fas fa-arrows-alt"></i> Master User
-                                  </h5>
-                                  <hr />
-                                </div>
-                              </div>
-                              <div
-                                class="row position-relative collapse"
-                                id="masterUser"
-                              >
-                                <div class="col-lg-4 cl-sm-12 mb-3 form-group">
-                                  <label>First Name</label>
-                                  <input type="text" name="firstName" [(ngModel)]="selectedOrganization.organization.userDetails.firstName"
-                                    class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info"
-                                  >
-                                   
-                                
-                                </div>
-                                <div class="col-lg-4 col-sm-12">
-                                  <div class="form-group">
-                                    <label> Middle Name </label>
-                                    <input type="text" name="middleName" [(ngModel)]="selectedOrganization.organization.userDetails.middleName"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                    >
-                                     
-                                    
-                                  </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-12">
-                                  <div class="form-group">
-                                    <label> Last Name </label>
-                                    <input type="text" name="lastName" [(ngModel)]="selectedOrganization.organization.userDetails.lastName"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                    >
-                                     
-                                  </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-12">
-                                  <div class="form-group">
-                                    <label> Email Address </label>
-                                    <input type="text" name="emailAddress" [(ngModel)]="selectedOrganization.organization.userDetails.emailAddress"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                    >
-                                      
-                                    
-                                  </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-12">
-                                  <div class="form-group">
-                                    <label> Phone Number </label>
-                                    <input type="text" name="phoneNumber" [(ngModel)] ="selectedOrganization.organization.userDetails.phoneNumber"
-                                      class="bg-white form-control form-control-plaintext p-2 priview-multi scroll-60 text-info scroll-60"
-                                    >
-                                     
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- Setting end-->
-                        </div>
-                      </div>
-                    </div>
-                    <!-- end module multiselect section -->
-                  </section>
-                </form>
-                <footer class="footer-bottom">
-                  <a href="#">
-                    <img
-                      src="/assets/images/float-support.png"
-                      alt="support"
-                      class="float-support"
-                    />
-                  </a>
-                  <a href="#"
-                    ><img
-                      src="/assets/images/float-chat.png"
-                      alt="chat"
-                      class="float-chat"
-                    />
-                  </a>
-                </footer>
-              </div>
-              <div class="actions clearfix">
-                <ul role="menu" aria-label="Pagination">
-                  <li class="btn btn-success">
-                    <a role="menuitem" (click)="onSubmit()">Submit</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
+<h2 mat-dialog-title>Organization Details</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="mx-5 my-5" style="min-width: 60%;">
+    <mat-card class="my-3">
+      <h3>Organization Type</h3>
+      <p><strong>{{basicDetails?.org_type}}</strong></p>
+    </mat-card>
+    <div *ngIf="editing == 'basicdetail'; else bdviewMode">
+     <app-basic-details [secondFormGroup]="secondFormGroup" [editMode]="editMode" (cancelEdit)="cancelEditMode($event)"></app-basic-details>
     </div>
-  </div>
+    
+    <ng-template #bdviewMode>
+      <mat-card class="my-3">
+        <h3>Basic Details</h3>
+        <p><strong>Institute Type : </strong>{{basicDetails?.institute_type}}</p>
+        <p><strong>Organization Name : </strong>{{basicDetails?.org_name}}</p>
+        <p><strong>Organization Short Code : </strong>{{basicDetails?.org_short_code}}</p>
+        <!-- <app-basic-details></app-basic-details> -->
+        <div class="d-flex justify-content-end">
+          <button mat-raised-button color="accent" (click)="editBasicDetails()">
+            Edit
+          </button>
+        </div>
+    </mat-card>
+    </ng-template>
   
+    <mat-card class="my-3">
+      <h3>Address List</h3>
+      <div *ngFor="let address of addressList">
+        <p><strong>Address Type : </strong>{{address?.address_for}}</p>
+        <p><strong>Address : </strong>{{address?.address}}</p>
+    </div>
+    <div class="d-flex justify-content-end">
+    
+      <button mat-raised-button color="accent" (click)="editAddress()">
+        Edit
+      </button>
+    </div>
+    </mat-card>
+    <mat-card class="my-3">
+      <h3>Phone List</h3>
+      <div *ngFor="let phone of phoneList; let i = index">
+        <label for="social">Number - {{i+1}}</label>
+        <p><strong>Phone Type : </strong>{{phone?.phone_type}}</p>
+        <p><strong>Phone Number : </strong>{{phone?.phone_number}}</p>
+        <p><strong>Time : </strong>{{phone?.phone_timings}}</p>
+        <p><strong>Shift : </strong>{{phone?.phone_availability_shift}}</p>
+        <p><strong>Days</strong></p>
+        <ul>
+            <li *ngFor="let day of phone?.phone_availability_days">{{day}}</li>
+        </ul>
+        <!-- <p><strong>Associated With : </strong>{{phone?.associatedWith}}</p> -->
+    </div>
+    <div class="d-flex justify-content-end">
+    
+      <button mat-raised-button color="accent" (click)="editPhone()">
+        Edit
+      </button>
+    </div>
+    </mat-card>
+    <mat-card class="my-3">
+      <h3>Email List</h3>
+      <div *ngFor="let email of emailList; let i = index">
+        <label for="email">Number - {{i+1}}</label>
+        <p><strong>Email Type : </strong>{{email?.email_type}}</p>
+        <p><strong>Email Address : </strong>{{email?.email}}</p>
+        <p><strong>Email Text : </strong>{{email?.email_text}}</p>
+        <p><strong>Shift : </strong>{{email?.email_availability_shift}}</p>
+        <p><strong>Associated With : </strong>{{email?.associated_with}}</p>
+    </div>
+    <div class="d-flex justify-content-end">
+  
+      <button mat-raised-button color="accent" (click)="editEmail()">
+        Edit
+      </button>
+    </div>
+    </mat-card>
+    <mat-card class="my-3">
+      <h3>Social Handle List</h3>
+      <div *ngFor="let social of socialList; let i = index">
+        <label for="social">Number - {{i+1}}</label>
+        <p><strong>Social Media Type : </strong>{{social?.social_media}}</p>
+        <p><strong>Social Media Link : </strong>{{social?.social_media_link_handle}}</p>
+    </div>
+    <div class="d-flex justify-content-end">
+    
+      <button mat-raised-button color="accent" (click)="editSocial()">
+        Edit
+      </button>
+    </div>
+    </mat-card>
+    <mat-card class="my-3">
+      <h3>Registartion Details</h3>
+      <p><strong>Organization Category : </strong>{{registrationDetails?.orgCategory}}</p>
+      <p><strong>Registration Number : </strong>{{registrationDetails?.registrationNumber}}</p>
+      <p><strong>Registration Date : </strong>{{registrationDetails?.registrationDate}}</p>
+      <p><strong>Affiliation Start Date : </strong>{{registrationDetails?.affiliationStartDate}}</p>
+      <p><strong>Affiliation End Date : </strong>{{registrationDetails?.affiliationEndDate}}</p>
+      <p><strong>Affiliation and Accredential : </strong>{{registrationDetails?.affAndAcc}}</p>
+      <p><strong>Certificate Number : </strong>{{registrationDetails?.certificateNumber}}</p>
+      <p><strong>Status : </strong>{{registrationDetails?.status}}</p>
+      <div class="d-flex justify-content-end">
+        <button mat-raised-button color="accent" (click)="editRegistration()">
+          Edit
+        </button>
+      </div>
+    </mat-card>
+    <mat-card class="my-3">
+      <h3>Document List</h3>
+      <div *ngFor="let document of documentList; let i = index">
+        <label for="document">Number - {{i+1}}</label>
+        <p><strong>Document Type : </strong>{{document?.docType}}</p>
+        <p><strong>Document Number : </strong>{{document?.docNumber}}</p>
+        <p><strong>Document Registration Date : </strong>{{document?.validUpto}}</p>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button mat-raised-button color="accent" (click)="editDoc()">
+        Edit
+      </button>
+    </div>
+    </mat-card>
+  
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
+</mat-dialog-actions>

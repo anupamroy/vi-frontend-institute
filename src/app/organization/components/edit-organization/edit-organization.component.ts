@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+const jsonData = require('../add-organization/common/Validations/org_fields.json');
 import { OrganizationModel } from '../../../shared/models/organization';
 import { EditOrganizationService } from '../../services/edit-organization.service'
-import  Organization  from '../../../shared/models/organization'
+import Organization from '../../../shared/models/organization'
+import { forkJoin } from 'rxjs';
+import Swal from 'sweetalert2';
+import { AddOrganizationService } from '../../services/add-organization.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { validatorForFormControl } from '../add-organization/common/Validations/MyErrorStateMatcher';
 
 @Component({
   selector: 'app-edit-organization',
@@ -10,21 +16,38 @@ import  Organization  from '../../../shared/models/organization'
   styleUrls: ['./edit-organization.component.scss']
 })
 export class EditOrganizationComponent implements OnInit {
+  editData: any;
+  editMode: { editing: boolean; editData: any; };
 
-  constructor(private editOrgService: EditOrganizationService) {}
-  instituteTypeList = []
-  moduleList = []
-  selectedOrganization : Organization
-  orgType = []
-  emailType = []
+  constructor(private formBuilder: FormBuilder, private addOrganizationService: AddOrganizationService, private editOrgService: EditOrganizationService, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  id : string = '8f35eb00-185e-11eb-bafc-474e42308503';
 
-  processObjUpdated(object: Organization){
+  secondFormGroup: FormGroup;
+
+  organizationType;
+  basicDetails;
+  addressList;
+  documentList;
+  emailList;
+  phoneList;
+  socialList;
+  registrationDetails;
+  masterUserDetails;
+  settingsDetails;
+
+  orgKey;
+
+  organizationFields;
+
+  editing: any = { mode: "", editData: {} };
+
+  id: string = '8f35eb00-185e-11eb-bafc-474e42308503';
+
+  processObjUpdated(object: Organization) {
     var attribute = [];
     var value = [];
     for (const key in object) {
-      if (key !== 'itemId') {
+      if (key !== 'orgHash' && key != 'associated_with_org') {
         attribute.push(key);
         value.push(object[key]);
       }
@@ -37,61 +60,168 @@ export class EditOrganizationComponent implements OnInit {
     }
   }
 
-  onSubmit(){
-    this.editOrgService.updateOrganizationById(this.id,this.processObjUpdated(this.selectedOrganization)).subscribe();
+  onSubmit() {
+    // this.editOrgService.updateOrganizationById(this.id,this.processObjUpdated(this.selectedOrganization)).subscribe();
   }
 
-  ngOnInit(){
+  ngOnInit() {
+    this.organizationFields = jsonData;
+    console.log(this.data.dataKey, this.data.basicDetails);
+    this.basicDetails = this.data.basicDetails;
+    let apiArray: Array<any> = [];
+    apiArray.push(this.addOrganizationService.getAddressByID(this.data.dataKey));
+    apiArray.push(this.addOrganizationService.getEmailByID(this.data.dataKey));
+    apiArray.push(this.addOrganizationService.getPhoneByID(this.data.dataKey));
+    apiArray.push(this.addOrganizationService.getRegistration(this.data.dataKey));
+    apiArray.push(this.addOrganizationService.getAdditionalDocumnet(this.data.dataKey));
+    apiArray.push(this.addOrganizationService.getSocialByID(this.data.dataKey));
 
-    this.editOrgService.getOrganizationById(this.id).subscribe((res)=> {
-      let body = JSON.parse(res).Items[0]
-      console.log(body);
-      this.selectedOrganization  = new Organization(body)
-      console.log('ddsf',this.selectedOrganization);
-      
-      
-    })
-    this.editOrgService.getOrganization().subscribe(
-      (res) => {
-        const data = JSON.parse(res).Items;
-        console.log(data);
 
-        const tempInstituteType = [];
-        const tempModules = [];
+    forkJoin(apiArray).subscribe(results => {
+      console.log(results);
 
-        data.forEach((item) => {
-          if (item.isDeleted === false) {
-            if (item.itemId === 'INSTITUTE_TYPE') {
-              tempInstituteType.push(item);
-            } else if (item.itemId === 'MODULE') {
-              tempModules.push(item);
-            }
-          }
-        });
+      results.forEach(res => {
+        let data: any = JSON.parse(String(res));
+        console.log(data.Items);
+        this.populateData(data.Items);
 
-        this.instituteTypeList = tempInstituteType.map((item) => {
-          return { type: item.instituteType, value: false };
-        });
-        this.moduleList = tempModules.map((item) => {
-          return { type: item.moduleName, value: false };
-        });
-        console.log(this.instituteTypeList);
-        console.log(this.moduleList);
-        this.orgType = this.editOrgService.getOrganizationType().filter((item)=>{
-          return item !== this.selectedOrganization.organization.orgType;
-        })
-        this.emailType = this.editOrgService.getEmailType().filter((item)=>{
-          return item !== this.selectedOrganization.organization.contactDetails.email[0].emailType
-        })
-        console.log('MY ARRAY',this.orgType);
-      },
-      (error) => console.error(error)
-    );
-      //  this.selectedOrganization.organization.settings.modules
-     
-      
-   
+      });
+
+    });
+
+
+    // this.editOrgService.getOrganizationById(this.id).subscribe((res)=> {
+    //   let body = JSON.parse(res).Items[0]
+    //   console.log(body);
+    //   this.selectedOrganization  = new Organization(body)
+    //   console.log('ddsf',this.selectedOrganization);
+
+
+    // })
+
+    //  this.selectedOrganization.organization.settings.modules
+
+
+
   }
+
+  populateData(res) {
+    switch (res[0].orgHash) {
+      case "organizationType":
+        this.organizationType = res.organizationType
+        break;
+
+      case "ORGANIZATION":
+        this.basicDetails = res[0]
+        break;
+
+      case "ORGANIZATION_ADDRESS":
+        this.addressList = res
+        break;
+
+      case "ORGANIZATION_ADDDOCF":
+        this.documentList = res;
+        break;
+
+      case "ORGANIZATION_EMAIL":
+        this.emailList = res;
+        break;
+
+      case "ORGANIZATION_PHONE":
+        this.phoneList = res;
+        break;
+
+      case "ORGANIZATION_SOCIAL":
+        this.socialList = res;
+        break;
+
+      case "ORGANIZATION_REGAFF":
+        this.registrationDetails = res[0];
+
+        break;
+
+      case "masterUserDetails":
+        this.masterUserDetails = res.masterUserDetails
+        break;
+
+      case "settingsDetails":
+        this.settingsDetails = res.settingsDetails
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  editDoc() { }
+
+  editRegistration() {
+
+  }
+
+  editSocial() { }
+
+  editEmail() { }
+
+  editPhone() { }
+
+  editAddress() {
+    this.editing = "address";
+    this.editMode = { editing: true, editData: this.addressList };
+  }
+
+  editBasicDetails() {
+    this.secondFormGroup = this.formBuilder.group({
+      instituteTypeSelector: new FormControl(this.basicDetails.institute_type, Validators.required),
+      orgName: new FormControl(this.basicDetails?.org_name, validatorForFormControl(this.organizationFields.organizationName)),
+      orgShortCode: new FormControl(this.basicDetails?.org_short_code, validatorForFormControl(this.organizationFields.organizationShortCode))
+    });
+    this.editing = "basicdetail";
+    this.editMode = { editing: true, editData: this.basicDetails };
+
+  }
+
+  cancelEditMode(event) {
+    this.editing = "";
+  }
+
+
+  // this.editOrgService.getOrganization().subscribe(
+  //   (res) => {
+  //     const data = JSON.parse(res).Items;
+  //     console.log(data);
+
+  //     const tempInstituteType = [];
+  //     const tempModules = [];
+
+  //     data.forEach((item) => {
+  //       if (item.isDeleted === false) {
+  //         if (item.itemId === 'INSTITUTE_TYPE') {
+  //           tempInstituteType.push(item);
+  //         } else if (item.itemId === 'MODULE') {
+  //           tempModules.push(item);
+  //         }
+  //       }
+  //     });
+
+  //     this.instituteTypeList = tempInstituteType.map((item) => {
+  //       return { type: item.instituteType, value: false };
+  //     });
+  //     this.moduleList = tempModules.map((item) => {
+  //       return { type: item.moduleName, value: false };
+  //     });
+  //     console.log(this.instituteTypeList);
+  //     console.log(this.moduleList);
+  //     this.orgType = this.editOrgService.getOrganizationType().filter((item)=>{
+  //       return item !== this.selectedOrganization.organization.orgType;
+  //     })
+  //     this.emailType = this.editOrgService.getEmailType().filter((item)=>{
+  //       return item !== this.selectedOrganization.organization.contactDetails.email[0].emailType
+  //     })
+  //     console.log('MY ARRAY',this.orgType);
+  //   },
+  //   (error) => console.error(error)
+  // );
 
   // addOrganizationForm: FormGroup;
   // currentStep = 0;
