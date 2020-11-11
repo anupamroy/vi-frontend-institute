@@ -38,6 +38,6 @@ export class HeaderComponent implements OnInit, OnChanges {
   signOut():void{
     this._auth.logout();
     this._router.navigate(['home']);
-    this.username = 'Anonymous'
+    this.username = ''
   }
 }

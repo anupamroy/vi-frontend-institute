@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthDataService {
-  private userName = new BehaviorSubject<string>('Anonymous');
+  private userName = new BehaviorSubject<string>('');
   private headerForUser = new BehaviorSubject<any>(null);
 
   constructor() {
