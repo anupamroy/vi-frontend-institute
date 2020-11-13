@@ -22,10 +22,18 @@
 <div class="my-2">
   <form [formGroup]="phoneForm">
     <div class="row">
+      <div class="col-2">
+        <mat-form-field appearance='fill' class="w-100">
+          <mat-label>ISD</mat-label>
+          <mat-select formControlName="isd">
+            <mat-option *ngFor="let country of countryList" value="{{country.dial_code}}">({{country.dial_code}}){{country.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <div class="col-6">
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>Phone Number</mat-label>
-          <input matInput type="number" formControlName="phoneNumber" />
+          <input matInput type="text" formControlName="phoneNumber" required/>
 
           <!-- cutom validation start-->
           <mat-hint>Please fill out the fields!</mat-hint>
@@ -39,10 +47,10 @@
           <!-- custom validation end -->
         </mat-form-field>
       </div>
-      <div class="col-6">
+      <div class="col-4">
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>Phone Type</mat-label>
-          <mat-select formControlName="phoneType">
+          <mat-select formControlName="phoneType" required>
             <mat-option value="Primary">Primary</mat-option>
             <mat-option value="Secondary">Secondary</mat-option>
             <mat-option value="Emergency">Emergency</mat-option>
@@ -80,14 +88,14 @@
             }}</mat-option>
 
             <!-- cutom validation start-->
-            <mat-hint>Please fill out the fields!</mat-hint>
+            <!-- <mat-hint>Please fill out the fields!</mat-hint> -->
             <mat-error
                 *ngIf="phoneForm.controls.daysSelector.hasError('email') && !phoneForm.controls.daysSelector.hasError('required')">
                 Please enter a valid days
             </mat-error>
-            <mat-error *ngIf="phoneForm.controls.daysSelector.hasError('required')">
+            <!-- <mat-error *ngIf="phoneForm.controls.daysSelector.hasError('required')">
                 Days <strong>required</strong>
-            </mat-error>
+            </mat-error> -->
             <!-- custom validation end -->
           </mat-select>
         </mat-form-field>
@@ -102,14 +110,14 @@
           </mat-select>
 
           <!-- cutom validation start-->
-          <mat-hint>Please fill out the fields!</mat-hint>
+          <!-- <mat-hint>Please fill out the fields!</mat-hint> -->
           <mat-error
               *ngIf="phoneForm.controls.shift.hasError('email') && !phoneForm.controls.shift.hasError('required')">
               Please enter a valid shift
           </mat-error>
-          <mat-error *ngIf="phoneForm.controls.shift.hasError('required')">
+          <!-- <mat-error *ngIf="phoneForm.controls.shift.hasError('required')">
               Shift <strong>required</strong>
-          </mat-error>
+          </mat-error> -->
           <!-- custom validation end -->
         </mat-form-field>
       </div>
@@ -117,28 +125,41 @@
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>Associated with</mat-label>
           <mat-select formControlName="associatedWith">
+            <mat-option value="{{editMode?.editData?.associated_with}}">{{ editMode?.editData?.associated_with }}</mat-option>
             <mat-option *ngFor="let item of associatedPostList" value="{{item?.associated_post_name}}">{{item?.associated_post_name}}</mat-option>
             <!-- <mat-option value="Dean">Dean</mat-option>
             <mat-option value="Accountant">Accountant</mat-option> -->
           </mat-select>
 
           <!-- cutom validation start-->
-          <mat-hint>Please fill out the fields!</mat-hint>
+          <!-- <mat-hint>Please fill out the fields!</mat-hint> -->
           <mat-error
               *ngIf="phoneForm.controls.associatedWith.hasError('email') && !phoneForm.controls.associatedWith.hasError('required')">
               Please enter a valid associated post
           </mat-error>
-          <mat-error *ngIf="phoneForm.controls.associatedWith.hasError('required')">
+          <!-- <mat-error *ngIf="phoneForm.controls.associatedWith.hasError('required')">
               Associated with <strong>required</strong>
-          </mat-error>
+          </mat-error> -->
           <!-- custom validation end -->
         </mat-form-field>
       </div>
     </div>
-    <div class="d-flex justify-content-end">
+
+    <div  *ngIf="!editMode?.editing; else showUpdtaeButton" class="d-flex justify-content-end">
       <button (click)="addPhone()" [disabled]="!this.phoneForm.valid" mat-raised-button color="primary">
         Add
       </button>
     </div>
+
+    <div class="d-flex justify-content-end">
+      <ng-template #showUpdtaeButton>
+        <button mat-raised-button (click)="cancelEditMode()"  class="back vi-primary" color='primary'>Back</button>
+        <button (click)="updateData()" [disabled]="!this.phoneForm.valid" mat-raised-button color='primary'
+            class="float-right next">Update</button>
+        </ng-template>
+    </div>
+
+
+
   </form>
 </div>

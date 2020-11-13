@@ -5,7 +5,7 @@
             <div class="col-4">
                 <mat-form-field appearance='fill' class="w-100">
                     <mat-label>Institute Type</mat-label>
-                    <mat-select formControlName="instituteTypeSelector">
+                    <mat-select formControlName="instituteTypeSelector" required>
                         <mat-option *ngFor="let item of instituteTypeList" [value]="item.institute_type_name">
                             {{item.institute_type_name}}
                         </mat-option>
@@ -15,11 +15,13 @@
             <div class="col-8">
                 <mat-form-field appearance='fill' class="w-100">
                     <mat-label>Organization Name</mat-label>
-                    <input matInput formControlName="orgName" (keyup)="generateShortCode($event)" required [errorStateMatcher]="organizationMatcher">
+                    <input matInput formControlName="orgName" (keyup)="generateShortCode($event)" required
+                        [errorStateMatcher]="organizationMatcher">
 
                     <!-- custom validation start -->
                     <mat-hint>{{ organizationFields?.organizationName?.messages.hint }}</mat-hint>
-                    <mat-error *ngIf="secondFormGroup.controls.orgName.hasError('pattern') && !secondFormGroup.controls.orgName.hasError('required')">
+                    <mat-error
+                        *ngIf="secondFormGroup.controls.orgName.hasError('pattern') && !secondFormGroup.controls.orgName.hasError('required')">
                         {{ organizationFields?.organizationName?.messages.pattern }}
                     </mat-error>
                     <mat-error *ngIf="secondFormGroup.controls.orgName.hasError('required')">
@@ -39,15 +41,16 @@
             <mat-label>Organization Short Code</mat-label>
             <input matInput formControlName="orgShortCode" required [errorStateMatcher]="organizationMatcher">
 
-             <!-- custom validation start -->
-             <mat-hint>{{ organizationFields?.organizationShortCode?.messages.hint }}</mat-hint>
-             <mat-error *ngIf="secondFormGroup.controls.orgShortCode.hasError('pattern') && !secondFormGroup.controls.orgShortCode.hasError('required')">
-                 {{ organizationFields?.organizationShortCode?.messages.pattern }}
-             </mat-error>
-             <mat-error *ngIf="secondFormGroup.controls.orgShortCode.hasError('required')">
-                 {{ organizationFields?.organizationShortCode?.messages.required }}
-             </mat-error>
-             <!-- custom validation end -->
+            <!-- custom validation start -->
+            <mat-hint>{{ organizationFields?.organizationShortCode?.messages.hint }}</mat-hint>
+            <mat-error
+                *ngIf="secondFormGroup.controls.orgShortCode.hasError('pattern') && !secondFormGroup.controls.orgShortCode.hasError('required')">
+                {{ organizationFields?.organizationShortCode?.messages.pattern }}
+            </mat-error>
+            <mat-error *ngIf="secondFormGroup.controls.orgShortCode.hasError('required')">
+                {{ organizationFields?.organizationShortCode?.messages.required }}
+            </mat-error>
+            <!-- custom validation end -->
 
         </mat-form-field>
         <div class="d-flex justify-content-between my-3">
@@ -55,22 +58,22 @@
                 <input type='file' (change)="onFileChanged($event)" required>
             </div>
             <div class="img-container bg-light shadow">
-
+                <img [src]="imgURL" width="220" height="220" alt="">
             </div>
-           
+
         </div>
-      
+
     </form>
 </mat-card>
 
 <div *ngIf="!editMode?.editing; else showUpdtaeButton" class="mt-3 clearfix">
     <button mat-raised-button matStepperPrevious class="back vi-primary" color='primary'>Back Step</button>
-    <button (click)="displayData()" [disabled]="secondFormGroup.invalid" mat-raised-button matStepperNext color='primary'
-        class="float-right next">Next Step</button>
+    <button (click)="displayData()" [disabled]="secondFormGroup.invalid" mat-raised-button matStepperNext
+        color='primary' class="float-right next">Next Step</button>
 </div>
 
 <ng-template #showUpdtaeButton>
-    <button mat-raised-button (click)="cancelEditMode()"  class="back vi-primary" color='primary'>Back</button>
+    <button mat-raised-button (click)="cancelEditMode()" class="back vi-primary" color='primary'>Back</button>
     <button (click)="updateData()" [disabled]="secondFormGroup.invalid" mat-raised-button color='primary'
         class="float-right next">Update</button>
-    </ng-template>
+</ng-template>

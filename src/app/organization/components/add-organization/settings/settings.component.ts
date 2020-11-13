@@ -15,10 +15,6 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.sixthFormGroup = this.formBuilder.group({
-      authType: new FormControl('mfa', Validators.required),
-      // multifactorAuthentication: new FormControl('', Validators.required),
-      // passwordSetting: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
       moduleSelector: new FormControl([], Validators.required)
     });
   }

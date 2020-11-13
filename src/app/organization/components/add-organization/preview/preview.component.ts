@@ -126,7 +126,7 @@ export class PreviewComponent implements OnInit {
       basicDetailsObj.org_type = this.organizationType;
     }
     basicDetailsObj.org_code = this.generateORGCODE();
-    basicDetailsObj.org_logo = '';
+    basicDetailsObj.org_logo = this.basicDetails.org_logo; 
     basicDetailsObj.org_parent_id = '';
 
     // API call for basic details
@@ -175,17 +175,20 @@ export class PreviewComponent implements OnInit {
         });
 
         // additional Document list
-        this.documentList.forEach(doc => {
-          const obj = new AdditionDocument();
-          obj.docType = doc.documentType;
-          obj.docNumber = doc.documentNumber;
-          obj.docFile = "";
-          obj.validUpto = String(doc.documentRegistrationDate)
-          obj.associated_with_org = this.orgKey;
-
-          // Return api observable
-          apiArray.push(this.addOrganizationService.saveOrgDocsDetails(obj));
-        });
+        if (this.documentList && this.documentList.length > 0) {
+          this.documentList.forEach(doc => {
+            const obj = new AdditionDocument();
+            obj.docType = doc.documentType;
+            obj.docNumber = doc.documentNumber;
+            obj.docFile = "";
+            obj.validUpto = String(doc.documentRegistrationDate)
+            obj.associated_with_org = this.orgKey;
+  
+            // Return api observable
+            apiArray.push(this.addOrganizationService.saveOrgDocsDetails(obj));
+          });
+        }
+        
 
         // Phone List
         this.phoneList.forEach((phone, index) => {

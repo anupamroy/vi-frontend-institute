@@ -24,7 +24,7 @@ export class DocumentComponent implements OnInit {
     this.documentForm = this.formBuilder.group({
       documentType: new FormControl('', Validators.required),
       documentNumber: new FormControl('', Validators.required),
-      documentRegistrationDate: new FormControl('', Validators.required),
+      documentRegistrationDate: new FormControl(''),
       // checkMe: new FormControl('', Validators.required)
     });
   }

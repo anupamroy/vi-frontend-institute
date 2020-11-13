@@ -37,10 +37,16 @@
                 </mat-form-field>
             </div>
         </div>
-        <div class="d-flex justify-content-end">
+        <div *ngIf="!editMode?.editing; else showUpdateButton" class="d-flex justify-content-end">
             <button (click)="addSocialHandle()" [disabled]="!this.social.valid" mat-raised-button color="primary">
                 Add
             </button>
         </div>
+
+        <ng-template #showUpdateButton>
+            <button mat-raised-button (click)="cancelEditMode()" class="back vi-primary" color='primary'>Back</button>
+            <button (click)="updateData()" [disabled]="social.invalid" mat-raised-button color='primary'
+                class="float-right next">Update</button>
+        </ng-template>
     </form>
 </div>

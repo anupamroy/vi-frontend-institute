@@ -1,6 +1,7 @@
 export class Phone{
     orgHash: string = "ORGANIZATION_PHONE";
     orgKey?: string;
+    isd?: string;
     phone_number: string;
     phone_type: string;
     phone_timings: string;

@@ -5,7 +5,8 @@
             <div class="col-4">
                 <mat-form-field appearance='fill' class="w-100">
                     <mat-label>First Name</mat-label>
-                    <input matInput formControlName="firstName">
+                    <input matInput pattern="^[a-zA-Z0-9. ,-]*$"
+                     formControlName="firstName" required>
                 </mat-form-field>
             </div>
             <div class="col-4">
@@ -25,13 +26,39 @@
             <div class="col-6">
                 <mat-form-field appearance='fill' class="w-100">
                     <mat-label>Email Address</mat-label>
-                    <input matInput formControlName="emailAddress">
+                    <input matInput formControlName="emailAddress" required>
                 </mat-form-field>
             </div>
             <div class="col-6">
                 <mat-form-field appearance='fill' class="w-100">
                     <mat-label>Phone Number</mat-label>
-                    <input matInput formControlName="phoneNumber">
+                    <input matInput formControlName="phoneNumber" required>
+                </mat-form-field>
+            </div>
+        </div>
+        <mat-radio-group (change)="mfaPassword($event)" formControlName="authType" aria-label="Select an option">
+            <div class="row my-3">
+                <div class="col-6">
+                    <mat-radio-button value="mfa">
+                        Multifactor Authentication</mat-radio-button>
+                </div>
+                <div class="col-6">
+                    <mat-radio-button value="password">Password</mat-radio-button>
+                </div>
+            </div>
+        </mat-radio-group>
+
+        <div *ngIf="fifthFormGroup.controls.authType.value == 'password'" class="row">
+            <div class="col-6">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" required>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput type="password" formControlName="confirmPassword" required>
                 </mat-form-field>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import * as _ from 'lodash';
 import { ReplaySubject } from 'rxjs';
@@ -12,7 +12,11 @@ import { Social } from '../../../../models/Social';
   styleUrls: ['./social.component.scss']
 })
 export class SocialComponent implements OnInit {
-  social: FormGroup;
+  @Input() social: FormGroup;
+  @Output() formReset = new EventEmitter();
+  @Input() editMode: any = { editing: false, editData: {} };
+  @Output() cancelEdit = new EventEmitter();
+
   socialHandleList = [];
     /** used to help terminate all subscriptions when component destroyed */
     private ngUnsubscribe: ReplaySubject<boolean> = new ReplaySubject(1);
@@ -27,16 +31,25 @@ export class SocialComponent implements OnInit {
       this.orgkey = res;
 
     })
-    this.social = this.formBuilder.group({
-      socialMediaType: new FormControl('', Validators.required),
-      socialMediaLink: new FormControl('', Validators.required)
-    });
+    
+
+    if(this.editMode.editing){
+      this.social = this.formBuilder.group({
+        socialMediaType: new FormControl(this.editMode.editData.social_media, Validators.required),
+        socialMediaLink: new FormControl(this.editMode.editData.social_media_link_handle, Validators.required)
+      });
+    } else {
+      this.social = this.formBuilder.group({
+        socialMediaType: new FormControl('', Validators.required),
+        socialMediaLink: new FormControl('', Validators.required)
+      });
+    }
   }
 
   addSocialHandle(): void{
     const socialHandleObject = this.social.value;
     _.assign(socialHandleObject, {
-      id: _.uniqueId('social_')
+      id: _.uniqueId('social')
     });
     console.log(socialHandleObject);
     this.socialHandleList.push(socialHandleObject);
@@ -84,7 +97,7 @@ export class SocialComponent implements OnInit {
       return a.id === id;
     });
     if(this.socialHandleList.length == 0) {
-      this.addOrganizationService.contactDetailsFields.isSocialMediaSectionValid = false;
+      this.addOrganizationService.contactDetailsFields.isSocialMediaSectionValid = true;
     }
 
     //localstorage
@@ -95,7 +108,7 @@ export class SocialComponent implements OnInit {
     const socialHandleToEdit = _.remove(this.socialHandleList, (a) => {
       return a.id === id;
     });
-    this.addOrganizationService.contactDetailsFields.isSocialMediaSectionValid = false;
+    this.addOrganizationService.contactDetailsFields.isSocialMediaSectionValid = true;
 
     this.social = this.formBuilder.group({
       socialMediaType: new FormControl(socialHandleToEdit[0].socialMediaType, Validators.required),
@@ -104,6 +117,47 @@ export class SocialComponent implements OnInit {
 
     //localstorage
     localStorage.setItem('socialHandleList', JSON.stringify(this.socialHandleList))
+  }
+
+  processObjUpdated(object: Social) {
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'orgHash' && key != 'associated_with_org' && key != 'orgKey') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
+
+    return {
+      attribute,
+      value,
+      orgHash: object.orgHash,
+      orgKey: object.orgKey
+    }
+  }
+
+  cancelEditMode() {
+    this.cancelEdit.emit(false);
+  }
+
+  updateData(){
+    const obj = new Social();
+    obj.social_media = this.social.controls.socialMediaType.value;
+    obj.social_media_link_handle = this.social.controls.socialMediaLink.value;
+    obj.orgKey = this.editMode.editData.orgKey;
+
+    console.log(this.processObjUpdated(obj));
+
+    this.addOrganizationService.updateSocialDetails(this.processObjUpdated(obj)).subscribe((res) => {
+      let data = JSON.parse(res);
+      // console.log("attributes res ",res, data.Attributes);
+      let dataset = _.assign(new Social(),{associated_with_org :  this.editMode.editData.associated_with_org }, data.Attributes, _.pick(obj, ['orgKey']))
+      // console.log("data set .:",dataset)
+     
+      this.cancelEdit.emit(false);
+      this.addOrganizationService.$refreshList.next(dataset);
+    })
   }
 
     /**
