@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MyErrorStateMatcher, validatorForFormControl } from '../common/Validations/MyErrorStateMatcher';
 import { AddOrganizationService } from '../../../services/add-organization.service';
 import { BasicDetails } from '../../../models/BasicDetails';
+import * as _ from 'lodash';
 import { InstituteTypeService } from '../../institute-type/Services/institute-type.service';
 const jsonData = require('../common/Validations/org_fields.json');
 
@@ -18,6 +19,7 @@ export class BasicDetailsComponent implements OnInit {
   organizationMatcher = new MyErrorStateMatcher();
   organizationFields = jsonData;
   instituteTypeList;
+  imgURL="";
 
   items = ['Item 1', 'Item 2', 'Item 3'];
 
@@ -57,10 +59,10 @@ export class BasicDetailsComponent implements OnInit {
         }
       })
 
-      console.log('FINAL DATA TO BE POPULATED: ', this.instituteTypeList);
+      // console.log('FINAL DATA TO BE POPULATED: ', this.instituteTypeList);
     },
       error => {
-        console.log("Could not Fetch Data")
+        console.log("Institute Type Could not Fetch Data")
       })
 
   }
@@ -130,8 +132,13 @@ export class BasicDetailsComponent implements OnInit {
     // API call for basic details
     console.log(basicDetailsObj, this.editMode.editData);
     this.addOrganizationService.updateBasicDetails(this.processObjUpdated(basicDetailsObj)).subscribe(res => {
-      console.log(res);
+      let data = JSON.parse(res);
+      // console.log("attributes res ",res, data.Attributes);
+      let dataset = _.assign(new BasicDetails(), data.Attributes, _.pick(basicDetailsObj, ['orgKey']))
+      // console.log("data set .:",dataset)
+     
       this.cancelEdit.emit(false);
+      this.addOrganizationService.$refreshList.next(dataset);
     }, error => {
       this.cancelEdit.emit(false);
     })
@@ -142,6 +149,7 @@ export class BasicDetailsComponent implements OnInit {
     console.log(file);
     this.addOrganizationService.uploadFileinS3(file).subscribe(res => {
       console.log(res);
+      this.imgURL = res.url;
     }, error => {
       
     });
@@ -159,7 +167,7 @@ export class BasicDetailsComponent implements OnInit {
     // Storing data
     this.addOrganizationService.$preview.next({
       section: "basicDetails",
-      basicDetails: this.secondFormGroup.value
+      basicDetails: _.assign(this.secondFormGroup.value, {org_logo: this.imgURL} )
     })
 
     localStorage.setItem("basic-details", JSON.stringify(this.secondFormGroup.value))

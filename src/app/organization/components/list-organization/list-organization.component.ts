@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { BasicDetails } from '../../models/BasicDetails';
 import Swal from 'sweetalert2';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ListOrganizationService } from '../../services/list-organization.service';
 import { PreviewComponent } from '../add-organization/preview/preview.component';
 import { EditOrganizationComponent } from '../edit-organization/edit-organization.component';
+import { AddOrganizationService } from '../../services/add-organization.service';
+import { takeUntil } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-list-organization',
@@ -15,10 +18,20 @@ export class ListOrganizationComponent implements OnInit {
 
   list_organization = [];
 
-  constructor(public dialog: MatDialog, private listOrganizationService: ListOrganizationService ) { }
+  /** used to help terminate all subscriptions when component destroyed */
+  private ngUnsubscribe: ReplaySubject<boolean> = new ReplaySubject(1);
+
+  constructor(private addorgServive: AddOrganizationService, public dialog: MatDialog, private listOrganizationService: ListOrganizationService) { }
 
   ngOnInit(): void {
-   this.refreshList();
+    this.addorgServive.$refreshList.pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+     
+   
+      
+      // this.dialog.closeAll()
+      this.refreshList();
+    })
+    this.refreshList();
   }
 
   refreshList() {
@@ -58,7 +71,7 @@ export class ListOrganizationComponent implements OnInit {
     }
   }
 
-  onDelete(id: string): void{
+  onDelete(id: string): void {
     Swal.fire({
       title: 'Are you sure you want to delete?',
       icon: 'warning',
@@ -91,7 +104,7 @@ export class ListOrganizationComponent implements OnInit {
             'success'
           )
         })
-        
+
 
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
@@ -106,21 +119,21 @@ export class ListOrganizationComponent implements OnInit {
   showOrganization(item) {
     // this.router
     console.log(item.orgKey);
-    
- 
-      const dialogRef = this.dialog.open(EditOrganizationComponent, {
-        width: '800px',
-        // height: '400px',
-        data: {
-          dataKey: item.orgKey,
-          basicDetails: item
-        }
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog result: ${result}`);
-      });
-    
+
+
+    const dialogRef = this.dialog.open(EditOrganizationComponent, {
+      width: '800px',
+      // height: '400px',
+      data: {
+        dataKey: item.orgKey,
+        basicDetails: item
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+
   }
 
   onActivate(id: string) {
@@ -197,4 +210,16 @@ export class ListOrganizationComponent implements OnInit {
     })
   }
 
+  /**
+* Unsubscribe from any observable
+* This avoids "Attempt to use a destroyed view" when user navigates away before page done loading
+*
+* @memberof 
+*/
+  ngOnDestroy() {
+    this.ngUnsubscribe.next(true);
+    this.ngUnsubscribe.complete();
+  }
 }
+
+

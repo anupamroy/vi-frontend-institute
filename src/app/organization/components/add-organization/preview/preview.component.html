@@ -29,6 +29,8 @@
         <div *ngFor="let address of addressList">
             <p><strong>Address Type : </strong>{{address?.addressTypeSelector}}</p>
             <p><strong>Address : </strong>{{address?.address}}</p>
+            <p><strong>Country : </strong>{{address?.countryName}}</p>
+            <p><strong>zipCode : </strong>{{address?.zipCode}}</p>
         </div>
     </mat-card>
     <mat-card class="mx-3 my-3">

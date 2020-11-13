@@ -4,11 +4,12 @@ const jsonData = require('../add-organization/common/Validations/org_fields.json
 import { OrganizationModel } from '../../../shared/models/organization';
 import { EditOrganizationService } from '../../services/edit-organization.service'
 import Organization from '../../../shared/models/organization'
-import { forkJoin } from 'rxjs';
+import { forkJoin, ReplaySubject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { AddOrganizationService } from '../../services/add-organization.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { validatorForFormControl } from '../add-organization/common/Validations/MyErrorStateMatcher';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-organization',
@@ -18,6 +19,9 @@ import { validatorForFormControl } from '../add-organization/common/Validations/
 export class EditOrganizationComponent implements OnInit {
   editData: any;
   editMode: { editing: boolean; editData: any; };
+
+   /** used to help terminate all subscriptions when component destroyed */
+   private ngUnsubscribe: ReplaySubject<boolean> = new ReplaySubject(1);
 
   constructor(private formBuilder: FormBuilder, private addOrganizationService: AddOrganizationService, private editOrgService: EditOrganizationService, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -67,7 +71,8 @@ export class EditOrganizationComponent implements OnInit {
   ngOnInit() {
     this.organizationFields = jsonData;
     console.log(this.data.dataKey, this.data.basicDetails);
-    this.basicDetails = this.data.basicDetails;
+    this.addOrganizationService.$refreshList.next(this.data.basicDetails)
+    // this.basicDetails = ;
     let apiArray: Array<any> = [];
     apiArray.push(this.addOrganizationService.getAddressByID(this.data.dataKey));
     apiArray.push(this.addOrganizationService.getEmailByID(this.data.dataKey));
@@ -89,6 +94,14 @@ export class EditOrganizationComponent implements OnInit {
 
     });
 
+    this.addOrganizationService.$refreshList.pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+     
+      console.log("populate...");
+      this.populateData([res]);
+      // this.dialog.closeAll()
+      // this.refreshList();
+    })
+
 
     // this.editOrgService.getOrganizationById(this.id).subscribe((res)=> {
     //   let body = JSON.parse(res).Items[0]
@@ -106,7 +119,7 @@ export class EditOrganizationComponent implements OnInit {
   }
 
   populateData(res) {
-    switch (res[0].orgHash) {
+    switch (res[0]?.orgHash) {
       case "organizationType":
         this.organizationType = res.organizationType
         break;
@@ -156,18 +169,33 @@ export class EditOrganizationComponent implements OnInit {
   editDoc() { }
 
   editRegistration() {
+    this.editing = "registrationdetail";
+    this.editMode = { editing: true, editData: this.registrationDetails };
 
   }
 
-  editSocial() { }
+  editSocial(social) {
+    console.log(social);
+    
+    this.editing = "social";
+    this.editMode = { editing: true, editData: social };
+   }
 
-  editEmail() { }
+  editEmail(email) {
+    this.editing = "email";
+    this.editMode = { editing: true, editData: email };
+   }
 
-  editPhone() { }
+  editPhone(phone) {
+    console.log(phone);
 
-  editAddress() {
+    this.editing = "phone";
+    this.editMode = { editing: true, editData: phone };
+  }
+
+  editAddress(address) {
     this.editing = "address";
-    this.editMode = { editing: true, editData: this.addressList };
+    this.editMode = { editing: true, editData: address };
   }
 
   editBasicDetails() {

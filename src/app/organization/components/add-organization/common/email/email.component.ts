@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import * as _ from 'lodash';
 import { ReplaySubject } from 'rxjs';
@@ -14,7 +14,11 @@ import { Email } from '../../../../models/Email';
   styleUrls: ['./email.component.scss']
 })
 export class EmailComponent implements OnInit {
-  emailForm: FormGroup;
+  @Input() emailForm: FormGroup;
+  @Output() formReset = new EventEmitter();
+  @Input() editMode: any = { editing: false, editData: {} };
+  @Output() cancelEdit = new EventEmitter();
+
   matcher = new MyErrorStateMatcher();
   associatedPostList;
   emailFormList = [];
@@ -35,19 +39,73 @@ export class EmailComponent implements OnInit {
       this.orgkey = res;
 
     })
-    this.emailForm = this.formBuilder.group({
-      emailText: new FormControl('', Validators.required),
-      emailAddress: new FormControl('', Validators.required),
-      emailType: new FormControl('', Validators.required),
-      shift: new FormControl('', Validators.required),
-      associatedWith: new FormControl('', Validators.required)
-    });
+
+    if(this.editMode.editing){
+      this.emailForm = this.formBuilder.group({
+        emailText: new FormControl(this.editMode.editData.email_text, Validators.required),
+        emailAddress: new FormControl(this.editMode.editData.email, Validators.required),
+        emailType: new FormControl(this.editMode.editData.email_type, Validators.required),
+        shift: new FormControl(this.editMode.editData.email_availability_shift),
+        associatedWith: new FormControl(this.editMode.editData.associated_with)
+      });
+    } else {
+      this.emailForm = this.formBuilder.group({
+        emailText: new FormControl('', Validators.required),
+        emailAddress: new FormControl('', Validators.required),
+        emailType: new FormControl('', Validators.required),
+        shift: new FormControl(''),
+        associatedWith: new FormControl('')
+      });
+    }
+  }
+
+  processObjUpdated(object: Email) {
+    var attribute = [];
+    var value = [];
+    for (const key in object) {
+      if (key !== 'orgHash' && key != 'associated_with_org' && key != 'orgKey') {
+        attribute.push(key);
+        value.push(object[key]);
+      }
+    }
+
+    return {
+      attribute,
+      value,
+      orgHash: object.orgHash,
+      orgKey: object.orgKey
+    }
+  }
+
+  cancelEditMode() {
+    this.cancelEdit.emit(false);
+  }
+
+  updateData(){
+    const obj = new Email();
+    obj.associated_with = this.emailForm.controls.associatedWith.value;
+    obj.email = this.emailForm.controls.emailAddress.value;
+    obj.email_text = this.emailForm.controls.emailText.value;
+    obj.email_availability_shift = this.emailForm.controls.shift.value;
+    obj.orgKey = this.editMode.editData.orgKey;
+
+    console.log(this.processObjUpdated(obj));
+
+    this.addOrganizationService.updateEmailDetails(this.processObjUpdated(obj)).subscribe((res) => {
+      let data = JSON.parse(res);
+      // console.log("attributes res ",res, data.Attributes);
+      let dataset = _.assign(new Email(), data.Attributes, _.pick(obj, ['associated_with_org', 'orgKey']))
+      // console.log("data set .:",dataset)
+     
+      this.cancelEdit.emit(false);
+      this.addOrganizationService.$refreshList.next(dataset);
+    })
   }
 
   addEmail(): void {
     const emailObject = this.emailForm.value;
     _.assign(emailObject, {
-      id: _.uniqueId('email_')
+      id: _.uniqueId('email')
     });
 
     console.log(emailObject);
@@ -123,8 +181,8 @@ export class EmailComponent implements OnInit {
       emailText: new FormControl(documentToEdit[0].emailText, Validators.required),
       emailAddress: new FormControl(documentToEdit[0].emailAddress, Validators.required),
       emailType: new FormControl(documentToEdit[0].emailType, Validators.required),
-      shift: new FormControl(documentToEdit[0].shift, Validators.required),
-      associatedWith: new FormControl(documentToEdit[0].associatedWith, Validators.required)
+      shift: new FormControl(documentToEdit[0].shift),
+      associatedWith: new FormControl(documentToEdit[0].associatedWith)
     });
 
     //localstorage

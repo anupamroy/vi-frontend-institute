@@ -15,10 +15,13 @@ export class MasterUserComponent implements OnInit {
   ngOnInit(): void {
     this.fifthFormGroup = this.formBuilder.group({
       firstName: new FormControl('', Validators.required),
-      middleName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
+      middleName: new FormControl(''),
+      lastName: new FormControl(''),
       emailAddress: new FormControl('', Validators.required),
-      phoneNumber: new FormControl('', Validators.required)
+      phoneNumber: new FormControl('', Validators.required),
+      authType: new FormControl('mfa', Validators.required),
+      password: new FormControl(''),
+      confirmPassword: new FormControl(''),
     });
   }
 
@@ -33,6 +36,23 @@ export class MasterUserComponent implements OnInit {
 
     //localstorage
     localStorage.setItem('master-user', JSON.stringify(this.fifthFormGroup.value))
+  }
+
+  mfaPassword(e) {
+    console.log("asadsds", e.value);
+    if(e.value == "password") {
+      this.fifthFormGroup.controls["password"].setValidators(Validators.required);
+      this.fifthFormGroup.controls["confirmPassword"].setValidators(Validators.required);
+      this.fifthFormGroup.controls["confirmPassword"].updateValueAndValidity()
+      this.fifthFormGroup.controls["password"].updateValueAndValidity()
+    } else {
+      this.fifthFormGroup.controls["password"].clearValidators()
+      this.fifthFormGroup.controls["password"].updateValueAndValidity()
+      this.fifthFormGroup.controls["confirmPassword"].clearValidators()
+      this.fifthFormGroup.controls["confirmPassword"].updateValueAndValidity()
+    }
+   
+    
   }
 
 }

@@ -1,6 +1,7 @@
 export class Registration {
 
     orgHash:string = "ORGANIZATION_REGAFF";
+    orgKey? :string;
     orgCategory: string;
     registrationNumber: string
     registrationDate: string;

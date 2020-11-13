@@ -11,7 +11,9 @@ export class AddOrganizationService {
 
   $orgKey: ReplaySubject<string> = new ReplaySubject(1);
 
-  $associatedPostList: ReplaySubject<string> = new ReplaySubject(1);
+  $refreshList: BehaviorSubject<any> = new BehaviorSubject(null);
+
+  $associatedPostList: ReplaySubject<any> = new ReplaySubject(1);
   $preview: ReplaySubject<any> = new ReplaySubject(3);
   // preview = new EventEmitter(false);
 
@@ -27,7 +29,7 @@ export class AddOrganizationService {
     isPhoneSectionValid: false,
     isAddressSectionValid: false,
     isEmailSectionValid: false,
-    isSocialMediaSectionValid: false,
+    isSocialMediaSectionValid: true,
   };
 
   isContactDetailsFormValid(): boolean {
@@ -49,8 +51,28 @@ export class AddOrganizationService {
     return this.http.post(`${this.api}/organization/save`, body);
   }
 
+  updateAddressDetails(body: any): Observable<any> {
+    return this.http.put(`${this.api}/orgaddress/update`, body)
+  }
+
+  updateRegistrationDetails(body: any): Observable<any> {
+    return this.http.put(`${this.api}/orgregaff/update`, body)
+  }
+
+  updatePhoneDetails(body: any): Observable<any> {
+    return this.http.put(`${this.api}/orgphone/update`, body)
+  }
+
   updateBasicDetails(body: any): Observable<any> {
     return this.http.put(`${this.api}/organization/update`, body);
+  }
+
+  updateSocialDetails(body: any): Observable<any> {
+    return this.http.put(`${this.api}/orgsocial/update`, body);
+  }
+
+  updateEmailDetails(body: any): Observable<any> {
+    return this.http.put(`${this.api}/orgemail/update`, body)
   }
 
   saveAddress(body: any): Observable<any> {
@@ -93,7 +115,7 @@ export class AddOrganizationService {
     // this.http is the injected HttpClient
     const headers = new HttpHeaders();
     headers.set('bypass', 'true');
-    return this.http.put(`https://vedtcktqr1.execute-api.ap-south-1.amazonaws.com/v1/uploadfile`, file);
+    return this.http.put<any>(`https://vedtcktqr1.execute-api.ap-south-1.amazonaws.com/v1/uploadfile`, file);
 
   }
 
