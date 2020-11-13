@@ -51,6 +51,9 @@ import { AddPaperTypeComponent } from './components/paper-type/add-paper-type/ad
 import { EditPaperTypeComponent } from './components/paper-type/edit-paper-type/edit-paper-type.component';
 import { ListPaperTypeComponent } from './components/paper-type/list-paper-type/list-paper-type.component';
 import { AddOrganizationComponent } from './components/add-organization/add-organization.component';
+import { AddFeesMastersComponent } from '../fees-management/super-admin/add-fees-masters/add-fees-masters.component';
+import { EditFeesMastersComponent } from '../fees-management/super-admin/edit-fees-masters/edit-fees-masters.component';
+import { ListFeesMastersComponent } from '../fees-management/super-admin/list-fees-masters/list-fees-masters.component';
 
 const routes: Routes = [
   {
@@ -85,6 +88,11 @@ const routes: Routes = [
       { path: 'add-quota-type', component: AddQuotaTypeComponent },
       { path: 'add-paper-type', component: AddPaperTypeComponent },
       { path: 'add-organization', component: AddOrganizationComponent },
+      {
+        path: 'add-fees-masters', component:AddFeesMastersComponent 
+       },
+       {path:'edit-fees-masters/:id',component:EditFeesMastersComponent},
+       {path:'list-fees-masters',component:ListFeesMastersComponent}
     ],
   },
 

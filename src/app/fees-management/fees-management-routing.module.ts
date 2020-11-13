@@ -20,6 +20,7 @@ const routes: Routes = [
             path: 'edit/:id',
             component: EditFeesHeadComponent,
           },
+          
         ],
       },
     ],
@@ -30,4 +31,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FeesManagementRoutingModule {}
+export class FeesManagementRoutingModule { }
