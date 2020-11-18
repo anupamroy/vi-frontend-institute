@@ -9,7 +9,6 @@ const jsonData = require('./common/Validations/org_fields.json');
   styleUrls: ['./add-organization.component.scss'],
 })
 export class AddOrganizationComponent implements OnInit {
-
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
