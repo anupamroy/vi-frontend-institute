@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { InstituteComponent } from './org-admin/institute/institute.component';
+import { SellerDashboardComponent } from './org-admin/seller-dashboard/seller-dashboard.component';
 import { SellerComponent } from './org-admin/seller/seller.component';
-
+import { InstituteDashboardComponent } from './org-admin/institute-dashboard/institute-dashboard.component'
+import { AddFeesMastersComponent } from './fees-management/super-admin/add-fees-masters/add-fees-masters.component';
 
 const routes: Routes = [
     {
@@ -30,13 +32,27 @@ const routes: Routes = [
             ),
     },
     {
-        path:'seller',
-        component:SellerComponent
+        path: 'seller',
+        component: SellerComponent,
     },
     {
-        path:'institute',
-        component:InstituteComponent
+        path: 'seller-dashboard',
+        component: SellerDashboardComponent
     }
+
+    ,
+    {
+        path: 'institute',
+        component: InstituteComponent,
+    },
+    {
+        path: 'institute-dashboard',
+        component: InstituteDashboardComponent
+    },
+    {
+        path: 'add-fees-masters', component:AddFeesMastersComponent
+       }
+
     // {
     //     path: 'seller',
     //     loadChildren: () =>
@@ -47,7 +63,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }
