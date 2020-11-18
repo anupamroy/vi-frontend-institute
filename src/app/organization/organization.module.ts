@@ -114,6 +114,7 @@ import { MasterUserComponent } from './components/add-organization/master-user/m
 import { OrganizationTypeComponent } from './components/add-organization/organization-type/organization-type.component';
 import { ErrorMessageComponent } from './components/add-organization/common/Validations/error-message/error-message.component';
 import { PreviewComponent } from './components/add-organization/preview/preview.component';
+import { PasswordStrengthComponent } from './components/add-organization/common/password-strength/password-strength.component';
 
 
 
@@ -183,6 +184,7 @@ import { PreviewComponent } from './components/add-organization/preview/preview.
         OrganizationTypeComponent,
         ErrorMessageComponent,
         PreviewComponent,
+        PasswordStrengthComponent,
     ],
     imports: [
         CommonModule, OrganizationRoutingModule, FormsModule, ReactiveFormsModule,

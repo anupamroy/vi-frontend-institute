@@ -52,21 +52,42 @@
             <div class="col-6">
                 <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" formControlName="password" required>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </mat-form-field>
             </div>
             <div class="col-6">
                 <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Confirm Password</mat-label>
-                    <input matInput type="password" formControlName="confirmPassword" required>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" required>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </mat-form-field>
+            </div>
+        </div>
+        <div *ngIf="fifthFormGroup.controls.authType.value == 'password'" class="row">
+            <div class="col-4">
+                <app-password-strength [passwordToCheck]="fifthFormGroup.controls.password.value"></app-password-strength>
+            </div>
+            <div class="col-4">
+                <div>
+                    <small>&#8594; Password should contain <strong>capital letters</strong> and <strong>small letters.</strong></small>
+                </div>
+                <div>
+                    <small>&#8594; Password should contain <strong>numbers.</strong></small>
+                </div>
+                <div>
+                    <small>&#8594; Password should contain <strong>Symbols</strong> such as <strong>@!-$_#.</strong></small>
+                </div>
+            </div>
+            <div *ngIf="!compareTwoPassword()" class="col-4">
+                <p style="color: red;"><strong>Password</strong> and <strong>Confirm Password</strong> do not match!!</p>
             </div>
         </div>
     </form>
 </mat-card>
 <div class="my-3 clearfix">
     <button mat-raised-button color='primary' matStepperPrevious class="back">Back Step</button>
-    <button (click)="displayData()" [disabled]="!this.fifthFormGroup.valid" mat-raised-button color='primary' matStepperNext
+    <button (click)="displayData()" [disabled]="!this.fifthFormGroup.valid && !this.authTypeCompare()" mat-raised-button color='primary' matStepperNext
         class="float-right next">
         Next Step
     </button>

@@ -9,6 +9,7 @@ import { AddOrganizationService } from 'src/app/organization/services/add-organi
 })
 export class MasterUserComponent implements OnInit {
   @Input() fifthFormGroup: FormGroup;
+  hide: Boolean = true;
 
   constructor(private formBuilder: FormBuilder, private addOrganizationService: AddOrganizationService) { }
 
@@ -53,6 +54,26 @@ export class MasterUserComponent implements OnInit {
     }
    
     
+  }
+
+  authTypeCompare(): any {
+    if (this.fifthFormGroup.controls.authType.value === 'password') {
+      if (this.fifthFormGroup.controls.password.value === ''){
+        return false
+      } else {
+        return this.compareTwoPassword()
+      }
+    } else {
+      return true
+    }
+  }
+
+  compareTwoPassword(): Boolean {
+    if(this.fifthFormGroup.controls.password.value !== this.fifthFormGroup.controls.confirmPassword.value){
+      return false
+    }
+
+    return true;
   }
 
 }
