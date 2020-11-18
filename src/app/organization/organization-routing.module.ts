@@ -88,9 +88,9 @@ const routes: Routes = [
       { path: 'add-quota-type', component: AddQuotaTypeComponent },
       { path: 'add-paper-type', component: AddPaperTypeComponent },
       { path: 'add-organization', component: AddOrganizationComponent },
-      {
-        path: 'add-fees-masters', component:AddFeesMastersComponent 
-       },
+      // {
+      //   path: 'add-fees-masters', component:AddFeesMastersComponent 
+      //  },
        {path:'edit-fees-masters/:id',component:EditFeesMastersComponent},
        {path:'list-fees-masters',component:ListFeesMastersComponent}
     ],

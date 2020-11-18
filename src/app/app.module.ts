@@ -15,6 +15,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SellerComponent } from './org-admin/seller/seller.component';
 import { InstituteComponent } from './org-admin/institute/institute.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SellerDashboardComponent } from './org-admin/seller-dashboard/seller-dashboard.component';
+import { InstituteDashboardComponent } from './org-admin/institute-dashboard/institute-dashboard.component';
 
 /* Configure Amplify resources */
 Amplify.configure(awsconfig);
@@ -24,7 +26,9 @@ Amplify.configure(awsconfig);
     AppComponent,
     HomeComponent,
     SellerComponent,
-    InstituteComponent
+    InstituteComponent,
+    SellerDashboardComponent,
+    InstituteDashboardComponent
   
   ],
   imports: [

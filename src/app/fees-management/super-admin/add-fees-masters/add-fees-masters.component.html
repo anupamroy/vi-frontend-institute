@@ -73,18 +73,18 @@
 
                                                     <li>
                                                         <input type="checkbox" id="selectall">
-                                                        Festival Fees
+                                                        All Fees Heads
                                                         <ul class="list-style-none pl-3">
                                                             <li><input type="checkbox"
                                                                     (change)="feesHeadCheckBox('Durga Puja')"
                                                                     class="selectedId" name="selectedId" />
-                                                                Durga Puja
+                                                                    Fees Head-I
                                                             </li>
                                                             <li>
                                                                 <input (change)="feesHeadCheckBox('Saraswati Puja')"
                                                                     type="checkbox" class="selectedId"
                                                                     name="selectedId" />
-                                                                Saraswati Puja
+                                                                    Fees Heads-II
                                                             </li>
                                                         </ul>
                                                     </li>
@@ -199,24 +199,23 @@
                                                         data-target="#accountHeadBox"><i
                                                             class="fas fa-plus-circle"></i></a></label><br>
                                                 <button class="btn form-control text-left bg-white dropdown-toggle"
-                                                    type="button" data-toggle="dropdown"> Select fees type
+                                                    type="button" data-toggle="dropdown"> Select Account Head
                                                     <span class="caret"></span></button>
 
                                                 <ul class="dropdown-menu">
 
                                                     <li>
-                                                        <input type="checkbox" id="selectall"> Main
-                                                        Option
+                                                        <input type="checkbox" id="selectall"> Main Account Head
                                                         <ul class="list-style-none pl-3">
-                                                            <li><input  (change)="accountsHeadCheckBox('Sub Option')"
+                                                            <li><input  (change)="accountsHeadCheckBox('Account I')"
                                                                 type="checkbox" class="selectedId"
-                                                                name="selectedId" /> Sub Option
+                                                                name="selectedId" /> Account I
                                                             </li>
                                                             <li>
                                                                 <input 
-                                                                (change)="accountsHeadCheckBox('Sub Option')"
+                                                                (change)="accountsHeadCheckBox('Account II')"
                                                                 type="checkbox" class="selectedId"
-                                                                    name="selectedId" /> Sub Option
+                                                                    name="selectedId" /> Account II
                                                             </li>
                                                         </ul>
                                                     </li>
@@ -226,7 +225,7 @@
 
                                             <div class="col-lg-4 cl-sm-12 mb-3 form-group">
                                                 <label for="payable">Payable </label>
-                                                <select [(ngModel)]="addMasterDTO.payable" class="form-control"
+                                                <select placeholder="hello"  [(ngModel)]="addMasterDTO.payable" class="form-control"
                                                     id="payable" name="payable">
                                                     <option>Select Option</option>
                                                     <option *ngFor="let pay of payable">{{pay}}</option>

@@ -17,25 +17,28 @@
                     <!-- Nav pills -->
                     <ul class="nav nav-pills nav-justified tab-login" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="pill" href="#studentLogin"><i
-                                    class="fas fa-user-graduate"></i> NTA Seller Login</a>
+                            <a class="nav-link active" data-toggle="pill" href="#"><i
+                                    class="fas fa-user-graduate"></i>Seller Login</a>
                         </li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content border-double ">
                         <div id="studentLogin" class="container tab-pane active"><br>
-                            <form class="fees-mat-form" >
+                            <form class="fees-mat-form">
                                 <h3 class="text-center pt-3 pb-3">Sign In Now</h3>
                                 <div class="form-group">
                                     <input autofocus type="text" name="mobNo" id="mobNo" required="required"
-                                       [(ngModel)]="phone_number"
-                                        minlength="0" maxlength="10"
+                                        [(ngModel)]="phone_number" minlength="10"
                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                     <label for="mobNo" class="control-label ">Mobile Number</label><i class="bar"></i>
                                 </div>
+                                <div>
+                                    <input type="radio" aria-label="Radio button for following text input">
+                                </div>
 
                                 <div class="button-container">
-                                    <button class="btn-mat" id="logAlert" (click)="signIn($event)"  ><span>Sign In</span></button>
+                                    <button class="btn-mat" id="logAlert" (click)="signIn($event)"><span>Sign
+                                            In</span></button>
                                 </div>
                             </form>
                         </div>
