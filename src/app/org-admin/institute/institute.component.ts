@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthDataService } from 'src/app/shared/Services/auth-data.service';
-import { LoginSellerService } from 'src/app/shared/Services/login-seller.service';
+import { LoginInstituteService } from 'src/app/shared/Services/login-institute.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 export class InstituteComponent implements OnInit {
   phone_number: number;
 
-  constructor(private router: Router, private authDataService: AuthDataService, private auth : LoginSellerService) { }
+  constructor(private router: Router, private authDataService: AuthDataService, private auth : LoginInstituteService) { }
 
   ngOnInit(): void {
   }
