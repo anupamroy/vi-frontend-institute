@@ -10,7 +10,8 @@
             <div class="row">
                 <div class="offset-lg-1 col-lg-10">
                     <h5>
-                        <span class="float-right "><a class="text-light btn mb-3" routerLink="../../institute-dashboard">
+                        <span class="float-right "><a class="text-light btn mb-3"
+                                routerLink="../../institute-dashboard">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard </a>
                         </span>
                     </h5>
@@ -83,10 +84,10 @@
                                                                     class="selectedId" name="selectedId" />
                                                                 Fees Head-I
                                                             </li> -->
-                                                            <li><input type="checkbox"
-                                                                class="selectedId" name="selectedId" />
-                                                            Fees Head-I
-                                                        </li>
+                                                            <li><input type="checkbox" class="selectedId"
+                                                                    name="selectedId" />
+                                                                Fees Head-I
+                                                            </li>
                                                             <!-- <li>
                                                                 <input (change)="feesHeadCheckBox('Saraswati Puja')"
                                                                     type="checkbox" class="selectedId"
@@ -94,8 +95,7 @@
                                                                 Fees Heads-II
                                                             </li> -->
                                                             <li>
-                                                                <input 
-                                                                    type="checkbox" class="selectedId"
+                                                                <input type="checkbox" class="selectedId"
                                                                     name="selectedId" />
                                                                 Fees Heads-II
                                                             </li>
@@ -224,14 +224,12 @@
                                                                     type="checkbox" class="selectedId"
                                                                     name="selectedId" /> Account I
                                                             </li> -->
-                                                            <li><input 
-                                                                type="checkbox" class="selectedId"
-                                                                name="selectedId" /> Account I
-                                                        </li>
+                                                            <li><input type="checkbox" class="selectedId"
+                                                                    name="selectedId" /> Account I
+                                                            </li>
                                                             <li>
                                                                 <!-- <input (change)="accountsHeadCheckBox('Account II')" -->
-                                                                <input 
-                                                                    type="checkbox" class="selectedId"
+                                                                <input type="checkbox" class="selectedId"
                                                                     name="selectedId" /> Account II
                                                             </li>
                                                         </ul>
@@ -306,8 +304,8 @@
                                         <div class="row">
                                             <div class="col-lg-4 cl-sm-12 mb-3 form-group">
                                                 <label for="payable">Payable By </label>
-                                                <input [(ngModel)]="feesDTO.payableBy" class="form-control"
-                                                    id="payable" type="date" name="payable" placeholder="Payable By">
+                                                <input [(ngModel)]="feesDTO.payableBy" class="form-control" id="payable"
+                                                    type="date" name="payable" placeholder="Payable By">
                                             </div>
 
                                             <div class="col-lg-6 col-sm-12">
@@ -322,8 +320,8 @@
 
                                                     <label class="checkbox">Late Fine
                                                         <input [(ngModel)]="feesDTO.lateFine"
-                                                            (change)="feesDTO.lateFine? true : false"
-                                                            type="checkbox" id="lateFineCheck">
+                                                            (change)="feesDTO.lateFine? true : false" type="checkbox"
+                                                            id="lateFineCheck">
                                                         <span class="checkmark"></span>
                                                     </label>
 
@@ -349,8 +347,8 @@
                                             </div>
                                             <div class="col-lg-4 cl-sm-12 mb-3 form-group">
                                                 <label for="conUnit">Concession Unit </label>
-                                                <select [(ngModel)]="feesDTO.maxConcessionUnit"
-                                                    class="form-control" id="conUnit" name="conUnit">
+                                                <select [(ngModel)]="feesDTO.maxConcessionUnit" class="form-control"
+                                                    id="conUnit" name="conUnit">
                                                     <option *ngFor='let unit of units' value=unit>{{unit}}</option>
 
                                                 </select>
@@ -364,8 +362,8 @@
 
                                             <div class="col-lg-4 cl-sm-12 mb-3 form-group">
                                                 <label for="lateFine">Late fine calculated by </label>
-                                                <select [(ngModel)]="feesDTO.lateFineCalculatedBy"
-                                                    class="form-control" id="lateFine" name="lateFine">
+                                                <select [(ngModel)]="feesDTO.lateFineCalculatedBy" class="form-control"
+                                                    id="lateFine" name="lateFine">
                                                     <option *ngFor='let lateTime of lateFineCaluatedBy' value=lateTime>
                                                         {{lateTime}}</option>
 
@@ -402,9 +400,9 @@
                                         <div class="row bg-light p-3">
                                             <div class="col-lg-4 cl-sm-12 mb-3 form-group">
                                                 <label for="revocable">Maximum late fine revocable</label>
-                                                <input [(ngModel)]="feesDTO.maxLateFineRevocable"
-                                                    data-toggle="tooltip" data-placement="bottom" title="" type="text"
-                                                    name="revocable" id="revocable" class="form-control"
+                                                <input [(ngModel)]="feesDTO.maxLateFineRevocable" data-toggle="tooltip"
+                                                    data-placement="bottom" title="" type="text" name="revocable"
+                                                    id="revocable" class="form-control"
                                                     placeholder="Maximum late fine revocable" required=""
                                                     data-original-title="Demo tooltip text">
                                             </div>
@@ -423,7 +421,14 @@
                                         <div class="row">
 
                                             <div class="col-lg-2 button-container mt-3">
-                                                <button (click)="editFeesMaster($event)" type="button" id="cusEdit"
+                                                <button (click)="editFeesMaster($event)" 
+                                                style="background: linear-gradient(
+                                                                    180deg,
+                                                                    #f4bd22 50%,
+                                                                    #eeae20 50%
+                                                                    );
+                                                                    padding: 0.5rem;" 
+                                                            type="button" id="cusEdit"
                                                     class="btn btn-block btn-common-color btn-lg text-white mt-3"><span>
                                                         Edit <i class="fas fa-caret-right"></i></span></button>
                                             </div>
