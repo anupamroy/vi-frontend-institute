@@ -1,4 +1,7 @@
 export class AddMaster{
+    feesHash: string = "FEES";
+    associated_with_org : string;
+    feesKey? : string;
     feesType : string;
     feesHead : string[];
     feesGroup : string;
