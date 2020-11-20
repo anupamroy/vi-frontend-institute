@@ -1,1 +1,448 @@
-<p>edit-fees-masters works!</p>
+<div class="bg-light-blue" style="height:100%">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light-yellow navbar-nav p-0" id="mainNav">
+        <a class="navbar-brand js-scroll-trigger pl-5 pr-3 pt-0 pb-0 dx-block" href="#page-top">
+            <img src="../../../../../assets/images/mtjh.png" class="logo" alt="logo" />
+        </a>
+    </nav>
+    <section class="stu-dashboard mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="offset-lg-1 col-lg-10">
+                    <h5>
+                        <span class="float-right "><a class="text-light btn mb-3" routerLink="../../institute-dashboard">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard </a>
+                        </span>
+                    </h5>
+                </div>
+                <div class="col-lg-10 offset-lg-1 col-sm-12">
+                    <div class="border-double ">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
+                                    <i class="fas fa-arrows-alt">
+                                    </i>
+                                    Add fees master <span class="float-right">
+                                        <a class="btn mb-3" routerLink='../../list-fees-masters'> <i
+                                                class="fas fa-eye"></i>
+                                            View
+                                        </a>
+                                    </span>
+                                </h5>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="">
+                            <div class="">
+                                <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label for="feesType" class="col-lg-12 pl-0 pr-0">Fees Type
+                                                    &nbsp;&nbsp;<a class="float-right" href="#" data-toggle="collapse"
+                                                        data-target="#feesTypeBox"><i
+                                                            class="fas fa-plus-circle"></i></a></label>
+                                                <select [(ngModel)]="feesDTO.feesType"
+                                                    (change)="onChangeFeeType($event)" class="form-control"
+                                                    id="feesType" name="feesType">
+
+                                                    <option *ngFor='let ftype of feesType'>{{ftype}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label class="col-lg-12 pl-0 pr-0" for="feesGroup">Fees Group
+                                                    &nbsp;&nbsp;<a class="float-right" href="#" data-toggle="collapse"
+                                                        data-target="#feesGroupBox"><i
+                                                            class="fas fa-plus-circle"></i></a></label>
+                                                <select [(ngModel)]="feesDTO.feesGroup" class="form-control"
+                                                    id="feesGroup" name="feesGroup">
+                                                    <option *ngFor="let fgroup of feesGroup">{{fgroup}}</option>
+
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
+                                                <label class="col-lg-12 pl-0 pr-0" for="feesHead"> Fees Head
+                                                    <a class="float-right" href="#" data-toggle="collapse"
+                                                        data-target="#feesHeadBox">
+                                                        <i class="fas fa-plus-circle"></i></a></label><br>
+                                                <button class="btn form-control text-left bg-white dropdown-toggle"
+                                                    type="button" data-toggle="dropdown"> Select fees type
+                                                    <span class="caret"></span></button>
+
+                                                <ul class="dropdown-menu">
+
+                                                    <li>
+                                                        <input type="checkbox" id="selectall">
+                                                        All Fees Heads
+                                                        <ul class="list-style-none pl-3">
+                                                            <!-- <li><input type="checkbox"
+                                                                    (change)="feesHeadCheckBox('Durga Puja')"
+                                                                    class="selectedId" name="selectedId" />
+                                                                Fees Head-I
+                                                            </li> -->
+                                                            <li><input type="checkbox"
+                                                                class="selectedId" name="selectedId" />
+                                                            Fees Head-I
+                                                        </li>
+                                                            <!-- <li>
+                                                                <input (change)="feesHeadCheckBox('Saraswati Puja')"
+                                                                    type="checkbox" class="selectedId"
+                                                                    name="selectedId" />
+                                                                Fees Heads-II
+                                                            </li> -->
+                                                            <li>
+                                                                <input 
+                                                                    type="checkbox" class="selectedId"
+                                                                    name="selectedId" />
+                                                                Fees Heads-II
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 mb-3">
+                                        <div class="row collapse bg-light p-3" id="feesTypeBox">
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label for="feesType">Fees Type</label>
+                                                <input data-toggle="tooltip" data-placement="bottom"
+                                                    title="Demo tooltip text" type="text" name="feesType" id="feesType"
+                                                    class="form-control inputFocus" placeholder="Fees Group" required
+                                                    minlength="1">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-12 button-container mt-4">
+                                                <button type="button" id="cusEdit"
+                                                    class="btn btn-dark-blue mt-2"><span><i
+                                                            class="fas fa-arrow-right"></i></span></button>
+                                            </div>
+                                        </div>
+
+                                        <div class="row collapse bg-light p-3 mt-3" id="feesGroupBox">
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label for="feesGroup">Fees Group</label>
+                                                <input data-toggle="tooltip" data-placement="bottom"
+                                                    title="Demo tooltip text" type="text" name="feesGroup"
+                                                    id="feesGroup" class="form-control inputFocus"
+                                                    placeholder="Fees Group" required minlength="1">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-12 button-container mt-4">
+                                                <button type="button" id="cusEdit"
+                                                    class="btn btn-dark-blue mt-2"><span><i
+                                                            class="fas fa-arrow-right"></i></span></button>
+                                            </div>
+                                        </div>
+
+                                        <!--  -->
+                                        <div class="row collapse bg-light p-3 mt-3" id="feesHeadBox">
+                                            <div class="col-lg-3 cl-sm-12 mb-3 form-group">
+                                                <label for="insType">Institution Type </label>
+                                                <select class="form-control" id="insType" name="insType">
+                                                    <option>Select Option</option>
+                                                    <option>UG</option>
+                                                    <option>PG</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3 cl-sm-12 mb-3 form-group">
+                                                <label for="feesHead">Fees Head</label>
+                                                <input data-toggle="tooltip" data-placement="bottom"
+                                                    title="Demo tooltip text" type="text" name="feesHead" id="feesHead"
+                                                    class="form-control inputFocus" placeholder="Fees Head" required
+                                                    minlength="1" maxlength="20">
+                                            </div>
+
+                                            <div class="col-lg-3 cl-sm-12 mb-3 form-group dropdown">
+                                                <label for="parentFees"> Parent Fees</label><br>
+                                                <button class="btn form-control text-left bg-white dropdown-toggle"
+                                                    type="button" data-toggle="dropdown"> Select fees type
+                                                    <span class="caret"></span></button>
+
+                                                <ul class="dropdown-menu">
+
+                                                    <li><a href="#"><input type="checkbox" id="selectall"> Fruit</a>
+                                                        <ul class="list-style-none pl-3">
+                                                            <li><a href="#"><input type="checkbox" class="selectedId"
+                                                                        name="selectedId" />
+                                                                    Apple</a></li>
+                                                            <li><a href="#"><input type="checkbox" class="selectedId"
+                                                                        name="selectedId" />
+                                                                    Guava</a></li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <div class="dropdown-divider"></div>
+
+                                                    <li><a href="#"><input type="checkbox" id="selectall1">
+                                                            Flower</a>
+                                                        <ul class="list-style-none pl-3">
+                                                            <li><a href="#"><input type="checkbox" class="selectedId1"
+                                                                        name="selectedId1" />
+                                                                    Lily</a></li>
+                                                            <li><a href="#"><input type="checkbox" class="selectedId1"
+                                                                        name="selectedId1" />
+                                                                    Rose</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-12 button-container mt-4">
+                                                <button type="button" id="cusEdit"
+                                                    class="btn btn-dark-blue mt-2"><span><i
+                                                            class="fas fa-arrow-right"></i></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="row">
+
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label for="amount">Amount </label>
+                                                <input [(ngModel)]="feesDTO.amount" data-toggle="tooltip"
+                                                    data-placement="bottom" title="Demo tooltip text" type="text"
+                                                    name="text" id="amount" class="form-control inputFocus"
+                                                    placeholder="this is a text field" required>
+                                            </div>
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
+                                                <label class="col-lg-12 pl-0 pr-0" for="accountHead"> Account Head
+                                                    <a class="float-right" data-toggle="collapse"
+                                                        data-target="#accountHeadBox"><i
+                                                            class="fas fa-plus-circle"></i></a></label><br>
+                                                <button class="btn form-control text-left bg-white dropdown-toggle"
+                                                    type="button" data-toggle="dropdown"> Select Account Head
+                                                    <span class="caret"></span></button>
+
+                                                <ul class="dropdown-menu">
+
+                                                    <li>
+                                                        <input type="checkbox" id="selectall"> Main Account Head
+                                                        <ul class="list-style-none pl-3">
+                                                            <!-- <li><input (change)="accountsHeadCheckBox('Account I')"
+                                                                    type="checkbox" class="selectedId"
+                                                                    name="selectedId" /> Account I
+                                                            </li> -->
+                                                            <li><input 
+                                                                type="checkbox" class="selectedId"
+                                                                name="selectedId" /> Account I
+                                                        </li>
+                                                            <li>
+                                                                <!-- <input (change)="accountsHeadCheckBox('Account II')" -->
+                                                                <input 
+                                                                    type="checkbox" class="selectedId"
+                                                                    name="selectedId" /> Account II
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label for="payable">Payable </label>
+                                                <select placeholder="hello" [(ngModel)]="feesDTO.payable"
+                                                    class="form-control" id="payable" name="payable">
+                                                    <option>Select Option</option>
+                                                    <option *ngFor="let pay of payable">{{pay}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 mb-3">
+                                        <div class="row collapse bg-light p-3" id="accountHeadBox">
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label for="accountHead">Accounts Head </label>
+                                                <input data-toggle="tooltip" data-placement="bottom"
+                                                    title="Demo tooltip text" type="text" name="accountHead"
+                                                    id="accountHead" class="form-control inputFocus"
+                                                    placeholder="Fees Head" required minlength="1" maxlength="20">
+                                            </div>
+
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
+                                                <label for="parenthead"> Parent accounts head</label><br>
+                                                <button class="btn form-control text-left bg-white dropdown-toggle"
+                                                    type="button" data-toggle="dropdown"> Select fees type
+                                                    <span class="caret"></span></button>
+
+                                                <ul class="dropdown-menu">
+
+                                                    <li><a href="#"><input type="checkbox" id=""> Fruit</a>
+                                                        <ul class="list-style-none pl-3">
+                                                            <li><a href="#"><input type="checkbox" class="selectedId"
+                                                                        name="selectedId" />
+                                                                    Apple</a></li>
+                                                            <li><a href="#"><input type="checkbox" class="selectedId"
+                                                                        name="selectedId" />
+                                                                    Guava</a></li>
+                                                        </ul>
+                                                    </li>
+
+                                                    <div class="dropdown-divider"></div>
+                                                    <li><a href="#"><input type="checkbox" id="selectall1">
+                                                            Flower</a>
+                                                        <ul class="list-style-none pl-3">
+                                                            <li>
+                                                                <a href="#"><input type="checkbox" class="selectedId1"
+                                                                        name="selectedId1" />
+                                                                    Lily</a></li>
+                                                            <li>
+                                                                <a href="#"><input type="checkbox" class="selectedId1"
+                                                                        name="selectedId1" />
+                                                                    Rose</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-lg-4 col-sm-12 button-container mt-4">
+                                                <button type="button" id="cusEdit"
+                                                    class="btn btn-dark-blue mt-2"><span><i
+                                                            class="fas fa-arrow-right"></i></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label for="payable">Payable By </label>
+                                                <input [(ngModel)]="feesDTO.payableBy" class="form-control"
+                                                    id="payable" type="date" name="payable" placeholder="Payable By">
+                                            </div>
+
+                                            <div class="col-lg-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="checkbox"> Concession Checkbox</label><br>
+                                                    <label class="checkbox">Concession
+                                                        <input [(ngModel)]="feesDTO.isConcession"
+                                                            (change)="feesDTO.isConcession? true : false"
+                                                            type="checkbox" id="conCheck">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+
+                                                    <label class="checkbox">Late Fine
+                                                        <input [(ngModel)]="feesDTO.lateFine"
+                                                            (change)="feesDTO.lateFine? true : false"
+                                                            type="checkbox" id="lateFineCheck">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+
+                                                    <label class="checkbox">Late fine revocable
+                                                        <input [(ngModel)]="feesDTO.lateFineRevocable"
+                                                            (change)="feesDTO.lateFineRevocable? true : false"
+                                                            type="checkbox" id="revocableCheck">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="feesDTO.isConcession" class="col-lg-12 mb-3" id="checkBlock">
+                                        <div class="row bg-light p-3">
+                                            <div class="col-lg-3 cl-sm-12 mb-3 form-group">
+                                                <label for="concession">Max Concession</label>
+                                                <input [(ngModel)]="feesDTO.maxConcession" data-toggle="tooltip"
+                                                    data-placement="bottom" title="" type="text" name="concession"
+                                                    id="concession" class="form-control" placeholder="Max Concession"
+                                                    required="" data-original-title="Demo tooltip text">
+                                            </div>
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label for="conUnit">Concession Unit </label>
+                                                <select [(ngModel)]="feesDTO.maxConcessionUnit"
+                                                    class="form-control" id="conUnit" name="conUnit">
+                                                    <option *ngFor='let unit of units' value=unit>{{unit}}</option>
+
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <div *ngIf="feesDTO.lateFine" class="col-lg-12 mb-3" id="checkBlock2">
+                                        <div class="row bg-light p-3">
+
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label for="lateFine">Late fine calculated by </label>
+                                                <select [(ngModel)]="feesDTO.lateFineCalculatedBy"
+                                                    class="form-control" id="lateFine" name="lateFine">
+                                                    <option *ngFor='let lateTime of lateFineCaluatedBy' value=lateTime>
+                                                        {{lateTime}}</option>
+
+                                                </select>
+                                            </div>
+
+                                            <div class="col-lg-3 cl-sm-12 mb-3 form-group">
+                                                <label for="lateFineAmount">Late fine amount</label>
+                                                <input [(ngModel)]="feesDTO.lateFineAmount" data-toggle="tooltip"
+                                                    data-placement="bottom" title="" type="text" name="lateFineAmount"
+                                                    id="lateFineAmount" class="form-control"
+                                                    placeholder="Late fine amount" required=""
+                                                    data-original-title="Demo tooltip text">
+                                            </div>
+
+                                            <div class="col-lg-3 cl-sm-12 mb-3 form-group">
+                                                <label for="maxlateFineAmount">Max Late fine</label>
+                                                <input [(ngModel)]="feesDTO.maxLateFine" data-toggle="tooltip"
+                                                    data-placement="bottom" title="" type="text"
+                                                    name="maxlateFineAmount" id="maxlateFineAmount" class="form-control"
+                                                    placeholder="Max Late fine" required=""
+                                                    data-original-title="Demo tooltip text">
+                                            </div>
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label for="lateFineUnit">Late fine Unit </label>
+                                                <select [(ngModel)]="feesDTO.maxLateFineConcessionUnit"
+                                                    class="form-control" id="lateFineUnit" name="lateFineUnit">
+                                                    <option *ngFor='let unit of units' value=unit>{{unit}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="feesDTO.lateFineRevocable" class="col-lg-12 mb-3" id="checkBlock3">
+                                        <div class="row bg-light p-3">
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label for="revocable">Maximum late fine revocable</label>
+                                                <input [(ngModel)]="feesDTO.maxLateFineRevocable"
+                                                    data-toggle="tooltip" data-placement="bottom" title="" type="text"
+                                                    name="revocable" id="revocable" class="form-control"
+                                                    placeholder="Maximum late fine revocable" required=""
+                                                    data-original-title="Demo tooltip text">
+                                            </div>
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <label for="lateFineUnit">Late fine Unit</label>
+                                                <select [(ngModel)]="feesDTO.maxLateFineRevocableUnit"
+                                                    class="form-control" id="lateFineUnit" name="lateFineUnit">
+                                                    <option>Amount </option>
+                                                    <option>Percentage</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="row">
+
+                                            <div class="col-lg-2 button-container mt-3">
+                                                <button (click)="editFeesMaster($event)" type="button" id="cusEdit"
+                                                    class="btn btn-block btn-common-color btn-lg text-white mt-3"><span>
+                                                        Edit <i class="fas fa-caret-right"></i></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- add more row end-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer-bottom">
+        <a href="#">
+            <img src="/assets/images/float-support.png" alt="support" class="float-support" />
+        </a>
+        <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat" />
+        </a>
+    </footer>
+</div>

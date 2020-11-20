@@ -9,21 +9,26 @@
         <div class="container">
             <div class="row">
                 <div class="offset-lg-1 col-lg-10">
-                    <h5><span class="float-right "><a class="text-light btn mb-3" href="add-dashboard.html"> <i
+                    <h5>
+                        <span class="float-right "><a class="text-light btn mb-3" routerLink="../institute-dashboard"> <i
                                     class="fas fa-tachometer-alt"></i> Dashboard </a>
-                        </span></h5>
+                        </span>
+                    </h5>
                 </div>
                 <div class="col-lg-10 offset-lg-1 col-sm-12">
                     <div class="border-double ">
-
-                        <!-- <form class="bg-light p-4" action=""> -->
                         <div class="row">
                             <div class="col-lg-12 col-sm-12">
-
-                                <h5 class="pb-3 pt-1 text-blue text-left text-capitalize"><i
-                                        class="fas fa-arrows-alt"></i> Add fees master <span class="float-right"><a
-                                            class="btn mb-3" href="list-fees-master.html"> <i class="fas fa-eye"></i>
-                                            View </a>
+                                <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
+                                    <i
+                                        class="fas fa-arrows-alt"
+                                    >
+                                    </i> 
+                                    Add fees master <span class="float-right">
+                                        <a
+                                            class="btn mb-3" routerLink='../list-fees-masters'> <i class="fas fa-eye"></i>
+                                            View 
+                                        </a>
                                     </span>
                                 </h5>
 
@@ -42,11 +47,16 @@
                                                     &nbsp;&nbsp;<a class="float-right" href="#" data-toggle="collapse"
                                                         data-target="#feesTypeBox"><i
                                                             class="fas fa-plus-circle"></i></a></label>
-                                                <select [(ngModel)]="addMasterDTO.feesType"
-                                                    (change)="onChangeFeeType($event)" class="form-control"
-                                                    id="feesType" name="feesType">
-                                                    <option *ngFor='let ftype of feesType'>{{ftype}}</option>
+                                                <select 
+                                                [(ngModel)]="addMasterDTO.feesType"
+                                                    (change)="onChangeFeeType($event)" 
+                                                    class="form-control"
+                                                    id="feesType">
+                                                    <option value="None">None</option>
+
+                                                    <option *ngFor='let ftype of feesType' value={{ftype}}>{{ftype}}</option>
                                                 </select>
+                                                
                                             </div>
                                             <div class="col-lg-4 cl-sm-12 mb-3 form-group">
                                                 <label class="col-lg-12 pl-0 pr-0" for="feesGroup">Fees Group
@@ -318,7 +328,6 @@
                                                             type="checkbox" id="revocableCheck">
                                                         <span class="checkmark"></span>
                                                     </label>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -339,13 +348,10 @@
                                                 <select [(ngModel)]="addMasterDTO.maxConcessionUnit"
                                                 class="form-control" id="conUnit" name="conUnit">
                                                     <option *ngFor='let unit of units' value=unit>{{unit}}</option>
-
                                                 </select>
                                             </div>
-
                                         </div>
                                     </div>
-                                    <!--  -->
                                     <div *ngIf="addMasterDTO.lateFine" class="col-lg-12 mb-3" id="checkBlock2">
                                         <div class="row bg-light p-3">
 
@@ -355,10 +361,8 @@
                                                 class="form-control" id="lateFine" name="lateFine">
                                                     <option *ngFor='let lateTime of lateFineCaluatedBy' value=lateTime>
                                                         {{lateTime}}</option>
-
                                                 </select>
                                             </div>
-
                                             <div class="col-lg-3 cl-sm-12 mb-3 form-group">
                                                 <label for="lateFineAmount">Late fine amount</label>
                                                 <input [(ngModel)]="addMasterDTO.lateFineAmount"

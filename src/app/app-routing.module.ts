@@ -6,6 +6,8 @@ import { SellerDashboardComponent } from './org-admin/seller-dashboard/seller-da
 import { SellerComponent } from './org-admin/seller/seller.component';
 import { InstituteDashboardComponent } from './org-admin/institute-dashboard/institute-dashboard.component'
 import { AddFeesMastersComponent } from './fees-management/super-admin/add-fees-masters/add-fees-masters.component';
+import { ListFeesMastersComponent } from './fees-management/super-admin/list-fees-masters/list-fees-masters.component';
+import { EditFeesMastersComponent } from './fees-management/super-admin/edit-fees-masters/edit-fees-masters.component';
 
 const routes: Routes = [
     {
@@ -51,7 +53,13 @@ const routes: Routes = [
     },
     {
         path: 'add-fees-masters', component:AddFeesMastersComponent
-       }
+    },
+    {
+        path : 'list-fees-masters' , component : ListFeesMastersComponent
+    },
+    {
+        path : 'edit-fees-masters/:feesKey' , component : EditFeesMastersComponent
+    }
 
     // {
     //     path: 'seller',
