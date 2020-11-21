@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { AddressComponent } from './address.component';
 
@@ -8,7 +11,9 @@ describe('AddressComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddressComponent ]
+      declarations: [ AddressComponent ],
+      imports: [HttpClientTestingModule],
+      providers: [ FormBuilder]
     })
     .compileComponents();
   }));

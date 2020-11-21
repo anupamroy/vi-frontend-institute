@@ -3,6 +3,7 @@ export class MasterUser {
     password?: string;
     first_name: string;
     middle_name?: string;
+    locale?: string;
     last_name?: string;
     email?: string;
 }

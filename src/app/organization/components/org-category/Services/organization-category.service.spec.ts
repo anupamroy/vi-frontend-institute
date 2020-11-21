@@ -39,7 +39,7 @@ describe('OrganizationCategoryService', () => {
       expect(values).toEqual(dummyOrgCtg);
     });
 
-    const request = httpmock.expectOne(`${service.api}/all`);
+    const request = httpmock.expectOne(`${service.api2}/orgcategory/list/?masterType=ORGANIZATION_CATEGORY`);
 
     expect(request.request.method).toBe('GET');
 
@@ -57,7 +57,7 @@ describe('OrganizationCategoryService', () => {
       expect(values).toEqual(dummyAddOrg);
     });
 
-    const request = httpmock.expectOne(`${service.api}`, mockbody);
+    const request = httpmock.expectOne(`${service.api2}/orgcategory/save`, mockbody);
 
     expect(request.request.method).toBe('POST');
 
@@ -76,7 +76,7 @@ describe('OrganizationCategoryService', () => {
       expect(values).toEqual(dummyOrgCtg);
     });
 
-    const request = httpmock.expectOne(`${service.api}/${mockid}`, mockbody);
+    const request = httpmock.expectOne(`${service.api2}/orgcategory/update`, mockbody);
 
     expect(request.request.method).toBe('PUT');
 

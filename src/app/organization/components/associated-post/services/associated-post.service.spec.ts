@@ -38,7 +38,7 @@ describe('AssociatedPostService', () => {
       expect(values).toEqual(dummyAsstPost);
     });
 
-    const request = httpmock.expectOne(`${service.api}/all`);
+    const request = httpmock.expectOne(`${service.api}/associatedpost/list?masterType=ASSOCIATED_POST`);
 
     expect(request.request.method).toBe('GET');
 
@@ -56,7 +56,7 @@ describe('AssociatedPostService', () => {
       expect(values).toEqual(dummyAddAsstPost);
     });
 
-    const request = httpmock.expectOne(`${service.api}`, mockbody);
+    const request = httpmock.expectOne(`${service.api}/associatedpost/save`, mockbody);
 
     expect(request.request.method).toBe('POST');
 
@@ -72,12 +72,11 @@ describe('AssociatedPostService', () => {
 
     // mockid='1';
     // mockbody='test';
-    service.updateAssociatedPostById(mockid,mockbody).subscribe(values => {
-      expect(values.id).toBe('121');
+    service.updateAssociatedPostById(mockbody).subscribe(values => {
       expect(values).toEqual(dummyAsstPost);
     });
 
-    const request = httpmock.expectOne(`${service.api}/${mockid}`, mockbody);
+    const request = httpmock.expectOne(`${service.api}/associatedpost/update`, mockbody);
 
     expect(request.request.method).toBe('PUT');
 

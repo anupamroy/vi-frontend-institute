@@ -1,16 +1,16 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { ListOrganizationService } from './list-organization.service';
+import { OrgAdminService } from './org-admin.service';
 
-describe('ListOrganizationService', () => {
-  let service: ListOrganizationService;
+describe('OrgAdminService', () => {
+  let service: OrgAdminService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports:[HttpClientTestingModule]
     });
-    service = TestBed.inject(ListOrganizationService);
+    service = TestBed.inject(OrgAdminService);
   });
 
   it('should be created', () => {

@@ -1,4 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AddCourseTypeComponent } from './add-course-type.component';
 
@@ -8,7 +11,9 @@ describe('AddCourseTypeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddCourseTypeComponent ]
+      declarations: [ AddCourseTypeComponent ],
+      providers: [FormBuilder],
+      imports: [HttpClientTestingModule, RouterTestingModule, FormsModule, ReactiveFormsModule]
     })
     .compileComponents();
   }));

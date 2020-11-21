@@ -1,5 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ViewMastersComponent } from './view-masters.component';
 
 describe('ViewMastersComponent', () => {
@@ -8,7 +10,10 @@ describe('ViewMastersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewMastersComponent ]
+      declarations: [ ViewMastersComponent ],
+      providers: [FormBuilder],
+      imports: [HttpClientTestingModule, RouterTestingModule, FormsModule, ReactiveFormsModule]
+      
     })
     .compileComponents();
   }));
