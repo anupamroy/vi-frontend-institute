@@ -39,7 +39,7 @@ describe('FeesTypeService', () => {
       expect(values).toEqual(dummyFees);
     });
 
-    const request = httpmock.expectOne(`${service.api}/all`);
+    const request = httpmock.expectOne(`${service.api}/feestype/list/?masterType=FEES_TYPE`);
 
     expect(request.request.method).toBe('GET');
 
@@ -57,7 +57,7 @@ describe('FeesTypeService', () => {
       expect(values).toEqual(dummyAddFees);
     });
 
-    const request = httpmock.expectOne(`${service.api}`, mockbody);
+    const request = httpmock.expectOne(`${service.api}/feestype/save`, mockbody);
 
     expect(request.request.method).toBe('POST');
 
@@ -76,7 +76,7 @@ describe('FeesTypeService', () => {
       expect(values).toEqual(dummyFeesUpdate);
     });
 
-    const request = httpmock.expectOne(`${service.api}/${mockid}`, mockbody);
+    const request = httpmock.expectOne(`${service.api}/feestype/update`, mockbody);
 
     expect(request.request.method).toBe('PUT');
 

@@ -36,7 +36,6 @@
     <mat-card class="mx-3 my-3">
         <h4>Phone List</h4>
         <div *ngFor="let phone of phoneList; let i = index">
-            <label for="social">Number - {{i+1}}</label>
             <p><strong>Phone Type : </strong>{{phone?.phoneType}}</p>
             <p><strong>Phone Number : </strong>{{phone?.phoneNumber}}</p>
             <p><strong>Time : </strong>{{phone?.time}}</p>
@@ -72,20 +71,19 @@
     <h3>Registration Details</h3>
     <p><strong>Organization Category : </strong>{{registrationDetails?.organizationCategory}}</p>
     <p><strong>Registration Number : </strong>{{registrationDetails?.registrationNumber}}</p>
-    <p><strong>Registration Date : </strong>{{registrationDetails?.registrationDate}}</p>
-    <p><strong>Affiliation Start Date : </strong>{{registrationDetails?.affiliationStartDate}}</p>
-    <p><strong>Affiliation End Date : </strong>{{registrationDetails?.affiliationEndDate}}</p>
+    <p><strong>Registration Date : </strong>{{registrationDetails?.registrationDate | date}}</p>
+    <p><strong>Affiliation Start Date : </strong>{{registrationDetails?.affiliationStartDate | date}}</p>
+    <p><strong>Affiliation End Date : </strong>{{registrationDetails?.affiliationEndDate | date}}</p>
     <p><strong>Affiliation and Accredential : </strong>{{registrationDetails?.affAndAcc}}</p>
     <p><strong>Certificate Number : </strong>{{registrationDetails?.certificateNumber}}</p>
     <p><strong>Status : </strong>{{registrationDetails?.status}}</p>
 
     <mat-card class="mx-3 my-3">
         <h4>Document List</h4>
-        <div *ngFor="let document of documentList; let i = index">
-            <label for="document">Number - {{i+1}}</label>
+        <div *ngFor="let document of documentList; let i = index">\
             <p><strong>Document Type : </strong>{{document?.documentType}}</p>
             <p><strong>Document Number : </strong>{{document?.documentNumber}}</p>
-            <p><strong>Document Registration Date : </strong>{{document?.documentRegistrationDate}}</p>
+            <p><strong>Document Registration Date : </strong>{{document?.documentRegistrationDate | date}}</p>
         </div>
     </mat-card>
 </mat-card>
@@ -95,12 +93,12 @@
     <p><strong>Middle Name : </strong>{{masterUserDetails?.middleName}}</p>
     <p><strong>Last Name : </strong>{{masterUserDetails?.lastName}}</p>
     <p><strong>Email Address : </strong>{{masterUserDetails?.emailAddress}}</p>
-    <p><strong>Phone Number : </strong>{{masterUserDetails?.phoneNumber}}</p>
+    <p><strong>Phone Number : </strong>{{masterUserDetails?.isd}}{{masterUserDetails?.phoneNumber}}</p>
+    <p><strong>Authetication Type : </strong>{{masterUserDetails?.authType}}</p>
 </mat-card>
 <mat-card class="my-3">
     <h3>Settings</h3>
-    <p><strong>Multifactor Authetication : </strong>{{settingsDetails?.multifactorAuthentication}}</p>
-    <p><strong>Password : </strong>{{settingsDetails?.password}}</p>
+ 
     <p><strong>Modules : </strong></p>
     <ul>
         <li *ngFor="let module of settingsDetails?.moduleSelector">{{module}}</li>

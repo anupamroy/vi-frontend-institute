@@ -1,5 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { EditSubjectTypeComponent } from './edit-subject-type.component';
 
 describe('EditSubjectTypeComponent', () => {
@@ -8,7 +10,9 @@ describe('EditSubjectTypeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditSubjectTypeComponent ]
+      declarations: [ EditSubjectTypeComponent ],
+      providers: [FormBuilder],
+      imports: [HttpClientTestingModule, RouterTestingModule, FormsModule, ReactiveFormsModule]
     })
     .compileComponents();
   }));

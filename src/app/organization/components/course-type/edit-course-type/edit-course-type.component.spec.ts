@@ -1,4 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { EditCourseTypeComponent } from './edit-course-type.component';
 
@@ -8,7 +11,9 @@ describe('EditCourseTypeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditCourseTypeComponent ]
+      declarations: [ EditCourseTypeComponent ],
+      providers: [FormBuilder],
+      imports: [HttpClientTestingModule, RouterTestingModule, FormsModule, ReactiveFormsModule]
     })
     .compileComponents();
   }));
@@ -16,6 +21,9 @@ describe('EditCourseTypeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditCourseTypeComponent);
     component = fixture.componentInstance;
+    component.courseType = "courseType";
+    component.minDuration = "";
+    component.maxDuration = "";
     fixture.detectChanges();
   });
 

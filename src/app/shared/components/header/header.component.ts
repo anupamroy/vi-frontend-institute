@@ -19,6 +19,8 @@ export class HeaderComponent implements OnInit, OnChanges {
       this.username = username;
     });
     this.authDataService.getHeaderForUser().subscribe((obj) => {
+      console.log(obj);
+      
       this.headerData = obj;
     });
     console.log('this.auth.login',this._auth.isLoggedIn());
