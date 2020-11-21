@@ -8,6 +8,7 @@ import { InstituteDashboardComponent } from './org-admin/institute-dashboard/ins
 import { AddFeesMastersComponent } from './fees-management/super-admin/add-fees-masters/add-fees-masters.component';
 import { ListFeesMastersComponent } from './fees-management/super-admin/list-fees-masters/list-fees-masters.component';
 import { EditFeesMastersComponent } from './fees-management/super-admin/edit-fees-masters/edit-fees-masters.component';
+import { x } from 'joi';
 
 const routes: Routes = [
     {
@@ -32,6 +33,13 @@ const routes: Routes = [
             import('./organization/organization.module').then(
                 (m) => m.OrganizationModule
             ),
+    },
+    {
+        path: 'masters',
+        loadChildren : ()=>
+            import('../super-admin-vi/super-admin-vi.module')
+            .then((m)=>m.SuperAdminViModule
+            )
     },
     {
         path: 'seller',
