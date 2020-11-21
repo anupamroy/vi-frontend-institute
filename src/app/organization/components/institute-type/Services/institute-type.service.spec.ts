@@ -70,8 +70,7 @@ describe('InstituteTypeService', () => {
     const dummyInst =
       {id:'121',InstType:'xyz'};
 
-    service.updateInstituteTypeById(mockid,mockbody).subscribe(values => {
-      expect(values.id).toBe('121');
+    service.updateInstituteTypeById(mockbody).subscribe(values => {
       expect(values).toEqual(dummyInst);
     });
 

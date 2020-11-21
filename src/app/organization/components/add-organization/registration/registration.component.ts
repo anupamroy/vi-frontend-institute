@@ -37,6 +37,7 @@ export class RegistrationComponent implements OnInit {
         organizationCategory: new FormControl(this.editMode?.editData?.orgCategory, Validators.required),
         registrationNumber: new FormControl(this.editMode?.editData?.registrationNumber),
         registrationDate: new FormControl(this.editMode?.editData?.registrationDate),
+ 
         affiliationStartDate: new FormControl(this.editMode?.editData?.affiliationStartDate),
         affiliationEndDate: new FormControl(this.editMode?.editData?.affiliationEndDate),
         affAndAcc: new FormControl(this.editMode?.editData?.affAndAcc),
@@ -52,7 +53,7 @@ export class RegistrationComponent implements OnInit {
         registrationDate: new FormControl(''),
         affiliationStartDate: new FormControl(''),
         affiliationEndDate: new FormControl(''),
-        affAndAcc: new FormControl(false),
+        affAndAcc: new FormControl('NA'),
         certificateNumber: new FormControl(''),
         status: new FormControl(false)
       });

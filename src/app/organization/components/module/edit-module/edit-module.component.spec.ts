@@ -2,6 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditModuleComponent } from './edit-module.component';
 import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 describe('EditModuleComponent', () => {
   let component: EditModuleComponent;
@@ -9,10 +13,17 @@ describe('EditModuleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[RouterTestingModule],
-      declarations: [ EditModuleComponent ]
+      imports: [RouterTestingModule, HttpClientTestingModule, FormsModule, ReactiveFormsModule],
+      providers: [
+        FormBuilder,
+        { provide: ActivatedRoute, 
+          useValue: { queryParams: of(
+            { params: '{"masterId": 123, "parentModule":"parentModule", "connectedModules" : "connectedModules", "moduleName": "moduleName"}' }
+            ) } },
+      ],
+      declarations: [EditModuleComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -18,18 +18,26 @@
             <div class="col-4">
                 <mat-form-field appearance='fill' class="w-100">
                     <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="lastName">
+                    <input matInput formControlName="lastName" pattern="^[a-zA-Z0-9. ,-]*$" required>
                 </mat-form-field>
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-5">
                 <mat-form-field appearance='fill' class="w-100">
                     <mat-label>Email Address</mat-label>
                     <input matInput formControlName="emailAddress" required>
                 </mat-form-field>
             </div>
-            <div class="col-6">
+            <div class="col-2">
+                <mat-form-field appearance='fill' class="w-100">
+                  <mat-label>ISD</mat-label>
+                  <mat-select formControlName="isd">
+                    <mat-option *ngFor="let country of countryList" value="{{country.dial_code}}">({{country.dial_code}}){{country.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            <div class="col-5">
                 <mat-form-field appearance='fill' class="w-100">
                     <mat-label>Phone Number</mat-label>
                     <input matInput formControlName="phoneNumber" required>
