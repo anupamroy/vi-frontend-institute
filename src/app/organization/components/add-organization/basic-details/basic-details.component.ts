@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MyErrorStateMatcher, validatorForFormControl } from '../common/Validations/MyErrorStateMatcher';
 import { AddOrganizationService } from '../../../services/add-organization.service';
@@ -12,14 +12,14 @@ const jsonData = require('../common/Validations/org_fields.json');
   templateUrl: './basic-details.component.html',
   styleUrls: ['./basic-details.component.scss']
 })
-export class BasicDetailsComponent implements OnInit {
+export class BasicDetailsComponent implements OnInit, OnChanges {
   @Input() secondFormGroup: FormGroup;
   @Input() editMode: any = { editing: false, editData: {} };
   @Output() cancelEdit = new EventEmitter();
   organizationMatcher = new MyErrorStateMatcher();
   organizationFields = jsonData;
   instituteTypeList;
-  imgURL="";
+  imgURL = "";
 
   items = ['Item 1', 'Item 2', 'Item 3'];
 
@@ -27,7 +27,14 @@ export class BasicDetailsComponent implements OnInit {
     private addOrganizationService: AddOrganizationService,
     private InstituteTypeService: InstituteTypeService) { }
 
+  ngOnChanges(change) {
+    this.secondFormGroup = change.secondFormGroup.currentValue;
+    // this.secondFormGroup.reset
+    // if(this.secondFormGroup.controls.)
+    // this.secondFormGroup.get("instituteTypeSelector").enable();
+    console.log("changes view", change.secondFormGroup.currentValue);
 
+  }
 
   processObjUpdated(object: BasicDetails) {
     var attribute = [];
@@ -50,6 +57,8 @@ export class BasicDetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log("second form ", this.secondFormGroup);
+    
     this.InstituteTypeService.getInstituteType().subscribe(responseData => {
       const fetchData = JSON.parse(responseData).Items
       console.log('DATA FROM DATABASE: ', fetchData)
@@ -89,29 +98,6 @@ export class BasicDetailsComponent implements OnInit {
 
   saveBasicDetails(): void {
     console.log(this.secondFormGroup.value);
-
-    // Define a object
-    // const basicDetails = new BasicDetails();
-    // if (this.addOrganizationService.firstStepForm == 'Seller') {
-    //   basicDetails.org_type = '';
-    // } else {
-    //   basicDetails.org_type = this.addOrganizationService.firstStepForm;
-    // }
-    // basicDetails.institute_type = this.secondFormGroup.controls.instituteTypeSelector.value;
-    // basicDetails.org_name = this.secondFormGroup.controls.orgName.value;
-    // basicDetails.org_short_code = this.secondFormGroup.controls.orgShortCode.value;
-    // basicDetails.org_logo = 'link';
-    // basicDetails.org_parent_id = '';
-    // basicDetails.seller_id = '';
-    // basicDetails.org_code = this.generateORGCODE()
-
-    // // API call
-    // console.log(basicDetails);
-
-    // this.addOrganizationService.addBasicDetails(basicDetails).subscribe((res) => {
-    //   console.log("key   :", res.message);
-    //   this.addOrganizationService.saveOrgKey(res.message);
-    // });
   }
 
   cancelEditMode() {
@@ -136,7 +122,7 @@ export class BasicDetailsComponent implements OnInit {
       // console.log("attributes res ",res, data.Attributes);
       let dataset = _.assign(new BasicDetails(), data.Attributes, _.pick(basicDetailsObj, ['orgKey']))
       // console.log("data set .:",dataset)
-     
+
       this.cancelEdit.emit(false);
       this.addOrganizationService.$refreshList.next(dataset);
     }, error => {
@@ -151,7 +137,7 @@ export class BasicDetailsComponent implements OnInit {
       console.log(res);
       this.imgURL = res.url;
     }, error => {
-      
+
     });
 
   }
@@ -167,7 +153,7 @@ export class BasicDetailsComponent implements OnInit {
     // Storing data
     this.addOrganizationService.$preview.next({
       section: "basicDetails",
-      basicDetails: _.assign(this.secondFormGroup.value, {org_logo: this.imgURL} )
+      basicDetails: _.assign(this.secondFormGroup.value, { org_logo: this.imgURL })
     })
 
     localStorage.setItem("basic-details", JSON.stringify(this.secondFormGroup.value))

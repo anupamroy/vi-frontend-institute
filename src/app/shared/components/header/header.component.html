@@ -20,11 +20,11 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light-yellow navbar-nav p-0" id="mainNav">
     <a class="navbar-brand js-scroll-trigger pl-5 pr-3 pt-0 pb-0 dx-block" href="#page-top">
-      <img src="../../../../assets/images/data-crazy.png" class="logo" alt="logo" />
+      <img src="{{ headerData?.org_logo ? headerData?.org_logo : '../../../../assets/images/data-crazy.png' }}" class="logo" alt="logo" />
     </a>
     <div class="container-fluid">
       <a class="navbar-brand js-scroll-trigger mb-block pl-1" href="#page-top">
-        <img src="/assets/images/logo2.png" class="logo" alt="logo" />
+        <img src="{{ headerData?.org_logo ? headerData?.org_logo : '/assets/images/logo2.png' }}" class="logo" alt="logo" />
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,16 @@
       <div class="collapse navbar-collapse pl-lg-0" id="navbarResponsive">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <span class="nav-link institute-title" href="#">Data Crazy
+            <span class="nav-link institute-title" href="#">
+              
+              <div *ngIf="isLoggedIn; else loggedOut">
+               {{ headerData?.org_name }}
+              </div>
+              
+              <ng-template #loggedOut>
+                Data Crazy
+              </ng-template>
+            
               <span class="sr-only">(current)</span></span>
           </li>
         </ul>

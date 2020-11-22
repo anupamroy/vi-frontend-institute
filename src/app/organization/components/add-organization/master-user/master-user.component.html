@@ -95,7 +95,7 @@
 </mat-card>
 <div class="my-3 clearfix">
     <button mat-raised-button color='primary' matStepperPrevious class="back">Back Step</button>
-    <button (click)="displayData()" [disabled]="!this.fifthFormGroup.valid && !this.authTypeCompare()" mat-raised-button color='primary' matStepperNext
+    <button (click)="displayData()" [disabled]="!this.fifthFormGroup.valid && compareTwoPassword()" mat-raised-button color='primary' matStepperNext
         class="float-right next">
         Next Step
     </button>

@@ -44,7 +44,7 @@ export class MasterUserComponent implements OnInit {
 
   mfaPassword(e) {
     console.log("asadsds", e.value);
-    if(e.value == "password") {
+    if (e.value == "password") {
       this.fifthFormGroup.controls["password"].setValidators(Validators.required);
       this.fifthFormGroup.controls["confirmPassword"].setValidators(Validators.required);
       this.fifthFormGroup.controls["confirmPassword"].updateValueAndValidity()
@@ -55,13 +55,13 @@ export class MasterUserComponent implements OnInit {
       this.fifthFormGroup.controls["confirmPassword"].clearValidators()
       this.fifthFormGroup.controls["confirmPassword"].updateValueAndValidity()
     }
-   
-    
+
+
   }
 
   authTypeCompare(): any {
     if (this.fifthFormGroup.controls.authType.value === 'password') {
-      if (this.fifthFormGroup.controls.password.value === ''){
+      if (this.fifthFormGroup.controls.password.value === '') {
         return false
       } else {
         return this.compareTwoPassword()
@@ -72,10 +72,9 @@ export class MasterUserComponent implements OnInit {
   }
 
   compareTwoPassword(): Boolean {
-    if(this.fifthFormGroup.controls.password.value !== this.fifthFormGroup.controls.confirmPassword.value){
+    if (this.fifthFormGroup.controls.password.value || this.fifthFormGroup.controls.password.value !== this.fifthFormGroup.controls.confirmPassword.value) {
       return false
     }
-
     return true;
   }
 

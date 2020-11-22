@@ -236,7 +236,7 @@ import { PasswordStrengthComponent } from './components/add-organization/common/
     providers: [
         {
             provide: STEPPER_GLOBAL_OPTIONS,
-            useValue: { showError: false }
+            useValue: { showError: true }
         }
     ]
 })
