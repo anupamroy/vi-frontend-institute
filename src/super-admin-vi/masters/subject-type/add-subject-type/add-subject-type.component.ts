@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SubjectTypeService } from '../../../services/subject-type.service'
-import { SubjectType } from '../../../../shared/models/subject-type';
+import { SubjectType } from '../../../models/subject-type'
+import { SubjectTypeService } from '../../../masters-services/subject-type.service';
 import Swal from 'sweetalert2'
 
 @Component({

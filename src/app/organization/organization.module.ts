@@ -37,9 +37,9 @@ import { ViewStreamComponent } from './components/stream-master/view-stream/view
 import { AddSubjectAttributesComponent } from './components/subject-attributes-master/add-subject-attributes/add-subject-attributes.component';
 import { EditSubjectAttributesComponent } from './components/subject-attributes-master/edit-subject-attributes/edit-subject-attributes.component';
 import { ViewSubjectAttributesComponent } from './components/subject-attributes-master/view-subject-attributes/view-subject-attributes.component';
-import { EditSubjectTypeComponent } from './components/subject-type/edit-subject-type/edit-subject-type.component';
-import { AddSubjectTypeComponent } from './components/subject-type/add-subject-type/add-subject-type.component';
-import { ListSubjectTypeComponent } from './components/subject-type/list-subject-type/list-subject-type.component';
+// import { EditSubjectTypeComponent } from './components/subject-type/edit-subject-type/edit-subject-type.component';
+// import { AddSubjectTypeComponent } from './components/subject-type/add-subject-type/add-subject-type.component';
+// import { ListSubjectTypeComponent } from './components/subject-type/list-subject-type/list-subject-type.component';
 import { AddCourseTypeComponent } from './components/course-type/add-course-type/add-course-type.component';
 import { EditCourseTypeComponent } from './components/course-type/edit-course-type/edit-course-type.component';
 import { ListCourseTypeComponent } from './components/course-type/list-course-type/list-course-type.component';
@@ -154,9 +154,9 @@ import { PasswordStrengthComponent } from './components/add-organization/common/
         AddSubjectAttributesComponent,
         EditSubjectAttributesComponent,
         ViewSubjectAttributesComponent,
-        EditSubjectTypeComponent,
-        AddSubjectTypeComponent,
-        ListSubjectTypeComponent,
+        // EditSubjectTypeComponent,
+        // AddSubjectTypeComponent,
+        // ListSubjectTypeComponent,
         AddCourseTypeComponent,
         EditCourseTypeComponent,
         ListCourseTypeComponent,
