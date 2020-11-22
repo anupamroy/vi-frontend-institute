@@ -1,6 +1,6 @@
 stages:
   - build
-  - deploy
+  # - deploy
 
 build:
   image: node:latest
@@ -15,15 +15,15 @@ build:
     expire_in: 1 hour
 
 
-deploy:
-  image: python:latest
-  stage: deploy
-  only:
-    - dev
-  script:
-    - pip install awscli
-    - aws configure set aws_default_region $AWS_DEFAULT_REGION
-    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    - aws s3 rm s3://virtual-institute-super-admin --recursive
-    - aws s3 sync ./dist s3://virtual-institute-super-admin --acl public-read
+# deploy:
+#   image: python:latest
+#   stage: deploy
+#   only:
+#     - dev
+#   script:
+#     - pip install awscli
+#     - aws configure set aws_default_region $AWS_DEFAULT_REGION
+#     - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+#     - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+#     - aws s3 rm s3://virtual-institute-super-admin --recursive
+#     - aws s3 sync ./dist s3://virtual-institute-super-admin --acl public-read
