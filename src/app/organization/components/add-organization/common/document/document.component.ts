@@ -48,12 +48,13 @@ export class DocumentComponent implements OnInit {
 
     // Resetting the form
     let control: AbstractControl = null;
-    this.documentForm.reset();
-    this.documentForm.markAsUntouched();
+
     Object.keys(this.documentForm.controls).forEach((name) => {
       control = this.documentForm.controls[name];
       control.setErrors(null);
     });
+    this.documentForm.reset();
+    this.documentForm.markAsUntouched();
 
     //localstorage
     localStorage.setItem('documentList', JSON.stringify(this.documentList))

@@ -16,10 +16,8 @@ export class SellerDashboardComponent implements OnInit {
     console.log(org_id);
     this.orgAdminService.getSellerProfile(org_id).subscribe(res => {
       this.authDataService.setHeaderForUser(res);
-      console.log(res);
-      
     })
-    console.log("hello");
+  
     
   }
 

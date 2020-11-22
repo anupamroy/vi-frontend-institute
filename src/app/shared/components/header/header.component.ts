@@ -11,6 +11,7 @@ import { AuthService } from '../../Services/auth.service';
 export class HeaderComponent implements OnInit, OnChanges {
   username: string;
   headerData: any;
+  isLoggedIn: boolean = false;
   signoutButton: boolean;
   constructor(private authDataService: AuthDataService, private _auth: AuthService,private _router : Router) { }
 
@@ -19,9 +20,11 @@ export class HeaderComponent implements OnInit, OnChanges {
       this.username = username;
     });
     this.authDataService.getHeaderForUser().subscribe((obj) => {
-      console.log(obj);
-      
-      this.headerData = obj;
+      this.isLoggedIn = true;
+      if(obj) {
+        this.headerData = JSON.parse(obj).Items[0];
+      }
+     
     });
     console.log('this.auth.login',this._auth.isLoggedIn());
     this.signoutButton = this._auth.isLoggedIn();

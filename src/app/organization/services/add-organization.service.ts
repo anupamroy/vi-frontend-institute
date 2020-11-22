@@ -17,7 +17,7 @@ export class AddOrganizationService {
   $preview: ReplaySubject<any> = new ReplaySubject(3);
   // preview = new EventEmitter(false);
 
-  firstStepForm;
+  public firstStepForm;
   secondStepForm;
   thirdStepForm;
   fourthStepForm;

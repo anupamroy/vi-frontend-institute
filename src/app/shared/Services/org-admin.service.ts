@@ -11,4 +11,8 @@ export class OrgAdminService {
   getSellerProfile(id) {
     return this.http.get(`https://69jm8b6ya5.execute-api.ap-south-1.amazonaws.com/Prod/seller/org/${id}?orgTableType=ORGANIZATION`);
   }
+
+  getInstituteProfile(id) {
+    return this.http.get(`https://fsvq9a4d1d.execute-api.ap-south-1.amazonaws.com/Prod/institute/org/${id}?orgTableType=ORGANIZATION`);
+  }
 }

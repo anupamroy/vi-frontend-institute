@@ -18,12 +18,43 @@
 <mat-card id="card">
     <mat-horizontal-stepper #stepper>
         <!-- form 1 -->
-        <mat-step [stepControl]="firstFormGroup" label="Organization Type">
-            <app-organization-type [firstFormGroup]="firstFormGroup"></app-organization-type>
+        <mat-step [stepControl]="firstFormGroup" label="Organization Type" editable="true">
+            <!-- <app-organization-type [firstFormGroup]="firstFormGroup"></app-organization-type> -->
+            <mat-card class="my-3">
+                <form [formGroup]="firstFormGroup">
+                    <section>
+                        <div class="inner text-center">
+                            <h3 class="mb-lg-5 mb-3">Organization Type</h3>
+                            <div class="form-row mb-5">
+                                <div class="container my-5">
+                                    <div id="radios">
+                                        <label for="Seller" class="material-icons">
+                                            <input (change)="orgTypeChange()" formControlName="organizationType" type="radio" id="Seller" value="Seller" checked />
+                                            <span><img src="assets/images/seller.png" class="img-radio-icon"
+                                                    alt="seller"></span>
+                                            <!-- <p class="mt-4">Seller</p> -->
+                                        </label>
+                                        <label for="Institute" class="material-icons">
+                                            <input (change)="orgTypeChange()" formControlName="organizationType" type="radio" id="Institute" value="Institute" />
+                                            <span><img src="assets/images/institute.png" class="img-radio-icon"
+                                                    alt="Institute"></span>
+                                            <!-- <p class="mt-4">Institute</p> -->
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </form>
+            </mat-card>
+            <div class="my-3 clearfix">
+                <button mat-raised-button color='primary' matStepperPrevious class="back">Back Step</button>
+                <button (click)="displayData()" [disabled]="!this.firstFormGroup.valid" mat-raised-button color='primary' matStepperNext class="float-right next">Next Step</button>
+            </div>
         </mat-step>
 
         <!-- form 2 -->
-        <mat-step [stepControl]="secondFormGroup" label="Basic Details">
+        <mat-step [stepControl]="secondFormGroup" label="Basic Details" editable="true">
             <app-basic-details [secondFormGroup]="secondFormGroup"></app-basic-details>
         </mat-step>
 
