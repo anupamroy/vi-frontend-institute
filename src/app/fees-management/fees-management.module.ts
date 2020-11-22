@@ -9,6 +9,9 @@ import { ListFeesHeadComponent } from './components/fees-head/list-fees-head/lis
 import { AddFeesMastersComponent } from './super-admin/add-fees-masters/add-fees-masters.component';
 import { EditFeesMastersComponent } from './super-admin/edit-fees-masters/edit-fees-masters.component';
 import { ListFeesMastersComponent } from './super-admin/list-fees-masters/list-fees-masters.component';
+import { AddCourseCombinationComponent } from './super-admin/add-course-combination/add-course-combination.component';
+import { ListCourseCombinationComponent } from './super-admin/list-course-combination/list-course-combination.component';
+import { EditCourseCombinationComponent } from './super-admin/edit-course-combination/edit-course-combination.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { ListFeesMastersComponent } from './super-admin/list-fees-masters/list-f
     AddFeesMastersComponent,
     EditFeesMastersComponent,
     ListFeesMastersComponent,
+    AddCourseCombinationComponent,
+    ListCourseCombinationComponent,
+    EditCourseCombinationComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, FeesManagementRoutingModule,FormsModule],
 })
