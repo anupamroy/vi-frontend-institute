@@ -55,7 +55,6 @@ export class AddressComponent implements OnInit {
         zipCode: new FormControl('', Validators.required)
       });
     }
-
   }
 
   processObjUpdated(object: Address) {

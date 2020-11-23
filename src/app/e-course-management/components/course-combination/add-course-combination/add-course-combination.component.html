@@ -1,0 +1,256 @@
+<div class="bg-light-blue" style="height:100%">
+    <section class="stu-dashboard mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="offset-lg-1 col-lg-10">
+                    <h5>
+                        <span class="float-right "><a class="text-light btn mb-3"
+                                routerLink="../../institute-dashboard"> <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </span>
+                    </h5>
+                </div>
+                <div class="col-lg-10 offset-lg-1 col-sm-12">
+                    <div class="border-double ">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <h5 class="pb-3 pt-1 text-blue text-left text-capitalize">
+                                    <i class="fas fa-arrows-alt">
+                                    </i>
+                                    Add Course Combination <span class="float-right">
+                                        <a class="btn mb-3" routerLink='../list-course-combination'> <i
+                                                class="fas fa-eye"></i>
+                                            View
+                                        </a>
+                                    </span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="">
+                                <div class="bg-light-yellow ml-1 mr-1 p-3 row position-relative">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Academic Year</mat-label>
+                                                    <input matInput placeholder="Enter Academic Year" value="" required>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Course Type</mat-label>
+                                                    <mat-select>
+                                                        <mat-option [value]="">
+                                                            Course Type I
+                                                        </mat-option>
+                                                        <mat-option [value]="">
+                                                            Course Type II
+                                                        </mat-option>
+                                                        <mat-option [value]="">
+                                                            Course Type III
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
+                                                <mat-radio-group aria-label="Select an option">
+                                                    <mat-radio-button value="Semester">Semester</mat-radio-button>
+                                                    <mat-radio-button value="Year">Year</mat-radio-button>
+                                                </mat-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 mb-3">
+
+                                        <div class="row collapse bg-light p-3 mt-3" id="feesHeadBox">
+
+                                            <div class="col-lg-3 cl-sm-12 mb-3 form-group">
+                                                <mat-radio-group aria-label="Select an option">
+                                                    <mat-radio-button value="Semester">Semester</mat-radio-button>
+                                                    <mat-radio-button value="Year">Year</mat-radio-button>
+                                                </mat-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Course Sub Type</mat-label>
+                                                    <mat-select>
+                                                        <mat-option [value]="">
+                                                            Course Sub Type I
+                                                        </mat-option>
+                                                        <mat-option [value]="">
+                                                            Course Sub Type II
+                                                        </mat-option>
+                                                        <mat-option [value]="">
+                                                            Course Sub Type III
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group dropdown">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Subject Type</mat-label>
+                                                    <mat-select>
+                                                        <mat-option value="Core">
+                                                            Core
+                                                        </mat-option>
+                                                        <mat-option value="Specialization">
+                                                            Specialization
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+                                            </div>
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Subject</mat-label>
+                                                    <mat-select>
+                                                        <mat-option value="Core">
+                                                            Subject I
+                                                        </mat-option>
+                                                        <mat-option value="Specialization">
+                                                            Subject II
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="row">
+
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Core/Specialization Credit</mat-label>
+                                                    <input matInput placeholder="Enter Core/Specialization Credi"
+                                                        value="" required>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-lg-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <mat-radio-group aria-label="Select an option">
+                                                        <mat-radio-button value="Semester">Mandatory Passing in Same
+                                                            Semester</mat-radio-button>
+                                                        <mat-radio-button value="Year">Mandatory Passing in Same Year
+                                                        </mat-radio-button>
+                                                    </mat-radio-group>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-12 cl-sm-12 mb-3 form-group">
+                                                <label>Parameters</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Parameter-1</mat-label>
+                                                    <mat-select>
+                                                        <mat-option>Alternate</mat-option>
+                                                        <mat-option>StraightCustom</mat-option>
+                                                        <mat-option>Custom</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>No. of Subjects can be taken up each Semester</mat-label>
+                                                    <input matInput placeholder="No of Subjects" value="">
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <mat-radio-group aria-label="Select an option">
+                                                    <mat-radio-button value="Semester">Mandatory Passing in Same
+                                                        Semester</mat-radio-button>
+                                                    <mat-radio-button value="Year">Mandatory Passing in Same Year
+                                                    </mat-radio-button>
+                                                </mat-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Semester/Year</mat-label>
+                                                    <mat-select multiple>
+                                                        <mat-option>1</mat-option>
+                                                        <mat-option>2</mat-option>
+                                                        <mat-option>3</mat-option>
+                                                        <mat-option>4</mat-option>
+                                                        <mat-option>5</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-lg-4 cl-sm-12 mb-3 form-group">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Subjects</mat-label>
+                                                    <mat-select multiple>
+                                                        <mat-option>English</mat-option>
+                                                        <mat-option>Odia</mat-option>
+                                                        <mat-option>Computers</mat-option>
+                                                        <mat-option>History</mat-option>
+                                                        <mat-option>Geography</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-lg-4 col-sm-12">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Subjects Type</mat-label>
+                                                    <mat-select>
+                                                        <mat-option value="">
+                                                            Subjects Type I
+                                                        </mat-option>
+                                                        <mat-option value="">
+                                                            Subjects Type II
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-2 button-container mt-3" style="text-align: right;">
+                                                <button style="
+                          background: linear-gradient(
+                            180deg,
+                            #f4bd22 50%,
+                            #eeae20 50%
+                          );padding: 0.5rem; " type="button" id="cusEdit"
+                                                    class="btn btn-block btn-common-color btn-lg text-white mt-3"><span>
+                                                        Add <i class="fas fa-caret-right"></i></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer-bottom">
+        <a href="#">
+            <img src="/assets/images/float-support.png" alt="support" class="float-support" />
+        </a>
+        <a href="#"><img src="/assets/images/float-chat.png" alt="chat" class="float-chat" />
+        </a>
+    </footer>
+</div>
