@@ -35,6 +35,12 @@ const routes: Routes = [
             ),
     },
     {
+        path : 'course',
+        loadChildren : ()=>
+            import('./e-course-management/e-course-management.module')
+            .then((m)=>m.ECourseManagementModule)
+    },
+    {
         path: 'masters',
         loadChildren : ()=>
             import('../super-admin-vi/super-admin-vi.module')

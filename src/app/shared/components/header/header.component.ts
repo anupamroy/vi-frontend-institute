@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.authDataService.getHeaderForUser().subscribe((obj) => {
       this.isLoggedIn = true;
       if(obj) {
+        this.username = sessionStorage.getItem('username');
         this.headerData = JSON.parse(obj).Items[0];
       }
      
